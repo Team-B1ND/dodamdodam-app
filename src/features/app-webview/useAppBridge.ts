@@ -87,6 +87,22 @@ export const useAppBridge = () => {
 	core.mount(Actions.NFC_READ, async () => {
 		const result = await scanNfc();
 		return result ?? Errors.CANCELLED;
+  });
+
+	core.mount(Actions.ACK, async () => {
+		return null;
+  });
+
+	core.mountPush(Actions.ACK, (send) => {
+		return () => {};
+  });
+
+	core.mount(Actions.SYNC, async () => {
+		return null;
+  });
+
+	core.mountPush(Actions.SYNC, (send) => {
+		return () => {};
 	});
 
 	core.mountPush(Actions.NFC_READ, (send) => {
