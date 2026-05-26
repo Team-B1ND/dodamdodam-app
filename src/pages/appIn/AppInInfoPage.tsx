@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: "row" as const,
     alignItems: "center" as const,
     justifyContent: "center" as const,
-    gap: 4,
+    gap: 10,
     marginBottom: 12,
   },
   checkboxLabel: {
