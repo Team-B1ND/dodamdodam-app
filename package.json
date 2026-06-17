@@ -5,7 +5,9 @@
   "scripts": {
     "start": "expo start --dev-client --clear",
     "android": "expo run:android --device",
-    "ios": "expo run:ios --device",
+    "ios": "LANG=en_US.UTF-8 expo run:ios --device",
+    "prebuild": "LANG=en_US.UTF-8 expo prebuild",
+    "pod-install": "LANG=en_US.UTF-8 pod install --project-directory=ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit"
   },
