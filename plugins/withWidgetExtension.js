@@ -6,7 +6,7 @@ const {
 const path = require("path");
 const fs = require("fs");
 
-const APP_GROUP = "group.com.dodamdodam.shared";
+const APP_GROUP = "group.com.b1nd.dodam.student.shared";
 const WIDGET_TARGET = "dodamwidgetExtension";
 const NOTIF_TARGET = "NotificationService";
 
@@ -96,14 +96,17 @@ function withExtensionTargets(config) {
     const project = config.modResults;
     const iosRoot = config.modRequest.platformProjectRoot;
     const bundleId = config.ios?.bundleIdentifier || "com.b1nd.dodamdodamapp";
+    const marketingVersion = config.version || "1.0";
 
     // --- Widget Extension Target ---
     addExtensionTarget(project, iosRoot, {
       targetName: WIDGET_TARGET,
-      bundleId: `${bundleId}.dodamwidget`,
+      bundleId: `${bundleId}.widget`,
       infoPlistPath: `${WIDGET_TARGET}/Info.plist`,
       entitlementsPath: "dodamwidgetExtension.entitlements",
       deploymentTarget: "17.0",
+      displayName: "Dodam Widget",
+      marketingVersion,
     });
 
     // --- Notification Service Extension Target ---
@@ -113,6 +116,8 @@ function withExtensionTargets(config) {
       infoPlistPath: `${NOTIF_TARGET}/Info.plist`,
       entitlementsPath: null,
       deploymentTarget: "15.1",
+      displayName: "Dodam Notification Service",
+      marketingVersion,
     });
 
     return config;
@@ -120,7 +125,15 @@ function withExtensionTargets(config) {
 }
 
 function addExtensionTarget(project, iosRoot, opts) {
-  const { targetName, bundleId, infoPlistPath, entitlementsPath, deploymentTarget } = opts;
+  const {
+    targetName,
+    bundleId,
+    infoPlistPath,
+    entitlementsPath,
+    deploymentTarget,
+    displayName,
+    marketingVersion,
+  } = opts;
 
   // Skip if target already exists
   if (project.pbxTargetByName(targetName)) return;
@@ -128,12 +141,11 @@ function addExtensionTarget(project, iosRoot, opts) {
   const targetDir = path.join(iosRoot, targetName);
   if (!fs.existsSync(targetDir)) return;
 
-  // Collect source files relative to ios/
+  // Collect source files; paths relative to targetDir for correct group-based resolution
   const absFiles = collectSwiftFiles(targetDir);
-  const relFiles = absFiles.map((f) => path.relative(iosRoot, f));
+  const relFiles = absFiles.map((f) => path.relative(targetDir, f));
 
   // Create PBX group for the target
-  const groupFiles = relFiles.map((f) => path.basename(f));
   const group = project.addPbxGroup([], targetName, targetName);
   const groupKey = group.uuid;
 
@@ -152,7 +164,11 @@ function addExtensionTarget(project, iosRoot, opts) {
     bundleId
   );
 
+  project.addBuildPhase([], "PBXSourcesBuildPhase", "Sources", target.uuid);
+
   // Add source files to target's compile sources build phase
+  // relFiles are relative to targetDir so the PBXFileReference path resolves
+  // correctly within the group (group.path = targetName, file.path = relative-to-group)
   for (const relFile of relFiles) {
     project.addSourceFile(relFile, { target: target.uuid }, groupKey);
   }
@@ -160,9 +176,10 @@ function addExtensionTarget(project, iosRoot, opts) {
   // Add asset catalog if exists
   const assetsDir = path.join(targetDir, "Assets.xcassets");
   if (fs.existsSync(assetsDir)) {
-    const assetsRel = `${targetName}/Assets.xcassets`;
+    project.addBuildPhase([], "PBXResourcesBuildPhase", "Resources", target.uuid);
+    const assetsRel = "Assets.xcassets";
     try {
-      project.addResourceFile(assetsRel, { target: target.uuid });
+      project.addResourceFile(assetsRel, { target: target.uuid }, groupKey);
     } catch (_) {
       // Asset catalog may already be registered
     }
@@ -182,10 +199,14 @@ function addExtensionTarget(project, iosRoot, opts) {
       cfg.buildSettings.TARGETED_DEVICE_FAMILY = '"1"';
       cfg.buildSettings.IPHONEOS_DEPLOYMENT_TARGET = deploymentTarget;
       cfg.buildSettings.GENERATE_INFOPLIST_FILE = "YES";
+      cfg.buildSettings.INFOPLIST_KEY_CFBundleDisplayName = `"${displayName}"`;
       cfg.buildSettings.CURRENT_PROJECT_VERSION = "1";
-      cfg.buildSettings.MARKETING_VERSION = "1.0";
+      cfg.buildSettings.MARKETING_VERSION = marketingVersion;
       cfg.buildSettings.SWIFT_EMIT_LOC_STRINGS = "YES";
       cfg.buildSettings.CODE_SIGN_STYLE = "Automatic";
+      // Let CocoaPods xcconfig control these to avoid override warnings
+      cfg.buildSettings.CLANG_CXX_LANGUAGE_STANDARD = '"$(inherited)"';
+      cfg.buildSettings.CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = '"$(inherited)"';
 
       if (entitlementsPath) {
         cfg.buildSettings.CODE_SIGN_ENTITLEMENTS = `"${entitlementsPath}"`;
@@ -193,15 +214,7 @@ function addExtensionTarget(project, iosRoot, opts) {
     }
   }
 
-  // Embed in main app
-  const mainTarget = project.getFirstTarget();
-  project.addBuildPhase(
-    [`${targetName}.appex`],
-    "PBXCopyFilesBuildPhase",
-    "Embed Foundation Extensions",
-    mainTarget.uuid,
-    "app_extension"
-  );
+  // `addTarget(..., "app_extension")` already embeds the product in the main app.
 }
 
 module.exports = function withWidgetExtension(config) {

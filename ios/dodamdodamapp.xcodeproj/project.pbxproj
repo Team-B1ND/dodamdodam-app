@@ -7,123 +7,96 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7BF9BA062F7A9C4700ECD4F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BF9BA052F7A9C4700ECD4F5 /* GoogleService-Info.plist */; };
-		7BF9BA0E2F7A9C7800ECD4F5 /* RNMealWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA082F7A9C7800ECD4F5 /* RNMealWidgetModule.swift */; };
-		7BF9BA0F2F7A9C7800ECD4F5 /* RNMealWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA072F7A9C7800ECD4F5 /* RNMealWidgetModule.m */; };
-		7BF9BA102F7A9C7800ECD4F5 /* RNTimetableWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA0B2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.swift */; };
-		7BF9BA112F7A9C7800ECD4F5 /* RNTimetableWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA0A2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.m */; };
-		7BF9BA502F7AA1CC00ECD4F5 /* TimetableEmptyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA232F7AA1CC00ECD4F5 /* TimetableEmptyText.swift */; };
-		7BF9BA512F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA252F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift */; };
-		7BF9BA522F7AA1CC00ECD4F5 /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA272F7AA1CC00ECD4F5 /* TimetableModel.swift */; };
-		7BF9BA532F7AA1CC00ECD4F5 /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA1B2F7AA1CC00ECD4F5 /* MealModel.swift */; };
-		7BF9BA542F7AA1CC00ECD4F5 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA302F7AA1CC00ECD4F5 /* SharedDefaults.swift */; };
-		7BF9BA552F7AA1CC00ECD4F5 /* MealWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA212F7AA1CC00ECD4F5 /* MealWidget.swift */; };
-		7BF9BA562F7AA1CC00ECD4F5 /* SelectMealIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA172F7AA1CC00ECD4F5 /* SelectMealIntent.swift */; };
-		7BF9BA572F7AA1CC00ECD4F5 /* MealDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA142F7AA1CC00ECD4F5 /* MealDateHelper.swift */; };
-		7BF9BA582F7AA1CC00ECD4F5 /* MealProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA1D2F7AA1CC00ECD4F5 /* MealProvider.swift */; };
-		7BF9BA592F7AA1CC00ECD4F5 /* MealSelectionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA162F7AA1CC00ECD4F5 /* MealSelectionStorage.swift */; };
-		7BF9BA5A2F7AA1CC00ECD4F5 /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA192F7AA1CC00ECD4F5 /* MealType.swift */; };
-		7BF9BA5B2F7AA1CC00ECD4F5 /* TimetableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA292F7AA1CC00ECD4F5 /* TimetableProvider.swift */; };
-		7BF9BA5C2F7AA1CC00ECD4F5 /* TimetableHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA242F7AA1CC00ECD4F5 /* TimetableHeaderLabel.swift */; };
-		7BF9BA5D2F7AA1CC00ECD4F5 /* MealMenuText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA152F7AA1CC00ECD4F5 /* MealMenuText.swift */; };
-		7BF9BA5E2F7AA1CC00ECD4F5 /* AppMainWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA332F7AA1CC00ECD4F5 /* AppMainWidget.swift */; };
-		7BF9BA5F2F7AA1CC00ECD4F5 /* MealWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA1F2F7AA1CC00ECD4F5 /* MealWidgetView.swift */; };
-		7BF9BA602F7AA1CC00ECD4F5 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA312F7AA1CC00ECD4F5 /* WidgetColors.swift */; };
-		7BF9BA612F7AA1CC00ECD4F5 /* TimetableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA2D2F7AA1CC00ECD4F5 /* TimetableWidget.swift */; };
-		7BF9BA622F7AA1CC00ECD4F5 /* TimetableWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BA2B2F7AA1CC00ECD4F5 /* TimetableWidgetView.swift */; };
-		878C76E1D2E6534F147F87C2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9FEFE21D7E9CFF3C99293B32 /* PrivacyInfo.xcprivacy */; };
-		9361083E2F7BD56E00D1F84F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		93ABF57E2F74CA030053612F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ABF57D2F74CA030053612F /* NotificationService.swift */; };
-		93ABF5822F74CA030053612F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93ABF57B2F74CA030053612F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		93F6CE332F78EE1500462E97 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F6CE322F78EE1500462E97 /* WidgetKit.framework */; };
-		93F6CE352F78EE1500462E97 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F6CE342F78EE1500462E97 /* SwiftUI.framework */; };
-		93F6CE402F78EE1600462E97 /* dodamwidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		A008A4C648F27E99C8C0EB30 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001D3EBD9259BEB9958B8C8 /* ExpoModulesProvider.swift */; };
-		A9BB1FD72C8AD928A2AE9857 /* libPods-dodamdodamapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */; };
-		C3FEBF4EA48F62F449F3E0AA /* libPods-dodamwidgetExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */; };
+		091BDB67319F45F5B74B0FF0 /* TimetableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6B8BC1432946C4B166BD45 /* TimetableWidget.swift */; };
+		0E3A4C5B7D8F49A0B1C2D3E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		15F99107398D459E964D72B5 /* TimetableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C093EFAF0F4B609B3A89D6 /* TimetableProvider.swift */; };
+		1D77E8991BDE49DCB4D7001F /* SelectMealIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */; };
+		270BC017F6DB4D44893B14F9 /* TimetableHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B1DC3D925A462B82E6812A /* TimetableHeaderLabel.swift */; };
+		27F22B3E01D7581FF180A49D /* libPods-dodamdodamapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8936CA461D88A90C5E07C4 /* libPods-dodamdodamapp.a */; };
+		343ED0FDE19F4A389108D0E9 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */; };
+		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		40E6414E860847419134EA6C /* AppMainWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */; };
+		45A0B16941194B5A9A362915 /* MealWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC278270A04A3BA1938C81 /* MealWidget.swift */; };
+		5ABE104AAB2D4474A81FC1DC /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9601C9410E7F4025B1E07AC8 /* MealModel.swift */; };
+		68B1A088A127846392FF9635 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */; };
+		88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8CB42C11402FB995C840 /* MealType.swift */; };
+		8BC93403078E4BA592BCDCBF /* NotificationService.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 3CFD1620E27149769777318D /* NotificationService.appex */; };
+		8DEE63BA3F434062BDBB217A /* MealMenuText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D23419118411AA4F38A1E /* MealMenuText.swift */; };
+		B26AF9056DA64AA09923D6C3 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3EA6E0EED49C7B0987F80 /* WidgetColors.swift */; };
+		B446E7ADF3F64B8EB0E34136 /* TimetableEmptyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666E1793C034CCE8CD4EEC0 /* TimetableEmptyText.swift */; };
+		B6EE1067B74B4381872F22C2 /* TimetableWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B66F8C085943CC844448AC /* TimetableWidgetView.swift */; };
+		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		C1E5CD56A1A944C7B79BF24A /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F8478FC3554098AF8ADCA3 /* TimetableModel.swift */; };
+		C993F93D0DE7451D98FD060E /* TimetablePeriodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */; };
+		CE95A7DFFCC9475D8ED97471 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A05065036D946D79DCCA9FF /* GoogleService-Info.plist */; };
+		D3D5FD5738D3463CA47075C9 /* MealWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA3A54553D14A178F7AE179 /* MealWidgetView.swift */; };
+		D618177E1DA741FEB1FA8718 /* dodamwidgetExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */; };
+		E279D63C9B984E5CA3C917AC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */; };
+		F0C19D381F6C4E47B6783D91 /* MealProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B31FED1B814A2894CB7FA4 /* MealProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
+		F5A763522FE2CF00004AD0B3 /* RNTimetableWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634F2FE2CF00004AD0B3 /* RNTimetableWidgetModule.m */; };
+		F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634D2FE2CF00004AD0B3 /* RNMealWidgetModule.swift */; };
+		F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */; };
+		F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634C2FE2CF00004AD0B3 /* RNMealWidgetModule.m */; };
+		FB5C4AAA770D143C683FEE44 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		93ABF5802F74CA030053612F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 93ABF57A2F74CA030053612F;
-			remoteInfo = NotificationService;
-		};
-		93F6CE3E2F78EE1600462E97 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 93F6CE302F78EE1500462E97;
-			remoteInfo = dodamwidgetExtension;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		93ABF5832F74CA030053612F /* Embed Foundation Extensions */ = {
+		7191F149006240AD8C8EFFB2 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				93F6CE402F78EE1600462E97 /* dodamwidgetExtension.appex in Embed Foundation Extensions */,
-				93ABF5822F74CA030053612F /* NotificationService.appex in Embed Foundation Extensions */,
+				D618177E1DA741FEB1FA8718 /* dodamwidgetExtension.appex in Copy Files */,
+				8BC93403078E4BA592BCDCBF /* NotificationService.appex in Copy Files */,
 			);
-			name = "Embed Foundation Extensions";
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamwidgetExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1001D3EBD9259BEB9958B8C8 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		0B8936CA461D88A90C5E07C4 /* libPods-dodamdodamapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamdodamapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; fileEncoding = 9; includeInIndex = 0; path = dodamwidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* dodamdodamapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dodamdodamapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "/Users/kmg/coding/b1nd/dodamdodam-app/ios/dodamdodamapp/Images.xcassets"; sourceTree = "<absolute>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = dodamdodamapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = dodamdodamapp/Info.plist; sourceTree = "<group>"; };
-		7BF9BA052F7A9C4700ECD4F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7BF9BA072F7A9C7800ECD4F5 /* RNMealWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNMealWidgetModule.m; sourceTree = "<group>"; };
-		7BF9BA082F7A9C7800ECD4F5 /* RNMealWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNMealWidgetModule.swift; sourceTree = "<group>"; };
-		7BF9BA0A2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTimetableWidgetModule.m; sourceTree = "<group>"; };
-		7BF9BA0B2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTimetableWidgetModule.swift; sourceTree = "<group>"; };
-		7BF9BA122F7AA1CC00ECD4F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7BF9BA142F7AA1CC00ECD4F5 /* MealDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDateHelper.swift; sourceTree = "<group>"; };
-		7BF9BA152F7AA1CC00ECD4F5 /* MealMenuText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealMenuText.swift; sourceTree = "<group>"; };
-		7BF9BA162F7AA1CC00ECD4F5 /* MealSelectionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSelectionStorage.swift; sourceTree = "<group>"; };
-		7BF9BA172F7AA1CC00ECD4F5 /* SelectMealIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMealIntent.swift; sourceTree = "<group>"; };
-		7BF9BA192F7AA1CC00ECD4F5 /* MealType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealType.swift; sourceTree = "<group>"; };
-		7BF9BA1B2F7AA1CC00ECD4F5 /* MealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
-		7BF9BA1D2F7AA1CC00ECD4F5 /* MealProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealProvider.swift; sourceTree = "<group>"; };
-		7BF9BA1F2F7AA1CC00ECD4F5 /* MealWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealWidgetView.swift; sourceTree = "<group>"; };
-		7BF9BA212F7AA1CC00ECD4F5 /* MealWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealWidget.swift; sourceTree = "<group>"; };
-		7BF9BA232F7AA1CC00ECD4F5 /* TimetableEmptyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableEmptyText.swift; sourceTree = "<group>"; };
-		7BF9BA242F7AA1CC00ECD4F5 /* TimetableHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableHeaderLabel.swift; sourceTree = "<group>"; };
-		7BF9BA252F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetablePeriodRow.swift; sourceTree = "<group>"; };
-		7BF9BA272F7AA1CC00ECD4F5 /* TimetableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableModel.swift; sourceTree = "<group>"; };
-		7BF9BA292F7AA1CC00ECD4F5 /* TimetableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableProvider.swift; sourceTree = "<group>"; };
-		7BF9BA2B2F7AA1CC00ECD4F5 /* TimetableWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableWidgetView.swift; sourceTree = "<group>"; };
-		7BF9BA2D2F7AA1CC00ECD4F5 /* TimetableWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableWidget.swift; sourceTree = "<group>"; };
-		7BF9BA302F7AA1CC00ECD4F5 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
-		7BF9BA312F7AA1CC00ECD4F5 /* WidgetColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetColors.swift; sourceTree = "<group>"; };
-		7BF9BA332F7AA1CC00ECD4F5 /* AppMainWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMainWidget.swift; sourceTree = "<group>"; };
-		7BF9BA672F7AA42B00ECD4F5 /* dodamwidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dodamwidgetExtension.entitlements; sourceTree = "<group>"; };
-		7FC3D6A3CC25C51C9BD76F05 /* Pods-dodamwidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamwidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-dodamwidgetExtension/Pods-dodamwidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		8639F588B54A4F4DDE834E40 /* Pods-dodamdodamapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.debug.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.debug.xcconfig"; sourceTree = "<group>"; };
-		93ABF57B2F74CA030053612F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		93ABF57D2F74CA030053612F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = dodamwidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		93F6CE322F78EE1500462E97 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
-		93F6CE342F78EE1500462E97 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		9FEFE21D7E9CFF3C99293B32 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = dodamdodamapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		13C093EFAF0F4B609B3A89D6 /* TimetableProvider.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableProvider.swift; path = Feature/Timetable/Provider/TimetableProvider.swift; sourceTree = "<group>"; };
+		1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		27B66F8C085943CC844448AC /* TimetableWidgetView.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableWidgetView.swift; path = Feature/Timetable/View/TimetableWidgetView.swift; sourceTree = "<group>"; };
+		28B31FED1B814A2894CB7FA4 /* MealProvider.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealProvider.swift; path = Feature/Meal/Provider/MealProvider.swift; sourceTree = "<group>"; };
+		3CFD1620E27149769777318D /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; fileEncoding = 9; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; path = AppMainWidget.swift; sourceTree = "<group>"; };
+		40B3EA6E0EED49C7B0987F80 /* WidgetColors.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = WidgetColors.swift; path = Shared/WidgetColors.swift; sourceTree = "<group>"; };
+		43B1DC3D925A462B82E6812A /* TimetableHeaderLabel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableHeaderLabel.swift; path = Feature/Timetable/Component/TimetableHeaderLabel.swift; sourceTree = "<group>"; };
+		47D898C190446B4311527F2E /* Pods-dodamdodamapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.release.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.release.xcconfig"; sourceTree = "<group>"; };
+		5666E1793C034CCE8CD4EEC0 /* TimetableEmptyText.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableEmptyText.swift; path = Feature/Timetable/Component/TimetableEmptyText.swift; sourceTree = "<group>"; };
+		6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SharedDefaults.swift; path = Shared/SharedDefaults.swift; sourceTree = "<group>"; };
+		61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetablePeriodRow.swift; path = Feature/Timetable/Component/TimetablePeriodRow.swift; sourceTree = "<group>"; };
+		658D8CB42C11402FB995C840 /* MealType.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealType.swift; path = Feature/Meal/Enum/MealType.swift; sourceTree = "<group>"; };
+		6A05065036D946D79DCCA9FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "dodamdodamapp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6DA3A54553D14A178F7AE179 /* MealWidgetView.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealWidgetView.swift; path = Feature/Meal/View/MealWidgetView.swift; sourceTree = "<group>"; };
+		888D23419118411AA4F38A1E /* MealMenuText.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealMenuText.swift; path = Feature/Meal/Component/MealMenuText.swift; sourceTree = "<group>"; };
+		9601C9410E7F4025B1E07AC8 /* MealModel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealModel.swift; path = Feature/Meal/Model/MealModel.swift; sourceTree = "<group>"; };
+		9A6B8BC1432946C4B166BD45 /* TimetableWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableWidget.swift; path = Feature/Timetable/TimetableWidget.swift; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = dodamdodamapp/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B898BF834A4193579A5AFE9C /* Pods-dodamwidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamwidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-dodamwidgetExtension/Pods-dodamwidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
+		B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SelectMealIntent.swift; path = Feature/Meal/Component/SelectMealIntent.swift; sourceTree = "<group>"; };
+		B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		B5FC278270A04A3BA1938C81 /* MealWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealWidget.swift; path = Feature/Meal/MealWidget.swift; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamdodamapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = dodamdodamapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		E0ECC263F550F09524DF839C /* Pods-dodamdodamapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.debug.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.debug.xcconfig"; sourceTree = "<group>"; };
+		E6F8478FC3554098AF8ADCA3 /* TimetableModel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableModel.swift; path = Feature/Timetable/Model/TimetableModel.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = dodamdodamapp/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* dodamdodamapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "dodamdodamapp-Bridging-Header.h"; path = "dodamdodamapp/dodamdodamapp-Bridging-Header.h"; sourceTree = "<group>"; };
-		F3346488BF29E42BF0F449C2 /* Pods-dodamdodamapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.release.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.release.xcconfig"; sourceTree = "<group>"; };
+		F5A7634C2FE2CF00004AD0B3 /* RNMealWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNMealWidgetModule.m; sourceTree = "<group>"; };
+		F5A7634D2FE2CF00004AD0B3 /* RNMealWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNMealWidgetModule.swift; sourceTree = "<group>"; };
+		F5A7634F2FE2CF00004AD0B3 /* RNTimetableWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTimetableWidgetModule.m; sourceTree = "<group>"; };
+		F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTimetableWidgetModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,24 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9BB1FD72C8AD928A2AE9857 /* libPods-dodamdodamapp.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		93ABF5782F74CA030053612F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		93F6CE2E2F78EE1500462E97 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				93F6CE352F78EE1500462E97 /* SwiftUI.framework in Frameworks */,
-				93F6CE332F78EE1500462E97 /* WidgetKit.framework in Frameworks */,
-				C3FEBF4EA48F62F449F3E0AA /* libPods-dodamwidgetExtension.a in Frameworks */,
+				27F22B3E01D7581FF180A49D /* libPods-dodamdodamapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,205 +120,79 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				7BF9BA052F7A9C4700ECD4F5 /* GoogleService-Info.plist */,
-				9FEFE21D7E9CFF3C99293B32 /* PrivacyInfo.xcprivacy */,
+				6A05065036D946D79DCCA9FF /* GoogleService-Info.plist */,
+				D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */,
 			);
 			name = dodamdodamapp;
 			sourceTree = "<group>";
 		};
-		2A28FC03DDCE938A01F69BE3 /* dodamdodamapp */ = {
+		19571B04DA0D4411AEF5CA36 /* dodamwidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
-				1001D3EBD9259BEB9958B8C8 /* ExpoModulesProvider.swift */,
+				1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */,
+				3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */,
+				888D23419118411AA4F38A1E /* MealMenuText.swift */,
+				B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */,
+				658D8CB42C11402FB995C840 /* MealType.swift */,
+				B5FC278270A04A3BA1938C81 /* MealWidget.swift */,
+				9601C9410E7F4025B1E07AC8 /* MealModel.swift */,
+				28B31FED1B814A2894CB7FA4 /* MealProvider.swift */,
+				6DA3A54553D14A178F7AE179 /* MealWidgetView.swift */,
+				5666E1793C034CCE8CD4EEC0 /* TimetableEmptyText.swift */,
+				43B1DC3D925A462B82E6812A /* TimetableHeaderLabel.swift */,
+				61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */,
+				E6F8478FC3554098AF8ADCA3 /* TimetableModel.swift */,
+				13C093EFAF0F4B609B3A89D6 /* TimetableProvider.swift */,
+				9A6B8BC1432946C4B166BD45 /* TimetableWidget.swift */,
+				27B66F8C085943CC844448AC /* TimetableWidgetView.swift */,
+				6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */,
+				40B3EA6E0EED49C7B0987F80 /* WidgetColors.swift */,
 			);
-			name = dodamdodamapp;
+			path = dodamwidgetExtension;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				E087557581BAD9598CCBA1A0 /* libPods-dodamdodamapp.a */,
-				93F6CE322F78EE1500462E97 /* WidgetKit.framework */,
-				93F6CE342F78EE1500462E97 /* SwiftUI.framework */,
-				0F228636A37DF51F43590EA6 /* libPods-dodamwidgetExtension.a */,
+				0B8936CA461D88A90C5E07C4 /* libPods-dodamdodamapp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7BF9BA092F7A9C7800ECD4F5 /* Meal */ = {
+		3285087E29E6B7C0C9286EEE /* dodamdodamapp */ = {
 			isa = PBXGroup;
 			children = (
-				7BF9BA072F7A9C7800ECD4F5 /* RNMealWidgetModule.m */,
-				7BF9BA082F7A9C7800ECD4F5 /* RNMealWidgetModule.swift */,
+				B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */,
 			);
-			path = Meal;
+			name = dodamdodamapp;
 			sourceTree = "<group>";
 		};
-		7BF9BA0C2F7A9C7800ECD4F5 /* Timetable */ = {
+		401AE01862FC4C198E7E0B2D /* NativeModules */ = {
 			isa = PBXGroup;
 			children = (
-				7BF9BA0A2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.m */,
-				7BF9BA0B2F7A9C7800ECD4F5 /* RNTimetableWidgetModule.swift */,
-			);
-			path = Timetable;
-			sourceTree = "<group>";
-		};
-		7BF9BA0D2F7A9C7800ECD4F5 /* NativeModules */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA092F7A9C7800ECD4F5 /* Meal */,
-				7BF9BA0C2F7A9C7800ECD4F5 /* Timetable */,
+				F5A7634E2FE2CF00004AD0B3 /* Meal */,
+				F5A763512FE2CF00004AD0B3 /* Timetable */,
 			);
 			name = NativeModules;
 			path = dodamdodamapp/NativeModules;
 			sourceTree = "<group>";
 		};
-		7BF9BA132F7AA1CC00ECD4F5 /* Resource */ = {
+		5148E926F2213A4D41B968C5 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				7BF9BA122F7AA1CC00ECD4F5 /* Assets.xcassets */,
+				3285087E29E6B7C0C9286EEE /* dodamdodamapp */,
 			);
-			path = Resource;
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		7BF9BA182F7AA1CC00ECD4F5 /* Component */ = {
+		7C50C55E39F057F7C7F90939 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7BF9BA142F7AA1CC00ECD4F5 /* MealDateHelper.swift */,
-				7BF9BA152F7AA1CC00ECD4F5 /* MealMenuText.swift */,
-				7BF9BA162F7AA1CC00ECD4F5 /* MealSelectionStorage.swift */,
-				7BF9BA172F7AA1CC00ECD4F5 /* SelectMealIntent.swift */,
+				E0ECC263F550F09524DF839C /* Pods-dodamdodamapp.debug.xcconfig */,
+				47D898C190446B4311527F2E /* Pods-dodamdodamapp.release.xcconfig */,
 			);
-			path = Component;
-			sourceTree = "<group>";
-		};
-		7BF9BA1A2F7AA1CC00ECD4F5 /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA192F7AA1CC00ECD4F5 /* MealType.swift */,
-			);
-			path = Enum;
-			sourceTree = "<group>";
-		};
-		7BF9BA1C2F7AA1CC00ECD4F5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA1B2F7AA1CC00ECD4F5 /* MealModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		7BF9BA1E2F7AA1CC00ECD4F5 /* Provider */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA1D2F7AA1CC00ECD4F5 /* MealProvider.swift */,
-			);
-			path = Provider;
-			sourceTree = "<group>";
-		};
-		7BF9BA202F7AA1CC00ECD4F5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA1F2F7AA1CC00ECD4F5 /* MealWidgetView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		7BF9BA222F7AA1CC00ECD4F5 /* Meal */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA182F7AA1CC00ECD4F5 /* Component */,
-				7BF9BA1A2F7AA1CC00ECD4F5 /* Enum */,
-				7BF9BA1C2F7AA1CC00ECD4F5 /* Model */,
-				7BF9BA1E2F7AA1CC00ECD4F5 /* Provider */,
-				7BF9BA202F7AA1CC00ECD4F5 /* View */,
-				7BF9BA212F7AA1CC00ECD4F5 /* MealWidget.swift */,
-			);
-			path = Meal;
-			sourceTree = "<group>";
-		};
-		7BF9BA262F7AA1CC00ECD4F5 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA232F7AA1CC00ECD4F5 /* TimetableEmptyText.swift */,
-				7BF9BA242F7AA1CC00ECD4F5 /* TimetableHeaderLabel.swift */,
-				7BF9BA252F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift */,
-			);
-			path = Component;
-			sourceTree = "<group>";
-		};
-		7BF9BA282F7AA1CC00ECD4F5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA272F7AA1CC00ECD4F5 /* TimetableModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		7BF9BA2A2F7AA1CC00ECD4F5 /* Provider */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA292F7AA1CC00ECD4F5 /* TimetableProvider.swift */,
-			);
-			path = Provider;
-			sourceTree = "<group>";
-		};
-		7BF9BA2C2F7AA1CC00ECD4F5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA2B2F7AA1CC00ECD4F5 /* TimetableWidgetView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		7BF9BA2E2F7AA1CC00ECD4F5 /* Timetable */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA262F7AA1CC00ECD4F5 /* Component */,
-				7BF9BA282F7AA1CC00ECD4F5 /* Model */,
-				7BF9BA2A2F7AA1CC00ECD4F5 /* Provider */,
-				7BF9BA2C2F7AA1CC00ECD4F5 /* View */,
-				7BF9BA2D2F7AA1CC00ECD4F5 /* TimetableWidget.swift */,
-			);
-			path = Timetable;
-			sourceTree = "<group>";
-		};
-		7BF9BA2F2F7AA1CC00ECD4F5 /* Feature */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA222F7AA1CC00ECD4F5 /* Meal */,
-				7BF9BA2E2F7AA1CC00ECD4F5 /* Timetable */,
-			);
-			path = Feature;
-			sourceTree = "<group>";
-		};
-		7BF9BA322F7AA1CC00ECD4F5 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA302F7AA1CC00ECD4F5 /* SharedDefaults.swift */,
-				7BF9BA312F7AA1CC00ECD4F5 /* WidgetColors.swift */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		7BF9BA352F7AA1CC00ECD4F5 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA2F2F7AA1CC00ECD4F5 /* Feature */,
-				7BF9BA322F7AA1CC00ECD4F5 /* Shared */,
-				7BF9BA332F7AA1CC00ECD4F5 /* AppMainWidget.swift */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		7BF9BA382F7AA1CC00ECD4F5 /* dodamwidget */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA132F7AA1CC00ECD4F5 /* Resource */,
-				7BF9BA352F7AA1CC00ECD4F5 /* Source */,
-			);
-			path = dodamwidget;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -375,16 +205,15 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				7BF9BA382F7AA1CC00ECD4F5 /* dodamwidget */,
 				13B07FAE1A68108700A75B9A /* dodamdodamapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				D6E9745C2CF2FD243AD12CE9 /* Pods */,
-				84D6B7334AB88B31F97A7954 /* ExpoModulesProviders */,
-				93ABF57C2F74CA030053612F /* NotificationService */,
-				93F6CE362F78EE1500462E97 /* dodamwidgetExtension */,
-				7BF9BA0D2F7A9C7800ECD4F5 /* NativeModules */,
+				19571B04DA0D4411AEF5CA36 /* dodamwidgetExtension */,
+				83F6DF2E3C314CF49CEB5F59 /* NotificationService */,
+				401AE01862FC4C198E7E0B2D /* NativeModules */,
+				7C50C55E39F057F7C7F90939 /* Pods */,
+				5148E926F2213A4D41B968C5 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -395,34 +224,18 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* dodamdodamapp.app */,
-				93ABF57B2F74CA030053612F /* NotificationService.appex */,
-				93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */,
+				109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */,
+				3CFD1620E27149769777318D /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84D6B7334AB88B31F97A7954 /* ExpoModulesProviders */ = {
+		83F6DF2E3C314CF49CEB5F59 /* NotificationService */ = {
 			isa = PBXGroup;
 			children = (
-				2A28FC03DDCE938A01F69BE3 /* dodamdodamapp */,
-			);
-			name = ExpoModulesProviders;
-			sourceTree = "<group>";
-		};
-		93ABF57C2F74CA030053612F /* NotificationService */ = {
-			isa = PBXGroup;
-			children = (
-				93ABF57D2F74CA030053612F /* NotificationService.swift */,
+				C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */,
 			);
 			path = NotificationService;
-			sourceTree = "<group>";
-		};
-		93F6CE362F78EE1500462E97 /* dodamwidgetExtension */ = {
-			isa = PBXGroup;
-			children = (
-				7BF9BA672F7AA42B00ECD4F5 /* dodamwidgetExtension.entitlements */,
-			);
-			path = dodamwidgetExtension;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -434,15 +247,22 @@
 			path = dodamdodamapp/Supporting;
 			sourceTree = "<group>";
 		};
-		D6E9745C2CF2FD243AD12CE9 /* Pods */ = {
+		F5A7634E2FE2CF00004AD0B3 /* Meal */ = {
 			isa = PBXGroup;
 			children = (
-				8639F588B54A4F4DDE834E40 /* Pods-dodamdodamapp.debug.xcconfig */,
-				F3346488BF29E42BF0F449C2 /* Pods-dodamdodamapp.release.xcconfig */,
-				7FC3D6A3CC25C51C9BD76F05 /* Pods-dodamwidgetExtension.debug.xcconfig */,
-				B898BF834A4193579A5AFE9C /* Pods-dodamwidgetExtension.release.xcconfig */,
+				F5A7634C2FE2CF00004AD0B3 /* RNMealWidgetModule.m */,
+				F5A7634D2FE2CF00004AD0B3 /* RNMealWidgetModule.swift */,
 			);
-			path = Pods;
+			path = Meal;
+			sourceTree = "<group>";
+		};
+		F5A763512FE2CF00004AD0B3 /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				F5A7634F2FE2CF00004AD0B3 /* RNTimetableWidgetModule.m */,
+				F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */,
+			);
+			path = Timetable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,52 +273,31 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "dodamdodamapp" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				EE8F0FDBDF681A5BCC3877F9 /* [Expo] Configure project */,
+				A6BCF0E101A8156559C58098 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				5615DE6FF98335DE17BA9B0F /* [CP] Embed Pods Frameworks */,
-				1D3B4C3719B88F8F22DD98C5 /* [CP-User] [RNFB] Core Configuration */,
-				93ABF5832F74CA030053612F /* Embed Foundation Extensions */,
+				7191F149006240AD8C8EFFB2 /* Copy Files */,
+				6269E11604AB5B116C9EEF36 /* [CP] Embed Pods Frameworks */,
+				9DFAA4EAE997900222DDC98A /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				93ABF5812F74CA030053612F /* PBXTargetDependency */,
-				93F6CE3F2F78EE1600462E97 /* PBXTargetDependency */,
 			);
 			name = dodamdodamapp;
 			productName = dodamdodamapp;
 			productReference = 13B07F961A680F5B00A75B9A /* dodamdodamapp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		93ABF57A2F74CA030053612F /* NotificationService */ = {
+		204FFF3383334DCE8F8A9BB8 /* dodamwidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93ABF5872F74CA030053612F /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildConfigurationList = 039C505E1BF74F09907ECEA5 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */;
 			buildPhases = (
-				93ABF5772F74CA030053612F /* Sources */,
-				93ABF5782F74CA030053612F /* Frameworks */,
-				93ABF5792F74CA030053612F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NotificationService;
-			productName = NotificationService;
-			productReference = 93ABF57B2F74CA030053612F /* NotificationService.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		93F6CE302F78EE1500462E97 /* dodamwidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 93F6CE442F78EE1600462E97 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */;
-			buildPhases = (
-				B2D0E4138CE992B38BF293B6 /* [CP] Check Pods Manifest.lock */,
-				93F6CE2D2F78EE1500462E97 /* Sources */,
-				93F6CE2E2F78EE1500462E97 /* Frameworks */,
-				93F6CE2F2F78EE1500462E97 /* Resources */,
+				B2188C5DBFDA45A2B5283D99 /* Sources */,
+				4632BC2A10BA4A0180452E72 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -506,7 +305,22 @@
 			);
 			name = dodamwidgetExtension;
 			productName = dodamwidgetExtension;
-			productReference = 93F6CE312F78EE1500462E97 /* dodamwidgetExtension.appex */;
+			productReference = 109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		36679A16FA604A759695C91B /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6B1DE61441A49AE9FC46888 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				0C9171C3A5934ADAB2DB4825 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			productName = NotificationService;
+			productReference = 3CFD1620E27149769777318D /* NotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -515,17 +329,10 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
-					};
-					93ABF57A2F74CA030053612F = {
-						CreatedOnToolsVersion = 26.0.1;
-					};
-					93F6CE302F78EE1500462E97 = {
-						CreatedOnToolsVersion = 26.0.1;
 					};
 				};
 			};
@@ -543,8 +350,8 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* dodamdodamapp */,
-				93ABF57A2F74CA030053612F /* NotificationService */,
-				93F6CE302F78EE1500462E97 /* dodamwidgetExtension */,
+				204FFF3383334DCE8F8A9BB8 /* dodamwidgetExtension */,
+				36679A16FA604A759695C91B /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
@@ -554,23 +361,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9361083E2F7BD56E00D1F84F /* Images.xcassets in Resources */,
-				7BF9BA062F7A9C4700ECD4F5 /* GoogleService-Info.plist in Resources */,
-				878C76E1D2E6534F147F87C2 /* PrivacyInfo.xcprivacy in Resources */,
+				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+				CE95A7DFFCC9475D8ED97471 /* GoogleService-Info.plist in Resources */,
+				68B1A088A127846392FF9635 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93ABF5792F74CA030053612F /* Resources */ = {
+		4632BC2A10BA4A0180452E72 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		93F6CE2F2F78EE1500462E97 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				0E3A4C5B7D8F49A0B1C2D3E4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,22 +419,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1D3B4C3719B88F8F22DD98C5 /* [CP-User] [RNFB] Core Configuration */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = "[CP-User] [RNFB] Core Configuration";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\n\n##########################################################################\n##########################################################################\n#\n#  NOTE THAT IF YOU CHANGE THIS FILE YOU MUST RUN pod install AFTERWARDS\n#\n#  This file is installed as an Xcode build script in the project file\n#  by cocoapods, and you will not see your changes until you pod install\n#\n##########################################################################\n##########################################################################\n\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"note:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"note:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"note: -> RNFB build script started\"\necho \"note: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"note:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | /usr/bin/head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"note:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  if ! _RN_ROOT_EXISTS=$(ruby -Ku -e \"require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\"); then\n    echo \"error: Failed to parse firebase.json, check for syntax errors.\"\n    exit 1\n  fi\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    if ! python3 --version >/dev/null 2>&1; then echo \"error: python3 not found, firebase.json file processing error.\" && exit 1; fi\n    _JSON_OUTPUT_BASE64=$(python3 -c 'import json,sys,base64;print(base64.b64encode(bytes(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"', '\"'rb'\"').read())['${_JSON_ROOT}']), '\"'utf-8'\"')).decode())' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.app_data_collection_default_enabled\n  _APP_DATA_COLLECTION_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_data_collection_default_enabled\")\n  if [[ $_APP_DATA_COLLECTION_ENABLED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseDataCollectionDefaultEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_DATA_COLLECTION_ENABLED\")\")\n  fi\n\n  # config.analytics_auto_collection_enabled\n  _ANALYTICS_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_auto_collection_enabled\")\n  if [[ $_ANALYTICS_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_COLLECTION\")\")\n  fi\n\n  # config.analytics_collection_deactivated\n  _ANALYTICS_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_collection_deactivated\")\n  if [[ $_ANALYTICS_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_DEACTIVATED\")\")\n  fi\n\n  # config.analytics_idfv_collection_enabled\n  _ANALYTICS_IDFV_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_idfv_collection_enabled\")\n  if [[ $_ANALYTICS_IDFV_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_IDFV_COLLECTION\")\")\n  fi\n\n  # config.analytics_default_allow_analytics_storage\n  _ANALYTICS_STORAGE=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_analytics_storage\")\n  if [[ $_ANALYTICS_STORAGE ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_STORAGE\")\")\n  fi\n\n  # config.analytics_default_allow_ad_storage\n  _ANALYTICS_AD_STORAGE=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_storage\")\n  if [[ $_ANALYTICS_AD_STORAGE ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AD_STORAGE\")\")\n  fi\n\n  # config.analytics_default_allow_ad_user_data\n  _ANALYTICS_AD_USER_DATA=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_user_data\")\n  if [[ $_ANALYTICS_AD_USER_DATA ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AD_USER_DATA\")\")\n  fi\n\n  # config.analytics_default_allow_ad_personalization_signals\n  _ANALYTICS_PERSONALIZATION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_personalization_signals\")\n  if [[ $_ANALYTICS_PERSONALIZATION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_PERSONALIZATION\")\")\n  fi\n\n  # config.analytics_registration_with_ad_network_enabled\n  _ANALYTICS_REGISTRATION_WITH_AD_NETWORK=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_registration_with_ad_network_enabled\")\n  if [[ $_ANALYTICS_REGISTRATION_WITH_AD_NETWORK ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_REGISTRATION_WITH_AD_NETWORK_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_REGISTRATION_WITH_AD_NETWORK\")\")\n  fi\n\n  # config.google_analytics_automatic_screen_reporting_enabled\n  _ANALYTICS_AUTO_SCREEN_REPORTING=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_automatic_screen_reporting_enabled\")\n  if [[ $_ANALYTICS_AUTO_SCREEN_REPORTING ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAutomaticScreenReportingEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_SCREEN_REPORTING\")\")\n  fi\n\n  # config.perf_auto_collection_enabled\n  _PERF_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_auto_collection_enabled\")\n  if [[ $_PERF_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_enabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_AUTO_COLLECTION\")\")\n  fi\n\n  # config.perf_collection_deactivated\n  _PERF_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_collection_deactivated\")\n  if [[ $_PERF_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_deactivated\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_DEACTIVATED\")\")\n  fi\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.in_app_messaging_auto_colllection_enabled\n  _FIAM_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"in_app_messaging_auto_collection_enabled\")\n  if [[ $_FIAM_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseInAppMessagingAutomaticDataCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_FIAM_AUTO_INIT\")\")\n  fi\n\n  # config.app_check_token_auto_refresh\n  _APP_CHECK_TOKEN_AUTO_REFRESH=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_check_token_auto_refresh\")\n  if [[ $_APP_CHECK_TOKEN_AUTO_REFRESH ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAppCheckTokenAutoRefreshEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_CHECK_TOKEN_AUTO_REFRESH\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes useful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"note: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally\n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"note: <- RNFB build script finished\"\n";
-		};
-		5615DE6FF98335DE17BA9B0F /* [CP] Embed Pods Frameworks */ = {
+		6269E11604AB5B116C9EEF36 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -707,29 +495,22 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B2D0E4138CE992B38BF293B6 /* [CP] Check Pods Manifest.lock */ = {
+		9DFAA4EAE997900222DDC98A /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
+			name = "[CP-User] [RNFB] Core Configuration";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-dodamwidgetExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\n\n##########################################################################\n##########################################################################\n#\n#  NOTE THAT IF YOU CHANGE THIS FILE YOU MUST RUN pod install AFTERWARDS\n#\n#  This file is installed as an Xcode build script in the project file\n#  by cocoapods, and you will not see your changes until you pod install\n#\n##########################################################################\n##########################################################################\n\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"note:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"note:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -Ku -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"note: -> RNFB build script started\"\necho \"note: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"note:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | /usr/bin/head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"note:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  if ! _RN_ROOT_EXISTS=$(ruby -Ku -e \"require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\"); then\n    echo \"error: Failed to parse firebase.json, check for syntax errors.\"\n    exit 1\n  fi\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    if ! python3 --version >/dev/null 2>&1; then echo \"error: python3 not found, firebase.json file processing error.\" && exit 1; fi\n    _JSON_OUTPUT_BASE64=$(python3 -c 'import json,sys,base64;print(base64.b64encode(bytes(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"', '\"'rb'\"').read())['${_JSON_ROOT}']), '\"'utf-8'\"')).decode())' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.app_data_collection_default_enabled\n  _APP_DATA_COLLECTION_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_data_collection_default_enabled\")\n  if [[ $_APP_DATA_COLLECTION_ENABLED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseDataCollectionDefaultEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_DATA_COLLECTION_ENABLED\")\")\n  fi\n\n  # config.analytics_auto_collection_enabled\n  _ANALYTICS_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_auto_collection_enabled\")\n  if [[ $_ANALYTICS_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_COLLECTION\")\")\n  fi\n\n  # config.analytics_collection_deactivated\n  _ANALYTICS_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_collection_deactivated\")\n  if [[ $_ANALYTICS_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_DEACTIVATED\")\")\n  fi\n\n  # config.analytics_idfv_collection_enabled\n  _ANALYTICS_IDFV_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_idfv_collection_enabled\")\n  if [[ $_ANALYTICS_IDFV_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_IDFV_COLLECTION\")\")\n  fi\n\n  # config.analytics_default_allow_analytics_storage\n  _ANALYTICS_STORAGE=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_analytics_storage\")\n  if [[ $_ANALYTICS_STORAGE ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_STORAGE\")\")\n  fi\n\n  # config.analytics_default_allow_ad_storage\n  _ANALYTICS_AD_STORAGE=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_storage\")\n  if [[ $_ANALYTICS_AD_STORAGE ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AD_STORAGE\")\")\n  fi\n\n  # config.analytics_default_allow_ad_user_data\n  _ANALYTICS_AD_USER_DATA=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_user_data\")\n  if [[ $_ANALYTICS_AD_USER_DATA ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AD_USER_DATA\")\")\n  fi\n\n  # config.analytics_default_allow_ad_personalization_signals\n  _ANALYTICS_PERSONALIZATION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"analytics_default_allow_ad_personalization_signals\")\n  if [[ $_ANALYTICS_PERSONALIZATION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_PERSONALIZATION\")\")\n  fi\n\n  # config.analytics_registration_with_ad_network_enabled\n  _ANALYTICS_REGISTRATION_WITH_AD_NETWORK=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_registration_with_ad_network_enabled\")\n  if [[ $_ANALYTICS_REGISTRATION_WITH_AD_NETWORK ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GOOGLE_ANALYTICS_REGISTRATION_WITH_AD_NETWORK_ENABLED\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_REGISTRATION_WITH_AD_NETWORK\")\")\n  fi\n\n  # config.google_analytics_automatic_screen_reporting_enabled\n  _ANALYTICS_AUTO_SCREEN_REPORTING=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"google_analytics_automatic_screen_reporting_enabled\")\n  if [[ $_ANALYTICS_AUTO_SCREEN_REPORTING ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAutomaticScreenReportingEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_ANALYTICS_AUTO_SCREEN_REPORTING\")\")\n  fi\n\n  # config.perf_auto_collection_enabled\n  _PERF_AUTO_COLLECTION=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_auto_collection_enabled\")\n  if [[ $_PERF_AUTO_COLLECTION ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_enabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_AUTO_COLLECTION\")\")\n  fi\n\n  # config.perf_collection_deactivated\n  _PERF_DEACTIVATED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"perf_collection_deactivated\")\n  if [[ $_PERF_DEACTIVATED ]]; then\n    _PLIST_ENTRY_KEYS+=(\"firebase_performance_collection_deactivated\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_PERF_DEACTIVATED\")\")\n  fi\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.in_app_messaging_auto_colllection_enabled\n  _FIAM_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"in_app_messaging_auto_collection_enabled\")\n  if [[ $_FIAM_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseInAppMessagingAutomaticDataCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_FIAM_AUTO_INIT\")\")\n  fi\n\n  # config.app_check_token_auto_refresh\n  _APP_CHECK_TOKEN_AUTO_REFRESH=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"app_check_token_auto_refresh\")\n  if [[ $_APP_CHECK_TOKEN_AUTO_REFRESH ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseAppCheckTokenAutoRefreshEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_APP_CHECK_TOKEN_AUTO_REFRESH\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes useful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"note: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally\n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"note: <- RNFB build script finished\"\n";
 		};
-		EE8F0FDBDF681A5BCC3877F9 /* [Expo] Configure project */ = {
+		A6BCF0E101A8156559C58098 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -752,96 +533,79 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-dodamdodamapp/expo-configure-project.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0C9171C3A5934ADAB2DB4825 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E279D63C9B984E5CA3C917AC /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BF9BA0E2F7A9C7800ECD4F5 /* RNMealWidgetModule.swift in Sources */,
-				7BF9BA0F2F7A9C7800ECD4F5 /* RNMealWidgetModule.m in Sources */,
-				7BF9BA102F7A9C7800ECD4F5 /* RNTimetableWidgetModule.swift in Sources */,
-				7BF9BA112F7A9C7800ECD4F5 /* RNTimetableWidgetModule.m in Sources */,
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				A008A4C648F27E99C8C0EB30 /* ExpoModulesProvider.swift in Sources */,
+				F5A763522FE2CF00004AD0B3 /* RNTimetableWidgetModule.m in Sources */,
+				F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */,
+				F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */,
+				F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */,
+				FB5C4AAA770D143C683FEE44 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93ABF5772F74CA030053612F /* Sources */ = {
+		B2188C5DBFDA45A2B5283D99 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93ABF57E2F74CA030053612F /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		93F6CE2D2F78EE1500462E97 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BF9BA502F7AA1CC00ECD4F5 /* TimetableEmptyText.swift in Sources */,
-				7BF9BA512F7AA1CC00ECD4F5 /* TimetablePeriodRow.swift in Sources */,
-				7BF9BA522F7AA1CC00ECD4F5 /* TimetableModel.swift in Sources */,
-				7BF9BA532F7AA1CC00ECD4F5 /* MealModel.swift in Sources */,
-				7BF9BA542F7AA1CC00ECD4F5 /* SharedDefaults.swift in Sources */,
-				7BF9BA552F7AA1CC00ECD4F5 /* MealWidget.swift in Sources */,
-				7BF9BA562F7AA1CC00ECD4F5 /* SelectMealIntent.swift in Sources */,
-				7BF9BA572F7AA1CC00ECD4F5 /* MealDateHelper.swift in Sources */,
-				7BF9BA582F7AA1CC00ECD4F5 /* MealProvider.swift in Sources */,
-				7BF9BA592F7AA1CC00ECD4F5 /* MealSelectionStorage.swift in Sources */,
-				7BF9BA5A2F7AA1CC00ECD4F5 /* MealType.swift in Sources */,
-				7BF9BA5B2F7AA1CC00ECD4F5 /* TimetableProvider.swift in Sources */,
-				7BF9BA5C2F7AA1CC00ECD4F5 /* TimetableHeaderLabel.swift in Sources */,
-				7BF9BA5D2F7AA1CC00ECD4F5 /* MealMenuText.swift in Sources */,
-				7BF9BA5E2F7AA1CC00ECD4F5 /* AppMainWidget.swift in Sources */,
-				7BF9BA5F2F7AA1CC00ECD4F5 /* MealWidgetView.swift in Sources */,
-				7BF9BA602F7AA1CC00ECD4F5 /* WidgetColors.swift in Sources */,
-				7BF9BA612F7AA1CC00ECD4F5 /* TimetableWidget.swift in Sources */,
-				7BF9BA622F7AA1CC00ECD4F5 /* TimetableWidgetView.swift in Sources */,
+				40E6414E860847419134EA6C /* AppMainWidget.swift in Sources */,
+				8DEE63BA3F434062BDBB217A /* MealMenuText.swift in Sources */,
+				1D77E8991BDE49DCB4D7001F /* SelectMealIntent.swift in Sources */,
+				88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */,
+				45A0B16941194B5A9A362915 /* MealWidget.swift in Sources */,
+				5ABE104AAB2D4474A81FC1DC /* MealModel.swift in Sources */,
+				F0C19D381F6C4E47B6783D91 /* MealProvider.swift in Sources */,
+				D3D5FD5738D3463CA47075C9 /* MealWidgetView.swift in Sources */,
+				B446E7ADF3F64B8EB0E34136 /* TimetableEmptyText.swift in Sources */,
+				270BC017F6DB4D44893B14F9 /* TimetableHeaderLabel.swift in Sources */,
+				C993F93D0DE7451D98FD060E /* TimetablePeriodRow.swift in Sources */,
+				C1E5CD56A1A944C7B79BF24A /* TimetableModel.swift in Sources */,
+				15F99107398D459E964D72B5 /* TimetableProvider.swift in Sources */,
+				091BDB67319F45F5B74B0FF0 /* TimetableWidget.swift in Sources */,
+				B6EE1067B74B4381872F22C2 /* TimetableWidgetView.swift in Sources */,
+				343ED0FDE19F4A389108D0E9 /* SharedDefaults.swift in Sources */,
+				B26AF9056DA64AA09923D6C3 /* WidgetColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		93ABF5812F74CA030053612F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 93ABF57A2F74CA030053612F /* NotificationService */;
-			targetProxy = 93ABF5802F74CA030053612F /* PBXContainerItemProxy */;
-		};
-		93F6CE3F2F78EE1600462E97 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 93F6CE302F78EE1500462E97 /* dodamwidgetExtension */;
-			targetProxy = 93F6CE3E2F78EE1600462E97 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8639F588B54A4F4DDE834E40 /* Pods-dodamdodamapp.debug.xcconfig */;
+			baseConfigurationReference = E0ECC263F550F09524DF839C /* Pods-dodamdodamapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = dodamdodamapp/dodamdodamapp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 688647KH4L;
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = dodamdodamapp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -850,9 +614,6 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student;
 				PRODUCT_NAME = dodamdodamapp;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "dodamdodamapp/dodamdodamapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -863,21 +624,20 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3346488BF29E42BF0F449C2 /* Pods-dodamdodamapp.release.xcconfig */;
+			baseConfigurationReference = 47D898C190446B4311527F2E /* Pods-dodamdodamapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = dodamdodamapp/dodamdodamapp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 688647KH4L;
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				INFOPLIST_FILE = dodamdodamapp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -886,15 +646,74 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student;
 				PRODUCT_NAME = dodamdodamapp;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "dodamdodamapp/dodamdodamapp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
+		};
+		20D37F3EDAA646C28EEEA61A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Widget";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 5.0.1;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
+				PRODUCT_NAME = dodamwidgetExtension;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		412D10C042D94DFE9B153765 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Widget";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 5.0.1;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
+				PRODUCT_NAME = dodamwidgetExtension;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1018,191 +837,61 @@
 			};
 			name = Release;
 		};
-		93ABF5842F74CA030053612F /* Debug */ = {
+		AF72C471225C401CA55F7389 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 688647KH4L;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Notification Service";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NotificationService;
 				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
-		93ABF5852F74CA030053612F /* Release */ = {
+		D0529660A240419DB06BA830 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 688647KH4L;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Notification Service";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NotificationService;
 				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		93F6CE412F78EE1600462E97 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FC3D6A3CC25C51C9BD76F05 /* Pods-dodamwidgetExtension.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension/dodamwidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 688647KH4L;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = dodamwidgetExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		93F6CE422F78EE1600462E97 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B898BF834A4193579A5AFE9C /* Pods-dodamwidgetExtension.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension/dodamwidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 688647KH4L;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = dodamwidgetExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1211,6 +900,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		039C505E1BF74F09907ECEA5 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				412D10C042D94DFE9B153765 /* Debug */,
+				20D37F3EDAA646C28EEEA61A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "dodamdodamapp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1229,20 +927,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93ABF5872F74CA030053612F /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+		D6B1DE61441A49AE9FC46888 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				93ABF5842F74CA030053612F /* Debug */,
-				93ABF5852F74CA030053612F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		93F6CE442F78EE1600462E97 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				93F6CE412F78EE1600462E97 /* Debug */,
-				93F6CE422F78EE1600462E97 /* Release */,
+				AF72C471225C401CA55F7389 /* Debug */,
+				D0529660A240419DB06BA830 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
