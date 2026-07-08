@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		091BDB67319F45F5B74B0FF0 /* TimetableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6B8BC1432946C4B166BD45 /* TimetableWidget.swift */; };
+		0E3A4C5B7D8F49A0B1C2D3E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		15F99107398D459E964D72B5 /* TimetableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C093EFAF0F4B609B3A89D6 /* TimetableProvider.swift */; };
 		1D77E8991BDE49DCB4D7001F /* SelectMealIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */; };
@@ -54,16 +55,6 @@
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F50B882B87D415BA8BC283A /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +64,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = dodamdodamapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = dodamdodamapp/Info.plist; sourceTree = "<group>"; };
 		13C093EFAF0F4B609B3A89D6 /* TimetableProvider.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableProvider.swift; path = Feature/Timetable/Provider/TimetableProvider.swift; sourceTree = "<group>"; };
+		1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27B66F8C085943CC844448AC /* TimetableWidgetView.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableWidgetView.swift; path = Feature/Timetable/View/TimetableWidgetView.swift; sourceTree = "<group>"; };
 		28B31FED1B814A2894CB7FA4 /* MealProvider.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealProvider.swift; path = Feature/Meal/Provider/MealProvider.swift; sourceTree = "<group>"; };
 		3CFD1620E27149769777318D /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; fileEncoding = 9; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +129,7 @@
 		19571B04DA0D4411AEF5CA36 /* dodamwidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
+				1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */,
 				3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */,
 				888D23419118411AA4F38A1E /* MealMenuText.swift */,
 				B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */,
@@ -287,7 +280,6 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
 				7191F149006240AD8C8EFFB2 /* Copy Files */,
-				9F50B882B87D415BA8BC283A /* Copy Files */,
 				6269E11604AB5B116C9EEF36 /* [CP] Embed Pods Frameworks */,
 				9DFAA4EAE997900222DDC98A /* [CP-User] [RNFB] Core Configuration */,
 			);
@@ -381,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E3A4C5B7D8F49A0B1C2D3E4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,7 +605,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -644,7 +637,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -671,15 +664,16 @@
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Widget";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.wid;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widge;
 				PRODUCT_NAME = dodamwidgetExtension;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -703,15 +697,16 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Widget";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.wid;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widge;
 				PRODUCT_NAME = dodamwidgetExtension;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -856,15 +851,16 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Notification Service";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.Notification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
 				PRODUCT_NAME = NotificationService;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -883,15 +879,16 @@
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Notification Service";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.Notification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
 				PRODUCT_NAME = NotificationService;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

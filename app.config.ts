@@ -23,7 +23,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundleIdentifier: "com.b1nd.dodam.student",
     googleServicesFile: "./src/app/GoogleService-Info.plist",
     entitlements: {
-      "com.apple.developer.nfc.readersession.formats": ["NDEF"],
+      "com.apple.developer.nfc.readersession.formats": ["TAG"],
     },
     infoPlist: {
       NSAppTransportSecurity: {

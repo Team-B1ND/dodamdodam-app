@@ -96,14 +96,17 @@ function withExtensionTargets(config) {
     const project = config.modResults;
     const iosRoot = config.modRequest.platformProjectRoot;
     const bundleId = config.ios?.bundleIdentifier || "com.b1nd.dodamdodamapp";
+    const marketingVersion = config.version || "1.0";
 
     // --- Widget Extension Target ---
     addExtensionTarget(project, iosRoot, {
       targetName: WIDGET_TARGET,
-      bundleId: `${bundleId}.dodamwidget`,
+      bundleId: `${bundleId}.widget`,
       infoPlistPath: `${WIDGET_TARGET}/Info.plist`,
       entitlementsPath: "dodamwidgetExtension.entitlements",
       deploymentTarget: "17.0",
+      displayName: "Dodam Widget",
+      marketingVersion,
     });
 
     // --- Notification Service Extension Target ---
@@ -113,6 +116,8 @@ function withExtensionTargets(config) {
       infoPlistPath: `${NOTIF_TARGET}/Info.plist`,
       entitlementsPath: null,
       deploymentTarget: "15.1",
+      displayName: "Dodam Notification Service",
+      marketingVersion,
     });
 
     return config;
@@ -120,7 +125,15 @@ function withExtensionTargets(config) {
 }
 
 function addExtensionTarget(project, iosRoot, opts) {
-  const { targetName, bundleId, infoPlistPath, entitlementsPath, deploymentTarget } = opts;
+  const {
+    targetName,
+    bundleId,
+    infoPlistPath,
+    entitlementsPath,
+    deploymentTarget,
+    displayName,
+    marketingVersion,
+  } = opts;
 
   // Skip if target already exists
   if (project.pbxTargetByName(targetName)) return;
@@ -164,9 +177,9 @@ function addExtensionTarget(project, iosRoot, opts) {
   const assetsDir = path.join(targetDir, "Assets.xcassets");
   if (fs.existsSync(assetsDir)) {
     project.addBuildPhase([], "PBXResourcesBuildPhase", "Resources", target.uuid);
-    const assetsRel = `${targetName}/Assets.xcassets`;
+    const assetsRel = "Assets.xcassets";
     try {
-      project.addResourceFile(assetsRel, { target: target.uuid });
+      project.addResourceFile(assetsRel, { target: target.uuid }, groupKey);
     } catch (_) {
       // Asset catalog may already be registered
     }
@@ -186,8 +199,9 @@ function addExtensionTarget(project, iosRoot, opts) {
       cfg.buildSettings.TARGETED_DEVICE_FAMILY = '"1"';
       cfg.buildSettings.IPHONEOS_DEPLOYMENT_TARGET = deploymentTarget;
       cfg.buildSettings.GENERATE_INFOPLIST_FILE = "YES";
+      cfg.buildSettings.INFOPLIST_KEY_CFBundleDisplayName = `"${displayName}"`;
       cfg.buildSettings.CURRENT_PROJECT_VERSION = "1";
-      cfg.buildSettings.MARKETING_VERSION = "1.0";
+      cfg.buildSettings.MARKETING_VERSION = marketingVersion;
       cfg.buildSettings.SWIFT_EMIT_LOC_STRINGS = "YES";
       cfg.buildSettings.CODE_SIGN_STYLE = "Automatic";
       // Let CocoaPods xcconfig control these to avoid override warnings
