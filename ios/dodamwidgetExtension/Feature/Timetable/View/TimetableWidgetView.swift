@@ -11,7 +11,10 @@ import WidgetKit
 struct TimetableWidgetView: View {
   var entry: TimetableEntry
   @Environment(\.widgetFamily) var widgetFamily
-  
+  @Environment(\.widgetRenderingMode) var widgetRenderingMode
+
+  private var isFullColor: Bool { widgetRenderingMode == .fullColor }
+
   private let days = ["월", "화", "수", "목", "금"]
   
   private var isWeekday: Bool {
@@ -84,7 +87,7 @@ struct TimetableWidgetView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .padding(10)
-      .background(WidgetColor.backgroundNormal)
+      .background(isFullColor ? WidgetColor.backgroundNormal : Color.clear)
       .clipShape(RoundedRectangle(cornerRadius: 14))
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -146,7 +149,7 @@ struct TimetableWidgetView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
       .padding(12)
-      .background(WidgetColor.backgroundNormal)
+      .background(isFullColor ? WidgetColor.backgroundNormal : Color.clear)
       .clipShape(RoundedRectangle(cornerRadius: 14))
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -167,11 +170,16 @@ struct TimetableWidgetView: View {
             
             Text(day)
               .font(.footnote.bold())
-              .foregroundColor(isTodayHighlight ? .white : WidgetColor.labelAlternative)
+              .foregroundColor(isFullColor && isTodayHighlight ? .white : WidgetColor.labelAlternative)
               .frame(maxWidth: .infinity)
               .padding(.vertical, 6)
-              .background(isTodayHighlight ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
+              .background(
+                isFullColor
+                  ? (isTodayHighlight ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
+                  : Color.clear
+              )
               .clipShape(Capsule())
+              .widgetAccentable(isTodayHighlight)
           }
         }
         
@@ -197,16 +205,22 @@ struct TimetableWidgetView: View {
                 Text(subject)
                   .font(.caption2)
                   .fontWeight(isCurrentCell ? .bold : .regular)
-                  .foregroundStyle(isCurrentCell ? .white : (isTodayColumn ? WidgetColor.primaryNormal : WidgetColor.labelNormal))
+                  .foregroundStyle(
+                    isFullColor
+                      ? (isCurrentCell ? .white : (isTodayColumn ? WidgetColor.primaryNormal : WidgetColor.labelNormal))
+                      : (isTodayColumn ? WidgetColor.labelNormal : WidgetColor.labelAlternative)
+                  )
                   .lineLimit(1)
                   .minimumScaleFactor(0.7)
                   .frame(maxWidth: .infinity, maxHeight: .infinity)
                   .padding(.vertical, 4)
                   .background(
-                    isCurrentCell ? WidgetColor.primaryNormal :
-                      (isTodayColumn ? WidgetColor.primaryNormal.opacity(0.1) : WidgetColor.backgroundNormal)
+                    isFullColor
+                      ? (isCurrentCell ? WidgetColor.primaryNormal : (isTodayColumn ? WidgetColor.primaryNormal.opacity(0.1) : WidgetColor.backgroundNormal))
+                      : Color.clear
                   )
                   .clipShape(RoundedRectangle(cornerRadius: 6))
+                  .widgetAccentable(isCurrentCell)
               }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
