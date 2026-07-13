@@ -37,7 +37,6 @@
 		D618177E1DA741FEB1FA8718 /* dodamwidgetExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */; };
 		DAC078ECCE0E40668D7CE693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A2017123002A67F008AC312 /* GoogleService-Info.plist */; };
 		E279D63C9B984E5CA3C917AC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */; };
-		F0947CB9EB2C6153F9BBA68C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */; };
 		F0C19D381F6C4E47B6783D91 /* MealProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B31FED1B814A2894CB7FA4 /* MealProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 		F5A763522FE2CF00004AD0B3 /* RNTimetableWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634F2FE2CF00004AD0B3 /* RNTimetableWidgetModule.m */; };
@@ -109,7 +108,6 @@
 		9A2017103002A25E008AC312 /* WatchConnectivityBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityBridge.swift; sourceTree = "<group>"; };
 		9A2017123002A67F008AC312 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A6B8BC1432946C4B166BD45 /* TimetableWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableWidget.swift; path = Feature/Timetable/TimetableWidget.swift; sourceTree = "<group>"; };
-		9AF8D3F0300284BA00562EAF /* dodamdodamappWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dodamdodamappWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF8D3FC300284BB00562EAF /* dodamdodamappWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dodamdodamappWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = dodamdodamapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SelectMealIntent.swift; path = Feature/Meal/Component/SelectMealIntent.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9AF8D3F1300284BA00562EAF /* dodamdodamappWatch */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = dodamdodamappWatch; sourceTree = "<group>"; };
 		9AF8D400300284BB00562EAF /* dodamdodamappWatch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "dodamdodamappWatch Watch App"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -140,13 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F22B3E01D7581FF180A49D /* libPods-dodamdodamapp.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9AF8D3ED300284BA00562EAF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +248,6 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* dodamdodamapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				9AF8D3F1300284BA00562EAF /* dodamdodamappWatch */,
 				9AF8D400300284BB00562EAF /* dodamdodamappWatch Watch App */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
@@ -279,7 +268,6 @@
 				13B07F961A680F5B00A75B9A /* dodamdodamapp.app */,
 				109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */,
 				3CFD1620E27149769777318D /* NotificationService.appex */,
-				9AF8D3F0300284BA00562EAF /* dodamdodamappWatch.app */,
 				9AF8D3FC300284BB00562EAF /* dodamdodamappWatch Watch App.app */,
 			);
 			name = Products;
@@ -335,12 +323,14 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
 				7191F149006240AD8C8EFFB2 /* Copy Files */,
+				9AF8D409300284BC00562EAF /* Embed Watch Content */,
 				6269E11604AB5B116C9EEF36 /* [CP] Embed Pods Frameworks */,
 				9DFAA4EAE997900222DDC98A /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9AF8D3FF300284BB00562EAF /* PBXTargetDependency */,
 			);
 			name = dodamdodamapp;
 			productName = dodamdodamapp;
@@ -378,28 +368,6 @@
 			productReference = 3CFD1620E27149769777318D /* NotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		9AF8D3EF300284BA00562EAF /* dodamdodamappWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9AF8D40D300284BC00562EAF /* Build configuration list for PBXNativeTarget "dodamdodamappWatch" */;
-			buildPhases = (
-				9AF8D3EC300284BA00562EAF /* Sources */,
-				9AF8D3ED300284BA00562EAF /* Frameworks */,
-				9AF8D3EE300284BA00562EAF /* Resources */,
-				9AF8D409300284BC00562EAF /* Embed Watch Content */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9AF8D3FF300284BB00562EAF /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				9AF8D3F1300284BA00562EAF /* dodamdodamappWatch */,
-			);
-			name = dodamdodamappWatch;
-			productName = dodamdodamappWatch;
-			productReference = 9AF8D3F0300284BA00562EAF /* dodamdodamappWatch.app */;
-			productType = "com.apple.product-type.application";
-		};
 		9AF8D3FB300284BB00562EAF /* dodamdodamappWatch Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AF8D40C300284BC00562EAF /* Build configuration list for PBXNativeTarget "dodamdodamappWatch Watch App" */;
@@ -432,9 +400,6 @@
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
 					};
-					9AF8D3EF300284BA00562EAF = {
-						CreatedOnToolsVersion = 27.0;
-					};
 					9AF8D3FB300284BB00562EAF = {
 						CreatedOnToolsVersion = 27.0;
 					};
@@ -456,7 +421,6 @@
 				13B07F861A680F5B00A75B9A /* dodamdodamapp */,
 				204FFF3383334DCE8F8A9BB8 /* dodamwidgetExtension */,
 				36679A16FA604A759695C91B /* NotificationService */,
-				9AF8D3EF300284BA00562EAF /* dodamdodamappWatch */,
 				9AF8D3FB300284BB00562EAF /* dodamdodamappWatch Watch App */,
 			);
 		};
@@ -480,14 +444,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3A4C5B7D8F49A0B1C2D3E4 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9AF8D3EE300284BA00562EAF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F0947CB9EB2C6153F9BBA68C /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,13 +638,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9AF8D3EC300284BA00562EAF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9AF8D3F8300284BB00562EAF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -739,9 +688,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = dodamdodamapp/dodamdodamapp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6W7K4RM8WW;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -763,6 +714,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student;
 				PRODUCT_NAME = dodamdodamapp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Chanwoo Dev - Main App";
 				SWIFT_OBJC_BRIDGING_HEADER = "dodamdodamapp/dodamdodamapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -779,9 +731,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = dodamdodamapp/dodamdodamapp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6W7K4RM8WW;
 				INFOPLIST_FILE = dodamdodamapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -798,6 +752,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student;
 				PRODUCT_NAME = dodamdodamapp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Chanwoo Dev - Main App";
 				SWIFT_OBJC_BRIDGING_HEADER = "dodamdodamapp/dodamdodamapp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -811,9 +766,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6W7K4RM8WW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Widget";
@@ -827,6 +783,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
 				PRODUCT_NAME = dodamwidgetExtension;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Chanwoo Dev - Widget";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -840,9 +798,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6W7K4RM8WW;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -860,6 +819,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
 				PRODUCT_NAME = dodamwidgetExtension;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Chanwoo Dev - Widget";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -989,105 +950,6 @@
 			};
 			name = Release;
 		};
-		9AF8D407300284BC00562EAF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.watch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		9AF8D408300284BC00562EAF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.watch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		9AF8D40A300284BC00562EAF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1104,13 +966,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = MFQ49VCL3G;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.b1nd.dodam.student.watch;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.b1nd.dodam.student;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1154,13 +1017,14 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = MFQ49VCL3G;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.b1nd.dodam.student.watch;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.b1nd.dodam.student;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1190,9 +1054,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6W7K4RM8WW;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1210,6 +1075,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
 				PRODUCT_NAME = NotificationService;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Chanwoo Dev - NotificationService";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1222,9 +1089,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6W7K4RM8WW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Dodam Notification Service";
@@ -1238,6 +1106,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
 				PRODUCT_NAME = NotificationService;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Chanwoo Dev - NotificationService";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1280,15 +1150,6 @@
 			buildConfigurations = (
 				9AF8D40A300284BC00562EAF /* Debug */,
 				9AF8D40B300284BC00562EAF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9AF8D40D300284BC00562EAF /* Build configuration list for PBXNativeTarget "dodamdodamappWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9AF8D407300284BC00562EAF /* Debug */,
-				9AF8D408300284BC00562EAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
