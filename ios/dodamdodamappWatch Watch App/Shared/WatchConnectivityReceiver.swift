@@ -87,12 +87,26 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
     return -1
   }
 
-  private var todayDateString: String {
+  private func dateString(from date: Date) -> String {
     let formatter = DateFormatter()
     formatter.calendar = Calendar(identifier: .gregorian)
     formatter.locale = Locale(identifier: "ko_KR")
     formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.string(from: Date())
+    return formatter.string(from: date)
+  }
+
+  private var todayDateString: String {
+    dateString(from: Date())
+  }
+
+  /// 저녁(19:10) 이후엔 아침/점심/저녁 전부 내일 날짜 기준으로 조회한다.
+  private func effectiveDateString(for type: MealType) -> String {
+    let hour = Calendar.current.component(.hour, from: Date())
+    let minute = Calendar.current.component(.minute, from: Date())
+    guard hour * 100 + minute > 1910 else { return todayDateString }
+
+    let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+    return dateString(from: tomorrow)
   }
 
   var timetableState: TimetableCardState {
@@ -122,10 +136,10 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
       return Dictionary(uniqueKeysWithValues: MealType.allCases.map { ($0, .unavailable) })
     }
 
-    let today = todayDateString
     var result: [MealType: MealCardState] = [:]
     for type in MealType.allCases {
-      if let match = allMeals.first(where: { $0.date == today && $0.mealType == type.apiRawValue }) {
+      let targetDate = effectiveDateString(for: type)
+      if let match = allMeals.first(where: { $0.date == targetDate && $0.mealType == type.apiRawValue }) {
         result[type] = match.menus.isEmpty
           ? .empty
           : .loaded(Meal(mealType: type, calorie: match.calorie, menus: match.menus))

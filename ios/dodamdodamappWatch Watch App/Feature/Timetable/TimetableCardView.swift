@@ -29,7 +29,7 @@ struct TimetableCardView: View {
                 .foregroundStyle(isCurrent ? WatchColor.primaryNormal : WatchColor.labelNormal)
                 .lineLimit(1)
             }
-            .frame(height: 15)
+            .frame(height: 17)
           }
         }
       case .weekend:
