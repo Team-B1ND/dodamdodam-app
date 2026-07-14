@@ -9,11 +9,13 @@ struct ContentView: View {
   @StateObject private var connectivity = WatchConnectivityReceiver.shared
 
   var body: some View {
-    TabView {
-      TimetableCardView(state: connectivity.timetableState)
-      MealPagerView(states: connectivity.mealStates)
+    TimelineView(.everyMinute) { _ in
+      TabView {
+        TimetableCardView(state: connectivity.timetableState, isStale: connectivity.isTimetableStale)
+        MealPagerView(states: connectivity.mealStates)
+      }
+      .tabViewStyle(.page)
     }
-    .tabViewStyle(.page)
   }
 }
 

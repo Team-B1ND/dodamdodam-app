@@ -18,6 +18,8 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
   private let defaults = UserDefaults.standard
   private let timetableCacheKey = "cachedTimetableJSON"
   private let mealsCacheKey = "cachedMealsJSON"
+  private let timetableSyncDateKey = "timetableSyncDate"
+  private let staleThreshold: TimeInterval = 7 * 24 * 60 * 60
 
   private override init() {
     timetableJSON = defaults.string(forKey: timetableCacheKey)
@@ -42,6 +44,7 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
       if let timetable = context["timetable"] as? String {
         self.timetableJSON = timetable
         self.defaults.set(timetable, forKey: self.timetableCacheKey)
+        self.defaults.set(Date(), forKey: self.timetableSyncDateKey)
       }
       if let meals = context["meals"] as? String {
         self.mealsJSON = meals
@@ -81,6 +84,8 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
       (15 * 60 + 30, 16 * 60 + 20),
     ]
 
+    guard current >= periods[0].0 else { return -1 }
+
     for (i, period) in periods.enumerated() {
       if current <= period.1 { return i }
     }
@@ -107,6 +112,11 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
 
     let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
     return dateString(from: tomorrow)
+  }
+
+  var isTimetableStale: Bool {
+    guard let syncDate = defaults.object(forKey: timetableSyncDateKey) as? Date else { return false }
+    return Date().timeIntervalSince(syncDate) > staleThreshold
   }
 
   var timetableState: TimetableCardState {

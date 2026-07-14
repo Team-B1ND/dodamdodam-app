@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TimetableCardView: View {
   let state: TimetableCardState
+  var isStale: Bool = false
 
   private var badgeLabel: String {
     switch state {
@@ -11,8 +12,13 @@ struct TimetableCardView: View {
     }
   }
 
+  private var badgeTrailingText: String? {
+    guard isStale, case .loaded = state else { return nil }
+    return "⚠️ 오래된 정보"
+  }
+
   var body: some View {
-    WatchPageCard(badgeLabel: badgeLabel) {
+    WatchPageCard(badgeLabel: badgeLabel, badgeTrailingText: badgeTrailingText) {
       switch state {
       case .loaded(_, let periods, let currentPeriod):
         VStack(alignment: .leading, spacing: 0) {
