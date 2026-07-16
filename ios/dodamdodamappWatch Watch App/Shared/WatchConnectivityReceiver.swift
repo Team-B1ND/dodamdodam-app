@@ -84,10 +84,8 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
       (15 * 60 + 30, 16 * 60 + 20),
     ]
 
-    guard current >= periods[0].0 else { return -1 }
-
     for (i, period) in periods.enumerated() {
-      if current <= period.1 { return i }
+      if current >= period.0 && current <= period.1 { return i }
     }
     return -1
   }
