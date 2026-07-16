@@ -39,14 +39,14 @@ private fun DodamWatchApp() {
   val mealsJson by WatchDataRepository.mealsJson.collectAsState()
 
   // SwiftUI의 TimelineView(.everyMinute)와 동일: 매 분마다 재계산되도록 tick
-  val tick by produceState(initialValue = 0L) {
+  val tick by produceState(initialValue = System.currentTimeMillis()) {
     while (true) {
-      value = System.currentTimeMillis()
       delay(60_000)
+      value = System.currentTimeMillis()
     }
   }
 
-  val now = Calendar.getInstance()
+  val now = Calendar.getInstance().apply { timeInMillis = tick }
   val pageCount = 2
   val pagerState = rememberPagerState(initialPage = 0) { pageCount }
 
