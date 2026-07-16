@@ -160,6 +160,9 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
+    // 갤럭시워치(도담워치)로 시간표/급식 데이터를 전달하기 위한 Wearable Data Layer
+    implementation("com.google.android.gms:play-services-wearable:19.0.0")
+
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";
     def isWebpAnimatedEnabled = (findProperty('expo.webp.animated') ?: "") == "true";
