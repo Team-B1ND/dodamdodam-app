@@ -1,0 +1,57 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.plugin.compose"
+
+android {
+  namespace "com.b1nd.dodam.student.watch"
+  compileSdk 36
+
+  defaultConfig {
+    // Wearable Data Layer는 폰 앱과 패키지명이 같아야 데이터를 전달한다 (기기가 달라 충돌 없음)
+    applicationId "com.b1nd.dodam.student"
+    minSdk 30
+    targetSdk 36
+    versionCode 1
+    versionName "1.0"
+  }
+
+  // Wearable Data Layer는 폰 앱과 서명까지 같아야 하므로 앱 모듈과 동일한 키스토어를 사용한다
+  signingConfigs {
+    debug {
+      storeFile file('../app/debug.keystore')
+      storePassword 'android'
+      keyAlias 'androiddebugkey'
+      keyPassword 'android'
+    }
+  }
+
+  buildTypes {
+    debug {
+      signingConfig signingConfigs.debug
+    }
+  }
+
+  buildFeatures {
+    compose true
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  kotlinOptions {
+    jvmTarget = "17"
+  }
+}
+
+dependencies {
+  implementation platform("androidx.compose:compose-bom:2024.12.01")
+  implementation "androidx.wear.compose:compose-material:1.4.0"
+  implementation "androidx.wear.compose:compose-foundation:1.4.0"
+  implementation "androidx.compose.foundation:foundation"
+  implementation "androidx.activity:activity-compose:1.9.3"
+  implementation "androidx.lifecycle:lifecycle-runtime-compose:2.8.7"
+  implementation "com.google.android.gms:play-services-wearable:19.0.0"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"
+}
