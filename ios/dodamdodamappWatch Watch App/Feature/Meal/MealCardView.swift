@@ -11,14 +11,20 @@ struct MealCardView: View {
     return nil
   }
 
+  // 카드 높이가 고정이라, 메뉴가 6개를 넘으면 마지막 자리를 "..."으로 대체한다.
+  private func displayMenus(_ menus: [String]) -> [String] {
+    guard menus.count > 6 else { return menus }
+    return Array(menus.prefix(5)) + ["..."]
+  }
+
   var body: some View {
     WatchPageCard(badgeLabel: mealType.label, badgeTrailingText: kcalText) {
       switch state {
       case .loaded(let meal) where !meal.menus.isEmpty:
         VStack(alignment: .leading, spacing: 4) {
-          ForEach(meal.menus, id: \.self) { menu in
+          ForEach(Array(displayMenus(meal.menus).enumerated()), id: \.offset) { _, menu in
             Text(menu)
-              .font(.footnote)
+              .font(.system(size: 13))
               .foregroundStyle(WatchColor.labelNormal)
               .lineLimit(1)
           }
