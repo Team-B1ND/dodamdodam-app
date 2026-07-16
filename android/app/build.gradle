@@ -163,6 +163,9 @@ dependencies {
     // 갤럭시워치(도담워치)로 시간표/급식 데이터를 전달하기 위한 Wearable Data Layer
     implementation("com.google.android.gms:play-services-wearable:19.0.0")
 
+    // :wear APK를 폰 APK에 내장해 Play 스토어가 페어링된 워치에 자동 설치하도록 함
+    wearApp project(':wear')
+
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";
     def isWebpAnimatedEnabled = (findProperty('expo.webp.animated') ?: "") == "true";

@@ -23,11 +23,20 @@ android {
       keyAlias 'androiddebugkey'
       keyPassword 'android'
     }
+    release {
+      storeFile file('../app/Dodam.jks')
+      storePassword 'ds07430743'
+      keyAlias 'dodamdodam'
+      keyPassword 'ds07430743'
+    }
   }
 
   buildTypes {
     debug {
       signingConfig signingConfigs.debug
+    }
+    release {
+      signingConfig signingConfigs.release
     }
   }
 
