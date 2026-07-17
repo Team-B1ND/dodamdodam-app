@@ -12,9 +12,9 @@ import com.b1nd.dodam.student.watch.shared.WatchCardEmptyText
 import com.b1nd.dodam.student.watch.shared.WatchColor
 import com.b1nd.dodam.student.watch.shared.WatchPageCard
 
-// 카드에 온전히 들어가는 건 5줄까지라, 메뉴가 5개를 넘으면 마지막 자리를 "..."으로 대체한다.
+// 카드 높이가 고정이라, 메뉴가 6개를 넘으면 마지막 자리를 "..."으로 대체한다.
 private fun displayMenus(menus: List<String>) =
-  if (menus.size > 5) menus.take(4) + "..." else menus
+  if (menus.size > 6) menus.take(5) + "..." else menus
 
 @Composable
 fun MealCardView(mealType: MealType, state: MealCardState) {

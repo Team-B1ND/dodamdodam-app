@@ -79,16 +79,16 @@ fun WatchPageCard(
 ) {
   // 원형 화면은 사각 카드의 아래쪽 모서리가 곡면에 걸리기 쉬워서 위/옆보다 아래 여백을 더 준다.
   Column(
-    modifier = Modifier.fillMaxSize().padding(start = 26.dp, end = 26.dp, top = 32.dp, bottom = 40.dp),
+    modifier = Modifier.fillMaxSize().padding(start = 26.dp, end = 26.dp, top = 24.dp, bottom = 36.dp),
     horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.spacedBy(8.dp),
+    verticalArrangement = Arrangement.spacedBy(4.dp),
   ) {
     WatchCardBadge(label = badgeLabel, trailingText = badgeTrailingText, centered = badgeCentered)
     Box(
       modifier = Modifier
         .fillMaxSize()
         .background(WatchColor.backgroundNormal, RoundedCornerShape(20.dp))
-        .padding(10.dp)
+        .padding(horizontal = 10.dp, vertical = 6.dp)
     ) {
       content()
     }
