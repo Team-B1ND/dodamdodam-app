@@ -52,7 +52,7 @@ export const ProjectForm = ({ common, project, onAddMember }: ProjectFormProps) 
         </ScrollView>
       )}
 
-      <FilledButton size="mideum" display="fill" onPress={onAddMember}>
+      <FilledButton size="medium" display="fill" onPress={onAddMember}>
         학생추가
       </FilledButton>
     </View>

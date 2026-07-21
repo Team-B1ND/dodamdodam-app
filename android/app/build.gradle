@@ -92,8 +92,8 @@ android {
         applicationId 'com.b1nd.dodam.student'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 22
-        versionName "5.0.0"
+        versionCode 23
+        versionName "5.0.1"
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
     }
@@ -159,6 +159,12 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+
+    // 갤럭시워치(도담워치)로 시간표/급식 데이터를 전달하기 위한 Wearable Data Layer
+    implementation("com.google.android.gms:play-services-wearable:19.0.0")
+
+    // :wear APK를 폰 APK에 내장해 Play 스토어가 페어링된 워치에 자동 설치하도록 함
+    wearApp project(':wear')
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";

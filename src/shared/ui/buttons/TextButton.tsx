@@ -12,7 +12,7 @@ import { typo, shapes } from "@shared/tokens";
 import { usePressAnimation, useHaptic } from "@shared/hooks";
 import type { HapticType } from "@shared/hooks";
 
-type ButtonSize = "large" | "mideum" | "small";
+type ButtonSize = "large" | "medium" | "small";
 type ButtonDisplay = "inline" | "fill";
 
 interface TextButtonProps {
@@ -31,7 +31,7 @@ const getSizeStyles = (size: ButtonSize) => {
   switch (size) {
     case "large":
       return { paddingHorizontal: 28, minHeight: 48, borderRadius: shapes.medium, typoStyle: typo("Body1", "Medium") };
-    case "mideum":
+    case "medium":
       return { paddingHorizontal: 20, minHeight: 40, borderRadius: shapes.small, typoStyle: typo("Body2", "Medium") };
     case "small":
       return { paddingHorizontal: 12, minHeight: 32, borderRadius: shapes.extraSmall, typoStyle: typo("Caption2", "Bold") };
@@ -39,7 +39,7 @@ const getSizeStyles = (size: ButtonSize) => {
 };
 
 export const TextButton = ({
-  size = "mideum",
+  size = "medium",
   display = "inline",
   disabled = false,
   haptic = "light",

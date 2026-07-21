@@ -13,6 +13,7 @@ import { usePressAnimation } from "@shared/hooks";
 import { Plus } from "@shared/icons/mono";
 import { typo } from "@shared/tokens";
 import { useEditProfile } from "./hooks/useEditProfile";
+import { formatPhoneNumber, parsePhoneDigits } from "@features/register/formatPhoneNumber";
 
 const AVATAR_SIZE = 120;
 const ADD_BUTTON_SIZE = 32;
@@ -35,6 +36,10 @@ export const EditProfileForm = ({ onComplete }: EditProfileFormProps) => {
     sendVerificationCode, submitUpdate,
     isSaving, isSendingCode, hasChanges,
   } = useEditProfile(onComplete);
+
+  const handlePhoneChange = useCallback((text: string) => {
+    setPhone(parsePhoneDigits(text));
+  }, [setPhone]);
 
   const [imgError, setImgError] = useState(false);
   useEffect(() => setImgError(false), [profileImageUri]);
@@ -110,7 +115,7 @@ export const EditProfileForm = ({ onComplete }: EditProfileFormProps) => {
 
         <View style={styles.fields}>
           <TextField label="이름" value={name} onChangeText={setName} />
-          <TextField label="전화번호" value={phone} onChangeText={setPhone} keyboardType="phone-pad" />
+          <TextField label="전화번호" value={formatPhoneNumber(phone)} onChangeText={handlePhoneChange} keyboardType="number-pad" />
           {isStudent && (
             <View style={styles.row}>
               <TextField label="학년" value={grade} onChangeText={setGrade} keyboardType="number-pad" customStyle={styles.rowField} />

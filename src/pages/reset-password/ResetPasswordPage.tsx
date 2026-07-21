@@ -18,6 +18,7 @@ import {
 import { authApi } from "@entities/auth/api";
 import { userApi } from "@entities/user/api";
 import { useSlideAnimation } from "@shared/hooks/animations/useSlideAnimation";
+import { formatPhoneNumber, parsePhoneDigits } from "@features/register/formatPhoneNumber";
 
 export const ResetPasswordPage = () => {
   const { colors } = useTheme();
@@ -26,6 +27,9 @@ export const ResetPasswordPage = () => {
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
 
   const [phone, setPhone] = useState("");
+  const handlePhoneChange = useCallback((text: string) => {
+    setPhone(parsePhoneDigits(text));
+  }, []);
   const [phoneVerified, setPhoneVerified] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
@@ -48,6 +52,7 @@ export const ResetPasswordPage = () => {
     setSendingCode(true);
     try {
       await authApi.requestPhoneVerification(rawPhone);
+      toast.success("인증코드가 전송되었어요.", { position: "top" });
       overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
         <VerifyCodeDialog
           isOpen={isOpen}
@@ -105,27 +110,14 @@ export const ResetPasswordPage = () => {
           </Text>
 
           <View style={styles.fields}>
-            <View style={styles.phoneRow}>
-              <View style={styles.phoneInput}>
-                <TextField
-                  type="text"
-                  label="전화번호"
-                  value={phone}
-                  onChangeText={setPhone}
-                  keyboardType="phone-pad"
-                  editable={!phoneVerified}
-                />
-              </View>
-              <FilledButton
-                size="medium"
-                display={phoneVerified ? "tint" : "fill"}
-                disabled={phone.replace(/-/g, "").length < 10 || phoneVerified}
-                isLoading={sendingCode}
-                onPress={handleSendCode}
-              >
-                {phoneVerified ? "인증완료" : "인증"}
-              </FilledButton>
-            </View>
+            <TextField
+              type="text"
+              label="전화번호"
+              value={formatPhoneNumber(phone)}
+              onChangeText={handlePhoneChange}
+              keyboardType="number-pad"
+              editable={!phoneVerified}
+            />
 
             {phoneVerified && (
               <Animated.View style={[styles.passwordFields, passwordFieldsStyle]}>
@@ -146,6 +138,19 @@ export const ResetPasswordPage = () => {
               </Animated.View>
             )}
           </View>
+
+          {!phoneVerified && phone.replace(/-/g, "").length >= 10 && (
+            <View style={styles.verifyButton}>
+              <FilledButton
+                size="large"
+                display="fill"
+                isLoading={sendingCode}
+                onPress={handleSendCode}
+              >
+                인증코드 전송
+              </FilledButton>
+            </View>
+          )}
         </TextAreaProvider>
 
         <View style={styles.bottom}>
@@ -182,13 +187,8 @@ const styles = StyleSheet.create({
   fields: {
     gap: 20,
   },
-  phoneRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 8,
-  },
-  phoneInput: {
-    flex: 1,
+  verifyButton: {
+    marginTop: 24,
   },
   passwordFields: {
     gap: 20,

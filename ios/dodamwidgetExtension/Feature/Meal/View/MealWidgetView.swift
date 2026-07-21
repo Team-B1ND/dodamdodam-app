@@ -8,18 +8,30 @@
 import SwiftUI
 import WidgetKit
 import AppIntents
+import Foundation
 
 struct MealWidgetView: View {
   var entry: MealEntry
   @Environment(\.widgetFamily) var widgetFamily
+  @Environment(\.widgetRenderingMode) var widgetRenderingMode
+
+  private var isFullColor: Bool { widgetRenderingMode == .fullColor }
+
+  private var entryDateString: String {
+    let formatter = DateFormatter()
+    formatter.calendar = Calendar(identifier: .gregorian)
+    formatter.locale = Locale(identifier: "ko_KR")
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.string(from: entry.date)
+  }
   
   var selectedType: MealType {
     if #available(iOS 17.0, *) {
       let saved = UserDefaults(suiteName: "group.com.b1nd.dodam.student.shared")?
         .string(forKey: "selectedMealType") ?? ""
-      return MealType(rawValue: saved) ?? MealType.from(Date())
+      return MealType(rawValue: saved) ?? MealType.from(entry.date)
     }
-    return MealType.from(Date())
+    return MealType.from(entry.date)
   }
   
   var body: some View {
@@ -44,33 +56,46 @@ struct MealWidgetView: View {
   
   @ViewBuilder
   var mediumContent: some View {
-    let currentMeal = entry.meals.first { $0.mealType == selectedType.rawValue }
+    let currentMeal = entry.meals.first { $0.date == entryDateString && $0.mealType == selectedType.rawValue }
     
     VStack(spacing: 8) {
       HStack(spacing: 6) {
         if #available(iOS 17.0, *) {
           ForEach(MealType.allCases, id: \.self) { type in
-            let meal = entry.meals.first { $0.mealType == type.rawValue }
+            let meal = entry.meals.first { $0.date == entryDateString && $0.mealType == type.rawValue }
             let isSelected = selectedType == type
             
             Button(intent: SelectMealIntent(mealType: type.rawValue)) {
               HStack(spacing: 4) {
                 Text(type.label)
                   .font(.footnote.bold())
-                  .foregroundColor(isSelected ? .white : WidgetColor.labelAlternative)
+                  .foregroundColor(isFullColor && isSelected ? .white : WidgetColor.labelAlternative)
                 Spacer()
                 if let meal {
                   Text("\(Int(meal.calorie))Kcal")
                     .font(.system(size: 9, weight: .medium))
-                    .foregroundColor(isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative)
+                    .foregroundColor(isFullColor && isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative)
                     .lineLimit(1)
                     .layoutPriority(1)
                 }
               }
               .padding(.horizontal, 10)
               .padding(.vertical, 6)
-              .background(isSelected ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
+              .background(
+                isFullColor
+                  ? (isSelected ? WidgetColor.primaryNormal : WidgetColor.backgroundNormal)
+                  : Color.clear
+              )
               .clipShape(Capsule())
+              .overlay(
+                Capsule()
+                  .strokeBorder(
+                    isSelected ? WidgetColor.primaryNormal : WidgetColor.labelAlternative.opacity(0.5),
+                    lineWidth: isSelected ? 1.5 : 1
+                  )
+                  .opacity(isFullColor ? 0 : 1)
+              )
+              .widgetAccentable(isSelected)
             }
             .buttonStyle(.plain)
           }
@@ -125,7 +150,7 @@ struct MealWidgetView: View {
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
       .padding(10)
-      .background(WidgetColor.backgroundNormal)
+      .background(isFullColor ? WidgetColor.backgroundNormal : Color.clear)
       .clipShape(RoundedRectangle(cornerRadius: 14))
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -134,19 +159,20 @@ struct MealWidgetView: View {
   
   @ViewBuilder
   var smallContent: some View {
-    let currentType = MealType.from(Date())
-    let currentMeal = entry.meals.first { $0.mealType == currentType.rawValue }
+    let currentType = MealType.from(entry.date)
+    let currentMeal = entry.meals.first { $0.date == entryDateString && $0.mealType == currentType.rawValue }
     
     VStack(spacing: 8) {
       if let meal = currentMeal {
         HStack {
           Text(currentType.label)
-            .foregroundColor(.white)
+            .foregroundColor(isFullColor ? .white : WidgetColor.labelAlternative)
             .padding(.horizontal, 10)
             .padding(.vertical, 4)
-            .background(WidgetColor.primaryNormal)
+            .background(isFullColor ? WidgetColor.primaryNormal : Color.clear)
             .clipShape(Capsule())
             .font(.footnote.bold())
+            .widgetAccentable(true)
           Spacer()
           Text("\(Int(meal.calorie))Kcal")
             .font(.caption)
@@ -167,7 +193,7 @@ struct MealWidgetView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(10)
-        .background(WidgetColor.backgroundNormal)
+        .background(isFullColor ? WidgetColor.backgroundNormal : Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 14))
         
       } else {
