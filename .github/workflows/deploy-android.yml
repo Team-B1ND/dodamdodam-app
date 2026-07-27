@@ -63,7 +63,5 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.b1nd.dodam.student
-          releaseFiles: |
-            android/app/build/outputs/bundle/release/app-release.aab
-            android/wear/build/outputs/bundle/release/wear-release.aab
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab,android/wear/build/outputs/bundle/release/wear-release.aab
           track: internal
