@@ -56,18 +56,14 @@ jobs:
             -PMYAPP_UPLOAD_KEY_ALIAS=${{ secrets.KEY_ALIAS }} \
             -PMYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
 
-      - name: Upload to Play Store
+      # 폰과 워치는 같은 패키지라 별도 릴리즈로 나누면 기존 사용자 업그레이드 경로가 사라진다.
+      # 반드시 하나의 릴리즈(edit)에 두 AAB를 함께 넣어야 한다.
+      - name: Upload to Play Store (phone + Wear OS)
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.b1nd.dodam.student
-          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
-          track: internal
-
-      - name: Upload Wear OS build to Play Store
-        uses: r0adkll/upload-google-play@v1
-        with:
-          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: com.b1nd.dodam.student
-          releaseFiles: android/wear/build/outputs/bundle/release/wear-release.aab
+          releaseFiles: |
+            android/app/build/outputs/bundle/release/app-release.aab
+            android/wear/build/outputs/bundle/release/wear-release.aab
           track: internal
