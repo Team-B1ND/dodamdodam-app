@@ -13,6 +13,7 @@ import {
   useNightStudyPersonalApply,
   useNightStudyProjectApply,
   StudentAddSheet,
+  TeamAddSheet,
 } from "@features/night-study";
 
 const makeSegments = (tab: string): SegmentedButtonData[] => [
@@ -26,6 +27,7 @@ export const NightStudyApplyPage = () => {
   const route = useRoute<any>();
   const initialTab = route.params?.tab ?? "personal";
   const studentSheetRef = useRef<BottomSheetModal>(null);
+  const teamSheetRef = useRef<BottomSheetModal>(null);
 
   const [segments, setSegments] = useState(() => makeSegments(initialTab));
   const activeTab = segments.find((s) => s.isActive)?.value ?? "personal";
@@ -87,6 +89,7 @@ export const NightStudyApplyPage = () => {
               common={common}
               project={project}
               onAddMember={handleAddMember}
+              onAddTeam={() => teamSheetRef.current?.present()}
             />
           )}
         </TextAreaProvider>
@@ -105,6 +108,10 @@ export const NightStudyApplyPage = () => {
           project.members.forEach((m) => project.removeMember(m.id));
           members.forEach((m) => project.addMember(m));
         }}
+      />
+      <TeamAddSheet
+        sheetRef={teamSheetRef}
+        onConfirm={() => {}}
       />
     </SafeAreaView>
   );
