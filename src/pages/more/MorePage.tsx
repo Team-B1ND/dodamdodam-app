@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "@shared/theme";
 import { TopNavBar, RefreshView, Dialog, useOverlay } from "@shared/ui";
-import { Gear, File } from "@shared/icons/mono";
+import { Gear, File, People } from "@shared/icons/mono";
 import { ProfileCard } from "@features/profile";
 import { InAppList } from "@features/inapp";
 import { userQueryKeys } from "@entities/user/api/queryKeys";
@@ -22,6 +22,7 @@ export const MorePage = () => {
 
   const openSettings = useCallback(() => navigation.navigate("Settings"), [navigation]);
   const openEditProfile = useCallback(() => navigation.navigate("EditProfile"), [navigation]);
+  const openTeamList = useCallback(() => navigation.navigate("TeamList"), [navigation]);
 
   const showStudentCode = useCallback(() => {
     const user = queryClient.getQueryData<User>(userQueryKeys.me);
@@ -63,6 +64,7 @@ export const MorePage = () => {
 
         <View style={styles.section}>
           <MenuItem icon={<File />} title="내 학생코드 보기" onPress={showStudentCode} />
+          <MenuItem icon={<People />} title="팀 확인하기" onPress={openTeamList} />
         </View>
 
         <Suspense fallback={<InAppList.Skeleton />}>
