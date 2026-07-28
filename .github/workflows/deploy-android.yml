@@ -76,6 +76,3 @@ jobs:
           packageName: com.b1nd.dodam.student
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab,android/wear/build/outputs/bundle/release/wear-release.aab
           track: internal
-          # Wear OS 폼 팩터 추가 등 수동 심사가 필요한 변경은 자동 전송이 거부되므로,
-          # 커밋만 하고 심사 전송은 Play Console에서 수동으로 진행한다.
-          changesNotSentForReview: true
