@@ -56,6 +56,17 @@ jobs:
             -PMYAPP_UPLOAD_KEY_ALIAS=${{ secrets.KEY_ALIAS }} \
             -PMYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
 
+      # Wear OS 폼 팩터를 Play Console에서 최초 활성화하려면 Console UI로 직접 한 번
+      # 출시해야 하므로, 서명된 AAB를 다운로드할 수 있게 아티팩트로 남긴다.
+      - name: Upload AABs as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aabs
+          path: |
+            android/app/build/outputs/bundle/release/app-release.aab
+            android/wear/build/outputs/bundle/release/wear-release.aab
+          retention-days: 7
+
       # 폰과 워치는 같은 패키지라 별도 릴리즈로 나누면 기존 사용자 업그레이드 경로가 사라진다.
       # 반드시 하나의 릴리즈(edit)에 두 AAB를 함께 넣어야 한다.
       - name: Upload to Play Store (phone + Wear OS)
