@@ -12,7 +12,7 @@ android {
     minSdk 30
     targetSdk 36
     // 폰 앱과 패키지명이 같아 versionCode 번호 공간을 공유하므로, 충돌하지 않도록 10001+ 대역을 사용한다
-    versionCode 10006
+    versionCode 10007
     versionName "1.0"
   }
 
