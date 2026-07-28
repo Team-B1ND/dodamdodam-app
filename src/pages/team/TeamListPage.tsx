@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { TopNavBar, RefreshView, SegmentedButton, toast } from "@shared/ui";
+import { TopNavBar, RefreshView, SegmentedButton } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
 import { Plus } from "@shared/icons/mono";
 import { TeamAllList, TeamMyList } from "@features/team";
@@ -21,9 +21,7 @@ export const TeamListPage = () => {
   const activeTab = segments.find((s) => s.isActive)?.value ?? "all";
   const goBack = () => navigation.goBack();
 
-  // TODO: 팀 생성 화면이 라우트에 등록되면 navigation.navigate("TeamCreate")로 교체
-  const openCreateTeam = () =>
-    toast("팀 생성 화면은 아직 준비 중이에요.", { position: "top" });
+  const openCreateTeam = () => navigation.navigate("TeamCreate");
 
   return (
     <SafeAreaView

@@ -1,17 +1,19 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { shapes } from "@shared/tokens";
 import { EmptyState } from "@shared/ui";
 import { Handshake } from "@shared/icons/illustration";
+import type { Team } from "@entities/team/types";
 import { TeamCard } from "../card/TeamCard";
 import { useMyTeamsSuspense } from "../hooks/useTeamListSuspense";
-import { useTeamDetailNavigation } from "../hooks/useTeamDetailNavigation";
 
 export const TeamMyList = () => {
   const { colors } = useTheme();
+  const navigation = useNavigation<any>();
   const items = useMyTeamsSuspense();
-  const handlePress = useTeamDetailNavigation();
+  const handlePress = (team: Team) => navigation.navigate("TeamDetail", { teamId: team.id });
 
   if (items.length === 0) {
     return (
