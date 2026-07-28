@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useCallback, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,6 +8,7 @@ import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
 import { Plus } from "@shared/icons/mono";
 import { TeamAllList, TeamMyList } from "@features/team";
 import { teamQueryKeys } from "@entities/team/api/queryKeys";
+import { Plus } from "@shared/icons/mono";
 
 const INITIAL_SEGMENTS: SegmentedButtonData[] = [
   { text: "전체 팀", value: "all", isActive: true },
@@ -20,6 +21,7 @@ export const TeamListPage = () => {
   const [segments, setSegments] = useState(INITIAL_SEGMENTS);
   const activeTab = segments.find((s) => s.isActive)?.value ?? "all";
   const goBack = () => navigation.goBack();
+  const openTeamCreate = useCallback(() => navigation.navigate("TeamCreate"), [navigation]);
 
   const openCreateTeam = () => navigation.navigate("TeamCreate");
 
@@ -28,10 +30,7 @@ export const TeamListPage = () => {
       style={[styles.container, { backgroundColor: colors.background.default }]}
       edges={["top"]}
     >
-      <TopNavBar
-        left={<TopNavBar.BackButton onPress={goBack} />}
-        right={<TopNavBar.IconButton icon={<Plus />} onPress={openCreateTeam} />}
-      >
+      <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />} right={<TopNavBar.IconButton icon={<Plus />} onPress={openTeamCreate}/>} >
         <TopNavBar.Title hasBackButton>팀</TopNavBar.Title>
       </TopNavBar>
       <RefreshView
