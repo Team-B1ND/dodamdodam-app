@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
-import { Avatar } from "@shared/ui";
 import type { Team } from "@entities/team/types";
+import { TeamAvatar } from "../ui/TeamAvatar";
 
 interface TeamCardProps {
   item: Team;
@@ -18,7 +18,7 @@ export const TeamCard = ({ item, onPress }: TeamCardProps) => {
       style={[styles.card, { backgroundColor: colors.background.surface }]}
       onPress={() => onPress?.(item)}
     >
-      <Avatar size={44} />
+      <TeamAvatar profileImage={item.profileImage} size={44} />
       <View style={styles.info}>
         <Text style={[styles.name, { color: colors.text.primary }]}>
           {item.name}

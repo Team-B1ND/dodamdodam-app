@@ -4,9 +4,10 @@ import { useNavigation, useRoute, type RouteProp } from "@react-navigation/nativ
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
-import { TopNavBar, Avatar, Divider, Skeleton } from "@shared/ui";
+import { TopNavBar, Divider, Skeleton } from "@shared/ui";
 import { Crown } from "@shared/icons/mono";
 import { useTeamDetailSuspense } from "@features/team/hooks/useTeamDetailSuspense";
+import { TeamAvatar } from "@features/team/ui/TeamAvatar";
 import type { TeamMember } from "@entities/team/types";
 
 export interface TeamDetailParams {
@@ -20,7 +21,7 @@ const TeamMemberRow = ({ member }: { member: TeamMember }) => {
 
   return (
     <View style={styles.memberRow}>
-      <Avatar size={36} />
+      <TeamAvatar profileImage={member.profileImage} size={36} />
       <View style={styles.memberInfo}>
         <View style={styles.memberNameRow}>
           <Text style={[styles.memberName, { color: colors.text.primary }]}>
@@ -51,7 +52,7 @@ const TeamDetailContent = ({ teamId }: { teamId: string }) => {
   return (
     <>
       <View style={styles.header}>
-        <Avatar size={64} />
+        <TeamAvatar profileImage={team.profileImage} size={64} />
         <Text style={[styles.name, { color: colors.text.primary }]}>{team.name}</Text>
         <Text style={[styles.introduction, { color: colors.text.tertiary }]}>
           {team.introduction}
