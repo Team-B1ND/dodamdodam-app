@@ -18,6 +18,7 @@ import { NightStudyApplyPage } from "@pages/night-study";
 import { TeamListPage, TeamDetailPage } from "@pages/team";
 import { ChangePasswordPage } from "@pages/change-password";
 import { ResetPasswordPage } from "@pages/reset-password";
+import { TeamCreatePage } from "@pages/team/TeamCreatePage";
 
 const Stack = createStackNavigator();
 
@@ -54,6 +55,7 @@ export const RootStackNavigator = () => (
     <Stack.Screen name="NightStudyApply" component={NightStudyApplyPage} />
     <Stack.Screen name="TeamList" component={TeamListPage} />
     <Stack.Screen name="TeamDetail" component={TeamDetailPage} />
+    <Stack.Screen name="TeamCreate" component={TeamCreatePage} />
     <Stack.Screen
       name="AppWebView"
       component={AppWebViewPage}
