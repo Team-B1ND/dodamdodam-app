@@ -1,6 +1,14 @@
 import { basicApiHandler } from "@entities/api/common";
 import type { ApiResponse } from "@shared/types";
-import type { NightStudyPersonal, NightStudyProject, NightStudyPersonalRequest, NightStudyProjectRequest } from "@entities/night-study/types";
+import type {
+  InfinityScrollResponse,
+  NightStudyPersonal,
+  NightStudyProject,
+  NightStudyPersonalRequest,
+  NightStudyProjectRequest,
+  NightStudyTeam,
+  NightStudyTeamMember,
+} from "@entities/night-study/types";
 
 export const nightStudyApi = {
   getMyPersonal: () =>
@@ -14,6 +22,17 @@ export const nightStudyApi = {
 
   createProject: (body: NightStudyProjectRequest) =>
     basicApiHandler.post<ApiResponse>("/nightstudy/project", body),
+
+  getTeams: (page = 0, size = 20) =>
+    basicApiHandler.get<ApiResponse<InfinityScrollResponse<NightStudyTeam>>>(
+      "/nightstudy/teams",
+      { params: { page, size } },
+    ),
+
+  getTeamMembers: (publicId: string) =>
+    basicApiHandler.get<ApiResponse<NightStudyTeamMember[]>>(
+      `/nightstudy/teams/${publicId}`,
+    ),
 
   delete: (id: string) =>
     basicApiHandler.delete<ApiResponse>(`/nightstudy/${id}`),

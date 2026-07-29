@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState, type FC } from "react";
-import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useCallback, useEffect, useMemo, useState, type FC } from "react";
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -7,20 +7,18 @@ import {
 } from "@gorhom/bottom-sheet";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
-import { FilledButton, TextAreaProvider } from "@shared/ui";
+import { FilledButton, TextAreaProvider, toast } from "@shared/ui";
 import { CheckmarkCircleFill, CheckmarkCircleLine, MagnifyingGlass, People, XmarkCircle } from "@shared/icons/mono";
-
-export interface NightStudyTeam {
-  id: string;
-  name: string;
-  description: string;
-}
+import { nightStudyApi } from "@entities/night-study/api";
+import { userApi } from "@entities/user/api";
+import type { NightStudyTeam } from "@entities/night-study/types";
+import type { SelectedNightStudyTeam, StudentMember } from "../hooks/useNightStudyForm";
+import { useNightStudyTeams } from "../hooks/useNightStudyTeams";
 
 interface TeamAddSheetProps {
   sheetRef: React.RefObject<BottomSheetModal | null>;
-  teams?: NightStudyTeam[];
-  selected?: NightStudyTeam[];
-  onConfirm: (teams: NightStudyTeam[]) => void;
+  selectedTeamIds?: string[];
+  onConfirm: (teams: SelectedNightStudyTeam[]) => void;
 }
 
 const Backdrop: FC<BottomSheetBackdropProps> = (props) => (
@@ -54,36 +52,74 @@ const TeamAvatar = ({ size = 38 }: { size?: number }) => {
 
 export const TeamAddSheet = ({
   sheetRef,
-  teams = [],
-  selected = [],
+  selectedTeamIds = [],
   onConfirm,
 }: TeamAddSheetProps) => {
   const { colors } = useTheme();
+  const { teams, loading, loadMore, refresh } = useNightStudyTeams();
   const [query, setQuery] = useState("");
-  const [selection, setSelection] = useState<NightStudyTeam[]>(selected);
-  const selectedIds = useMemo(() => new Set(selection.map((team) => team.id)), [selection]);
+  const [selection, setSelection] = useState<NightStudyTeam[]>([]);
+  const [confirming, setConfirming] = useState(false);
+  const selectedIds = useMemo(
+    () => new Set(selection.map((team) => team.publicId)),
+    [selection],
+  );
   const filtered = useMemo(() => {
     const keyword = query.trim().toLowerCase();
     if (!keyword) return teams;
-    return teams.filter(
-      (team) =>
-        team.name.toLowerCase().includes(keyword) ||
-        team.description.toLowerCase().includes(keyword),
-    );
+    return teams.filter((team) => team.name.toLowerCase().includes(keyword));
   }, [query, teams]);
+
+  useEffect(() => {
+    const selectedIds = new Set(selectedTeamIds);
+    setSelection(teams.filter((team) => selectedIds.has(team.publicId)));
+  }, [selectedTeamIds, teams]);
 
   const toggle = useCallback((team: NightStudyTeam) => {
     setSelection((current) =>
-      current.some((item) => item.id === team.id)
-        ? current.filter((item) => item.id !== team.id)
+      current.some((item) => item.publicId === team.publicId)
+        ? current.filter((item) => item.publicId !== team.publicId)
         : [...current, team],
     );
   }, []);
 
-  const confirm = useCallback(() => {
-    onConfirm(selection);
-    sheetRef.current?.dismiss();
-  }, [onConfirm, selection, sheetRef]);
+  const confirm = useCallback(async () => {
+    if (confirming) return;
+
+    setConfirming(true);
+    try {
+      const [{ data: meResponse }, memberResponses] = await Promise.all([
+        userApi.getMe(),
+        Promise.all(selection.map((team) => nightStudyApi.getTeamMembers(team.publicId))),
+      ]);
+      const myId = meResponse.data.publicId;
+      const selectedTeams = selection.map<SelectedNightStudyTeam>((team, index) => {
+        const members = memberResponses[index].data.data
+          .filter((member) => member.isAccept && member.student)
+          .map<StudentMember>((member) => ({
+            id: member.userId,
+            name: member.name,
+            grade: member.student!.grade,
+            room: member.student!.room,
+            number: member.student!.number,
+            isSelf: member.userId === myId,
+          }));
+
+        return {
+          id: team.publicId,
+          name: team.name,
+          members,
+        };
+      });
+
+      onConfirm(selectedTeams);
+      sheetRef.current?.dismiss();
+    } catch {
+      toast.error("팀원을 불러오지 못했어요.", { position: "top" });
+    } finally {
+      setConfirming(false);
+    }
+  }, [confirming, onConfirm, selection, sheetRef]);
 
   return (
     <BottomSheetModal
@@ -102,7 +138,7 @@ export const TeamAddSheet = ({
         {selection.length > 0 && (
           <View style={styles.selectedRow}>
             {selection.map((team) => (
-              <View key={team.id} style={styles.selectedItem}>
+              <View key={team.publicId} style={styles.selectedItem}>
                 <View>
                   <TeamAvatar size={38} />
                   <Pressable style={styles.remove} onPress={() => toggle(team)}>
@@ -128,19 +164,25 @@ export const TeamAddSheet = ({
 
         <FlatList
           data={filtered}
-          keyExtractor={(team) => team.id}
+          keyExtractor={(team) => team.publicId}
           style={styles.list}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.3}
+          refreshing={loading && teams.length === 0}
+          onRefresh={refresh}
+          ListFooterComponent={
+            loading && teams.length > 0
+              ? <ActivityIndicator color={colors.brand.primary} />
+              : null
+          }
           renderItem={({ item }) => {
-            const isSelected = selectedIds.has(item.id);
+            const isSelected = selectedIds.has(item.publicId);
             return (
               <Pressable style={styles.row} onPress={() => toggle(item)}>
                 <View style={styles.info}>
                   <TeamAvatar size={38} />
                   <View>
                     <Text style={[styles.name, { color: colors.text.primary }]}>{item.name}</Text>
-                    <Text style={[styles.description, { color: colors.text.tertiary }]}>
-                      {item.description}
-                    </Text>
                   </View>
                 </View>
                 {isSelected ? (
@@ -154,7 +196,15 @@ export const TeamAddSheet = ({
         />
 
         <View style={[styles.divider, { backgroundColor: colors.border.subtle }]} />
-        <FilledButton size="large" display="fill" onPress={confirm}>추가</FilledButton>
+        <FilledButton
+          size="large"
+          display="fill"
+          disabled={selection.length === 0}
+          isLoading={confirming}
+          onPress={confirm}
+        >
+          추가
+        </FilledButton>
       </TextAreaProvider>
     </BottomSheetModal>
   );
@@ -173,6 +223,5 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingVertical: 4 },
   info: { flexDirection: "row", alignItems: "center", gap: 8, flex: 1 },
   name: { ...typo("Body1", "Medium") },
-  description: { ...typo("Body2", "Medium") },
   divider: { height: 1 },
 });

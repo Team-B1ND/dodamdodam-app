@@ -14,7 +14,6 @@ export { NightStudyCard } from "./card/NightStudyCard";
 export { PersonalForm } from "./form/PersonalForm";
 export { StudentAddSheet } from "./student/StudentAddSheet";
 export { TeamAddSheet } from "./team/TeamAddSheet";
-export type { NightStudyTeam } from "./team/TeamAddSheet";
 export { ProjectForm } from "./form/ProjectForm";
 export { TimeSlotPicker } from "./form/TimeSlotPicker";
 export { useNightStudyForm } from "./hooks/useNightStudyForm";

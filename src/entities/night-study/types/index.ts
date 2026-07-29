@@ -47,3 +47,27 @@ export interface NightStudyProjectRequest {
   endAt: string;
   members: string[];
 }
+
+export interface NightStudyTeam {
+  publicId: string;
+  name: string;
+  imageUrl: string | null;
+}
+
+export interface NightStudyTeamMember {
+  userId: string;
+  name: string;
+  profileImage: string | null;
+  isOwner: boolean;
+  isAccept: boolean;
+  student: {
+    grade: number;
+    room: number;
+    number: number;
+  } | null;
+}
+
+export interface InfinityScrollResponse<T> {
+  content: T[];
+  hasNext: boolean;
+}

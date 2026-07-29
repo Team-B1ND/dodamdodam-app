@@ -52,13 +52,20 @@ export const NightStudyApplyPage = () => {
       });
       if (success) navigation.goBack();
     } else {
+      const mergedMembers = [
+        ...project.members,
+        ...project.teams.flatMap((team) => team.members),
+      ].filter((member) => !member.isSelf).filter(
+        (member, index, all) =>
+          all.findIndex((candidate) => candidate.id === member.id) === index,
+      );
       const success = await applyProject({
         projectName: project.projectName,
         projectDescription: project.projectDescription,
         timeSlot: common.timeSlot,
         startDate: common.startDate,
         endDate: common.endDate,
-        members: project.members,
+        members: mergedMembers,
       });
       if (success) navigation.goBack();
     }
@@ -111,7 +118,11 @@ export const NightStudyApplyPage = () => {
       />
       <TeamAddSheet
         sheetRef={teamSheetRef}
-        onConfirm={() => {}}
+        selectedTeamIds={project.teams.map((team) => team.id)}
+        onConfirm={(teams) => {
+          project.teams.forEach((team) => project.removeTeam(team.id));
+          teams.forEach((team) => project.addTeam(team));
+        }}
       />
     </SafeAreaView>
   );
