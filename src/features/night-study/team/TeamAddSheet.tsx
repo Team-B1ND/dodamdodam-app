@@ -102,6 +102,7 @@ export const TeamAddSheet = ({
             grade: member.student!.grade,
             room: member.student!.room,
             number: member.student!.number,
+            profileImage: member.profileImage,
             isSelf: member.userId === myId,
           }));
 

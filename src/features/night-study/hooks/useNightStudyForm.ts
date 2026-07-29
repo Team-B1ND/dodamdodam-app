@@ -7,6 +7,7 @@ export interface StudentMember {
   grade: number;
   room: number;
   number: number;
+  profileImage?: string | null;
   isSelf?: boolean;
 }
 

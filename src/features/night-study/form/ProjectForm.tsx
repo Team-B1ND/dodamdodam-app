@@ -2,11 +2,12 @@ import React from "react";
 import { View, Text, ScrollView, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
-import { TextField, FilledButton, Avatar } from "@shared/ui";
+import { TextField, FilledButton } from "@shared/ui";
 import { People, XmarkCircle } from "@shared/icons/mono";
 import { DatePickerRow } from "@features/out-sleeping";
 import { TimeSlotPicker, type TimeSlot } from "./TimeSlotPicker";
 import type { SelectedNightStudyTeam, StudentMember } from "../hooks/useNightStudyForm";
+import { StudentAvatar } from "../student/StudentAvatar";
 
 interface ProjectFormProps {
   common: {
@@ -177,7 +178,7 @@ const MemberAvatar = ({
   return (
     <View style={styles.memberItem}>
       <View>
-        <Avatar size={38} />
+        <StudentAvatar size={38} profileImage={member.profileImage} />
         {onRemove && (
           <Pressable hitSlop={6} style={styles.removeButton} onPress={onRemove}>
             <XmarkCircle size={16} color={colors.text.tertiary} />
