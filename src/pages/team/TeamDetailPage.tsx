@@ -6,9 +6,8 @@ import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
 import { TopNavBar, Divider, Skeleton } from "@shared/ui";
 import { Crown } from "@shared/icons/mono";
-import { useTeamDetailSuspense } from "@features/team/hooks/useTeamDetailSuspense";
-import { TeamAvatar } from "@features/team/ui/TeamAvatar";
-import type { TeamMember } from "@entities/team/types";
+import { useTeamDetailSuspense } from "@features/team";
+import { TeamAvatar, type TeamMember } from "@entities/team";
 
 export interface TeamDetailParams {
   teamId: string;

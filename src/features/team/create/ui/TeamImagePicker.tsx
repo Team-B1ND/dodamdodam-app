@@ -1,8 +1,8 @@
 import { Image, Pressable, StyleSheet } from "react-native";
 import { MonoIcons } from "@shared/icons";
 import { useTheme } from "@shared/theme";
-import { useImagePick } from "../hooks/useImagePick";
-import type { TeamImagePickerProps } from "../types";
+import { useImagePick } from "../model/useImagePick";
+import type { TeamImagePickerProps } from "../model/types";
 
 export const TeamImagePicker = ({
   value,
@@ -25,10 +25,7 @@ export const TeamImagePicker = ({
       {value ? (
         <Image source={{ uri: value.uri }} style={styles.image} />
       ) : (
-        <MonoIcons.Photo
-          size={32}
-          color={colors.text.tertiary}
-        />
+        <MonoIcons.Photo size={32} color={colors.text.tertiary} />
       )}
     </Pressable>
   );

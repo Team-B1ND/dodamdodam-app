@@ -7,8 +7,7 @@ import { TopNavBar, RefreshView, SegmentedButton } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
 import { Plus } from "@shared/icons/mono";
 import { TeamAllList, TeamMyList } from "@features/team";
-import { teamQueryKeys } from "@entities/team/api/queryKeys";
-import { Plus } from "@shared/icons/mono";
+import { teamQueryKeys } from "@entities/team";
 
 const INITIAL_SEGMENTS: SegmentedButtonData[] = [
   { text: "전체 팀", value: "all", isActive: true },
@@ -23,14 +22,15 @@ export const TeamListPage = () => {
   const goBack = () => navigation.goBack();
   const openTeamCreate = useCallback(() => navigation.navigate("TeamCreate"), [navigation]);
 
-  const openCreateTeam = () => navigation.navigate("TeamCreate");
-
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
       edges={["top"]}
     >
-      <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />} right={<TopNavBar.IconButton icon={<Plus />} onPress={openTeamCreate}/>} >
+      <TopNavBar
+        left={<TopNavBar.BackButton onPress={goBack} />}
+        right={<TopNavBar.IconButton icon={<Plus />} onPress={openTeamCreate} />}
+      >
         <TopNavBar.Title hasBackButton>팀</TopNavBar.Title>
       </TopNavBar>
       <RefreshView

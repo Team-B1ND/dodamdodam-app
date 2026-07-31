@@ -1,7 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { teamApi } from "@entities/team/api";
-import { teamQueryKeys } from "@entities/team/api/queryKeys";
-import type { Team } from "@entities/team/types";
+import { teamApi, teamQueryKeys, type Team } from "@entities/team";
 
 export const useAllTeamsSuspense = (): Team[] => {
   const { data } = useSuspenseQuery({
