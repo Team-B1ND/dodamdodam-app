@@ -65,7 +65,6 @@ export const TeamApplyForm = ({
       )}
 
       <FilledButton
-        role="assistive"
         size="medium"
         display="fill"
         onPress={onAddMemberPress}
