@@ -13,6 +13,7 @@ import {
   useNightStudyPersonalApply,
   useNightStudyProjectApply,
   StudentAddSheet,
+  TeamAddSheet,
 } from "@features/night-study";
 
 const makeSegments = (tab: string): SegmentedButtonData[] => [
@@ -26,6 +27,7 @@ export const NightStudyApplyPage = () => {
   const route = useRoute<any>();
   const initialTab = route.params?.tab ?? "personal";
   const studentSheetRef = useRef<BottomSheetModal>(null);
+  const teamSheetRef = useRef<BottomSheetModal>(null);
 
   const [segments, setSegments] = useState(() => makeSegments(initialTab));
   const activeTab = segments.find((s) => s.isActive)?.value ?? "personal";
@@ -50,13 +52,20 @@ export const NightStudyApplyPage = () => {
       });
       if (success) navigation.goBack();
     } else {
+      const mergedMembers = [
+        ...project.members,
+        ...project.teams.flatMap((team) => team.members),
+      ].filter((member) => !member.isSelf).filter(
+        (member, index, all) =>
+          all.findIndex((candidate) => candidate.id === member.id) === index,
+      );
       const success = await applyProject({
         projectName: project.projectName,
         projectDescription: project.projectDescription,
         timeSlot: common.timeSlot,
         startDate: common.startDate,
         endDate: common.endDate,
-        members: project.members,
+        members: mergedMembers,
       });
       if (success) navigation.goBack();
     }
@@ -87,6 +96,7 @@ export const NightStudyApplyPage = () => {
               common={common}
               project={project}
               onAddMember={handleAddMember}
+              onAddTeam={() => teamSheetRef.current?.present()}
             />
           )}
         </TextAreaProvider>
@@ -104,6 +114,14 @@ export const NightStudyApplyPage = () => {
         onConfirm={(members) => {
           project.members.forEach((m) => project.removeMember(m.id));
           members.forEach((m) => project.addMember(m));
+        }}
+      />
+      <TeamAddSheet
+        sheetRef={teamSheetRef}
+        selectedTeamIds={project.teams.map((team) => team.id)}
+        onConfirm={(teams) => {
+          project.teams.forEach((team) => project.removeTeam(team.id));
+          teams.forEach((team) => project.addTeam(team));
         }}
       />
     </SafeAreaView>
