@@ -5,12 +5,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
 import { TopNavBar, RefreshView, SegmentedButton } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
+import { Plus } from "@shared/icons/mono";
 import { TeamAllList, TeamMyList } from "@features/team";
 import { teamQueryKeys } from "@entities/team/api/queryKeys";
 
 const INITIAL_SEGMENTS: SegmentedButtonData[] = [
-  { text: "전체", value: "all", isActive: true },
-  { text: "소속", value: "my", isActive: false },
+  { text: "전체 팀", value: "all", isActive: true },
+  { text: "소속 팀", value: "my", isActive: false },
 ];
 
 export const TeamListPage = () => {
@@ -20,12 +21,17 @@ export const TeamListPage = () => {
   const activeTab = segments.find((s) => s.isActive)?.value ?? "all";
   const goBack = () => navigation.goBack();
 
+  const openCreateTeam = () => navigation.navigate("TeamCreate");
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
       edges={["top"]}
     >
-      <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />}>
+      <TopNavBar
+        left={<TopNavBar.BackButton onPress={goBack} />}
+        right={<TopNavBar.IconButton icon={<Plus />} onPress={openCreateTeam} />}
+      >
         <TopNavBar.Title hasBackButton>팀</TopNavBar.Title>
       </TopNavBar>
       <RefreshView

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
@@ -13,11 +13,7 @@ export const TeamAllList = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
   const items = useAllTeamsSuspense();
-
-  const handlePress = useCallback(
-    (team: Team) => navigation.navigate("TeamDetail", { teamId: team.id }),
-    [navigation],
-  );
+  const handlePress = (team: Team) => navigation.navigate("TeamDetail", { teamId: team.id });
 
   if (items.length === 0) {
     return (

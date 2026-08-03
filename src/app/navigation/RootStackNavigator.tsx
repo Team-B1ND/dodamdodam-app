@@ -15,7 +15,7 @@ import { CreateAccountPage } from "@pages/create-account";
 import { AppWebViewPage } from "@pages/app-webview";
 import { OutSleepingApplyPage } from "@pages/out-sleeping";
 import { NightStudyApplyPage } from "@pages/night-study";
-import { TeamListPage } from "@pages/team";
+import { TeamListPage, TeamDetailPage } from "@pages/team";
 import { ChangePasswordPage } from "@pages/change-password";
 import { ResetPasswordPage } from "@pages/reset-password";
 
@@ -53,6 +53,7 @@ export const RootStackNavigator = () => (
     <Stack.Screen name="OutSleepingApply" component={OutSleepingApplyPage} />
     <Stack.Screen name="NightStudyApply" component={NightStudyApplyPage} />
     <Stack.Screen name="TeamList" component={TeamListPage} />
+    <Stack.Screen name="TeamDetail" component={TeamDetailPage} />
     <Stack.Screen
       name="AppWebView"
       component={AppWebViewPage}
