@@ -48,3 +48,26 @@ export const useMyTeamsSuspense = () => {
     refetch: query.refetch,
   };
 };
+
+export const useInviteTeamsSuspense = () => {
+  const query = useSuspenseInfiniteQuery({
+    queryKey: teamQueryKeys.invite,
+    initialPageParam: 0,
+    queryFn: async ({ pageParam }) =>
+      (await teamApi.getMyInvitations(pageParam, PAGE_SIZE)).data.data ?? {
+        content: [] as Team[],
+        hasNext: false,
+      },
+    getNextPageParam: (lastPage, _pages, lastPageParam) =>
+      lastPage.hasNext ? lastPageParam + 1 : undefined,
+  });
+
+  return {
+    items: query.data.pages.flatMap((page) => page.content),
+    hasNextPage: query.hasNextPage,
+    isFetchingNextPage: query.isFetchingNextPage,
+    isRefetching: query.isRefetching,
+    fetchNextPage: query.fetchNextPage,
+    refetch: query.refetch,
+  };
+};

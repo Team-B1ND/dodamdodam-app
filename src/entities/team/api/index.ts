@@ -26,6 +26,12 @@ export const teamApi = {
       { params: { page, size } },
     ),
 
+  getMyInvitations: (page = 0, size = 20) =>
+    basicApiHandler.get<ApiResponse<InfinityScrollResponse<Team>>>(
+      "/nightstudy/teams/invite/my",
+      { params: { page, size } },
+    ),
+
   getMembers: (publicId: string) =>
     basicApiHandler.get<ApiResponse<TeamMember[]>>(`/nightstudy/teams/${publicId}`),
 
@@ -34,6 +40,16 @@ export const teamApi = {
 
   inviteTeam: (publicId: string, members: string[]) =>
     basicApiHandler.post<ApiResponse<void>>("/nightstudy/teams/invite", { publicId, members }),
+
+  acceptInvitation: (publicId: string) =>
+    basicApiHandler.patch<ApiResponse<void>>(
+      `/nightstudy/teams/invite/accept/${publicId}`,
+    ),
+
+  rejectInvitation: (publicId: string) =>
+    basicApiHandler.delete<ApiResponse<void>>(
+      `/nightstudy/teams/invite/reject/${publicId}`,
+    ),
 
   updateTeam: (body: UpdateTeamRequest) =>
     basicApiHandler.patch<ApiResponse<void>>("/nightstudy/teams", body),
