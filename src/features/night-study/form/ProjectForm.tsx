@@ -51,7 +51,7 @@ export const ProjectForm = ({ common, project, onAddMember, onAddTeam }: Project
           <FilledButton
             size="large"
             display="fill"
-            role="assistive"
+            role="primary"
             onPress={onAddMember}
           >
             학생추가
@@ -61,7 +61,7 @@ export const ProjectForm = ({ common, project, onAddMember, onAddTeam }: Project
           <FilledButton
             size="large"
             display="fill"
-            role="assistive"
+            role="primary"
             onPress={onAddTeam}
           >
             팀 추가
