@@ -1,14 +1,14 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { ImagePickerAsset } from "expo-image-picker";
 import { teamApi } from "@entities/team";
-import { fileApi } from "@entities/file/api";
 import { toast } from "@shared/ui";
 import type { StudentMember } from "@features/night-study";
+import { uploadTeamImage, type TeamFormImage } from "@features/team/form";
 
 export interface CreateTeamForm {
   name: string;
   description: string;
+  image: TeamFormImage;
   members: StudentMember[];
 }
 
@@ -19,27 +19,14 @@ const findCreatedTeamId = async (name: string): Promise<string | undefined> => {
 
 export const useCreateTeam = (onSuccess: () => void) => {
   const queryClient = useQueryClient();
-  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
-
-  const uploadMutation = useMutation({
-    mutationFn: async (asset: ImagePickerAsset) => {
-      const { data } = await fileApi.upload(
-        asset.uri,
-        asset.fileName ?? "team.jpg",
-        asset.mimeType ?? "image/jpeg",
-      );
-      return data.data;
-    },
-    onSuccess: (result) => setUploadedImageUrl(result.url),
-    onError: () => toast.error("이미지 업로드에 실패했어요", { position: "top" }),
-  });
 
   const createMutation = useMutation({
-    mutationFn: async ({ name, description, members }: CreateTeamForm) => {
+    mutationFn: async ({ name, description, image, members }: CreateTeamForm) => {
+      const imageUrl = await uploadTeamImage(image);
       const { data } = await teamApi.create({
         name,
         description,
-        imageUrl: uploadedImageUrl,
+        imageUrl,
       });
 
       if (members.length === 0) return { invited: true };
@@ -65,20 +52,13 @@ export const useCreateTeam = (onSuccess: () => void) => {
     onError: () => toast.error("팀 생성에 실패했어요", { position: "top" }),
   });
 
-  const uploadImage = useCallback(
-    (asset: ImagePickerAsset) => uploadMutation.mutate(asset),
-    [uploadMutation],
-  );
-
   const submit = useCallback(
     (form: CreateTeamForm) => createMutation.mutate(form),
     [createMutation],
   );
 
   return {
-    uploadedImageUrl,
-    uploadImage,
     submit,
-    isSubmitting: uploadMutation.isPending || createMutation.isPending,
+    isSubmitting: createMutation.isPending,
   };
 };

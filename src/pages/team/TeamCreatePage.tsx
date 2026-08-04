@@ -19,19 +19,11 @@ export const TeamCreatePage = () => {
   const [teamMembers, setTeamMembers] = useState<StudentMember[]>([]);
 
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
-  const { uploadImage, submit, isSubmitting } = useCreateTeam(goBack);
+  const { submit, isSubmitting } = useCreateTeam(goBack);
 
   const openStudentSheet = useCallback(() => {
     studentSheetRef.current?.present();
   }, []);
-
-  const handleTeamImageChange = useCallback(
-    (image: TeamFormImage) => {
-      setTeamImage(image);
-      if (image?.type === "local") uploadImage(image.asset);
-    },
-    [uploadImage],
-  );
 
   const isValid =
     teamName.trim().length > 0 &&
@@ -42,9 +34,10 @@ export const TeamCreatePage = () => {
     submit({
       name: teamName.trim(),
       description: teamDescription.trim(),
+      image: teamImage,
       members: teamMembers,
     });
-  }, [submit, teamName, teamDescription, teamMembers]);
+  }, [submit, teamName, teamDescription, teamImage, teamMembers]);
 
   return (
     <SafeAreaView
@@ -67,7 +60,7 @@ export const TeamCreatePage = () => {
           teamDescription={teamDescription}
           onTeamDescriptionChange={setTeamDescription}
           teamImage={teamImage}
-          onTeamImageChange={handleTeamImageChange}
+          onTeamImageChange={setTeamImage}
           teamMembers={teamMembers}
           onAddMemberPress={openStudentSheet}
         />

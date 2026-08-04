@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { teamApi, teamQueryKeys, type Team } from "@entities/team";
-import { fileApi } from "@entities/file/api";
 import type { StudentMember } from "@features/night-study";
-import type { TeamFormImage } from "@features/team/form";
+import { uploadTeamImage, type TeamFormImage } from "@features/team/form";
 import { toast } from "@shared/ui";
 
 export interface UpdateTeamForm {
@@ -17,25 +16,12 @@ interface UseUpdateTeamOptions {
   onSuccess?: (team: Team) => void;
 }
 
-const uploadImage = async (image: TeamFormImage): Promise<string | null> => {
-  if (!image) return null;
-  if (image.type === "remote") return image.url;
-
-  const { asset } = image;
-  const { data } = await fileApi.upload(
-    asset.uri,
-    asset.fileName ?? "team.jpg",
-    asset.mimeType ?? "image/jpeg",
-  );
-  return data.data.url;
-};
-
 export const useUpdateTeam = ({ onSuccess }: UseUpdateTeamOptions = {}) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({ team, name, description, image, members }: UpdateTeamForm) => {
-      const imageUrl = await uploadImage(image);
+      const imageUrl = await uploadTeamImage(image);
 
       await teamApi.updateTeam({
         publicId: team.publicId,
