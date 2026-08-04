@@ -6,7 +6,7 @@ export const useTeamDetailNavigation = () => {
   const navigation = useNavigation<any>();
 
   return useCallback(
-    (team: Team) => navigation.navigate("TeamDetail", { teamId: team.id }),
+    (team: Team) => navigation.navigate("TeamDetail", { team }),
     [navigation],
   );
 };

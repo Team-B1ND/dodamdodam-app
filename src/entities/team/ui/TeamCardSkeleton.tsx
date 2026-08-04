@@ -11,7 +11,6 @@ const CardSkeleton = ({ backgroundColor }: { backgroundColor: string }) => (
       <Skeleton width={80} height={16} radius={4} />
       <Skeleton width={140} height={12} radius={4} />
     </View>
-    <Skeleton width={28} height={12} radius={4} />
   </View>
 );
 

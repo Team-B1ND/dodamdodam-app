@@ -18,21 +18,20 @@ export const TeamCard = ({ item, onPress }: TeamCardProps) => {
       style={[styles.card, { backgroundColor: colors.background.surface }]}
       onPress={() => onPress?.(item)}
     >
-      <TeamAvatar profileImage={item.profileImage} size={44} />
+      <TeamAvatar imageUrl={item.imageUrl} size={44} />
       <View style={styles.info}>
         <Text style={[styles.name, { color: colors.text.primary }]}>
           {item.name}
         </Text>
-        <Text
-          style={[styles.introduction, { color: colors.text.tertiary }]}
-          numberOfLines={1}
-        >
-          {item.introduction}
-        </Text>
+        {item.description ? (
+          <Text
+            style={[styles.description, { color: colors.text.tertiary }]}
+            numberOfLines={1}
+          >
+            {item.description}
+          </Text>
+        ) : null}
       </View>
-      <Text style={[styles.memberCount, { color: colors.text.secondary }]}>
-        {item.memberCount}명
-      </Text>
     </Pressable>
   );
 };
@@ -52,10 +51,7 @@ const styles = StyleSheet.create({
   name: {
     ...typo("Body1", "Bold"),
   },
-  introduction: {
-    ...typo("Label", "Medium"),
-  },
-  memberCount: {
+  description: {
     ...typo("Label", "Medium"),
   },
 });

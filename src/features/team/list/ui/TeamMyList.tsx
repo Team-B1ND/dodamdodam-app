@@ -24,7 +24,7 @@ export const TeamMyList = () => {
   return (
     <View style={styles.list}>
       {items.map((item) => (
-        <TeamCard key={item.id} item={item} onPress={handlePress} />
+        <TeamCard key={item.publicId} item={item} onPress={handlePress} />
       ))}
     </View>
   );

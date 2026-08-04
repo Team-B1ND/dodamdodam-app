@@ -5,7 +5,7 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import type { ImagePickerAsset } from "expo-image-picker";
 import { StudentAddSheet, type StudentMember } from "@features/night-study";
-import { TeamApplyForm } from "@features/team";
+import { TeamApplyForm, useCreateTeam } from "@features/team";
 import { useTheme } from "@shared/theme";
 import { FilledButton, TopNavBar } from "@shared/ui";
 
@@ -13,7 +13,6 @@ export const TeamCreatePage = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<any>();
   const studentSheetRef = useRef<BottomSheetModal>(null);
-  const loading = false;
 
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
@@ -21,9 +20,32 @@ export const TeamCreatePage = () => {
   const [teamMembers, setTeamMembers] = useState<StudentMember[]>([]);
 
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
+  const { uploadImage, submit, isSubmitting } = useCreateTeam(goBack);
+
   const openStudentSheet = useCallback(() => {
     studentSheetRef.current?.present();
   }, []);
+
+  const handleTeamImageChange = useCallback(
+    (asset: ImagePickerAsset | null) => {
+      setTeamImage(asset);
+      if (asset) uploadImage(asset);
+    },
+    [uploadImage],
+  );
+
+  const isValid =
+    teamName.trim().length > 0 &&
+    teamName.length <= 9 &&
+    teamDescription.length <= 14;
+
+  const handleSubmit = useCallback(() => {
+    submit({
+      name: teamName.trim(),
+      description: teamDescription.trim(),
+      members: teamMembers,
+    });
+  }, [submit, teamName, teamDescription, teamMembers]);
 
   return (
     <SafeAreaView
@@ -40,7 +62,7 @@ export const TeamCreatePage = () => {
           teamDescription={teamDescription}
           onTeamDescriptionChange={setTeamDescription}
           teamImage={teamImage}
-          onTeamImageChange={setTeamImage}
+          onTeamImageChange={handleTeamImageChange}
           teamMembers={teamMembers}
           onAddMemberPress={openStudentSheet}
         />
@@ -49,8 +71,9 @@ export const TeamCreatePage = () => {
         <FilledButton
           size="large"
           display="fill"
-          isLoading={loading}
-          onPress={() => {}}
+          disabled={!isValid || isSubmitting}
+          isLoading={isSubmitting}
+          onPress={handleSubmit}
         >
           팀 생성
         </FilledButton>

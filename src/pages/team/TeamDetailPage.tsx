@@ -3,14 +3,14 @@ import { View, Text, StyleSheet } from "react-native";
 import { useNavigation, useRoute, type RouteProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { typo, shapes } from "@shared/tokens";
+import { typo } from "@shared/tokens";
 import { TopNavBar, Divider, Skeleton } from "@shared/ui";
 import { Crown } from "@shared/icons/mono";
-import { useTeamDetailSuspense } from "@features/team";
-import { TeamAvatar, type TeamMember } from "@entities/team";
+import { useTeamMembersSuspense } from "@features/team";
+import { TeamAvatar, type Team, type TeamMember } from "@entities/team";
 
 export interface TeamDetailParams {
-  teamId: string;
+  team: Team;
 }
 
 type TeamDetailRouteProp = RouteProp<{ TeamDetail: TeamDetailParams }, "TeamDetail">;
@@ -18,52 +18,53 @@ type TeamDetailRouteProp = RouteProp<{ TeamDetail: TeamDetailParams }, "TeamDeta
 const TeamMemberRow = ({ member }: { member: TeamMember }) => {
   const { colors } = useTheme();
 
+  const statusText = member.isAccept
+    ? member.student
+      ? `${member.student.grade}-${member.student.room}`
+      : ""
+    : "초대 중";
+
   return (
     <View style={styles.memberRow}>
-      <TeamAvatar profileImage={member.profileImage} size={36} />
+      <TeamAvatar imageUrl={member.profileImage} size={36} />
       <View style={styles.memberInfo}>
         <View style={styles.memberNameRow}>
           <Text style={[styles.memberName, { color: colors.text.primary }]}>
             {member.name}
           </Text>
-          {member.role === "LEADER" && <Crown size={14} color={colors.status.warning} />}
+          {member.isOwner && <Crown size={14} color={colors.status.warning} />}
         </View>
       </View>
       <Text style={[styles.memberGrade, { color: colors.text.secondary }]}>
-        {member.grade}-{member.room}
+        {statusText}
       </Text>
     </View>
   );
 };
 
-const TeamDetailContent = ({ teamId }: { teamId: string }) => {
+const TeamDetailContent = ({ team }: { team: Team }) => {
   const { colors } = useTheme();
-  const team = useTeamDetailSuspense(teamId);
-
-  if (!team) {
-    return (
-      <Text style={[styles.emptyMessage, { color: colors.text.tertiary }]}>
-        팀 정보를 찾을 수 없어요.
-      </Text>
-    );
-  }
+  const members = useTeamMembersSuspense(team.publicId);
+  const acceptedCount = members.filter((member) => member.isAccept).length;
 
   return (
     <>
       <View style={styles.header}>
-        <TeamAvatar profileImage={team.profileImage} size={64} />
+        <TeamAvatar imageUrl={team.imageUrl} size={64} />
         <Text style={[styles.name, { color: colors.text.primary }]}>{team.name}</Text>
-        <Text style={[styles.introduction, { color: colors.text.tertiary }]}>
-          {team.introduction}
-        </Text>
+        {team.description ? (
+          <Text style={[styles.description, { color: colors.text.tertiary }]}>
+            {team.description}
+          </Text>
+        ) : null}
         <Text style={[styles.memberCount, { color: colors.text.secondary }]}>
-          {team.memberCount}명
+          {acceptedCount}명
         </Text>
       </View>
       <Divider />
       <View style={styles.memberList}>
-        {team.members.map((member) => (
-          <TeamMemberRow key={member.publicId} member={member} />
+        {members.map((member) => (
+          <TeamMemberRow key={member.userId} member={member} />
         ))}
       </View>
     </>
@@ -91,7 +92,7 @@ export const TeamDetailPage = () => {
       <TopNavBar left={<TopNavBar.BackButton onPress={() => navigation.goBack()} />} />
       <View style={styles.content}>
         <Suspense fallback={<TeamDetailSkeleton />}>
-          <TeamDetailContent teamId={params.teamId} />
+          <TeamDetailContent team={params.team} />
         </Suspense>
       </View>
     </SafeAreaView>
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   name: {
     ...typo("Heading2", "Bold"),
   },
-  introduction: {
+  description: {
     ...typo("Body1", "Medium"),
   },
   memberCount: {
@@ -144,10 +145,5 @@ const styles = StyleSheet.create({
   },
   memberGrade: {
     ...typo("Label", "Medium"),
-  },
-  emptyMessage: {
-    ...typo("Body1", "Medium"),
-    textAlign: "center",
-    paddingVertical: 48,
   },
 });
