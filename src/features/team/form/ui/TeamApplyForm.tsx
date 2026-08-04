@@ -1,7 +1,8 @@
-import { Avatar, FilledButton, TextField } from "@shared/ui";
+import { FilledButton, TextField } from "@shared/ui";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
+import { TeamAvatar, TeamMemberRow } from "@entities/team";
 import { TeamImagePicker } from "./TeamImagePicker";
 import type { TeamApplyFormProps } from "../model/types";
 
@@ -12,6 +13,7 @@ export const TeamApplyForm = ({
   onTeamDescriptionChange,
   teamImage,
   onTeamImageChange,
+  existingMembers = [],
   teamMembers,
   onAddMemberPress,
 }: TeamApplyFormProps) => {
@@ -40,10 +42,29 @@ export const TeamApplyForm = ({
       </Text>
       <TeamImagePicker value={teamImage} onChange={onTeamImageChange} />
 
+      {existingMembers.length > 0 && (
+        <View style={styles.memberSection}>
+          <Text
+            selectable
+            style={[styles.labelText, { color: colors.text.tertiary }]}
+          >
+            현재 팀원
+          </Text>
+          <View>
+            {existingMembers.map((member) => (
+              <TeamMemberRow key={member.userId} member={member} />
+            ))}
+          </View>
+        </View>
+      )}
+
       {teamMembers.length > 0 && (
         <View style={styles.memberSection}>
-          <Text style={[styles.labelText, { color: colors.text.tertiary }]}>
-            팀원 목록
+          <Text
+            selectable
+            style={[styles.labelText, { color: colors.text.tertiary }]}
+          >
+            {existingMembers.length > 0 ? "초대 예정" : "팀원 목록"}
           </Text>
           <ScrollView
             horizontal
@@ -52,8 +73,9 @@ export const TeamApplyForm = ({
           >
             {teamMembers.map((member) => (
               <View key={member.id} style={styles.memberItem}>
-                <Avatar size={38} />
+                <TeamAvatar imageUrl={member.profileImage ?? null} size={38} />
                 <Text
+                  selectable
                   style={[styles.memberName, { color: colors.text.secondary }]}
                 >
                   {member.name}

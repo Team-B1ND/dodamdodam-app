@@ -1,11 +1,10 @@
 import { useCallback, useRef, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
-import type { ImagePickerAsset } from "expo-image-picker";
 import { StudentAddSheet, type StudentMember } from "@features/night-study";
-import { TeamApplyForm, useCreateTeam } from "@features/team";
+import { TeamApplyForm, useCreateTeam, type TeamFormImage } from "@features/team";
 import { useTheme } from "@shared/theme";
 import { FilledButton, TopNavBar } from "@shared/ui";
 
@@ -16,7 +15,7 @@ export const TeamCreatePage = () => {
 
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
-  const [teamImage, setTeamImage] = useState<ImagePickerAsset | null>(null);
+  const [teamImage, setTeamImage] = useState<TeamFormImage>(null);
   const [teamMembers, setTeamMembers] = useState<StudentMember[]>([]);
 
   const goBack = useCallback(() => navigation.goBack(), [navigation]);
@@ -27,9 +26,9 @@ export const TeamCreatePage = () => {
   }, []);
 
   const handleTeamImageChange = useCallback(
-    (asset: ImagePickerAsset | null) => {
-      setTeamImage(asset);
-      if (asset) uploadImage(asset);
+    (image: TeamFormImage) => {
+      setTeamImage(image);
+      if (image?.type === "local") uploadImage(image.asset);
     },
     [uploadImage],
   );
@@ -50,12 +49,18 @@ export const TeamCreatePage = () => {
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
-      edges={["top"]}
+      edges={["top", "bottom"]}
     >
       <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />}>
         <TopNavBar.Title hasBackButton>팀 생성</TopNavBar.Title>
       </TopNavBar>
-      <View style={styles.content}>
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={styles.contentContainer}
+        contentInsetAdjustmentBehavior="automatic"
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
         <TeamApplyForm
           teamName={teamName}
           onTeamNameChange={setTeamName}
@@ -66,7 +71,7 @@ export const TeamCreatePage = () => {
           teamMembers={teamMembers}
           onAddMemberPress={openStudentSheet}
         />
-      </View>
+      </ScrollView>
       <View style={styles.submitArea}>
         <FilledButton
           size="large"
@@ -93,6 +98,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+  },
+  contentContainer: {
     paddingHorizontal: 16,
     paddingVertical: 12,
   },

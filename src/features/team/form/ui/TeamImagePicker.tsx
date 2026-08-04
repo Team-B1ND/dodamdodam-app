@@ -1,4 +1,6 @@
+import { useCallback } from "react";
 import { Image, Pressable, StyleSheet } from "react-native";
+import type { ImagePickerAsset } from "expo-image-picker";
 import { MonoIcons } from "@shared/icons";
 import { useTheme } from "@shared/theme";
 import { useImagePick } from "../model/useImagePick";
@@ -9,7 +11,17 @@ export const TeamImagePicker = ({
   onChange,
 }: TeamImagePickerProps) => {
   const { colors } = useTheme();
-  const pickImage = useImagePick(onChange);
+  const handlePicked = useCallback(
+    (asset: ImagePickerAsset) => onChange({ type: "local", asset }),
+    [onChange],
+  );
+  const pickImage = useImagePick(handlePicked);
+  const imageUri =
+    value?.type === "remote"
+      ? value.url
+      : value?.type === "local"
+        ? value.asset.uri
+        : null;
 
   return (
     <Pressable
@@ -22,8 +34,8 @@ export const TeamImagePicker = ({
         },
       ]}
     >
-      {value ? (
-        <Image source={{ uri: value.uri }} style={styles.image} />
+      {imageUri ? (
+        <Image source={{ uri: imageUri }} style={styles.image} />
       ) : (
         <MonoIcons.Photo size={32} color={colors.text.tertiary} />
       )}

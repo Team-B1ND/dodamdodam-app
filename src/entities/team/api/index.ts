@@ -1,7 +1,7 @@
 import { basicApiHandler } from "@entities/api/common";
 import type { ApiResponse } from "@shared/types";
 import type { InfinityScrollResponse } from "@entities/night-study/types";
-import type { Team, TeamMember } from "../types";
+import type { Team, TeamMember, UpdateTeamRequest } from "../types";
 
 export interface CreateTeamRequest {
   name: string;
@@ -34,4 +34,13 @@ export const teamApi = {
 
   inviteTeam: (publicId: string, members: string[]) =>
     basicApiHandler.post<ApiResponse<void>>("/nightstudy/teams/invite", { publicId, members }),
+
+  updateTeam: (body: UpdateTeamRequest) =>
+    basicApiHandler.patch<ApiResponse<void>>("/nightstudy/teams", body),
+
+  deleteTeam: (publicId: string) =>
+    basicApiHandler.delete<ApiResponse<void>>(`/nightstudy/teams/${publicId}`),
+
+  leaveTeam: (publicId: string) =>
+    basicApiHandler.delete<ApiResponse<void>>(`/nightstudy/teams/leave/${publicId}`),
 };

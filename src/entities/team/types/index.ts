@@ -19,3 +19,10 @@ export interface TeamMember {
   isAccept: boolean;
   student: StudentInfo | null;
 }
+
+export interface UpdateTeamRequest {
+  publicId: string;
+  name: string;
+  description: string;
+  imageUrl: string | null;
+}
