@@ -1,13 +1,12 @@
 import React, { Suspense, useCallback, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { TopNavBar, RefreshView, SegmentedButton } from "@shared/ui";
+import { TopNavBar, SegmentedButton } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
 import { Plus } from "@shared/icons/mono";
 import { TeamAllList, TeamMyList } from "@features/team";
-import { teamQueryKeys } from "@entities/team";
 
 const INITIAL_SEGMENTS: SegmentedButtonData[] = [
   { text: "전체 팀", value: "all", isActive: true },
@@ -33,12 +32,7 @@ export const TeamListPage = () => {
       >
         <TopNavBar.Title hasBackButton>팀</TopNavBar.Title>
       </TopNavBar>
-      <RefreshView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        queryKeys={[activeTab === "all" ? teamQueryKeys.all : teamQueryKeys.my]}
-      >
+      <View style={styles.content}>
         <SegmentedButton data={segments} setData={setSegments} />
         {activeTab === "all" ? (
           <Suspense fallback={<TeamAllList.Skeleton />}>
@@ -49,18 +43,17 @@ export const TeamListPage = () => {
             <TeamMyList />
           </Suspense>
         )}
-      </RefreshView>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  scroll: { flex: 1 },
-  scrollContent: {
+  content: {
+    flex: 1,
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    paddingBottom: 140,
+    paddingTop: 12,
     gap: 20,
   },
 });
