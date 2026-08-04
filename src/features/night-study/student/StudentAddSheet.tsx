@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, type FC } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, type FC } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import {
   BottomSheetModal,
@@ -16,6 +16,7 @@ import type { StudentMember } from "../hooks/useNightStudyForm";
 
 interface StudentAddSheetProps {
   selected: StudentMember[];
+  excludedIds?: readonly string[];
   onConfirm: (members: StudentMember[]) => void;
   sheetRef: React.RefObject<BottomSheetModal | null>;
 }
@@ -32,11 +33,21 @@ const Backdrop: FC<BottomSheetBackdropProps> = (props) => (
 
 const SNAP_POINTS = ["85%"];
 
-export const StudentAddSheet = ({ selected, onConfirm, sheetRef }: StudentAddSheetProps) => {
+export const StudentAddSheet = ({
+  selected,
+  excludedIds = [],
+  onConfirm,
+  sheetRef,
+}: StudentAddSheetProps) => {
   const { colors } = useTheme();
   const selection = useStudentSelection(selected);
   const { students, hasNext, loading, search, loadMore } = useStudentSearch();
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const excludedIdSet = useMemo(() => new Set(excludedIds), [excludedIds]);
+  const selectableStudents = useMemo(
+    () => students.filter((student) => !excludedIdSet.has(student.id)),
+    [excludedIdSet, students],
+  );
 
   const handleSearch = useCallback((text: string) => {
     selection.setSearch(text);
@@ -81,7 +92,7 @@ export const StudentAddSheet = ({ selected, onConfirm, sheetRef }: StudentAddShe
             onChangeText={handleSearch}
           />
           <StudentList
-            data={students}
+            data={selectableStudents}
             selectedIds={selection.ids}
             onToggle={selection.toggle}
             onEndReached={hasNext ? loadMore : undefined}
