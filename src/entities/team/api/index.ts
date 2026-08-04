@@ -41,6 +41,16 @@ export const teamApi = {
   inviteTeam: (publicId: string, members: string[]) =>
     basicApiHandler.post<ApiResponse<void>>("/nightstudy/teams/invite", { publicId, members }),
 
+  acceptInvitation: (publicId: string) =>
+    basicApiHandler.patch<ApiResponse<void>>(
+      `/nightstudy/teams/invite/accept/${publicId}`,
+    ),
+
+  rejectInvitation: (publicId: string) =>
+    basicApiHandler.delete<ApiResponse<void>>(
+      `/nightstudy/teams/invite/reject/${publicId}`,
+    ),
+
   updateTeam: (body: UpdateTeamRequest) =>
     basicApiHandler.patch<ApiResponse<void>>("/nightstudy/teams", body),
 

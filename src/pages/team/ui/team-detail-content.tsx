@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { TeamAvatar, TeamMemberRow, type Team } from "@entities/team";
 import {
+  TeamInvitationActions,
   TeamManageActions,
   useTeamMembersSuspense,
   useTeamViewerRole,
@@ -12,9 +13,13 @@ import { Divider } from "@shared/ui";
 
 interface TeamDetailContentProps {
   team: Team;
+  isInvitation?: boolean;
 }
 
-export const TeamDetailContent = ({ team }: TeamDetailContentProps) => {
+export const TeamDetailContent = ({
+  team,
+  isInvitation = false,
+}: TeamDetailContentProps) => {
   const { colors } = useTheme();
   const members = useTeamMembersSuspense(team.publicId);
   const viewerRole = useTeamViewerRole(members);
@@ -53,7 +58,11 @@ export const TeamDetailContent = ({ team }: TeamDetailContentProps) => {
           <TeamMemberRow key={member.userId} member={member} />
         ))}
       </ScrollView>
-      <TeamManageActions team={team} role={viewerRole} />
+      {isInvitation ? (
+        <TeamInvitationActions publicId={team.publicId} />
+      ) : (
+        <TeamManageActions team={team} role={viewerRole} />
+      )}
     </View>
   );
 };
