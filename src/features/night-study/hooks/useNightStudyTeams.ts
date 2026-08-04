@@ -17,7 +17,7 @@ export const useNightStudyTeams = () => {
     loadingRef.current = true;
     setLoading(true);
     try {
-      const { data } = await nightStudyApi.getTeams(page, PAGE_SIZE);
+      const { data } = await nightStudyApi.getMyTeams(page, PAGE_SIZE);
       const nextTeams = data.data.content;
       pageRef.current = page;
       setTeams((current) => (append ? [...current, ...nextTeams] : nextTeams));

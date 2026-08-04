@@ -23,9 +23,9 @@ export const nightStudyApi = {
   createProject: (body: NightStudyProjectRequest) =>
     basicApiHandler.post<ApiResponse>("/nightstudy/project", body),
 
-  getTeams: (page = 0, size = 20) =>
+  getMyTeams: (page = 0, size = 20) =>
     basicApiHandler.get<ApiResponse<InfinityScrollResponse<NightStudyTeam>>>(
-      "/nightstudy/teams",
+      "/nightstudy/teams/my",
       { params: { page, size } },
     ),
 
