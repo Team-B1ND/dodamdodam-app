@@ -22,38 +22,36 @@ export const TeamDetailContent = ({ team }: TeamDetailContentProps) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <TeamAvatar imageUrl={team.imageUrl} size={64} />
+        <Text selectable style={[styles.name, { color: colors.text.primary }]}>
+          {team.name}
+        </Text>
+        {team.description ? (
+          <Text
+            selectable
+            style={[styles.description, { color: colors.text.tertiary }]}
+          >
+            {team.description}
+          </Text>
+        ) : null}
+        <Text
+          selectable
+          style={[styles.memberCount, { color: colors.text.secondary }]}
+        >
+          {acceptedCount}명
+        </Text>
+      </View>
+      <Divider />
       <ScrollView
         style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={styles.memberList}
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.header}>
-          <TeamAvatar imageUrl={team.imageUrl} size={64} />
-          <Text selectable style={[styles.name, { color: colors.text.primary }]}>
-            {team.name}
-          </Text>
-          {team.description ? (
-            <Text
-              selectable
-              style={[styles.description, { color: colors.text.tertiary }]}
-            >
-              {team.description}
-            </Text>
-          ) : null}
-          <Text
-            selectable
-            style={[styles.memberCount, { color: colors.text.secondary }]}
-          >
-            {acceptedCount}명
-          </Text>
-        </View>
-        <Divider />
-        <View style={styles.memberList}>
-          {members.map((member) => (
-            <TeamMemberRow key={member.userId} member={member} />
-          ))}
-        </View>
+        {members.map((member) => (
+          <TeamMemberRow key={member.userId} member={member} />
+        ))}
       </ScrollView>
       <TeamManageActions team={team} role={viewerRole} />
     </View>
@@ -66,9 +64,6 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 24,
   },
   header: {
     alignItems: "center",
@@ -86,6 +81,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   memberList: {
+    flexGrow: 1,
     paddingVertical: 12,
     gap: 4,
   },
