@@ -26,6 +26,12 @@ export const teamApi = {
       { params: { page, size } },
     ),
 
+  getMyInvitations: (page = 0, size = 20) =>
+    basicApiHandler.get<ApiResponse<InfinityScrollResponse<Team>>>(
+      "/nightstudy/teams/invite/my",
+      { params: { page, size } },
+    ),
+
   getMembers: (publicId: string) =>
     basicApiHandler.get<ApiResponse<TeamMember[]>>(`/nightstudy/teams/${publicId}`),
 

@@ -6,11 +6,12 @@ import { useTheme } from "@shared/theme";
 import { TopNavBar, SegmentedButton } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
 import { Plus } from "@shared/icons/mono";
-import { TeamAllList, TeamMyList } from "@features/team";
+import { TeamAllList, TeamInviteList, TeamMyList } from "@features/team";
 
 const INITIAL_SEGMENTS: SegmentedButtonData[] = [
   { text: "전체 팀", value: "all", isActive: true },
   { text: "소속 팀", value: "my", isActive: false },
+  { text: "초대 목록", value: "invite", isActive: false },
 ];
 
 export const TeamListPage = () => {
@@ -34,18 +35,35 @@ export const TeamListPage = () => {
       </TopNavBar>
       <View style={styles.content}>
         <SegmentedButton data={segments} setData={setSegments} />
-        {activeTab === "all" ? (
-          <Suspense fallback={<TeamAllList.Skeleton />}>
-            <TeamAllList />
-          </Suspense>
-        ) : (
-          <Suspense fallback={<TeamMyList.Skeleton />}>
-            <TeamMyList />
-          </Suspense>
-        )}
+        <RenderTeamList activeTab={activeTab} />
       </View>
     </SafeAreaView>
   );
+};
+
+const RenderTeamList = ({ activeTab }: { activeTab: string }) => {
+  switch (activeTab) {
+    case "all":
+      return (
+        <Suspense fallback={<TeamAllList.Skeleton />}>
+          <TeamAllList />
+        </Suspense>
+      );
+    case "my":
+      return (
+        <Suspense fallback={<TeamMyList.Skeleton />}>
+          <TeamMyList />
+        </Suspense>
+      );
+    case "invite":
+      return (
+        <Suspense fallback={<TeamInviteList.Skeleton />}>
+          <TeamInviteList />
+        </Suspense>
+      );
+    default:
+      return null;
+  }
 };
 
 const styles = StyleSheet.create({
