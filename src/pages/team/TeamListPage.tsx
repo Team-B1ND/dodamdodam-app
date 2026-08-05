@@ -1,17 +1,17 @@
-import React, { Suspense, useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { Suspense, useCallback, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { TopNavBar, RefreshView, SegmentedButton } from "@shared/ui";
+import { TopNavBar, SegmentedButton } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
 import { Plus } from "@shared/icons/mono";
-import { TeamAllList, TeamMyList } from "@features/team";
-import { teamQueryKeys } from "@entities/team/api/queryKeys";
+import { TeamAllList, TeamInviteList, TeamMyList } from "@features/team";
 
 const INITIAL_SEGMENTS: SegmentedButtonData[] = [
   { text: "전체 팀", value: "all", isActive: true },
   { text: "소속 팀", value: "my", isActive: false },
+  { text: "초대 목록", value: "invite", isActive: false },
 ];
 
 export const TeamListPage = () => {
@@ -20,8 +20,7 @@ export const TeamListPage = () => {
   const [segments, setSegments] = useState(INITIAL_SEGMENTS);
   const activeTab = segments.find((s) => s.isActive)?.value ?? "all";
   const goBack = () => navigation.goBack();
-
-  const openCreateTeam = () => navigation.navigate("TeamCreate");
+  const openTeamCreate = useCallback(() => navigation.navigate("TeamCreate"), [navigation]);
 
   return (
     <SafeAreaView
@@ -30,38 +29,49 @@ export const TeamListPage = () => {
     >
       <TopNavBar
         left={<TopNavBar.BackButton onPress={goBack} />}
-        right={<TopNavBar.IconButton icon={<Plus />} onPress={openCreateTeam} />}
+        right={<TopNavBar.IconButton icon={<Plus />} onPress={openTeamCreate} />}
       >
         <TopNavBar.Title hasBackButton>팀</TopNavBar.Title>
       </TopNavBar>
-      <RefreshView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        queryKeys={[activeTab === "all" ? teamQueryKeys.all : teamQueryKeys.my]}
-      >
+      <View style={styles.content}>
         <SegmentedButton data={segments} setData={setSegments} />
-        {activeTab === "all" ? (
-          <Suspense fallback={<TeamAllList.Skeleton />}>
-            <TeamAllList />
-          </Suspense>
-        ) : (
-          <Suspense fallback={<TeamMyList.Skeleton />}>
-            <TeamMyList />
-          </Suspense>
-        )}
-      </RefreshView>
+        <RenderTeamList activeTab={activeTab} />
+      </View>
     </SafeAreaView>
   );
 };
 
+const RenderTeamList = ({ activeTab }: { activeTab: string }) => {
+  switch (activeTab) {
+    case "all":
+      return (
+        <Suspense fallback={<TeamAllList.Skeleton />}>
+          <TeamAllList />
+        </Suspense>
+      );
+    case "my":
+      return (
+        <Suspense fallback={<TeamMyList.Skeleton />}>
+          <TeamMyList />
+        </Suspense>
+      );
+    case "invite":
+      return (
+        <Suspense fallback={<TeamInviteList.Skeleton />}>
+          <TeamInviteList />
+        </Suspense>
+      );
+    default:
+      return null;
+  }
+};
+
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  scroll: { flex: 1 },
-  scrollContent: {
+  content: {
+    flex: 1,
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    paddingBottom: 140,
+    paddingTop: 12,
     gap: 20,
   },
 });

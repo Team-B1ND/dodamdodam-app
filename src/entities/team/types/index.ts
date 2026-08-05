@@ -1,24 +1,28 @@
 export interface Team {
-  id: string;
-  name: string;
-  introduction: string;
-  profileImage: string | null;
-  memberCount: number;
-  createdAt: string;
-}
-
-export type TeamRole = "LEADER" | "MEMBER";
-
-export interface TeamMember {
   publicId: string;
   name: string;
-  profileImage: string | null;
+  description: string | null;
+  imageUrl: string | null;
+}
+
+export interface StudentInfo {
   grade: number;
   room: number;
   number: number;
-  role: TeamRole;
 }
 
-export interface TeamDetail extends Team {
-  members: TeamMember[];
+export interface TeamMember {
+  userId: string;
+  name: string;
+  profileImage: string | null;
+  isOwner: boolean;
+  isAccept: boolean;
+  student: StudentInfo | null;
+}
+
+export interface UpdateTeamRequest {
+  publicId: string;
+  name: string;
+  description: string;
+  imageUrl: string | null;
 }
