@@ -9,6 +9,7 @@ const toStudentMember = (user: User): StudentMember => ({
   grade: user.student?.grade ?? 0,
   room: user.student?.room ?? 0,
   number: user.student?.number ?? 0,
+  profileImage: user.profileImage,
 });
 
 export const useStudentSearch = () => {
