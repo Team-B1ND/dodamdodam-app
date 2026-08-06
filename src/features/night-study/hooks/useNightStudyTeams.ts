@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { nightStudyApi } from "@entities/night-study/api";
-import type { NightStudyTeam } from "@entities/night-study/types";
+import { teamApi, type Team } from "@entities/team";
 
 const PAGE_SIZE = 20;
 
 export const useNightStudyTeams = () => {
-  const [teams, setTeams] = useState<NightStudyTeam[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
   const [hasNext, setHasNext] = useState(false);
   const [loading, setLoading] = useState(false);
   const pageRef = useRef(0);
@@ -17,7 +16,7 @@ export const useNightStudyTeams = () => {
     loadingRef.current = true;
     setLoading(true);
     try {
-      const { data } = await nightStudyApi.getMyTeams(page, PAGE_SIZE);
+      const { data } = await teamApi.getMy(page, PAGE_SIZE);
       const nextTeams = data.data.content;
       pageRef.current = page;
       setTeams((current) => (append ? [...current, ...nextTeams] : nextTeams));

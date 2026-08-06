@@ -9,9 +9,8 @@ import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { FilledButton, TextAreaProvider, toast } from "@shared/ui";
 import { CheckmarkCircleFill, CheckmarkCircleLine, MagnifyingGlass, People, XmarkCircle } from "@shared/icons/mono";
-import { nightStudyApi } from "@entities/night-study/api";
+import { teamApi, type Team } from "@entities/team";
 import { userApi } from "@entities/user/api";
-import type { NightStudyTeam } from "@entities/night-study/types";
 import type { SelectedNightStudyTeam, StudentMember } from "../hooks/useNightStudyForm";
 import { useNightStudyTeams } from "../hooks/useNightStudyTeams";
 
@@ -58,7 +57,7 @@ export const TeamAddSheet = ({
   const { colors } = useTheme();
   const { teams, loading, loadMore, refresh } = useNightStudyTeams();
   const [query, setQuery] = useState("");
-  const [selection, setSelection] = useState<NightStudyTeam[]>([]);
+  const [selection, setSelection] = useState<Team[]>([]);
   const [confirming, setConfirming] = useState(false);
   const selectedIds = useMemo(
     () => new Set(selection.map((team) => team.publicId)),
@@ -75,7 +74,7 @@ export const TeamAddSheet = ({
     setSelection(teams.filter((team) => selectedIds.has(team.publicId)));
   }, [selectedTeamIds, teams]);
 
-  const toggle = useCallback((team: NightStudyTeam) => {
+  const toggle = useCallback((team: Team) => {
     setSelection((current) =>
       current.some((item) => item.publicId === team.publicId)
         ? current.filter((item) => item.publicId !== team.publicId)
@@ -90,7 +89,7 @@ export const TeamAddSheet = ({
     try {
       const [{ data: meResponse }, memberResponses] = await Promise.all([
         userApi.getMe(),
-        Promise.all(selection.map((team) => nightStudyApi.getTeamMembers(team.publicId))),
+        Promise.all(selection.map((team) => teamApi.getMembers(team.publicId))),
       ]);
       const myId = meResponse.data.publicId;
       const selectedTeams = selection.map<SelectedNightStudyTeam>((team, index) => {
