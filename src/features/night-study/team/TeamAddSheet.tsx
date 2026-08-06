@@ -206,7 +206,6 @@ export const TeamAddSheet = ({
         <FilledButton
           size="large"
           display="fill"
-          disabled={selection.length === 0}
           isLoading={confirming}
           onPress={confirm}
         >
