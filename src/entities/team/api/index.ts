@@ -1,6 +1,5 @@
 import { basicApiHandler } from "@entities/api/common";
-import type { ApiResponse } from "@shared/types";
-import type { InfinityScrollResponse } from "@entities/night-study/types";
+import type { ApiResponse, InfinityScrollResponse } from "@shared/types";
 import type { Team, TeamMember, UpdateTeamRequest } from "../types";
 
 export interface CreateTeamRequest {

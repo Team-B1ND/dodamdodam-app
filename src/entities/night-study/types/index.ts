@@ -47,8 +47,3 @@ export interface NightStudyProjectRequest {
   endAt: string;
   members: string[];
 }
-
-export interface InfinityScrollResponse<T> {
-  content: T[];
-  hasNext: boolean;
-}
