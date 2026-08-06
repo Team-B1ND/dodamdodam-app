@@ -44,10 +44,14 @@ export const StudentAddSheet = ({
   const { students, hasNext, loading, search, loadMore } = useStudentSearch();
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const excludedIdSet = useMemo(() => new Set(excludedIds), [excludedIds]);
-  const selectableStudents = useMemo(
+  const availableStudents = useMemo(
     () => students.filter((student) => !excludedIdSet.has(student.id)),
     [excludedIdSet, students],
   );
+
+  useEffect(() => {
+    selection.reset(selected.filter((student) => !excludedIdSet.has(student.id)));
+  }, [excludedIdSet, selected, selection.reset]);
 
   const handleSearch = useCallback((text: string) => {
     selection.setSearch(text);
@@ -63,9 +67,9 @@ export const StudentAddSheet = ({
   }, [search]);
 
   const handleConfirm = useCallback(() => {
-    onConfirm(selection.members);
+    onConfirm(selection.members.filter((member) => !excludedIdSet.has(member.id)));
     sheetRef.current?.dismiss();
-  }, [onConfirm, selection.members, sheetRef]);
+  }, [excludedIdSet, onConfirm, selection.members, sheetRef]);
 
   return (
     <BottomSheetModal
@@ -92,7 +96,7 @@ export const StudentAddSheet = ({
             onChangeText={handleSearch}
           />
           <StudentList
-            data={selectableStudents}
+            data={availableStudents}
             selectedIds={selection.ids}
             onToggle={selection.toggle}
             onEndReached={hasNext ? loadMore : undefined}

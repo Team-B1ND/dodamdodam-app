@@ -117,6 +117,9 @@ export const NightStudyApplyPage = () => {
       <StudentAddSheet
         sheetRef={studentSheetRef}
         selected={project.members}
+        excludedIds={project.teams.flatMap((team) =>
+          team.members.map((member) => member.id),
+        )}
         onConfirm={(members) => {
           project.members.forEach((m) => project.removeMember(m.id));
           members.forEach((m) => project.addMember(m));
@@ -126,6 +129,12 @@ export const NightStudyApplyPage = () => {
         sheetRef={teamSheetRef}
         selectedTeamIds={project.teams.map((team) => team.id)}
         onConfirm={(teams) => {
+          const teamMemberIds = new Set(
+            teams.flatMap((team) => team.members.map((member) => member.id)),
+          );
+          project.members
+            .filter((member) => teamMemberIds.has(member.id))
+            .forEach((member) => project.removeMember(member.id));
           project.teams.forEach((team) => project.removeTeam(team.id));
           teams.forEach((team) => project.addTeam(team));
         }}
