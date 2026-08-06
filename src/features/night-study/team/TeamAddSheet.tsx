@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState, type FC } from "react";
+import React, { useCallback, useMemo, useState, type FC } from "react";
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import {
   BottomSheetBackdrop,
@@ -69,10 +69,16 @@ export const TeamAddSheet = ({
     return teams.filter((team) => team.name.toLowerCase().includes(keyword));
   }, [query, teams]);
 
-  useEffect(() => {
-    const selectedIds = new Set(selectedTeamIds);
-    setSelection(teams.filter((team) => selectedIds.has(team.publicId)));
-  }, [selectedTeamIds, teams]);
+  // 시트가 열릴 때만 기존 선택을 복원한다. teams 변경(페이지네이션)마다 돌리면
+  // 시트 안에서 방금 체크한 팀이 스크롤할 때 풀린다.
+  const syncSelection = useCallback(
+    (index: number) => {
+      if (index < 0) return;
+      const confirmedIds = new Set(selectedTeamIds);
+      setSelection(teams.filter((team) => confirmedIds.has(team.publicId)));
+    },
+    [selectedTeamIds, teams],
+  );
 
   const toggle = useCallback((team: Team) => {
     setSelection((current) =>
@@ -128,6 +134,7 @@ export const TeamAddSheet = ({
       snapPoints={["85%"]}
       enableDynamicSizing={false}
       enablePanDownToClose
+      onChange={syncSelection}
       backdropComponent={Backdrop}
       backgroundStyle={{ backgroundColor: colors.background.default }}
       handleIndicatorStyle={{ backgroundColor: colors.border.strong }}

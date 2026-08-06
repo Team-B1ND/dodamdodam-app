@@ -33,9 +33,12 @@ const Backdrop: FC<BottomSheetBackdropProps> = (props) => (
 
 const SNAP_POINTS = ["85%"];
 
+// 기본값을 인라인 []로 두면 렌더마다 새 배열이라 아래 useMemo/동기화가 매번 다시 돈다.
+const NO_EXCLUDED_IDS: readonly string[] = [];
+
 export const StudentAddSheet = ({
   selected,
-  excludedIds = [],
+  excludedIds = NO_EXCLUDED_IDS,
   onConfirm,
   sheetRef,
 }: StudentAddSheetProps) => {
@@ -49,9 +52,15 @@ export const StudentAddSheet = ({
     [excludedIdSet, students],
   );
 
-  useEffect(() => {
-    selection.reset(selected.filter((student) => !excludedIdSet.has(student.id)));
-  }, [excludedIdSet, selected, selection.reset]);
+  // 시트가 열릴 때만 기존 선택을 복원한다. 렌더마다 돌리면 setState가 다시 렌더를
+  // 부르면서 무한 루프가 된다.
+  const syncSelection = useCallback(
+    (index: number) => {
+      if (index < 0) return;
+      selection.reset(selected.filter((student) => !excludedIdSet.has(student.id)));
+    },
+    [excludedIdSet, selected, selection.reset],
+  );
 
   const handleSearch = useCallback((text: string) => {
     selection.setSearch(text);
@@ -78,6 +87,7 @@ export const StudentAddSheet = ({
       snapPoints={SNAP_POINTS}
       index={0}
       enablePanDownToClose
+      onChange={syncSelection}
       backdropComponent={Backdrop}
       backgroundStyle={{ backgroundColor: colors.background.default }}
       handleIndicatorStyle={{ backgroundColor: colors.fill.secondary }}

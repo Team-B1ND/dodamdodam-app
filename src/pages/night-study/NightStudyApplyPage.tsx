@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useMemo } from "react";
 import { View, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -35,6 +35,11 @@ export const NightStudyApplyPage = () => {
   const { apply: applyPersonal, loading: personalLoading } = useNightStudyPersonalApply();
   const { apply: applyProject, loading: projectLoading } = useNightStudyProjectApply();
   const loading = activeTab === "personal" ? personalLoading : projectLoading;
+  // 매 렌더 새 배열이 되면 StudentAddSheet의 선택/검색어가 초기화된다.
+  const teamMemberIds = useMemo(
+    () => project.teams.flatMap((team) => team.members.map((member) => member.id)),
+    [project.teams],
+  );
 
   const handleAddMember = useCallback(() => {
     studentSheetRef.current?.present();
@@ -117,9 +122,7 @@ export const NightStudyApplyPage = () => {
       <StudentAddSheet
         sheetRef={studentSheetRef}
         selected={project.members}
-        excludedIds={project.teams.flatMap((team) =>
-          team.members.map((member) => member.id),
-        )}
+        excludedIds={teamMemberIds}
         onConfirm={(members) => {
           project.members.forEach((m) => project.removeMember(m.id));
           members.forEach((m) => project.addMember(m));
