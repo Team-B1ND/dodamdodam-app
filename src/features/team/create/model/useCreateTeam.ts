@@ -13,8 +13,12 @@ export interface CreateTeamForm {
 }
 
 const findCreatedTeamId = async (name: string): Promise<string | undefined> => {
-  const { data } = await teamApi.getMy();
-  return data.data?.content.find((team) => team.name === name)?.publicId;
+  for (let page = 0; ; page += 1) {
+    const { data } = await teamApi.getMy(page);
+    const found = data.data?.content.find((team) => team.name === name);
+    if (found) return found.publicId;
+    if (!data.data?.hasNext) return undefined;
+  }
 };
 
 export const useCreateTeam = (onSuccess: () => void) => {
