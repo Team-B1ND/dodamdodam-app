@@ -19,7 +19,6 @@
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		40E6414E860847419134EA6C /* AppMainWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */; };
 		45A0B16941194B5A9A362915 /* MealWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC278270A04A3BA1938C81 /* MealWidget.swift */; };
-		4E00F5A79A534C88861EAF17 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BEFAF188D54D77B95D7F5F /* SceneDelegate.swift */; };
 		5ABE104AAB2D4474A81FC1DC /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9601C9410E7F4025B1E07AC8 /* MealModel.swift */; };
 		68B1A088A127846392FF9635 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */; };
 		88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8CB42C11402FB995C840 /* MealType.swift */; };
@@ -97,7 +96,6 @@
 		40B3EA6E0EED49C7B0987F80 /* WidgetColors.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = WidgetColors.swift; path = Shared/WidgetColors.swift; sourceTree = "<group>"; };
 		43B1DC3D925A462B82E6812A /* TimetableHeaderLabel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableHeaderLabel.swift; path = Feature/Timetable/Component/TimetableHeaderLabel.swift; sourceTree = "<group>"; };
 		47D898C190446B4311527F2E /* Pods-dodamdodamapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.release.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.release.xcconfig"; sourceTree = "<group>"; };
-		54BEFAF188D54D77B95D7F5F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = dodamdodamapp/SceneDelegate.swift; sourceTree = "<group>"; };
 		5666E1793C034CCE8CD4EEC0 /* TimetableEmptyText.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableEmptyText.swift; path = Feature/Timetable/Component/TimetableEmptyText.swift; sourceTree = "<group>"; };
 		6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SharedDefaults.swift; path = Shared/SharedDefaults.swift; sourceTree = "<group>"; };
 		61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetablePeriodRow.swift; path = Feature/Timetable/Component/TimetablePeriodRow.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
-				54BEFAF188D54D77B95D7F5F /* SceneDelegate.swift */,
 				F11748442D0722820044C1D9 /* dodamdodamapp-Bridging-Header.h */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -629,7 +626,6 @@
 			files = (
 				9A2017113002A25E008AC312 /* WatchConnectivityBridge.swift in Sources */,
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				4E00F5A79A534C88861EAF17 /* SceneDelegate.swift in Sources */,
 				F5A763522FE2CF00004AD0B3 /* RNTimetableWidgetModule.m in Sources */,
 				F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */,
 				F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */,
