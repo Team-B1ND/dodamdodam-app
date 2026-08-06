@@ -20,8 +20,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9.15.4
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -58,10 +56,31 @@ jobs:
             -PMYAPP_UPLOAD_KEY_ALIAS=${{ secrets.KEY_ALIAS }} \
             -PMYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}
 
-      - name: Upload to Play Store
+      # Wear OS 폼 팩터를 Play Console에서 최초 활성화하려면 Console UI로 직접 한 번
+      # 출시해야 하므로, 서명된 AAB를 다운로드할 수 있게 아티팩트로 남긴다.
+      - name: Upload AABs as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aabs
+          path: |
+            android/app/build/outputs/bundle/release/app-release.aab
+            android/wear/build/outputs/bundle/release/wear-release.aab
+          retention-days: 7
+
+      # Wear OS 폼 팩터 활성화 후에는 워치 번들이 전용 트랙(wear:internal)으로 가야 하므로
+      # 폰과 워치를 각자의 트랙에 따로 업로드한다.
+      - name: Upload phone build to Play Store
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.b1nd.dodam.student
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: internal
+
+      - name: Upload Wear OS build to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.b1nd.dodam.student
+          releaseFiles: android/wear/build/outputs/bundle/release/wear-release.aab
+          track: wear:internal
