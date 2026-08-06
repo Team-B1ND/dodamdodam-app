@@ -9,7 +9,6 @@ import { TeamDetailContent, TeamDetailSkeleton } from "./ui";
 
 export interface TeamDetailParams {
   team: Team;
-  isInvitation?: boolean;
 }
 
 type TeamDetailRouteProp = RouteProp<{ TeamDetail: TeamDetailParams }, "TeamDetail">;
@@ -27,10 +26,7 @@ export const TeamDetailPage = () => {
       <TopNavBar left={<TopNavBar.BackButton onPress={() => navigation.goBack()} />} />
       <View style={styles.content}>
         <Suspense fallback={<TeamDetailSkeleton />}>
-          <TeamDetailContent
-            team={params.team}
-            isInvitation={params.isInvitation}
-          />
+          <TeamDetailContent team={params.team} />
         </Suspense>
       </View>
     </SafeAreaView>

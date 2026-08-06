@@ -39,7 +39,7 @@ export const TeamManageActions = ({ team, role }: TeamManageActionsProps) => {
     [navigation, overlay, team.publicId],
   );
 
-  if (role === "guest") return null;
+  if (role === "guest" || role === "invited") return null;
 
   return (
     <View style={styles.container}>

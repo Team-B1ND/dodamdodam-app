@@ -13,13 +13,9 @@ import { Divider } from "@shared/ui";
 
 interface TeamDetailContentProps {
   team: Team;
-  isInvitation?: boolean;
 }
 
-export const TeamDetailContent = ({
-  team,
-  isInvitation = false,
-}: TeamDetailContentProps) => {
+export const TeamDetailContent = ({ team }: TeamDetailContentProps) => {
   const { colors } = useTheme();
   const members = useTeamMembersSuspense(team.publicId);
   const viewerRole = useTeamViewerRole(members);
@@ -58,7 +54,7 @@ export const TeamDetailContent = ({
           <TeamMemberRow key={member.userId} member={member} />
         ))}
       </ScrollView>
-      {isInvitation ? (
+      {viewerRole === "invited" ? (
         <TeamInvitationActions publicId={team.publicId} />
       ) : (
         <TeamManageActions team={team} role={viewerRole} />

@@ -5,7 +5,7 @@ import { TeamList } from "./team-list";
 
 export const TeamInviteList = () => {
   const query = useInviteTeamsSuspense();
-  const handlePress = useTeamDetailNavigation(true);
+  const handlePress = useTeamDetailNavigation();
 
   return (
     <TeamList
