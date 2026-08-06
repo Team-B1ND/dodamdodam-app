@@ -60,6 +60,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9AF8D3FB300284BB00562EAF"
             BuildableName = "dodamdodamappWatch Watch App.app"
+            BlueprintName = "dodamdodamappWatch Watch App"
             ReferencedContainer = "container:dodamdodamapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,6 +77,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9AF8D3FB300284BB00562EAF"
             BuildableName = "dodamdodamappWatch Watch App.app"
+            BlueprintName = "dodamdodamappWatch Watch App"
             ReferencedContainer = "container:dodamdodamapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
