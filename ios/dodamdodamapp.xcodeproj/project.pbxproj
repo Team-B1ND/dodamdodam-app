@@ -771,7 +771,7 @@
 				);
 				MARKETING_VERSION = 5.1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.WidgetExtension;
 				PRODUCT_NAME = dodamwidgetExtension;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -806,7 +806,7 @@
 				);
 				MARKETING_VERSION = 5.1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.WidgetExtension;
 				PRODUCT_NAME = dodamwidgetExtension;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
