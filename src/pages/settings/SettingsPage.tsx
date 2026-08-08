@@ -27,7 +27,7 @@ export const SettingsPage = () => {
     webPopupRef.current?.present();
   }, []);
   const openPrivacyPolicyPopup = useCallback(() => {
-    setPopupUrl("https://app.notion.com/p/3b63cf93eace8049ad01e5f6a9654fdb?source=copy_link");
+    setPopupUrl("https://humble-tadpole-f3c.notion.site/3b63cf93eace8049ad01e5f6a9654fdb?source=copy_link");
     webPopupRef.current?.present();
   }, []);
 
