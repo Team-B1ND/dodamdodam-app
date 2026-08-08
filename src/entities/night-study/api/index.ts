@@ -1,6 +1,11 @@
 import { basicApiHandler } from "@entities/api/common";
 import type { ApiResponse } from "@shared/types";
-import type { NightStudyPersonal, NightStudyProject, NightStudyPersonalRequest, NightStudyProjectRequest } from "@entities/night-study/types";
+import type {
+  NightStudyPersonal,
+  NightStudyProject,
+  NightStudyPersonalRequest,
+  NightStudyProjectRequest,
+} from "@entities/night-study/types";
 
 export const nightStudyApi = {
   getMyPersonal: () =>

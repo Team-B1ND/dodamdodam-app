@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, Pressable, ScrollView, StyleSheet } from "react-native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
-import { Avatar } from "@shared/ui";
 import { XmarkCircle } from "@shared/icons/mono";
 import type { StudentMember } from "../hooks/useNightStudyForm";
+import { StudentAvatar } from "./StudentAvatar";
 
 interface SelectedStudentListProps {
   members: StudentMember[];
@@ -25,7 +25,7 @@ export const SelectedStudentList = ({ members, onRemove }: SelectedStudentListPr
       {members.map((member) => (
         <View key={member.id} style={styles.item}>
           <View>
-            <Avatar size={38} />
+            <StudentAvatar size={38} profileImage={member.profileImage} />
             <Pressable style={styles.removeButton} onPress={() => onRemove(member.id)}>
               <XmarkCircle size={16} color={colors.text.tertiary} />
             </Pressable>
