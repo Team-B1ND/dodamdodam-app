@@ -2,10 +2,10 @@ import React, { memo } from "react";
 import { View, Text, Pressable, FlatList, StyleSheet } from "react-native";
 import { useTheme } from "@shared/theme";
 import { typo, shapes } from "@shared/tokens";
-import { Avatar } from "@shared/ui";
 import { CheckmarkCircleFill } from "@shared/icons/mono";
 import type { StudentMember } from "../hooks/useNightStudyForm";
 import { StudentListSkeleton } from "./StudentListSkeleton";
+import { StudentAvatar } from "./StudentAvatar";
 
 interface StudentListProps {
   data: StudentMember[];
@@ -29,7 +29,7 @@ const StudentRow = memo(({
   return (
     <Pressable style={styles.row} onPress={onPress}>
       <View style={styles.info}>
-        <Avatar size={38} />
+        <StudentAvatar size={38} profileImage={item.profileImage} />
         <View>
           <Text style={[styles.name, { color: colors.text.primary }]}>{item.name}</Text>
           <Text style={[styles.sub, { color: colors.text.tertiary }]}>{item.grade}-{item.room}</Text>

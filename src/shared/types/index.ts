@@ -1,1 +1,1 @@
-export type { ApiResponse, ApiError } from "./api";
+export type { ApiResponse, ApiError, InfinityScrollResponse } from "./api";

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		15F99107398D459E964D72B5 /* TimetableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C093EFAF0F4B609B3A89D6 /* TimetableProvider.swift */; };
 		1D77E8991BDE49DCB4D7001F /* SelectMealIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */; };
+		23DD53DFB4C0F966CFD8E7BD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */; };
 		270BC017F6DB4D44893B14F9 /* TimetableHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B1DC3D925A462B82E6812A /* TimetableHeaderLabel.swift */; };
 		27F22B3E01D7581FF180A49D /* libPods-dodamdodamapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8936CA461D88A90C5E07C4 /* libPods-dodamdodamapp.a */; };
 		343ED0FDE19F4A389108D0E9 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */; };
@@ -23,15 +24,17 @@
 		88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8CB42C11402FB995C840 /* MealType.swift */; };
 		8BC93403078E4BA592BCDCBF /* NotificationService.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 3CFD1620E27149769777318D /* NotificationService.appex */; };
 		8DEE63BA3F434062BDBB217A /* MealMenuText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D23419118411AA4F38A1E /* MealMenuText.swift */; };
+		9A2017113002A25E008AC312 /* WatchConnectivityBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2017103002A25E008AC312 /* WatchConnectivityBridge.swift */; };
+		9AF8D3FD300284BB00562EAF /* DodamWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9AF8D3FC300284BB00562EAF /* DodamWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B26AF9056DA64AA09923D6C3 /* WidgetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B3EA6E0EED49C7B0987F80 /* WidgetColors.swift */; };
 		B446E7ADF3F64B8EB0E34136 /* TimetableEmptyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5666E1793C034CCE8CD4EEC0 /* TimetableEmptyText.swift */; };
 		B6EE1067B74B4381872F22C2 /* TimetableWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B66F8C085943CC844448AC /* TimetableWidgetView.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		C1E5CD56A1A944C7B79BF24A /* TimetableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F8478FC3554098AF8ADCA3 /* TimetableModel.swift */; };
 		C993F93D0DE7451D98FD060E /* TimetablePeriodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */; };
-		CE95A7DFFCC9475D8ED97471 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A05065036D946D79DCCA9FF /* GoogleService-Info.plist */; };
 		D3D5FD5738D3463CA47075C9 /* MealWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA3A54553D14A178F7AE179 /* MealWidgetView.swift */; };
 		D618177E1DA741FEB1FA8718 /* dodamwidgetExtension.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */; };
+		DAC078ECCE0E40668D7CE693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A2017123002A67F008AC312 /* GoogleService-Info.plist */; };
 		E279D63C9B984E5CA3C917AC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */; };
 		F0C19D381F6C4E47B6783D91 /* MealProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B31FED1B814A2894CB7FA4 /* MealProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
@@ -41,6 +44,16 @@
 		F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634C2FE2CF00004AD0B3 /* RNMealWidgetModule.m */; };
 		FB5C4AAA770D143C683FEE44 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9AF8D3FE300284BB00562EAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AF8D3FB300284BB00562EAF;
+			remoteInfo = "dodamdodamappWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7191F149006240AD8C8EFFB2 /* Copy Files */ = {
@@ -53,6 +66,17 @@
 				8BC93403078E4BA592BCDCBF /* NotificationService.appex in Copy Files */,
 			);
 			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AF8D409300284BC00562EAF /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				9AF8D3FD300284BB00562EAF /* DodamWatchApp.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -76,11 +100,14 @@
 		6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SharedDefaults.swift; path = Shared/SharedDefaults.swift; sourceTree = "<group>"; };
 		61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetablePeriodRow.swift; path = Feature/Timetable/Component/TimetablePeriodRow.swift; sourceTree = "<group>"; };
 		658D8CB42C11402FB995C840 /* MealType.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealType.swift; path = Feature/Meal/Enum/MealType.swift; sourceTree = "<group>"; };
-		6A05065036D946D79DCCA9FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "dodamdodamapp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6DA3A54553D14A178F7AE179 /* MealWidgetView.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealWidgetView.swift; path = Feature/Meal/View/MealWidgetView.swift; sourceTree = "<group>"; };
 		888D23419118411AA4F38A1E /* MealMenuText.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealMenuText.swift; path = Feature/Meal/Component/MealMenuText.swift; sourceTree = "<group>"; };
 		9601C9410E7F4025B1E07AC8 /* MealModel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealModel.swift; path = Feature/Meal/Model/MealModel.swift; sourceTree = "<group>"; };
+		9A2017103002A25E008AC312 /* WatchConnectivityBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityBridge.swift; sourceTree = "<group>"; };
+		9A2017123002A67F008AC312 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A6B8BC1432946C4B166BD45 /* TimetableWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableWidget.swift; path = Feature/Timetable/TimetableWidget.swift; sourceTree = "<group>"; };
+		9AF8D3FC300284BB00562EAF /* DodamWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DodamWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D4E5F60718293A4B5C /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = dodamdodamapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SelectMealIntent.swift; path = Feature/Meal/Component/SelectMealIntent.swift; sourceTree = "<group>"; };
 		B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
@@ -99,12 +126,23 @@
 		F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTimetableWidgetModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		9AF8D400300284BB00562EAF /* dodamdodamappWatch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "dodamdodamappWatch Watch App"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				27F22B3E01D7581FF180A49D /* libPods-dodamdodamapp.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AF8D3F9300284BB00562EAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,8 +157,8 @@
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				9A2017123002A67F008AC312 /* GoogleService-Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				6A05065036D946D79DCCA9FF /* GoogleService-Info.plist */,
 				D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */,
 			);
 			name = dodamdodamapp;
@@ -173,6 +211,7 @@
 			children = (
 				F5A7634E2FE2CF00004AD0B3 /* Meal */,
 				F5A763512FE2CF00004AD0B3 /* Timetable */,
+				9A2017103002A25E008AC312 /* WatchConnectivityBridge.swift */,
 			);
 			name = NativeModules;
 			path = dodamdodamapp/NativeModules;
@@ -205,8 +244,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A1B2C3D4E5F60718293A4B5D /* Config */,
 				13B07FAE1A68108700A75B9A /* dodamdodamapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				9AF8D400300284BB00562EAF /* dodamdodamappWatch Watch App */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				19571B04DA0D4411AEF5CA36 /* dodamwidgetExtension */,
@@ -226,6 +267,7 @@
 				13B07F961A680F5B00A75B9A /* dodamdodamapp.app */,
 				109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */,
 				3CFD1620E27149769777318D /* NotificationService.appex */,
+				9AF8D3FC300284BB00562EAF /* DodamWatchApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,6 +278,14 @@
 				C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A4B5D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A4B5C /* Version.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -268,9 +318,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* dodamdodamapp */ = {
+		13B07F861A680F5B00A75B9A /* DodamdodamApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "dodamdodamapp" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DodamdodamApp" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
 				A6BCF0E101A8156559C58098 /* [Expo] Configure project */,
@@ -280,21 +330,23 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
 				7191F149006240AD8C8EFFB2 /* Copy Files */,
+				9AF8D409300284BC00562EAF /* Embed Watch Content */,
 				6269E11604AB5B116C9EEF36 /* [CP] Embed Pods Frameworks */,
 				9DFAA4EAE997900222DDC98A /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9AF8D3FF300284BB00562EAF /* PBXTargetDependency */,
 			);
-			name = dodamdodamapp;
+			name = DodamdodamApp;
 			productName = dodamdodamapp;
 			productReference = 13B07F961A680F5B00A75B9A /* dodamdodamapp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		204FFF3383334DCE8F8A9BB8 /* dodamwidgetExtension */ = {
+		204FFF3383334DCE8F8A9BB8 /* DodamWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 039C505E1BF74F09907ECEA5 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */;
+			buildConfigurationList = 039C505E1BF74F09907ECEA5 /* Build configuration list for PBXNativeTarget "DodamWidgetExtension" */;
 			buildPhases = (
 				B2188C5DBFDA45A2B5283D99 /* Sources */,
 				4632BC2A10BA4A0180452E72 /* Resources */,
@@ -303,14 +355,14 @@
 			);
 			dependencies = (
 			);
-			name = dodamwidgetExtension;
+			name = DodamWidgetExtension;
 			productName = dodamwidgetExtension;
 			productReference = 109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		36679A16FA604A759695C91B /* NotificationService */ = {
+		36679A16FA604A759695C91B /* DodamNotificationService */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6B1DE61441A49AE9FC46888 /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildConfigurationList = D6B1DE61441A49AE9FC46888 /* Build configuration list for PBXNativeTarget "DodamNotificationService" */;
 			buildPhases = (
 				0C9171C3A5934ADAB2DB4825 /* Sources */,
 			);
@@ -318,10 +370,30 @@
 			);
 			dependencies = (
 			);
-			name = NotificationService;
+			name = DodamNotificationService;
 			productName = NotificationService;
 			productReference = 3CFD1620E27149769777318D /* NotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		9AF8D3FB300284BB00562EAF /* DodamWatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AF8D40C300284BC00562EAF /* Build configuration list for PBXNativeTarget "DodamWatchApp" */;
+			buildPhases = (
+				9AF8D3F8300284BB00562EAF /* Sources */,
+				9AF8D3F9300284BB00562EAF /* Frameworks */,
+				9AF8D3FA300284BB00562EAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9AF8D400300284BB00562EAF /* dodamdodamappWatch Watch App */,
+			);
+			name = DodamWatchApp;
+			productName = "dodamdodamappWatch Watch App";
+			productReference = 9AF8D3FC300284BB00562EAF /* DodamWatchApp.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -329,10 +401,14 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
+					};
+					9AF8D3FB300284BB00562EAF = {
+						CreatedOnToolsVersion = 27.0;
 					};
 				};
 			};
@@ -349,9 +425,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* dodamdodamapp */,
-				204FFF3383334DCE8F8A9BB8 /* dodamwidgetExtension */,
-				36679A16FA604A759695C91B /* NotificationService */,
+				13B07F861A680F5B00A75B9A /* DodamdodamApp */,
+				204FFF3383334DCE8F8A9BB8 /* DodamWidgetExtension */,
+				36679A16FA604A759695C91B /* DodamNotificationService */,
+				9AF8D3FB300284BB00562EAF /* DodamWatchApp */,
 			);
 		};
 /* End PBXProject section */
@@ -361,10 +438,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAC078ECCE0E40668D7CE693 /* GoogleService-Info.plist in Resources */,
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				CE95A7DFFCC9475D8ED97471 /* GoogleService-Info.plist in Resources */,
 				68B1A088A127846392FF9635 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +451,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3A4C5B7D8F49A0B1C2D3E4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AF8D3FA300284BB00562EAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23DD53DFB4C0F966CFD8E7BD /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,12 +634,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A2017113002A25E008AC312 /* WatchConnectivityBridge.swift in Sources */,
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
 				F5A763522FE2CF00004AD0B3 /* RNTimetableWidgetModule.m in Sources */,
 				F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */,
 				F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */,
 				F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */,
 				FB5C4AAA770D143C683FEE44 /* ExpoModulesProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AF8D3F8300284BB00562EAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +677,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9AF8D3FF300284BB00562EAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AF8D3FB300284BB00562EAF /* DodamWatchApp */;
+			targetProxy = 9AF8D3FE300284BB00562EAF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -592,7 +693,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = dodamdodamapp/dodamdodamapp.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -605,7 +707,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -614,6 +715,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student;
 				PRODUCT_NAME = dodamdodamapp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dodamdodamapp/dodamdodamapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -629,7 +731,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = dodamdodamapp/dodamdodamapp.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				INFOPLIST_FILE = dodamdodamapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -637,7 +740,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -646,6 +748,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student;
 				PRODUCT_NAME = dodamdodamapp;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "dodamdodamapp/dodamdodamapp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -659,8 +762,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = dodamwidgetExtension/Info.plist;
@@ -671,10 +774,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.WidgetExtension;
 				PRODUCT_NAME = dodamwidgetExtension;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -688,8 +791,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = dodamwidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -704,10 +807,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.WidgetExtension;
 				PRODUCT_NAME = dodamwidgetExtension;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -717,6 +820,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1B2C3D4E5F60718293A4B5C /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -782,6 +886,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1B2C3D4E5F60718293A4B5C /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -837,13 +942,108 @@
 			};
 			name = Release;
 		};
+		9AF8D40A300284BC00562EAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.b1nd.dodam.student;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.WatchApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.6;
+			};
+			name = Debug;
+		};
+		9AF8D40B300284BC00562EAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6W7K4RM8WW;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "도담도담";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.b1nd.dodam.student;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.WatchApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.6;
+			};
+			name = Release;
+		};
 		AF72C471225C401CA55F7389 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -858,10 +1058,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
 				PRODUCT_NAME = NotificationService;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -874,8 +1074,8 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "$(inherited)";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6W7K4RM8WW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -886,10 +1086,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.b1nd.dodam.student.NotificationService;
 				PRODUCT_NAME = NotificationService;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -900,7 +1100,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		039C505E1BF74F09907ECEA5 /* Build configuration list for PBXNativeTarget "dodamwidgetExtension" */ = {
+		039C505E1BF74F09907ECEA5 /* Build configuration list for PBXNativeTarget "DodamWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				412D10C042D94DFE9B153765 /* Debug */,
@@ -909,7 +1109,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "dodamdodamapp" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DodamdodamApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -927,7 +1127,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6B1DE61441A49AE9FC46888 /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+		9AF8D40C300284BC00562EAF /* Build configuration list for PBXNativeTarget "DodamWatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AF8D40A300284BC00562EAF /* Debug */,
+				9AF8D40B300284BC00562EAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6B1DE61441A49AE9FC46888 /* Build configuration list for PBXNativeTarget "DodamNotificationService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF72C471225C401CA55F7389 /* Debug */,

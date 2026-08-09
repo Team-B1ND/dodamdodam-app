@@ -9,3 +9,8 @@ export interface ApiError {
   message: string;
   code: string;
 }
+
+export interface InfinityScrollResponse<T> {
+  content: T[];
+  hasNext: boolean;
+}
