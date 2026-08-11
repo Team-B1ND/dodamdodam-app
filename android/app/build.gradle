@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "org.jetbrains.kotlin.plugin.compose"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
@@ -134,6 +135,9 @@ android {
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
     }
+    buildFeatures {
+        compose true
+    }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
@@ -159,6 +163,7 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation("androidx.glance:glance-appwidget:1.1.1")
 
     // 갤럭시워치(도담워치)로 시간표/급식 데이터를 전달하기 위한 Wearable Data Layer
     implementation("com.google.android.gms:play-services-wearable:19.0.0")
