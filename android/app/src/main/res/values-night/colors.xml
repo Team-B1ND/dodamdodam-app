@@ -1,1 +1,5 @@
-<resources/>
+<resources>
+  <color name="widget_primary">#0083F0</color><color name="widget_label_normal">#F5F5F5</color>
+  <color name="widget_label_alternative">#C4C5C6</color><color name="widget_background_normal">#232424</color>
+  <color name="widget_background_neutral">#191A1A</color>
+</resources>
