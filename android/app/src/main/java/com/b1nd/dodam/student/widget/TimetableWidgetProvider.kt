@@ -46,47 +46,65 @@ class TimetableWidgetProvider : GlanceAppWidgetReceiver() {
   override val glanceAppWidget: GlanceAppWidget = TimetableWidget()
 
   companion object {
-    fun updateAll(context: Context) = WidgetUpdateScope.launch { TimetableWidget().updateAll(context) }
+    fun updateAll(context: Context) = WidgetUpdateScope.launch {
+      TimetableWidget().updateAll(context)
+      TimetableLargeWidget().updateAll(context)
+    }
   }
 }
 
-private class TimetableWidget : GlanceAppWidget() {
+class TimetableLargeWidgetProvider : GlanceAppWidgetReceiver() {
+  override val glanceAppWidget: GlanceAppWidget = TimetableLargeWidget()
+}
+
+internal class TimetableWidget : GlanceAppWidget() {
   override val sizeMode = SizeMode.Exact
 
   override suspend fun provideGlance(context: Context, id: GlanceId) {
     val json = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
       .getString(WidgetPreferences.TIMETABLE_KEY, "[]") ?: "[]"
-    provideContent { TimetableContent(context, parseTimetable(json)) }
+    provideContent { TimetableContent(context, parseTimetable(json), false) }
+  }
+}
+
+internal class TimetableLargeWidget : GlanceAppWidget() {
+  override val sizeMode = SizeMode.Exact
+
+  override suspend fun provideGlance(context: Context, id: GlanceId) {
+    val json = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
+      .getString(WidgetPreferences.TIMETABLE_KEY, "[]") ?: "[]"
+    provideContent { TimetableContent(context, parseTimetable(json), false) }
   }
 }
 
 @Composable
-private fun TimetableContent(context: Context, week: List<List<String>>) {
+private fun TimetableContent(context: Context, week: List<List<String>>, forceWeekLayout: Boolean) {
   val size = LocalSize.current
-  val showWeek = size.width >= 280.dp && size.height >= 260.dp
+  val showWeek = forceWeekLayout || (size.width >= 220.dp && size.height >= 260.dp)
+  val compact = size.height < 180.dp
   val dayIndex = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
   val weekday = dayIndex in 0..4
   val current = currentPeriod()
 
   Column(
-    modifier = GlanceModifier.fillMaxSize().appWidgetBackground().background(timetableBackground).cornerRadius(24.dp).padding(12.dp)
+    modifier = GlanceModifier.fillMaxSize().appWidgetBackground().background(timetableBackground).cornerRadius(24.dp).padding(if (compact) 6.dp else 12.dp)
       .clickable(actionStartActivity(Intent(context, MainActivity::class.java))),
   ) {
-    if (showWeek) WeekHeader(dayIndex, size.width) else DayHeader(if (weekday) "${DAY_LABELS[dayIndex]}요일" else "주말")
-    Spacer(GlanceModifier.height(8.dp))
-    Column(modifier = GlanceModifier.fillMaxSize().background(timetableCard).cornerRadius(14.dp).padding(8.dp)) {
+    if (showWeek) WeekHeader(dayIndex, size.width) else DayHeader(if (weekday) "${DAY_LABELS[dayIndex]}요일" else "주말", compact)
+    Spacer(GlanceModifier.height(if (compact) 4.dp else 8.dp))
+    Column(modifier = GlanceModifier.fillMaxSize().background(timetableCard).cornerRadius(14.dp).padding(if (compact) 4.dp else 8.dp)) {
       if (showWeek) WeekTimetable(week, dayIndex, current, size.width, size.height) else TodayTimetable(if (weekday) week.getOrNull(dayIndex).orEmpty() else emptyList(), weekday, current, size.height)
     }
   }
 }
 
 @Composable
-private fun DayHeader(label: String) {
+private fun DayHeader(label: String, compact: Boolean) {
   Box(
-    modifier = GlanceModifier.height(28.dp).background(timetablePrimary).cornerRadius(14.dp).padding(horizontal = 12.dp),
+    modifier = GlanceModifier.height(if (compact) 20.dp else 28.dp).background(timetablePrimary).cornerRadius(14.dp).padding(horizontal = if (compact) 8.dp else 12.dp),
     contentAlignment = Alignment.Center,
   ) {
-    Text(label, style = TextStyle(color = timetableWhite, fontSize = 12.sp, fontWeight = FontWeight.Bold))
+    Text(label, style = TextStyle(color = timetableWhite, fontSize = if (compact) 10.sp else 12.sp, fontWeight = FontWeight.Bold))
   }
 }
 
@@ -113,14 +131,29 @@ private fun TodayTimetable(subjects: List<String>, weekday: Boolean, current: In
       Text(if (weekday) "등록된 시간표가 없어요" else "주말에는 시간표가 없어요", style = TextStyle(color = timetableAlternative, fontSize = 11.sp))
     }
   } else {
-    val availableHeight = (widgetHeight - 76.dp).coerceAtLeast(56.dp)
+    val compact = widgetHeight < 180.dp
+    val availableHeight = (widgetHeight - if (compact) 44.dp else 76.dp).coerceAtLeast(if (compact) 63.dp else 56.dp)
     val visibleSubjects = subjects.take(7)
     val rowHeight = availableHeight / visibleSubjects.size
-    val compact = widgetHeight < 180.dp
-    visibleSubjects.forEachIndexed { period, subject ->
+    TimetablePeriodColumn(visibleSubjects, 0, current, rowHeight, compact, GlanceModifier.fillMaxWidth())
+  }
+}
+
+@Composable
+private fun TimetablePeriodColumn(
+  subjects: List<String>,
+  startPeriod: Int,
+  current: Int,
+  rowHeight: androidx.compose.ui.unit.Dp,
+  compact: Boolean,
+  modifier: GlanceModifier,
+) {
+  Column(modifier = modifier) {
+    subjects.forEachIndexed { index, subject ->
+      val period = startPeriod + index
       Row(modifier = GlanceModifier.fillMaxWidth().height(rowHeight), verticalAlignment = Alignment.CenterVertically) {
-        Text("${period + 1}교시", modifier = GlanceModifier.width(38.dp), style = TextStyle(color = if (period == current) timetablePrimary else timetableAlternative, fontSize = if (compact) 9.sp else 10.sp, fontWeight = FontWeight.Bold), maxLines = 1)
-        Text(subject, modifier = GlanceModifier.fillMaxWidth(), style = TextStyle(color = if (period == current) timetablePrimary else timetableNormal, fontSize = if (compact) 10.sp else 12.sp), maxLines = 1)
+        Text("${period + 1}교시", modifier = GlanceModifier.width(if (compact) 32.dp else 38.dp), style = TextStyle(color = if (period == current) timetablePrimary else timetableAlternative, fontSize = if (compact) 8.sp else 10.sp, fontWeight = FontWeight.Bold), maxLines = 1)
+        Text(subject, modifier = GlanceModifier.fillMaxWidth(), style = TextStyle(color = if (period == current) timetablePrimary else timetableNormal, fontSize = if (compact) 9.sp else 12.sp), maxLines = 1)
       }
     }
   }
@@ -132,11 +165,11 @@ private fun WeekTimetable(week: List<List<String>>, today: Int, current: Int, wi
   val cellWidth = ((widgetWidth - 78.dp) / 5).coerceAtLeast(30.dp)
   repeat(7) { period ->
     Row(modifier = GlanceModifier.fillMaxWidth().height(rowHeight), verticalAlignment = Alignment.CenterVertically) {
-      Text("${period + 1}교시", modifier = GlanceModifier.width(38.dp), style = TextStyle(color = timetableAlternative, fontSize = 9.sp, fontWeight = FontWeight.Bold))
+      Text("${period + 1}교시", modifier = GlanceModifier.width(38.dp), style = TextStyle(color = timetableAlternative, fontSize = 10.sp, fontWeight = FontWeight.Bold))
       repeat(5) { day ->
         val highlighted = day == today && period == current
         Box(modifier = GlanceModifier.width(cellWidth).height(rowHeight).background(if (highlighted) timetablePrimary else timetableCard).cornerRadius(6.dp), contentAlignment = Alignment.Center) {
-          Text(week.getOrNull(day)?.getOrNull(period) ?: "-", style = TextStyle(color = if (highlighted) timetableWhite else timetableNormal, fontSize = 9.sp, fontWeight = if (highlighted) FontWeight.Bold else FontWeight.Normal), maxLines = 1)
+          Text(week.getOrNull(day)?.getOrNull(period) ?: "-", style = TextStyle(color = if (highlighted) timetableWhite else timetableNormal, fontSize = 11.sp, fontWeight = if (highlighted) FontWeight.Bold else FontWeight.Normal), maxLines = 1)
         }
       }
     }
