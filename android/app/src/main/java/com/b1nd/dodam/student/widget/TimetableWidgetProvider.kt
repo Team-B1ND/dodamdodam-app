@@ -73,7 +73,7 @@ internal class TimetableLargeWidget : GlanceAppWidget() {
   override suspend fun provideGlance(context: Context, id: GlanceId) {
     val json = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
       .getString(WidgetPreferences.TIMETABLE_KEY, "[]") ?: "[]"
-    provideContent { TimetableContent(context, parseTimetable(json), false) }
+    provideContent { TimetableContent(context, parseTimetable(json), true) }
   }
 }
 
