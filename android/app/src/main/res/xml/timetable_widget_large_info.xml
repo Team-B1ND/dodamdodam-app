@@ -4,7 +4,7 @@
   android:initialLayout="@layout/widget_loading"
   android:minWidth="250dp"
   android:minHeight="180dp"
-  android:minResizeWidth="80dp"
+  android:minResizeWidth="110dp"
   android:minResizeHeight="110dp"
   android:previewLayout="@layout/timetable_widget_large_preview"
   android:resizeMode="horizontal|vertical"
