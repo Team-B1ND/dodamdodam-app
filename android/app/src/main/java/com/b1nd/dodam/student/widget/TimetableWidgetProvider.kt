@@ -63,7 +63,7 @@ private class TimetableWidget : GlanceAppWidget() {
 @Composable
 private fun TimetableContent(context: Context, week: List<List<String>>) {
   val size = LocalSize.current
-  val showWeek = size.width >= 280.dp && size.height >= 180.dp
+  val showWeek = size.width >= 280.dp && size.height >= 260.dp
   val dayIndex = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
   val weekday = dayIndex in 0..4
   val current = currentPeriod()
@@ -113,14 +113,14 @@ private fun TodayTimetable(subjects: List<String>, weekday: Boolean, current: In
       Text(if (weekday) "등록된 시간표가 없어요" else "주말에는 시간표가 없어요", style = TextStyle(color = timetableAlternative, fontSize = 11.sp))
     }
   } else {
-    val availableHeight = (widgetHeight - 76.dp).coerceAtLeast(28.dp)
-    val visibleCount = (availableHeight.value / 28f).toInt().coerceIn(1, 7).coerceAtMost(subjects.size)
-    val visibleSubjects = subjects.take(visibleCount)
-    val rowHeight = availableHeight / visibleCount
+    val availableHeight = (widgetHeight - 76.dp).coerceAtLeast(56.dp)
+    val visibleSubjects = subjects.take(7)
+    val rowHeight = availableHeight / visibleSubjects.size
+    val compact = widgetHeight < 180.dp
     visibleSubjects.forEachIndexed { period, subject ->
       Row(modifier = GlanceModifier.fillMaxWidth().height(rowHeight), verticalAlignment = Alignment.CenterVertically) {
-        Text("${period + 1}교시", modifier = GlanceModifier.width(38.dp), style = TextStyle(color = if (period == current) timetablePrimary else timetableAlternative, fontSize = 10.sp, fontWeight = FontWeight.Bold))
-        Text(subject, modifier = GlanceModifier.fillMaxWidth(), style = TextStyle(color = if (period == current) timetablePrimary else timetableNormal, fontSize = 12.sp), maxLines = 1)
+        Text("${period + 1}교시", modifier = GlanceModifier.width(38.dp), style = TextStyle(color = if (period == current) timetablePrimary else timetableAlternative, fontSize = if (compact) 9.sp else 10.sp, fontWeight = FontWeight.Bold), maxLines = 1)
+        Text(subject, modifier = GlanceModifier.fillMaxWidth(), style = TextStyle(color = if (period == current) timetablePrimary else timetableNormal, fontSize = if (compact) 10.sp else 12.sp), maxLines = 1)
       }
     }
   }
