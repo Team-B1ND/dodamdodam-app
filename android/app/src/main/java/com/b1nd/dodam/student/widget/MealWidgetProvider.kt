@@ -3,7 +3,6 @@ package com.b1nd.dodam.student.widget
 import android.content.Context
 import android.content.Intent
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceId
@@ -19,7 +18,6 @@ import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.updateAll
 import androidx.glance.background
-import androidx.glance.color.ColorProvider
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
@@ -38,29 +36,18 @@ import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 
-private val widgetBackground = ColorProvider(Color(0xFFF5F5F5), Color(0xFF191A1A))
-private val cardBackground = ColorProvider(Color.White, Color(0xFF232424))
-private val normalLabel = ColorProvider(Color(0xFF0F0F10), Color(0xFFF5F5F5))
-private val alternativeLabel = ColorProvider(Color(0xFF5D5F60), Color(0xFFC4C5C6))
-private val primary = ColorProvider(Color(0xFF0083F0), Color(0xFF0083F0))
-private val white = ColorProvider(Color.White, Color.White)
-
-internal object WidgetUpdateScope {
-  private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-  fun launch(block: suspend () -> Unit) { scope.launch { block() } }
-}
+private val widgetBackground = WidgetColors.background
+private val cardBackground = WidgetColors.card
+private val normalLabel = WidgetColors.label
+private val alternativeLabel = WidgetColors.alternativeLabel
+private val primary = WidgetColors.primary
+private val white = WidgetColors.white
 
 class MealWidgetProvider : GlanceAppWidgetReceiver() {
   override val glanceAppWidget: GlanceAppWidget = MealWidget()
 
   companion object {
-    const val PREFERENCES_NAME = "dodam_widgets"
-    const val MEALS_KEY = "widgetMeals"
     fun updateAll(context: Context) = WidgetUpdateScope.launch { MealWidget().updateAll(context) }
   }
 }
@@ -69,8 +56,8 @@ private class MealWidget : GlanceAppWidget() {
   override val sizeMode = SizeMode.Exact
 
   override suspend fun provideGlance(context: Context, id: GlanceId) {
-    val prefs = context.getSharedPreferences(MealWidgetProvider.PREFERENCES_NAME, Context.MODE_PRIVATE)
-    val mealsJson = prefs.getString(MealWidgetProvider.MEALS_KEY, "[]") ?: "[]"
+    val prefs = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
+    val mealsJson = prefs.getString(WidgetPreferences.MEALS_KEY, "[]") ?: "[]"
     provideContent { MealContent(context, mealsJson, currentMealType()) }
   }
 }
@@ -146,8 +133,10 @@ private fun MealBody(meal: Meal?, modifier: GlanceModifier, maxMenus: Int, split
       Text("급식 정보가 없어요", style = TextStyle(color = alternativeLabel, fontSize = 12.sp))
       return@Column
     }
-    Text("${meal.calorie.toInt()}Kcal", style = TextStyle(color = alternativeLabel, fontSize = 10.sp), maxLines = 1)
-    Spacer(GlanceModifier.height(4.dp))
+    meal.calorie?.let {
+      Text("${it.toInt()}Kcal", style = TextStyle(color = alternativeLabel, fontSize = 10.sp), maxLines = 1)
+      Spacer(GlanceModifier.height(4.dp))
+    }
     val menus = meal.menus.take(maxMenus)
     if (menus.isEmpty()) {
       Text("오늘은 급식이 없어요", style = TextStyle(color = alternativeLabel, fontSize = 12.sp))
@@ -178,7 +167,7 @@ private fun MealMenuList(menus: List<String>, modifier: GlanceModifier, roomy: B
   }
 }
 
-private data class Meal(val calorie: Double, val menus: List<String>)
+private data class Meal(val calorie: Double?, val menus: List<String>)
 private data class MealType(val apiName: String, val label: String)
 private val MEAL_TYPES = listOf(MealType("BREAKFAST", "아침"), MealType("LUNCH", "점심"), MealType("DINNER", "저녁"))
 
@@ -188,7 +177,8 @@ private fun findMeal(json: String, type: String): Meal? = runCatching {
   (0 until array.length()).asSequence().map { array.getJSONObject(it) }
     .firstOrNull { it.optString("date") == today && it.optString("mealType") == type }?.let { item ->
       val menus = item.optJSONArray("menus") ?: JSONArray()
-      Meal(item.optDouble("calorie"), (0 until menus.length()).map { menus.optString(it) })
+      val calorie = item.optDouble("calorie", Double.NaN).takeIf { it.isFinite() && it > 0.0 }
+      Meal(calorie, (0 until menus.length()).map { menus.optString(it) })
     }
 }.getOrNull()
 
