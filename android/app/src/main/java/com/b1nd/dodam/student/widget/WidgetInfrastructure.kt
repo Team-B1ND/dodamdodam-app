@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 internal object WidgetPreferences {
   const val NAME = "dodam_widgets"
   const val MEALS_KEY = "widgetMeals"
+  const val SELECTED_MEAL_KEY = "selectedMealType"
   const val TIMETABLE_KEY = "widgetTimetable"
 }
 
