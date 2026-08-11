@@ -18,14 +18,42 @@
     android:textSize="12sp"
     android:textStyle="bold" />
 
-  <TextView
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_marginTop="8dp"
     android:layout_weight="1"
     android:background="@drawable/widget_preview_card_background"
-    android:padding="10dp"
-    android:text="@string/timetable_widget_preview_content"
-    android:textColor="@color/widget_label_normal"
-    android:textSize="12sp" />
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewPeriod" android:text="1교시" />
+      <TextView style="@style/WidgetTimetablePreviewSubject" android:text="국어" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewPeriod" android:text="2교시" />
+      <TextView style="@style/WidgetTimetablePreviewSubject" android:text="한국사" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewPeriod" android:text="3교시" />
+      <TextView style="@style/WidgetTimetablePreviewSubject" android:text="웹프로그래밍" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewPeriod" android:text="4교시" />
+      <TextView style="@style/WidgetTimetablePreviewSubject" android:text="체육" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewPeriod" android:text="5교시" />
+      <TextView style="@style/WidgetTimetablePreviewSubject" android:text="확률과 통계" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewPeriod" android:text="6교시" />
+      <TextView style="@style/WidgetTimetablePreviewSubject" android:text="자바2" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewPeriod" android:text="7교시" />
+      <TextView style="@style/WidgetTimetablePreviewSubject" android:text="자바2" />
+    </LinearLayout>
+  </LinearLayout>
 </LinearLayout>
