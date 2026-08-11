@@ -140,6 +140,7 @@ private fun MealSummary(type: MealType, meal: Meal?, modifier: GlanceModifier, b
 
 @Composable
 private fun MealBody(meal: Meal?, modifier: GlanceModifier, maxMenus: Int, splitColumns: Boolean) {
+  val roomy = LocalSize.current.height >= 220.dp
   Column(modifier = modifier.background(cardBackground).cornerRadius(14.dp).padding(10.dp)) {
     if (meal == null) {
       Text("급식 정보가 없어요", style = TextStyle(color = alternativeLabel, fontSize = 12.sp))
@@ -153,12 +154,26 @@ private fun MealBody(meal: Meal?, modifier: GlanceModifier, maxMenus: Int, split
     } else if (splitColumns && menus.size >= 4) {
       val half = (menus.size + 1) / 2
       Row(modifier = GlanceModifier.fillMaxWidth()) {
-        Text(menus.take(half).joinToString("\n") { "• $it" }, modifier = GlanceModifier.width((LocalSize.current.width - 48.dp) / 2), style = TextStyle(color = normalLabel, fontSize = 12.sp), maxLines = half)
+        MealMenuList(menus.take(half), GlanceModifier.width((LocalSize.current.width - 48.dp) / 2), roomy)
         Spacer(GlanceModifier.width(8.dp))
-        Text(menus.drop(half).joinToString("\n") { "• $it" }, modifier = GlanceModifier.fillMaxWidth(), style = TextStyle(color = normalLabel, fontSize = 12.sp), maxLines = menus.size - half)
+        MealMenuList(menus.drop(half), GlanceModifier.fillMaxWidth(), roomy)
       }
     } else {
-      Text(menus.joinToString("\n") { "• $it" }, style = TextStyle(color = normalLabel, fontSize = 12.sp), maxLines = maxMenus)
+      MealMenuList(menus, GlanceModifier.fillMaxWidth(), roomy)
+    }
+  }
+}
+
+@Composable
+private fun MealMenuList(menus: List<String>, modifier: GlanceModifier, roomy: Boolean) {
+  Column(modifier = modifier) {
+    menus.forEachIndexed { index, menu ->
+      Text(
+        text = "• $menu",
+        style = TextStyle(color = normalLabel, fontSize = if (roomy) 14.sp else 12.sp),
+        maxLines = 2,
+      )
+      if (index != menus.lastIndex) Spacer(GlanceModifier.height(if (roomy) 5.dp else 2.dp))
     }
   }
 }
