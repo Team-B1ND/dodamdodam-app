@@ -63,7 +63,11 @@ class MealWidgetProvider : GlanceAppWidgetReceiver() {
   }
 }
 
-private class MealWidget : GlanceAppWidget() {
+class MealWideWidgetProvider : GlanceAppWidgetReceiver() {
+  override val glanceAppWidget: GlanceAppWidget = MealWidget()
+}
+
+internal class MealWidget : GlanceAppWidget() {
   override val sizeMode = SizeMode.Exact
   override val stateDefinition = PreferencesGlanceStateDefinition
 
