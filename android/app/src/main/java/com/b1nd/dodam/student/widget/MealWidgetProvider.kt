@@ -5,19 +5,27 @@ import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.LocalSize
+import androidx.glance.action.ActionParameters
+import androidx.glance.action.actionParametersOf
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
+import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.action.actionRunCallback
+import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.glance.appwidget.appWidgetBackground
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.updateAll
 import androidx.glance.background
+import androidx.glance.currentState
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
@@ -31,6 +39,7 @@ import androidx.glance.layout.width
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
+import androidx.glance.state.PreferencesGlanceStateDefinition
 import com.b1nd.dodam.student.MainActivity
 import org.json.JSONArray
 import java.text.SimpleDateFormat
@@ -43,6 +52,8 @@ private val normalLabel = WidgetColors.label
 private val alternativeLabel = WidgetColors.alternativeLabel
 private val primary = WidgetColors.primary
 private val white = WidgetColors.white
+private val selectedMealParameter = ActionParameters.Key<String>(WidgetPreferences.SELECTED_MEAL_KEY)
+private val selectedMealPreference = stringPreferencesKey(WidgetPreferences.SELECTED_MEAL_KEY)
 
 class MealWidgetProvider : GlanceAppWidgetReceiver() {
   override val glanceAppWidget: GlanceAppWidget = MealWidget()
@@ -54,11 +65,25 @@ class MealWidgetProvider : GlanceAppWidgetReceiver() {
 
 private class MealWidget : GlanceAppWidget() {
   override val sizeMode = SizeMode.Exact
+  override val stateDefinition = PreferencesGlanceStateDefinition
 
   override suspend fun provideGlance(context: Context, id: GlanceId) {
-    val prefs = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
-    val mealsJson = prefs.getString(WidgetPreferences.MEALS_KEY, "[]") ?: "[]"
-    provideContent { MealContent(context, mealsJson, currentMealType()) }
+    provideContent {
+      val prefs = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
+      val mealsJson = prefs.getString(WidgetPreferences.MEALS_KEY, "[]") ?: "[]"
+      val selectedMeal = currentState<Preferences>()[selectedMealPreference] ?: currentMealType()
+      MealContent(context, mealsJson, selectedMeal)
+    }
+  }
+}
+
+internal class SelectMealAction : ActionCallback {
+  override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+    val selectedMeal = parameters[selectedMealParameter] ?: return
+    updateAppWidgetState(context, glanceId) { preferences ->
+      preferences[selectedMealPreference] = selectedMeal
+    }
+    MealWidget().update(context, glanceId)
   }
 }
 
@@ -66,15 +91,15 @@ private class MealWidget : GlanceAppWidget() {
 private fun MealContent(context: Context, json: String, selected: String) {
   val size = LocalSize.current
   val isWide = size.width >= 260.dp
-  val showAllMeals = isWide && size.height >= 200.dp
+  val showAllMeals = isWide && size.height >= 260.dp
   Column(
-    modifier = GlanceModifier.fillMaxSize().appWidgetBackground().background(widgetBackground).cornerRadius(24.dp).padding(12.dp)
-      .clickable(actionStartActivity(Intent(context, MainActivity::class.java))),
+    modifier = GlanceModifier.fillMaxSize().appWidgetBackground().background(widgetBackground).cornerRadius(24.dp).padding(12.dp),
   ) {
     if (showAllMeals) {
       Row(modifier = GlanceModifier.fillMaxSize()) {
         MEAL_TYPES.forEachIndexed { index, type ->
           MealSummary(
+            context = context,
             type = type,
             meal = findMeal(json, type.apiName),
             modifier = GlanceModifier.width((size.width - 32.dp) / 3).height(size.height - 24.dp),
@@ -98,7 +123,10 @@ private fun MealContent(context: Context, json: String, selected: String) {
       Spacer(GlanceModifier.height(8.dp))
       MealBody(
         meal = findMeal(json, activeType.apiName),
-        modifier = GlanceModifier.fillMaxWidth().height((size.height - 76.dp).coerceAtLeast(34.dp)),
+        modifier = GlanceModifier
+          .fillMaxWidth()
+          .height((size.height - 76.dp).coerceAtLeast(34.dp))
+          .clickable(actionStartActivity(Intent(context, MainActivity::class.java))),
         maxMenus = when { size.height < 150.dp -> 3; size.height < 220.dp -> 6; else -> 10 },
         splitColumns = isWide && size.width >= 320.dp,
       )
@@ -109,7 +137,11 @@ private fun MealContent(context: Context, json: String, selected: String) {
 @Composable
 private fun MealTab(type: MealType, selected: Boolean, modifier: GlanceModifier) {
   Box(
-    modifier = modifier.height(32.dp).background(if (selected) primary else cardBackground).cornerRadius(16.dp),
+    modifier = modifier
+      .height(32.dp)
+      .background(if (selected) primary else cardBackground)
+      .cornerRadius(16.dp)
+      .clickable(actionRunCallback<SelectMealAction>(actionParametersOf(selectedMealParameter to type.apiName))),
     contentAlignment = Alignment.Center,
   ) {
     Text(type.label, style = TextStyle(color = if (selected) white else alternativeLabel, fontSize = 12.sp, fontWeight = FontWeight.Bold))
@@ -117,11 +149,19 @@ private fun MealTab(type: MealType, selected: Boolean, modifier: GlanceModifier)
 }
 
 @Composable
-private fun MealSummary(type: MealType, meal: Meal?, modifier: GlanceModifier, bodyHeight: androidx.compose.ui.unit.Dp, maxMenus: Int) {
+private fun MealSummary(context: Context, type: MealType, meal: Meal?, modifier: GlanceModifier, bodyHeight: androidx.compose.ui.unit.Dp, maxMenus: Int) {
   Column(modifier = modifier) {
     MealTab(type, selected = true, modifier = GlanceModifier.fillMaxWidth())
     Spacer(GlanceModifier.height(8.dp))
-    MealBody(meal = meal, modifier = GlanceModifier.fillMaxWidth().height(bodyHeight), maxMenus = maxMenus, splitColumns = false)
+    MealBody(
+      meal = meal,
+      modifier = GlanceModifier
+        .fillMaxWidth()
+        .height(bodyHeight)
+        .clickable(actionStartActivity(Intent(context, MainActivity::class.java))),
+      maxMenus = maxMenus,
+      splitColumns = false,
+    )
   }
 }
 
@@ -156,13 +196,14 @@ private fun MealBody(meal: Meal?, modifier: GlanceModifier, maxMenus: Int, split
 @Composable
 private fun MealMenuList(menus: List<String>, modifier: GlanceModifier, roomy: Boolean) {
   Column(modifier = modifier) {
-    menus.forEachIndexed { index, menu ->
-      Text(
-        text = "• $menu",
-        style = TextStyle(color = normalLabel, fontSize = if (roomy) 14.sp else 12.sp),
-        maxLines = 2,
-      )
-      if (index != menus.lastIndex) Spacer(GlanceModifier.height(if (roomy) 5.dp else 2.dp))
+    menus.forEach { menu ->
+      Row(modifier = GlanceModifier.fillMaxWidth().height(if (roomy) 30.dp else 22.dp)) {
+        Text(
+          text = "• $menu",
+          style = TextStyle(color = normalLabel, fontSize = if (roomy) 14.sp else 12.sp),
+          maxLines = 2,
+        )
+      }
     }
   }
 }
