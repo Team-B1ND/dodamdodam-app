@@ -59,15 +59,18 @@ class MealWidgetProvider : GlanceAppWidgetReceiver() {
   override val glanceAppWidget: GlanceAppWidget = MealWidget()
 
   companion object {
-    fun updateAll(context: Context) = WidgetUpdateScope.launch { MealWidget().updateAll(context) }
+    fun updateAll(context: Context) = WidgetUpdateScope.launch {
+      MealWidget().updateAll(context)
+      MealWideWidget().updateAll(context)
+    }
   }
 }
 
 class MealWideWidgetProvider : GlanceAppWidgetReceiver() {
-  override val glanceAppWidget: GlanceAppWidget = MealWidget()
+  override val glanceAppWidget: GlanceAppWidget = MealWideWidget()
 }
 
-internal class MealWidget : GlanceAppWidget() {
+internal open class MealWidget : GlanceAppWidget() {
   override val sizeMode = SizeMode.Exact
   override val stateDefinition = PreferencesGlanceStateDefinition
 
@@ -80,6 +83,8 @@ internal class MealWidget : GlanceAppWidget() {
     }
   }
 }
+
+internal class MealWideWidget : MealWidget()
 
 internal class SelectMealAction : ActionCallback {
   override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
@@ -205,7 +210,7 @@ private fun MealMenuList(menus: List<String>, modifier: GlanceModifier, roomy: B
         Text(
           text = "• $menu",
           style = TextStyle(color = normalLabel, fontSize = if (roomy) 14.sp else 12.sp),
-          maxLines = 2,
+          maxLines = 1,
         )
       }
     }
