@@ -27,17 +27,29 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <receiver android:name=".widget.MealWidgetProvider" android:exported="false">
+    <receiver android:name=".widget.MealWidgetProvider" android:exported="false" android:label="@string/meal_widget_small_name">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
       </intent-filter>
       <meta-data android:name="android.appwidget.provider" android:resource="@xml/meal_widget_info"/>
     </receiver>
-    <receiver android:name=".widget.TimetableWidgetProvider" android:exported="false">
+    <receiver android:name=".widget.MealWideWidgetProvider" android:exported="false" android:label="@string/meal_widget_wide_name">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/meal_widget_wide_info"/>
+    </receiver>
+    <receiver android:name=".widget.TimetableWidgetProvider" android:exported="false" android:label="@string/timetable_widget_small_name">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
       </intent-filter>
       <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_info"/>
+    </receiver>
+    <receiver android:name=".widget.TimetableLargeWidgetProvider" android:exported="false" android:label="@string/timetable_widget_large_name">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_large_info"/>
     </receiver>
   </application>
 </manifest>
