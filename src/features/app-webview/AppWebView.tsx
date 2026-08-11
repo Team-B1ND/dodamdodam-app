@@ -15,6 +15,8 @@ export const AppWebView = () => {
 			<WebView
 				{...webViewProps}
 				source={{ uri }}
+				// iOS 16.4+는 이 값이 켜져야 Safari 웹 검사기에 WebView가 잡힌다.
+				webviewDebuggingEnabled={__DEV__}
 				overScrollMode="never"
 				bounces={false}
 				setBuiltInZoomControls={false}
