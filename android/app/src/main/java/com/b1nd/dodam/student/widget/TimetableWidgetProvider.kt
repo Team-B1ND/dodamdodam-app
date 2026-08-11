@@ -63,7 +63,7 @@ internal class TimetableWidget : GlanceAppWidget() {
   override suspend fun provideGlance(context: Context, id: GlanceId) {
     val json = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
       .getString(WidgetPreferences.TIMETABLE_KEY, "[]") ?: "[]"
-    provideContent { TimetableContent(context, parseTimetable(json), false) }
+    provideContent { TimetableContent(context, parseTimetable(json)) }
   }
 }
 
@@ -73,14 +73,14 @@ internal class TimetableLargeWidget : GlanceAppWidget() {
   override suspend fun provideGlance(context: Context, id: GlanceId) {
     val json = context.getSharedPreferences(WidgetPreferences.NAME, Context.MODE_PRIVATE)
       .getString(WidgetPreferences.TIMETABLE_KEY, "[]") ?: "[]"
-    provideContent { TimetableContent(context, parseTimetable(json), true) }
+    provideContent { TimetableContent(context, parseTimetable(json)) }
   }
 }
 
 @Composable
-private fun TimetableContent(context: Context, week: List<List<String>>, forceWeekLayout: Boolean) {
+private fun TimetableContent(context: Context, week: List<List<String>>) {
   val size = LocalSize.current
-  val showWeek = forceWeekLayout || (size.width >= 220.dp && size.height >= 260.dp)
+  val showWeek = size.width >= 280.dp && size.height >= 260.dp
   val compact = size.height < 180.dp
   val dayIndex = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
   val weekday = dayIndex in 0..4
