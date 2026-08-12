@@ -6,7 +6,12 @@ import {
   withTiming,
 } from "react-native-reanimated";
 import { usePressAnimation } from "@shared/hooks";
-import { CARD_PADDING, HORIZONTAL_PADDING, viewabilityConfig } from "../utils/constants";
+import {
+  CARD_PADDING,
+  EMPTY_STATE_HEIGHT,
+  HORIZONTAL_PADDING,
+  viewabilityConfig,
+} from "../utils/constants";
 import { calcContentHeight } from "../utils/calcContentHeight";
 import { getInitialMealIndex } from "../utils/getInitialMealIndex";
 import type { MealData } from "../HomeMealWidget";
@@ -16,7 +21,7 @@ export const useHomeMeal = (meals: MealData[]) => {
 
   const initialIndex = useMemo(() => {
     const idx = getInitialMealIndex();
-    return Math.min(idx, meals.length - 1);
+    return Math.max(0, Math.min(idx, meals.length - 1));
   }, [meals.length]);
 
   const [activeIndex, setActiveIndex] = useState(initialIndex);
@@ -31,7 +36,8 @@ export const useHomeMeal = (meals: MealData[]) => {
     () => meals.map((m) => calcContentHeight(m.menus.length)),
     [meals],
   );
-  const maxHeight = Math.max(...pageHeights);
+  // 스프레드만 쓰면 meals가 비었을 때 -Infinity가 된다.
+  const maxHeight = Math.max(EMPTY_STATE_HEIGHT, ...pageHeights);
   const animatedHeight = useSharedValue(pageHeights[initialIndex] ?? 0);
 
   const listWrapperStyle = useAnimatedStyle(() => ({

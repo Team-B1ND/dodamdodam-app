@@ -27,15 +27,15 @@ export const HomeMealCard = memo(({ onPress }: HomeMealCardProps) => {
   const today = useMemo(formatToday, []);
   const meals = useMealSuspense(today);
 
+  // 급식이 없는 끼니도 빈 슬라이드로 남겨둔다. 걸러내면 카드 자체가 사라지거나
+  // 페이지 수가 줄어 헤더 제목과 실제 끼니가 어긋난다.
   const mealData: MealData[] = useMemo(
     () =>
-      MEAL_ORDER.map((type) => meals.find((m) => m.mealType === type))
-        .filter(Boolean)
-        .map((m) => ({
-          id: m!.mealType,
-          label: MEAL_LABEL[m!.mealType],
-          menus: m!.menus,
-        })),
+      MEAL_ORDER.map((type) => ({
+        id: type,
+        label: MEAL_LABEL[type],
+        menus: meals.find((m) => m.mealType === type)?.menus ?? [],
+      })),
     [meals],
   );
 
