@@ -49,7 +49,7 @@ export const HomeMealWidget = React.memo(({ meals, onPress }: HomeMealWidgetProp
     [contentWidth, maxHeight],
   );
 
-  if (meals.length === 0) return null;
+  const activeTitle = MEAL_TITLES[meals[activeIndex]?.id ?? ""] ?? "오늘의 급식";
 
   return (
     <View style={styles.container}>
@@ -68,7 +68,7 @@ export const HomeMealWidget = React.memo(({ meals, onPress }: HomeMealWidgetProp
             <ForkAndKnife size={ICON_SIZE} color={colors.static.white} />
           </View>
           <Text style={[styles.title, { color: colors.text.primary }]}>
-            {MEAL_TITLES[activeIndex] ?? "오늘의 급식"}
+            {activeTitle}
           </Text>
           <ChevronRight size={14} color={colors.text.tertiary} />
         </Pressable>
