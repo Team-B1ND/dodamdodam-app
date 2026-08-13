@@ -82,20 +82,47 @@ private fun TimetableContent(context: Context, week: List<List<String>>) {
   val size = LocalSize.current
   val showWeek = size.width >= 280.dp && size.height >= 260.dp
   val compact = size.height < 180.dp
-  val dayIndex = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
-  val weekday = dayIndex in 0..4
+  val todayIndex = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
   val current = currentPeriod()
+  // 주간 뷰는 한 주가 모두 보이므로 오늘을 강조하고, 단일 일자 뷰만 다음 수업일로 넘긴다.
+  val day = displayDay()
+  val dayCurrent = if (day == null || day.isTomorrow) -1 else current
 
   Column(
     modifier = GlanceModifier.fillMaxSize().appWidgetBackground().background(timetableBackground).cornerRadius(24.dp).padding(if (compact) 6.dp else 12.dp)
       .clickable(actionStartActivity(Intent(context, MainActivity::class.java))),
   ) {
-    if (showWeek) WeekHeader(dayIndex, size.width) else DayHeader(if (weekday) "${DAY_LABELS[dayIndex]}요일" else "주말", compact)
+    if (showWeek) WeekHeader(todayIndex, size.width) else DayHeader(dayLabel(day), compact)
     Spacer(GlanceModifier.height(if (compact) 4.dp else 8.dp))
     Column(modifier = GlanceModifier.fillMaxSize().background(timetableCard).cornerRadius(14.dp).padding(if (compact) 4.dp else 8.dp)) {
-      if (showWeek) WeekTimetable(week, dayIndex, current, size.width, size.height) else TodayTimetable(if (weekday) week.getOrNull(dayIndex).orEmpty() else emptyList(), weekday, current, size.height)
+      if (showWeek) WeekTimetable(week, todayIndex, current, size.width, size.height)
+      else TodayTimetable(day?.let { week.getOrNull(it.index) }.orEmpty(), day != null, dayCurrent, size.height)
     }
   }
+}
+
+/** 시간표가 실제로 보여줄 요일. 주말이면 null. */
+private data class DisplayDay(val index: Int, val isTomorrow: Boolean)
+
+/** 정규수업이 16:30에 끝나므로 이 시각 이후엔 다음 수업일 시간표를 보여준다. */
+private const val TIMETABLE_ROLLOVER_MINUTES = 17 * 60
+
+private fun displayDay(now: Calendar = Calendar.getInstance()): DisplayDay? {
+  val index = now.get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
+  if (index !in 0..4) return null
+
+  val minutes = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE)
+  // 금요일(index 4)은 다음 주 시간표가 페이로드에 없어서 넘기지 않는다.
+  return if (index < 4 && minutes >= TIMETABLE_ROLLOVER_MINUTES) {
+    DisplayDay(index + 1, isTomorrow = true)
+  } else {
+    DisplayDay(index, isTomorrow = false)
+  }
+}
+
+private fun dayLabel(day: DisplayDay?): String {
+  val label = day?.let { DAY_LABELS.getOrNull(it.index) } ?: return "주말"
+  return if (day.isTomorrow) "내일 ($label)" else "${label}요일"
 }
 
 @Composable
