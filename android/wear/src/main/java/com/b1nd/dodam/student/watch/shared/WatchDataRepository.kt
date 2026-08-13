@@ -76,16 +76,29 @@ object WatchDataRepository {
     return System.currentTimeMillis() - syncDate > STALE_THRESHOLD_MS
   }
 
-  private fun todayLabel(calendar: Calendar): String {
-    val days = listOf("월", "화", "수", "목", "금")
-    val idx = calendar.get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
-    if (idx !in days.indices) return "주말"
-    return "${days[idx]}요일"
+  /// 정규수업이 16:30에 끝나므로 이 시각 이후엔 다음 수업일 시간표를 보여준다.
+  private const val TIMETABLE_ROLLOVER_MINUTES = 17 * 60
+
+  /** 시간표 카드가 실제로 보여줄 요일. 주말이면 null. */
+  private data class DisplayDay(val index: Int, val isTomorrow: Boolean)
+
+  private fun displayDay(now: Calendar): DisplayDay? {
+    val index = now.get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
+    if (index !in 0..4) return null
+
+    val minutes = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE)
+    // 금요일(index 4)은 다음 주 시간표가 페이로드에 없어서 넘기지 않는다.
+    return if (index < 4 && minutes >= TIMETABLE_ROLLOVER_MINUTES) {
+      DisplayDay(index + 1, isTomorrow = true)
+    } else {
+      DisplayDay(index, isTomorrow = false)
+    }
   }
 
-  private fun isWeekday(calendar: Calendar): Boolean {
-    val weekday = calendar.get(Calendar.DAY_OF_WEEK)
-    return weekday in Calendar.MONDAY..Calendar.FRIDAY
+  private fun dayLabel(day: DisplayDay): String {
+    val days = listOf("월", "화", "수", "목", "금")
+    val label = days.getOrNull(day.index) ?: return "주말"
+    return if (day.isTomorrow) "내일 ($label)" else "${label}요일"
   }
 
   // 08:50~16:20 사이 실제 수업 시간에만 강조, 쉬는시간/점심시간은 강조 없음.
@@ -121,9 +134,10 @@ object WatchDataRepository {
   }
 
   fun timetableState(now: Calendar = Calendar.getInstance()): TimetableCardState {
-    if (!isWeekday(now)) return TimetableCardState.Weekend
+    val day = displayDay(now) ?: return TimetableCardState.Weekend
+    val label = dayLabel(day)
 
-    val json = _timetableJson.value ?: return TimetableCardState.Empty(todayLabel(now))
+    val json = _timetableJson.value ?: return TimetableCardState.Empty(label)
     val weekTimetable = try {
       val outer = JSONArray(json)
       List(outer.length()) { i ->
@@ -131,17 +145,18 @@ object WatchDataRepository {
         List(inner.length()) { j -> inner.getString(j) }
       }
     } catch (e: Exception) {
-      return TimetableCardState.Empty(todayLabel(now))
+      return TimetableCardState.Empty(label)
     }
 
-    val index = now.get(Calendar.DAY_OF_WEEK) - Calendar.MONDAY
-    if (index !in weekTimetable.indices || weekTimetable[index].isEmpty()) {
-      return TimetableCardState.Empty(todayLabel(now))
+    if (day.index !in weekTimetable.indices || weekTimetable[day.index].isEmpty()) {
+      return TimetableCardState.Empty(label)
     }
 
-    val subjects = weekTimetable[index]
+    val subjects = weekTimetable[day.index]
     val periods = subjects.mapIndexed { i, subject -> TimetablePeriod(i + 1, subject) }
-    return TimetableCardState.Loaded(todayLabel(now), periods, currentPeriodIndex(now) + 1)
+    // 내일 시간표에는 '지금 몇 교시'라는 개념이 없으므로 강조하지 않는다.
+    val currentPeriod = if (day.isTomorrow) null else currentPeriodIndex(now) + 1
+    return TimetableCardState.Loaded(label, periods, currentPeriod)
   }
 
   fun mealStates(now: Calendar = Calendar.getInstance()): Map<MealType, MealCardState> {
