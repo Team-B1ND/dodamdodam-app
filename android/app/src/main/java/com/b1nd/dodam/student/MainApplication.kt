@@ -1,7 +1,10 @@
 package com.b1nd.dodam.student
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.res.Configuration
+import android.os.Build
 
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
@@ -38,6 +41,27 @@ class MainApplication : Application(), ReactApplication {
     }
     loadReactNative(this)
     ApplicationLifecycleDispatcher.onApplicationCreate(this)
+    createNotificationChannel()
+  }
+
+  /**
+   * Android 8+는 채널 없이는 알림을 띄울 수 없다. 만들어두지 않으면 FCM이 이름 없는
+   * fallback 채널로 대신 띄워서 사용자가 알림 종류를 구분하거나 끌 수 없다.
+   */
+  private fun createNotificationChannel() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+
+    val channel = NotificationChannel(
+      DEFAULT_NOTIFICATION_CHANNEL_ID,
+      getString(R.string.default_notification_channel_name),
+      NotificationManager.IMPORTANCE_DEFAULT,
+    )
+    getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
+  }
+
+  companion object {
+    // AndroidManifest의 default_notification_channel_id 값과 반드시 같아야 한다.
+    private const val DEFAULT_NOTIFICATION_CHANNEL_ID = "dodam_default"
   }
 
   override fun onConfigurationChanged(newConfig: Configuration) {

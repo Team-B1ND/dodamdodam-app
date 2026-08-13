@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import { PermissionsAndroid, Platform } from "react-native";
 import messaging from "@react-native-firebase/messaging";
 import { basicApiHandler } from "@entities/api/common";
 import { tokenStorage } from "@entities/api/common/tokenStorage";
@@ -10,6 +10,18 @@ function getPlatform(): string {
 }
 
 async function requestPermission(): Promise<boolean> {
+  // RNFB의 requestPermission은 안드로이드에서 아무것도 하지 않고 항상 AUTHORIZED를 반환한다.
+  // 그래서 POST_NOTIFICATIONS(Android 13+)를 직접 요청하지 않으면 권한이 거부된 채로 남고,
+  // 시스템이 알림을 조용히 버린다.
+  if (Platform.OS === "android") {
+    if (Number(Platform.Version) < 33) return true;
+
+    const result = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    );
+    return result === PermissionsAndroid.RESULTS.GRANTED;
+  }
+
   const authStatus = await messaging().requestPermission();
   return (
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
@@ -45,6 +57,16 @@ export async function registerPushToken(): Promise<void> {
   } catch (err) {
     console.error("Failed to register push token:", err);
   }
+}
+
+/**
+ * data-only 메시지가 백그라운드로 오면 RNFB가 이 핸들러를 찾는다. 없으면 경고만 남기고
+ * 메시지가 버려진다. 표시는 notification 페이로드를 받은 FCM이 담당하므로 여기서는
+ * 별도로 하는 일이 없지만, 핸들러 자체가 등록돼 있어야 전달 경로가 끊기지 않는다.
+ * 앱 코드가 아니라 모듈 최상위에서 한 번만 호출해야 한다.
+ */
+export function setupBackgroundMessageHandler(): void {
+  messaging().setBackgroundMessageHandler(async () => {});
 }
 
 /**

@@ -13,4 +13,5 @@
   <string name="timetable_widget_preview_title">화요일</string>
   <string name="timetable_widget_preview_content">1교시　국어\n2교시　한국사\n3교시　웹프로그래밍\n4교시　체육\n5교시　확률과 통계\n6교시　자바2\n7교시　자바2</string>
   <string name="expo_system_ui_user_interface_style" translatable="false">automatic</string>
+  <string name="default_notification_channel_name">도담도담 알림</string>
 </resources>
