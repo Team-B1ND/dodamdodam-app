@@ -93,8 +93,8 @@ android {
         applicationId 'com.b1nd.dodam.student'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 38
-        versionName "5.1.0"
+        versionCode 39
+        versionName "5.2.0"
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
     }
