@@ -14,7 +14,7 @@
 		1D77E8991BDE49DCB4D7001F /* SelectMealIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */; };
 		23DD53DFB4C0F966CFD8E7BD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */; };
 		270BC017F6DB4D44893B14F9 /* TimetableHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B1DC3D925A462B82E6812A /* TimetableHeaderLabel.swift */; };
-		27F22B3E01D7581FF180A49D /* libPods-dodamdodamapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8936CA461D88A90C5E07C4 /* libPods-dodamdodamapp.a */; };
+		27F22B3E01D7581FF180A49D /* libPods-DodamdodamApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8936CA461D88A90C5E07C4 /* libPods-DodamdodamApp.a */; };
 		343ED0FDE19F4A389108D0E9 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		40E6414E860847419134EA6C /* AppMainWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */; };
@@ -82,7 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B8936CA461D88A90C5E07C4 /* libPods-dodamdodamapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dodamdodamapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B8936CA461D88A90C5E07C4 /* libPods-DodamdodamApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DodamdodamApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		109DB08D07A94C54AA078FF9 /* dodamwidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; fileEncoding = 9; includeInIndex = 0; path = dodamwidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* dodamdodamapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dodamdodamapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = dodamdodamapp/Images.xcassets; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; path = AppMainWidget.swift; sourceTree = "<group>"; };
 		40B3EA6E0EED49C7B0987F80 /* WidgetColors.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = WidgetColors.swift; path = Shared/WidgetColors.swift; sourceTree = "<group>"; };
 		43B1DC3D925A462B82E6812A /* TimetableHeaderLabel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableHeaderLabel.swift; path = Feature/Timetable/Component/TimetableHeaderLabel.swift; sourceTree = "<group>"; };
-		47D898C190446B4311527F2E /* Pods-dodamdodamapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.release.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.release.xcconfig"; sourceTree = "<group>"; };
+		47D898C190446B4311527F2E /* Pods-DodamdodamApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodamdodamApp.release.xcconfig"; path = "Target Support Files/Pods-DodamdodamApp/Pods-DodamdodamApp.release.xcconfig"; sourceTree = "<group>"; };
 		5666E1793C034CCE8CD4EEC0 /* TimetableEmptyText.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableEmptyText.swift; path = Feature/Timetable/Component/TimetableEmptyText.swift; sourceTree = "<group>"; };
 		6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SharedDefaults.swift; path = Shared/SharedDefaults.swift; sourceTree = "<group>"; };
 		61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetablePeriodRow.swift; path = Feature/Timetable/Component/TimetablePeriodRow.swift; sourceTree = "<group>"; };
@@ -110,12 +110,12 @@
 		A1B2C3D4E5F60718293A4B5C /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = dodamdodamapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SelectMealIntent.swift; path = Feature/Meal/Component/SelectMealIntent.swift; sourceTree = "<group>"; };
-		B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DodamdodamApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		B5FC278270A04A3BA1938C81 /* MealWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealWidget.swift; path = Feature/Meal/MealWidget.swift; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = dodamdodamapp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		E0ECC263F550F09524DF839C /* Pods-dodamdodamapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dodamdodamapp.debug.xcconfig"; path = "Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp.debug.xcconfig"; sourceTree = "<group>"; };
+		E0ECC263F550F09524DF839C /* Pods-DodamdodamApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DodamdodamApp.debug.xcconfig"; path = "Target Support Files/Pods-DodamdodamApp/Pods-DodamdodamApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E6F8478FC3554098AF8ADCA3 /* TimetableModel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetableModel.swift; path = Feature/Timetable/Model/TimetableModel.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = dodamdodamapp/AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27F22B3E01D7581FF180A49D /* libPods-dodamdodamapp.a in Frameworks */,
+				27F22B3E01D7581FF180A49D /* libPods-DodamdodamApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				0B8936CA461D88A90C5E07C4 /* libPods-dodamdodamapp.a */,
+				0B8936CA461D88A90C5E07C4 /* libPods-DodamdodamApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -228,8 +228,8 @@
 		7C50C55E39F057F7C7F90939 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E0ECC263F550F09524DF839C /* Pods-dodamdodamapp.debug.xcconfig */,
-				47D898C190446B4311527F2E /* Pods-dodamdodamapp.release.xcconfig */,
+				E0ECC263F550F09524DF839C /* Pods-DodamdodamApp.debug.xcconfig */,
+				47D898C190446B4311527F2E /* Pods-DodamdodamApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -497,7 +497,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-dodamdodamapp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DodamdodamApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -510,7 +510,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DodamdodamApp/Pods-DodamdodamApp-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/React-Core-prebuilt/React.framework/React",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ReactNativeDependencies/ReactNativeDependencies.framework/ReactNativeDependencies",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermesvm.framework/hermesvm",
@@ -523,7 +523,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DodamdodamApp/Pods-DodamdodamApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
@@ -532,7 +532,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DodamdodamApp/Pods-DodamdodamApp-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXApplication/ExpoApplication_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/ExpoConstants_privacy.bundle",
@@ -577,7 +577,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-dodamdodamapp/Pods-dodamdodamapp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DodamdodamApp/Pods-DodamdodamApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9DFAA4EAE997900222DDC98A /* [CP-User] [RNFB] Core Configuration */ = {
@@ -607,17 +607,17 @@
 				"$(SRCROOT)/.xcode.env",
 				"$(SRCROOT)/.xcode.env.local",
 				"$(SRCROOT)/dodamdodamapp/dodamdodamapp.entitlements",
-				"$(SRCROOT)/Pods/Target Support Files/Pods-dodamdodamapp/expo-configure-project.sh",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-DodamdodamApp/expo-configure-project.sh",
 			);
 			name = "[Expo] Configure project";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/Pods/Target Support Files/Pods-dodamdodamapp/ExpoModulesProvider.swift",
+				"$(SRCROOT)/Pods/Target Support Files/Pods-DodamdodamApp/ExpoModulesProvider.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-dodamdodamapp/expo-configure-project.sh\"\n";
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-DodamdodamApp/expo-configure-project.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -688,7 +688,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0ECC263F550F09524DF839C /* Pods-dodamdodamapp.debug.xcconfig */;
+			baseConfigurationReference = E0ECC263F550F09524DF839C /* Pods-DodamdodamApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -726,7 +726,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47D898C190446B4311527F2E /* Pods-dodamdodamapp.release.xcconfig */;
+			baseConfigurationReference = 47D898C190446B4311527F2E /* Pods-DodamdodamApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

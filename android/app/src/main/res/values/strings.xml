@@ -1,4 +1,17 @@
 <resources>
   <string name="app_name">도담도담</string>
+  <string name="meal_widget_description">오늘의 급식 정보를 확인해보세요!</string>
+  <string name="meal_widget_small_name">도담도담 급식 2×2</string>
+  <string name="meal_widget_wide_name">도담도담 급식 4×2</string>
+  <string name="timetable_widget_description">오늘 또는 주간 시간표를 확인해요</string>
+  <string name="timetable_widget_small_name">도담도담 시간표 2×2</string>
+  <string name="timetable_widget_large_name">도담도담 시간표 4×3</string>
+  <string name="meal_widget_preview_title">점심</string>
+  <string name="meal_widget_preview_breakfast">아침</string>
+  <string name="meal_widget_preview_dinner">저녁</string>
+  <string name="meal_widget_preview_content">691Kcal\n\n• 율무밥\n• 애호박된장찌개\n• 봉추찜닭\n• 한치채소무침</string>
+  <string name="timetable_widget_preview_title">화요일</string>
+  <string name="timetable_widget_preview_content">1교시　국어\n2교시　한국사\n3교시　웹프로그래밍\n4교시　체육\n5교시　확률과 통계\n6교시　자바2\n7교시　자바2</string>
   <string name="expo_system_ui_user_interface_style" translatable="false">automatic</string>
+  <string name="default_notification_channel_name">도담도담 알림</string>
 </resources>

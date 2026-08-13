@@ -14,6 +14,11 @@ export const useAppBridge = () => {
 	const { open } = useBridgeUi();
 	const { scan: scanNfc, NfcSheet } = useNfcRead();
 
+	// SYNC/ACK는 BridgeCore가 직접 처리하고 콜백을 호출하지 않는다. 다만 등록돼 있지 않으면
+	// NOT_SUPPORT(data: undefined)로 응답하고, 웹이 그걸 Object.values로 까다가 터져 화면이 비었다.
+	core.mount(Actions.SYNC, async () => null);
+	core.mount(Actions.ACK, async () => null);
+
 	core.mount(Actions.NAVIGATION_POP, async () => {
 		navigation.goBack();
 		return null;

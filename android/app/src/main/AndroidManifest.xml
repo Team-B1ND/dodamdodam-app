@@ -18,6 +18,9 @@
     </intent>
   </queries>
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true" android:enableOnBackInvokedCallback="false">
+    <!-- id는 MainApplication에서 만드는 채널과 같아야 한다. tools:replace는 RNFB가 빈 값으로 선언해 둔 것을 덮기 위함. -->
+    <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="dodam_default" tools:replace="android:value"/>
+    <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/notification_color" tools:replace="android:resource"/>
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
@@ -27,5 +30,29 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <receiver android:name=".widget.MealWidgetProvider" android:exported="false" android:label="@string/meal_widget_small_name">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/meal_widget_info"/>
+    </receiver>
+    <receiver android:name=".widget.MealWideWidgetProvider" android:exported="false" android:label="@string/meal_widget_wide_name">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/meal_widget_wide_info"/>
+    </receiver>
+    <receiver android:name=".widget.TimetableWidgetProvider" android:exported="false" android:label="@string/timetable_widget_small_name">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_info"/>
+    </receiver>
+    <receiver android:name=".widget.TimetableLargeWidgetProvider" android:exported="false" android:label="@string/timetable_widget_large_name">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/timetable_widget_large_info"/>
+    </receiver>
   </application>
 </manifest>

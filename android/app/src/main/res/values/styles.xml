@@ -8,4 +8,62 @@
   <style name="Theme.App.SplashScreen" parent="AppTheme">
     <item name="android:windowBackground">@drawable/ic_launcher_background</item>
   </style>
+  <style name="WidgetTimetablePreviewRow">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">0dp</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:orientation">horizontal</item>
+  </style>
+  <style name="WidgetTimetablePreviewPeriod">
+    <item name="android:layout_width">38dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:includeFontPadding">false</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textColor">@color/widget_label_alternative</item>
+    <item name="android:textSize">10sp</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="WidgetTimetablePreviewSubject">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:includeFontPadding">false</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textColor">@color/widget_label_normal</item>
+    <item name="android:textSize">12sp</item>
+  </style>
+  <style name="WidgetTimetablePreviewWeekDay">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">28dp</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:background">@drawable/widget_preview_card_background</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textColor">@color/widget_label_alternative</item>
+    <item name="android:textSize">11sp</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="WidgetTimetablePreviewWeekDaySelected" parent="WidgetTimetablePreviewWeekDay">
+    <item name="android:background">@drawable/widget_preview_header_background</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+  <style name="WidgetTimetablePreviewWeekRow">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:gravity">center</item>
+    <item name="android:includeFontPadding">false</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textColor">@color/widget_label_normal</item>
+    <item name="android:textSize">11sp</item>
+  </style>
+  <style name="WidgetTimetablePreviewWeekPeriod" parent="WidgetTimetablePreviewWeekRow">
+    <item name="android:layout_width">38dp</item>
+    <item name="android:layout_weight">0</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textColor">@color/widget_label_alternative</item>
+    <item name="android:textSize">10sp</item>
+    <item name="android:textStyle">bold</item>
+  </style>
 </resources>
