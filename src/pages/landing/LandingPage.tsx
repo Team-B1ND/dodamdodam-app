@@ -21,8 +21,7 @@ export const LandingPage = () => {
     const timer = setTimeout(async () => {
       const token = await tokenStorage.getAccessToken();
 
-      // 등록은 로그인 시점에만 일어나서, 이미 로그인된 채로 앱을 켜면 토큰이 서버에 없었다.
-      // 권한이 이미 허용된 기기에서는 팝업 없이 토큰만 갱신된다.
+      // 로그인 시점에만 등록하면 이미 로그인된 채로 앱을 켠 사용자는 토큰이 서버에 남지 않는다.
       if (token) registerPushToken();
 
       navigation.dispatch(

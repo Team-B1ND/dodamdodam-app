@@ -44,10 +44,7 @@ class MainApplication : Application(), ReactApplication {
     createNotificationChannel()
   }
 
-  /**
-   * Android 8+는 채널 없이는 알림을 띄울 수 없다. 만들어두지 않으면 FCM이 이름 없는
-   * fallback 채널로 대신 띄워서 사용자가 알림 종류를 구분하거나 끌 수 없다.
-   */
+  /** 채널이 없으면 FCM이 이름 없는 fallback 채널로 띄워서 사용자가 알림을 구분하거나 끌 수 없다. */
   private fun createNotificationChannel() {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
 

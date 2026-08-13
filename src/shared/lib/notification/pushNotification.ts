@@ -10,9 +10,8 @@ function getPlatform(): string {
 }
 
 async function requestPermission(): Promise<boolean> {
-  // RNFB의 requestPermission은 안드로이드에서 아무것도 하지 않고 항상 AUTHORIZED를 반환한다.
-  // 그래서 POST_NOTIFICATIONS(Android 13+)를 직접 요청하지 않으면 권한이 거부된 채로 남고,
-  // 시스템이 알림을 조용히 버린다.
+  // RNFB의 requestPermission은 안드로이드에서 항상 AUTHORIZED를 반환하는 no-op이라,
+  // POST_NOTIFICATIONS를 직접 요청하지 않으면 거부된 채로 남아 알림이 조용히 버려진다.
   if (Platform.OS === "android") {
     if (Number(Platform.Version) < 33) return true;
 
@@ -60,20 +59,14 @@ export async function registerPushToken(): Promise<void> {
 }
 
 /**
- * data-only 메시지가 백그라운드로 오면 RNFB가 이 핸들러를 찾는다. 없으면 경고만 남기고
- * 메시지가 버려진다. 표시는 notification 페이로드를 받은 FCM이 담당하므로 여기서는
- * 별도로 하는 일이 없지만, 핸들러 자체가 등록돼 있어야 전달 경로가 끊기지 않는다.
- * 앱 코드가 아니라 모듈 최상위에서 한 번만 호출해야 한다.
+ * 백그라운드로 온 data 메시지는 이 핸들러가 없으면 버려진다. 표시는 FCM이 담당하므로
+ * 하는 일은 없지만 등록은 되어 있어야 한다. 컴포넌트 밖에서 한 번만 호출한다.
  */
 export function setupBackgroundMessageHandler(): void {
   messaging().setBackgroundMessageHandler(async () => {});
 }
 
-/**
- * FCM 토큰은 재설치·백업 복원 등으로 앱 실행 중에도 바뀐다. 새 토큰을 서버에 다시 보내지 않으면
- * 서버에 낡은 토큰만 남아 알림이 조용히 끊긴다.
- * 반환값은 구독 해제 함수다.
- */
+/** 토큰이 바뀌었는데 다시 보내지 않으면 서버에 낡은 값이 남아 알림이 끊긴다. 구독 해제 함수를 반환한다. */
 export function setupTokenRefresh(): () => void {
   return messaging().onTokenRefresh(async (fcmToken: string) => {
     try {
