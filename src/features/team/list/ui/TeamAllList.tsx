@@ -1,5 +1,6 @@
 import React from "react";
 import { useTeamDetailNavigation } from "../../detail";
+import { useRegisterTeamLoadMore } from "../model/useTeamListLoadMore";
 import { useAllTeamsSuspense } from "../model/useTeamListSuspense";
 import { TeamList } from "./team-list";
 
@@ -7,9 +8,12 @@ export const TeamAllList = () => {
   const query = useAllTeamsSuspense();
   const handlePress = useTeamDetailNavigation();
 
+  useRegisterTeamLoadMore(query);
+
   return (
     <TeamList
-      {...query}
+      items={query.items}
+      isFetchingNextPage={query.isFetchingNextPage}
       emptyMessage="아직 등록된 팀이 없어요."
       onTeamPress={handlePress}
     />
