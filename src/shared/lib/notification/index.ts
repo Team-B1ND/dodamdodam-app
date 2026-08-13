@@ -1,2 +1,2 @@
-export { registerPushToken, unregisterPushToken } from "./pushNotification";
+export { registerPushToken, unregisterPushToken, setupTokenRefresh } from "./pushNotification";
 export { setupNotificationNavigation } from "./notificationNavigator";
