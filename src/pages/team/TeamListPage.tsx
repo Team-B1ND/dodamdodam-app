@@ -67,6 +67,7 @@ const TeamListContent = () => {
         showsVerticalScrollIndicator={false}
         queryKeys={[TAB_QUERY_KEYS[activeTab]]}
         onEndReached={handleEndReached}
+        resetKey={activeTab}
       >
         <SegmentedButton data={segments} setData={setSegments} />
         <RenderTeamList activeTab={activeTab} />
