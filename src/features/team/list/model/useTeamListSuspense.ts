@@ -20,9 +20,7 @@ export const useAllTeamsSuspense = () => {
     items: query.data.pages.flatMap((page) => page.content),
     hasNextPage: query.hasNextPage,
     isFetchingNextPage: query.isFetchingNextPage,
-    isRefetching: query.isRefetching,
     fetchNextPage: query.fetchNextPage,
-    refetch: query.refetch,
   };
 };
 
@@ -43,9 +41,7 @@ export const useMyTeamsSuspense = () => {
     items: query.data.pages.flatMap((page) => page.content),
     hasNextPage: query.hasNextPage,
     isFetchingNextPage: query.isFetchingNextPage,
-    isRefetching: query.isRefetching,
     fetchNextPage: query.fetchNextPage,
-    refetch: query.refetch,
   };
 };
 
@@ -66,8 +62,6 @@ export const useInviteTeamsSuspense = () => {
     items: query.data.pages.flatMap((page) => page.content),
     hasNextPage: query.hasNextPage,
     isFetchingNextPage: query.isFetchingNextPage,
-    isRefetching: query.isRefetching,
     fetchNextPage: query.fetchNextPage,
-    refetch: query.refetch,
   };
 };
