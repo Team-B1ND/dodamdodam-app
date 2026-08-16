@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@android:id/background"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/widget_loading_background"
+  android:orientation="vertical"
+  android:padding="12dp">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="28dp"
+    android:orientation="horizontal"
+    android:paddingStart="46dp"
+    android:paddingEnd="8dp">
+    <TextView style="@style/WidgetTimetablePreviewWeekDay" android:text="월" />
+    <TextView style="@style/WidgetTimetablePreviewWeekDaySelected" android:text="화" />
+    <TextView style="@style/WidgetTimetablePreviewWeekDay" android:text="수" />
+    <TextView style="@style/WidgetTimetablePreviewWeekDay" android:text="목" />
+    <TextView style="@style/WidgetTimetablePreviewWeekDay" android:text="금" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:layout_weight="1"
+    android:background="@drawable/widget_preview_card_background"
+    android:orientation="vertical"
+    android:padding="8dp">
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewWeekPeriod" android:text="1교시" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="자율" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="국어" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="체육2" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="알고" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="자바2" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewWeekPeriod" android:text="2교시" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="국어" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="한국" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="확통" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="알고" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="자바2" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewWeekPeriod" android:text="3교시" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="웹프" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="네트" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="한국" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="체육2" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="직영" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewWeekPeriod" android:text="4교시" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="웹프" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="네트" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="국어" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="한국" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="진로" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewWeekPeriod" android:text="5교시" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="네트" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="확통" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="디자" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="웹프" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="확통" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewWeekPeriod" android:text="6교시" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="네트" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="자바2" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="디자" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="웹프" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="-" />
+    </LinearLayout>
+    <LinearLayout style="@style/WidgetTimetablePreviewRow">
+      <TextView style="@style/WidgetTimetablePreviewWeekPeriod" android:text="7교시" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="알고" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="자바2" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="동아" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="웹프" />
+      <TextView style="@style/WidgetTimetablePreviewWeekRow" android:text="-" />
+    </LinearLayout>
+  </LinearLayout>
+</LinearLayout>

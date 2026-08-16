@@ -6,6 +6,7 @@ import { useTheme } from "@shared/theme";
 import { AppLogo } from "@shared/ui/topNavBar/AppLogo";
 import { B1NDLogo } from "@shared/icons/logo";
 import { tokenStorage } from "@entities/api/common";
+import { registerPushToken } from "@shared/lib/notification";
 
 const SPLASH_DURATION = 2000;
 const APP_LOGO_WIDTH = 176;
@@ -19,6 +20,10 @@ export const LandingPage = () => {
   useEffect(() => {
     const timer = setTimeout(async () => {
       const token = await tokenStorage.getAccessToken();
+
+      // 로그인 시점에만 등록하면 이미 로그인된 채로 앱을 켠 사용자는 토큰이 서버에 남지 않는다.
+      if (token) registerPushToken();
+
       navigation.dispatch(
         CommonActions.reset({
           index: 0,

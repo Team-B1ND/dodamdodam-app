@@ -55,17 +55,34 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
 
   // MARK: - Derived UI state
 
-  private var todayLabel: String {
-    let days = ["월", "화", "수", "목", "금"]
-    let weekday = Calendar.current.component(.weekday, from: Date())
-    let idx = weekday - 2
-    guard idx >= 0, idx < days.count else { return "주말" }
-    return "\(days[idx])요일"
+  /// 정규수업이 16:30에 끝나므로 이 시각 이후엔 다음 수업일 시간표를 보여준다.
+  private static let timetableRolloverMinutes = 17 * 60
+
+  /// 시간표 카드가 실제로 보여줄 요일. 주말이면 nil.
+  private struct DisplayDay {
+    let index: Int
+    let isTomorrow: Bool
   }
 
-  private var isWeekday: Bool {
-    let weekday = Calendar.current.component(.weekday, from: Date())
-    return weekday >= 2 && weekday <= 6
+  private var displayDay: DisplayDay? {
+    let now = Date()
+    let index = Calendar.current.component(.weekday, from: now) - 2
+    guard index >= 0, index <= 4 else { return nil }
+
+    let components = Calendar.current.dateComponents([.hour, .minute], from: now)
+    let minutes = (components.hour ?? 0) * 60 + (components.minute ?? 0)
+
+    // 금요일(index 4)은 다음 주 시간표가 페이로드에 없어서 넘기지 않는다.
+    guard index < 4, minutes >= Self.timetableRolloverMinutes else {
+      return DisplayDay(index: index, isTomorrow: false)
+    }
+    return DisplayDay(index: index + 1, isTomorrow: true)
+  }
+
+  private func dayLabel(for day: DisplayDay) -> String {
+    let days = ["월", "화", "수", "목", "금"]
+    guard day.index >= 0, day.index < days.count else { return "주말" }
+    return day.isTomorrow ? "내일 (\(days[day.index]))" : "\(days[day.index])요일"
   }
 
   private func currentPeriodIndex() -> Int {
@@ -118,22 +135,23 @@ final class WatchConnectivityReceiver: NSObject, ObservableObject, WCSessionDele
   }
 
   var timetableState: TimetableCardState {
-    guard isWeekday else { return .weekend }
+    guard let day = displayDay else { return .weekend }
+    let label = dayLabel(for: day)
 
     guard let json = timetableJSON,
           let data = json.data(using: .utf8),
           let weekTimetable = try? JSONDecoder().decode([[String]].self, from: data)
-    else { return .empty(dayLabel: todayLabel) }
+    else { return .empty(dayLabel: label) }
 
-    let weekday = Calendar.current.component(.weekday, from: Date())
-    let index = weekday - 2
-    guard index >= 0, index < weekTimetable.count, !weekTimetable[index].isEmpty else {
-      return .empty(dayLabel: todayLabel)
+    guard day.index < weekTimetable.count, !weekTimetable[day.index].isEmpty else {
+      return .empty(dayLabel: label)
     }
 
-    let subjects = weekTimetable[index]
+    let subjects = weekTimetable[day.index]
     let periods = subjects.enumerated().map { TimetablePeriod(period: $0.offset + 1, subject: $0.element) }
-    return .loaded(dayLabel: todayLabel, periods: periods, currentPeriod: currentPeriodIndex() + 1)
+    // 내일 시간표에는 '지금 몇 교시'라는 개념이 없으므로 강조하지 않는다.
+    let currentPeriod = day.isTomorrow ? nil : currentPeriodIndex() + 1
+    return .loaded(dayLabel: label, periods: periods, currentPeriod: currentPeriod)
   }
 
   var mealStates: [MealType: MealCardState] {
