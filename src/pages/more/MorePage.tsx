@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingBottom: 24,
+    // 탭바가 콘텐츠 위에 떠 있어 그만큼 비워둔다. 다른 탭 화면과 같은 값.
+    paddingBottom: 140,
   },
   section: {
     paddingVertical: 4,
