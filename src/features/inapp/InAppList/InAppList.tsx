@@ -54,8 +54,8 @@ export const InAppListComponent = ({ onEndReachedRef }: InAppListProps) => {
           <MenuItem
             key={app.appId}
             iconImage={{ uri: isDark && app.darkIconUrl ? app.darkIconUrl : app.iconUrl }}
-            title={app.subtitle}
-            appName={app.name}
+            title={app.name}
+            appName={app.subtitle}
             onPress={() => handlePress(app)}
           />
         ))}
