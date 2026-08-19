@@ -3,13 +3,14 @@ import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import Constants from "expo-constants";
 import { useTheme } from "@shared/theme";
 import { Divider, TopNavBar, Skeleton, WebPopup, toast } from "@shared/ui";
 import { useLogout } from "@features/auth";
 import { SettingProfile } from "./ui/SettingProfile";
 import { SettingItem } from "./ui/SettingItem";
 
-const APP_VERSION = "3.4.7";
+const APP_VERSION = Constants.expoConfig?.version ?? "-";
 const DOCS_BASE_URL = "https://dodam-docs.b1nd.com";
 
 export const SettingsPage = () => {
