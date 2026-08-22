@@ -68,8 +68,9 @@ export const NightStudyApplyPage = () => {
         projectName: project.projectName,
         projectDescription: project.projectDescription,
         timeSlot: common.timeSlot,
-        startDate: common.startDate,
-        endDate: common.endDate,
+        // 하루짜리 신청이므로 시작/종료를 같은 날짜로 보낸다.
+        startDate: project.projectDate,
+        endDate: project.projectDate,
         members: mergedMembers,
       });
       if (success) navigation.goBack();

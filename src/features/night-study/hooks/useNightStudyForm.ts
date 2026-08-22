@@ -29,6 +29,8 @@ export const useNightStudyForm = () => {
   const togglePhone = useCallback(() => setUsePhone((prev) => !prev), []);
 
   // 프로젝트
+  // 프로젝트 심자는 하루만 신청할 수 있어 common의 기간(startDate~endDate)과 분리한다.
+  const [projectDate, setProjectDate] = useState(new Date());
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [members, setMembers] = useState<StudentMember[]>([]);
@@ -73,6 +75,7 @@ export const useNightStudyForm = () => {
     common: { timeSlot, setTimeSlot, startDate, setStartDate, endDate, setEndDate },
     personal: { reason, setReason, usePhone, togglePhone, phoneReason, setPhoneReason },
     project: {
+      projectDate, setProjectDate,
       projectName, setProjectName,
       projectDescription, setProjectDescription,
       members, addMember, removeMember,
