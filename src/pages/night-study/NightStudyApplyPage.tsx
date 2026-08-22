@@ -72,6 +72,7 @@ export const NightStudyApplyPage = () => {
         startDate: project.projectDate,
         endDate: project.projectDate,
         members: mergedMembers,
+        wishRoomId: project.wishRoom?.id,
       });
       if (success) navigation.goBack();
     }
