@@ -34,7 +34,6 @@ export const InAppListComponent = ({ onEndReachedRef }: InAppListProps) => {
       navigation.navigate("AppIn", {
         appId: app.appId,
         name: app.name,
-        team: "B1ND",
         subTitle: app.subtitle,
         description: app.description,
         iconUrl: app.iconUrl,
