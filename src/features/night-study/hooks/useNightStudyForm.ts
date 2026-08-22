@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import type { TimeSlot } from "../form/TimeSlotPicker";
+import type { NightStudyRoom } from "@entities/night-study/types";
 
 export interface StudentMember {
   id: string;
@@ -31,6 +32,7 @@ export const useNightStudyForm = () => {
   // 프로젝트
   // 프로젝트 심자는 하루만 신청할 수 있어 common의 기간(startDate~endDate)과 분리한다.
   const [projectDate, setProjectDate] = useState(new Date());
+  const [wishRoom, setWishRoom] = useState<NightStudyRoom | null>(null);
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [members, setMembers] = useState<StudentMember[]>([]);
@@ -76,6 +78,7 @@ export const useNightStudyForm = () => {
     personal: { reason, setReason, usePhone, togglePhone, phoneReason, setPhoneReason },
     project: {
       projectDate, setProjectDate,
+      wishRoom, setWishRoom,
       projectName, setProjectName,
       projectDescription, setProjectDescription,
       members, addMember, removeMember,

@@ -29,6 +29,7 @@ interface ProjectApplyParams {
   startDate: Date;
   endDate: Date;
   members: StudentMember[];
+  wishRoomId?: number;
 }
 
 export const useNightStudyPersonalApply = () => {
@@ -108,6 +109,8 @@ export const useNightStudyProjectApply = () => {
           startAt: formatDateParam(params.startDate),
           endAt: formatDateParam(params.endDate),
           members: params.members.map((m) => m.id),
+          // 희망 랩실은 선택 항목이라, 고르지 않았으면 필드를 보내지 않는다.
+          ...(params.wishRoomId !== undefined && { wishRoomId: params.wishRoomId }),
         });
         await queryClient.invalidateQueries({ queryKey: nightStudyQueryKeys.myProject });
         toast.success("프로젝트 심야 자습 신청이 완료되었어요.", { position: "top" });
