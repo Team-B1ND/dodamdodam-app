@@ -6,11 +6,11 @@ import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { Checkbox, FilledButton, TopNavBar } from "@shared/ui";
 import { skipStorage } from "@entities/inapp/storage/skipStorage";
+import { useInAppTeamName } from "@features/inapp";
 
 export interface AppInParams {
   appId: string;
   name: string;
-  team: string;
   subTitle: string;
   description: string;
   iconUrl: string;
@@ -25,6 +25,7 @@ export const AppInInfoPage = () => {
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const { params } = useRoute<AppInRouteProp>();
+  const teamName = useInAppTeamName(params.appId);
   const [doNotShowAgain, setDoNotShowAgain] = useState(true);
   const toggleDoNotShowAgain = useCallback(() => setDoNotShowAgain((prev) => !prev), []);
 
@@ -41,7 +42,9 @@ export const AppInInfoPage = () => {
         <View>
           <Image source={{ uri: iconUri }} style={styles.appIcon} />
           <Text style={[styles.appName, { color: colors.text.primary }]}>{params.name}</Text>
-          <Text style={[styles.teamName, { color: colors.brand.primary }]}>{params.team}</Text>
+          <Text style={[styles.teamName, { color: colors.brand.primary }]}>
+            {teamName ?? " "}
+          </Text>
           <Text style={[styles.subTitle, { color: colors.text.primary }]}>{params.subTitle}</Text>
           <Text style={[styles.description, { color: colors.text.primary }]}>
             {params.description}
