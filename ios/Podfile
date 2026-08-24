@@ -61,5 +61,18 @@ target 'DodamdodamApp' do
       :mac_catalyst_enabled => false,
       :ccache_enabled => ccache_enabled?(podfile_properties),
     )
+
+    # 일부 Pod의 리소스 번들 타깃이 Podfile의 platform을 물려받지 못하고
+    # 12.0으로 남아, 최신 Xcode에서 "deployment target is set to 12.0" 오류가 난다.
+    # 선언한 최소 버전 아래로 내려가지 않도록 강제한다.
+    min_target = podfile_properties['ios.deploymentTarget'] || '15.1'
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        current = config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
+        if current.nil? || current.to_f < min_target.to_f
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = min_target
+        end
+      end
+    end
   end
 end
