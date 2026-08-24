@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { type AxiosError } from "axios";
 import { authApi } from "@entities/auth/api";
-import { tokenStorage } from "@entities/api/common";
+import { tokenStorage, resetSessionExpiredState } from "@entities/api/common";
 import { registerPushToken } from "@shared/lib/notification";
 import type { ApiError } from "@shared/types";
 
@@ -30,6 +30,8 @@ export const useLogin = (): UseLoginResult => {
     try {
       const { data } = await authApi.login({ username, password });
       await tokenStorage.setTokens(data.data.access, data.data.refresh);
+      // 이전 세션에서 만료 처리가 걸려 있었다면 해제한다.
+      resetSessionExpiredState();
       registerPushToken();
       return null;
     } catch (e) {
