@@ -82,6 +82,10 @@ def enableMinifyInReleaseBuilds = (findProperty('android.enableMinifyInReleaseBu
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
+// 버전은 package.json을 단일 출처로 삼는다.
+def rootProjectPackageJson = new groovy.json.JsonSlurper()
+    .parseText(file("$rootDir/../package.json").text)
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -94,7 +98,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 39
-        versionName "5.1.2"
+        versionName rootProjectPackageJson.version
 
         buildConfigField "String", "REACT_NATIVE_RELEASE_LEVEL", "\"${findProperty('reactNativeReleaseLevel') ?: 'stable'}\""
     }
