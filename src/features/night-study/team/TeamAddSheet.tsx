@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState, type FC } from "react";
-import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -30,8 +30,28 @@ const Backdrop: FC<BottomSheetBackdropProps> = (props) => (
   />
 );
 
-const TeamAvatar = ({ size = 38 }: { size?: number }) => {
+const TeamAvatar = ({
+  size = 38,
+  imageUrl,
+}: {
+  size?: number;
+  imageUrl?: string | null;
+}) => {
   const { colors } = useTheme();
+
+  if (imageUrl) {
+    return (
+      <Image
+        source={{ uri: imageUrl }}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          resizeMode: "cover",
+        }}
+      />
+    );
+  }
 
   return (
     <View
@@ -147,7 +167,7 @@ export const TeamAddSheet = ({
             {selection.map((team) => (
               <View key={team.publicId} style={styles.selectedItem}>
                 <View>
-                  <TeamAvatar size={38} />
+                  <TeamAvatar size={38} imageUrl={team.imageUrl} />
                   <Pressable style={styles.remove} onPress={() => toggle(team)}>
                     <XmarkCircle size={16} color={colors.text.primary} />
                   </Pressable>
@@ -187,7 +207,7 @@ export const TeamAddSheet = ({
             return (
               <Pressable style={styles.row} onPress={() => toggle(item)}>
                 <View style={styles.info}>
-                  <TeamAvatar size={38} />
+                  <TeamAvatar size={38} imageUrl={item.imageUrl} />
                   <View>
                     <Text style={[styles.name, { color: colors.text.primary }]}>{item.name}</Text>
                   </View>

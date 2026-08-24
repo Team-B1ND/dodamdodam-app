@@ -27,6 +27,9 @@ basicApiHandler.interceptors.request.use(async (config: InternalAxiosRequestConf
 });
 
 let isRefreshing = false;
+// 세션 만료 처리가 시작되면 이후 401은 갱신을 시도하지 않고 즉시 거부한다.
+// 만료 처리 중 나가는 요청(푸시 토큰 해제 등)이 대기열에 갇히는 것을 막는다.
+let isSessionExpired = false;
 let failedQueue: Array<{
   resolve: (value: unknown) => void;
   reject: (reason: unknown) => void;
@@ -41,9 +44,20 @@ const processQueue = (error: unknown) => {
 };
 
 const handleSessionExpired = async () => {
-  await unregisterPushToken();
+  if (isSessionExpired) return;
+  isSessionExpired = true;
+
+  // 토큰 정리와 화면 전환을 먼저 끝낸다. 푸시 토큰 해제가 실패하거나 지연되어도
+  // 로그아웃은 보장되어야 한다.
   await tokenStorage.clear();
   onSessionExpired?.();
+
+  // 이미 만료된 토큰으로 나가는 정리 요청이라 실패해도 무방하다. 기다리지 않는다.
+  void unregisterPushToken();
+};
+
+export const resetSessionExpiredState = () => {
+  isSessionExpired = false;
 };
 
 basicApiHandler.interceptors.response.use(
@@ -63,6 +77,11 @@ basicApiHandler.interceptors.response.use(
     }
 
     if (!originalRequest || status !== 401) {
+      return Promise.reject(error);
+    }
+
+    // 만료 처리가 시작된 뒤의 401은 갱신 대상이 아니다.
+    if (isSessionExpired) {
       return Promise.reject(error);
     }
 

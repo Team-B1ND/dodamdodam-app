@@ -44,6 +44,10 @@ export const styles = StyleSheet.create({
   mealPage: {
     paddingBottom: CONTENT_PADDING_BOTTOM,
   },
+  emptyMealPage: {
+    paddingBottom: 0,
+    justifyContent: "center",
+  },
   menuColumns: {
     flexDirection: "row",
     gap: 12,
@@ -58,7 +62,6 @@ export const styles = StyleSheet.create({
   emptyText: {
     ...typo("Label", "Regular"),
     textAlign: "center",
-    paddingVertical: 8,
   },
   indicator: {
     alignSelf: "flex-end",
