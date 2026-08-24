@@ -3,14 +3,16 @@ import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import Constants from "expo-constants";
+import * as Application from "expo-application";
 import { useTheme } from "@shared/theme";
 import { Divider, TopNavBar, Skeleton, WebPopup, toast } from "@shared/ui";
 import { useLogout } from "@features/auth";
 import { SettingProfile } from "./ui/SettingProfile";
 import { SettingItem } from "./ui/SettingItem";
 
-const APP_VERSION = Constants.expoConfig?.version ?? "-";
+// 네이티브 값(Info.plist / build.gradle)을 직접 읽어, 표시 버전이 실제
+// 설치된 앱 버전과 어긋나지 않게 한다.
+const APP_VERSION = Application.nativeApplicationVersion ?? "-";
 const DOCS_BASE_URL = "https://dodam-docs.b1nd.com";
 
 export const SettingsPage = () => {

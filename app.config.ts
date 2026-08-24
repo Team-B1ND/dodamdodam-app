@@ -1,10 +1,12 @@
 import { ExpoConfig, ConfigContext } from "expo/config";
+// 버전은 package.json을 단일 출처로 삼는다.
+import { version } from "./package.json";
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "도담도담",
   slug: "dodamdodam-app",
-  version: "5.1.2",
+  version,
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
   plugins: [
