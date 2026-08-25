@@ -5,6 +5,7 @@ import type {
   NightStudyProject,
   NightStudyPersonalRequest,
   NightStudyProjectRequest,
+  NightStudyRoom,
 } from "@entities/night-study/types";
 
 export const nightStudyApi = {
@@ -13,6 +14,9 @@ export const nightStudyApi = {
 
   getMyProject: () =>
     basicApiHandler.get<ApiResponse<NightStudyProject[]>>("/nightstudy/my/project"),
+
+  getRooms: () =>
+    basicApiHandler.get<ApiResponse<NightStudyRoom[]>>("/nightstudy/rooms"),
 
   createPersonal: (body: NightStudyPersonalRequest) =>
     basicApiHandler.post<ApiResponse>("/nightstudy/personal", body),

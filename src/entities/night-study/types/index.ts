@@ -46,4 +46,5 @@ export interface NightStudyProjectRequest {
   startAt: string;
   endAt: string;
   members: string[];
+  wishRoomId?: number;
 }

@@ -34,7 +34,6 @@ export const InAppListComponent = ({ onEndReachedRef }: InAppListProps) => {
       navigation.navigate("AppIn", {
         appId: app.appId,
         name: app.name,
-        team: "B1ND",
         subTitle: app.subtitle,
         description: app.description,
         iconUrl: app.iconUrl,
@@ -54,8 +53,8 @@ export const InAppListComponent = ({ onEndReachedRef }: InAppListProps) => {
           <MenuItem
             key={app.appId}
             iconImage={{ uri: isDark && app.darkIconUrl ? app.darkIconUrl : app.iconUrl }}
-            title={app.subtitle}
-            appName={app.name}
+            title={app.name}
+            appName={app.subtitle}
             onPress={() => handlePress(app)}
           />
         ))}

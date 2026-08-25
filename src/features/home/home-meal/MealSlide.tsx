@@ -28,7 +28,7 @@ export const MealSlide = React.memo(({ item, width, height }: MealSlideProps) =>
 
   if (item.menus.length === 0) {
     return (
-      <View style={[styles.mealPage, { width, height }]}>
+      <View style={[styles.mealPage, styles.emptyMealPage, { width, height }]}>
         <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
           등록된 급식이 없습니다
         </Text>
