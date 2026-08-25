@@ -66,6 +66,8 @@ export const useNightStudyPersonalApply = () => {
           const code = error.response?.data?.code;
           if (code === "PERIOD_OVERLAPPED") {
             toast.warning("이미 해당 기간에 신청한 심야 자습이 있어요.", { position: "top" });
+          } else if (code === "NOT_APPLICATION_TIME") {
+            toast.error("지금은 심자 신청 기간이 아니에요.", { position: "top" });
           }
         }
         return false;
@@ -120,6 +122,8 @@ export const useNightStudyProjectApply = () => {
           const code = error.response?.data?.code;
           if (code === "PERIOD_OVERLAPPED") {
             toast.warning("이미 해당 기간에 신청한 심야 자습이 있어요.", { position: "top" });
+          } else if (code === "NOT_APPLICATION_TIME") {
+            toast.error("지금은 심자 신청 기간이 아니에요.", { position: "top" });
           }
         }
         return false;
