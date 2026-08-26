@@ -13,6 +13,35 @@ const PERIOD_MAP: Record<TimeSlot, number> = {
   NIGHT2: 2,
 };
 
+// 서버가 내려주는 심야 자습 신청 실패 코드. 서버 메시지를 그대로 쓰지 않고
+// 앱 말투에 맞춰 다시 쓴다.
+const APPLY_ERROR_MESSAGE: Record<string, string> = {
+  PERIOD_OVERLAPPED: "이미 해당 기간에 신청한 심야 자습이 있어요.",
+  NOT_APPLICATION_TIME: "지금은 심자 신청 기간이 아니에요.",
+  INVALID_START_AT: "시작 날짜가 오늘보다 과거일 수 없어요.",
+  INVALID_NIGHT_STUDY_TYPE: "심야 자습은 1교시 또는 2교시만 신청할 수 있어요.",
+  NIGHT_STUDY_BANNED: "심야 자습이 정지된 인원이 있어요.",
+};
+
+// 매핑되지 않은 코드까지 조용히 넘어가면 사용자가 실패 사실조차 알 수 없다.
+// 서버 응답 메시지, 그마저 없으면 기본 문구까지 단계적으로 폴백한다.
+const notifyApplyError = (error: unknown) => {
+  if (!axios.isAxiosError(error)) return;
+
+  // 네트워크 오류와 5xx는 인터셉터가 이미 토스트를 띄우고,
+  // 401은 세션 만료 처리로 로그인 화면에 넘어가므로 토스트가 불필요하다.
+  const status = error.response?.status;
+  if (!status || status === 401 || status >= 500) return;
+
+  const code = error.response?.data?.code;
+  const message =
+    (code && APPLY_ERROR_MESSAGE[code]) ||
+    error.response?.data?.message ||
+    "심야 자습 신청에 실패했어요.";
+
+  toast.warning(message, { position: "top" });
+};
+
 interface PersonalApplyParams {
   reason: string;
   timeSlot: TimeSlot;
@@ -62,14 +91,7 @@ export const useNightStudyPersonalApply = () => {
         toast.success("심야 자습 신청이 완료되었어요.", { position: "top" });
         return true;
       } catch (error) {
-        if (axios.isAxiosError(error)) {
-          const code = error.response?.data?.code;
-          if (code === "PERIOD_OVERLAPPED") {
-            toast.warning("이미 해당 기간에 신청한 심야 자습이 있어요.", { position: "top" });
-          } else if (code === "NOT_APPLICATION_TIME") {
-            toast.error("지금은 심자 신청 기간이 아니에요.", { position: "top" });
-          }
-        }
+        notifyApplyError(error);
         return false;
       } finally {
         setLoading(false);
@@ -118,14 +140,7 @@ export const useNightStudyProjectApply = () => {
         toast.success("프로젝트 심야 자습 신청이 완료되었어요.", { position: "top" });
         return true;
       } catch (error) {
-        if (axios.isAxiosError(error)) {
-          const code = error.response?.data?.code;
-          if (code === "PERIOD_OVERLAPPED") {
-            toast.warning("이미 해당 기간에 신청한 심야 자습이 있어요.", { position: "top" });
-          } else if (code === "NOT_APPLICATION_TIME") {
-            toast.error("지금은 심자 신청 기간이 아니에요.", { position: "top" });
-          }
-        }
+        notifyApplyError(error);
         return false;
       } finally {
         setLoading(false);
