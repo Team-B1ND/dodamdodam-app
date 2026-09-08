@@ -3,7 +3,6 @@ package com.b1nd.dodam.student.watch.feature.timetable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
@@ -30,19 +29,21 @@ fun TimetableCardView(state: TimetableCardState, isStale: Boolean = false) {
           state.periods.forEach { item ->
             val isCurrent = item.period == state.currentPeriod
             Row(
-              modifier = androidx.compose.ui.Modifier.height(17.dp),
+              modifier = androidx.compose.ui.Modifier.weight(1f),
               verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
             ) {
               Text(
                 text = "${item.period}교시",
-                fontSize = 12.sp,
+                fontSize = 11.sp,
+                lineHeight = 13.sp,
                 fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
                 color = if (isCurrent) WatchColor.primaryNormal else WatchColor.labelAlternative,
                 modifier = androidx.compose.ui.Modifier.width(38.dp),
               )
               Text(
                 text = item.subject,
-                fontSize = 12.sp,
+                fontSize = 11.sp,
+                lineHeight = 13.sp,
                 fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
                 color = if (isCurrent) WatchColor.primaryNormal else WatchColor.labelNormal,
                 maxLines = 1,
