@@ -13,6 +13,7 @@ import { SelectRolePage } from "@pages/select-role";
 import { EnterNamePage } from "@pages/enter-name";
 import { CreateAccountPage } from "@pages/create-account";
 import { AppWebViewPage } from "@pages/app-webview";
+import { MealPage } from "@pages/meal";
 import { OutSleepingApplyPage } from "@pages/out-sleeping";
 import { NightStudyApplyPage } from "@pages/night-study";
 import { TeamListPage, TeamDetailPage, TeamEditPage } from "@pages/team";
@@ -42,6 +43,7 @@ export const RootStackNavigator = () => (
     />
     <Stack.Screen name="LoginForm" component={LoginFormPage} />
     <Stack.Screen name="Main" component={BottomTabNavigator} />
+    <Stack.Screen name="Meal" component={MealPage} />
     <Stack.Screen name="AppIn" component={AppInInfoPage} />
     <Stack.Screen name="Settings" component={SettingsPage} />
     <Stack.Screen name="EditProfile" component={EditProfilePage} />
