@@ -12,6 +12,7 @@ import { NotificationPage } from "@pages/notification";
 import { SelectRolePage } from "@pages/select-role";
 import { EnterNamePage } from "@pages/enter-name";
 import { CreateAccountPage } from "@pages/create-account";
+import { LANDING_ROUTE } from "@shared/config";
 import { AppWebViewPage } from "@pages/app-webview";
 import { OutSleepingApplyPage } from "@pages/out-sleeping";
 import { NightStudyApplyPage } from "@pages/night-study";
@@ -24,14 +25,14 @@ const Stack = createStackNavigator();
 
 export const RootStackNavigator = () => (
   <Stack.Navigator
-    initialRouteName="Landing"
+    initialRouteName={LANDING_ROUTE}
     screenOptions={{
       ...iosSlideTransition,
       headerShown: false,
     }}
   >
     <Stack.Screen
-      name="Landing"
+      name={LANDING_ROUTE}
       component={LandingPage}
       options={{ gestureEnabled: false, cardStyleInterpolator: () => ({}) }}
     />
