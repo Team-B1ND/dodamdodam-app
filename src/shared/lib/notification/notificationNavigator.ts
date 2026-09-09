@@ -2,26 +2,48 @@ import { type NavigationContainerRef, CommonActions } from "@react-navigation/na
 import messaging, { type FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 import { tokenStorage } from "@entities/api/common";
 import { notificationApi } from "@entities/notification/api";
+import { LANDING_ROUTE } from "@shared/config";
 
 const STACK_ROUTES: Record<string, string> = {
   "/meal": "Meal",
 };
 
 const TAB_ROUTES: Record<string, string> = {
-  "/outing": "Outing",
+  "/outing": "OutSleeping",
   "/nightstudy": "NightStudy",
   "/home": "Home",
   "/more": "More",
 };
 
+const SPLASH_POLL_MS = 100;
+const SPLASH_TIMEOUT_MS = 6000;
+
+async function waitUntilSplashCleared(
+  navigationRef: React.RefObject<NavigationContainerRef<any> | null>,
+) {
+  const deadline = Date.now() + SPLASH_TIMEOUT_MS;
+
+  while (Date.now() < deadline) {
+    const route = navigationRef.current?.getCurrentRoute();
+    if (route && route.name !== LANDING_ROUTE) return true;
+    await new Promise((resolve) => setTimeout(resolve, SPLASH_POLL_MS));
+  }
+
+  return false;
+}
+
 async function handleNotificationNavigation(
   navigationRef: React.RefObject<NavigationContainerRef<any> | null>,
   data: Record<string, string> | undefined,
+  waitForSplash = false,
 ) {
   if (!data?.appUrl || !navigationRef.current) return;
 
   const token = await tokenStorage.getAccessToken();
   if (!token) return;
+
+  if (waitForSplash && !(await waitUntilSplashCleared(navigationRef))) return;
+  if (!navigationRef.current) return;
 
   if (data.id) {
     notificationApi.markAsRead(data.id).catch(() => {});
@@ -69,7 +91,7 @@ export function setupNotificationNavigation(
     .getInitialNotification()
     .then((remoteMessage: FirebaseMessagingTypes.RemoteMessage | null) => {
       if (remoteMessage) {
-        handleNotificationNavigation(navigationRef, remoteMessage.data as Record<string, string>);
+        handleNotificationNavigation(navigationRef, remoteMessage.data as Record<string, string>, true);
       }
     });
 }
