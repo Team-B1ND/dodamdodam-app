@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, ForkAndKnife, DoorOpen, MoonPlus, Menu } from "@shared/icons/mono";
+import { Home, Grid, DoorOpen, MoonPlus, Menu } from "@shared/icons/mono";
 import { BottomTabBar } from "@widgets/bottom-tab-bar";
 import { HomePage } from "@pages/home";
-import { MealPage } from "@pages/meal";
+import { AidPage } from "@pages/aid";
 import { OutSleepingPage } from "@pages/out-sleeping";
 import { NightStudyPage } from "@pages/night-study";
 import { MorePage } from "@pages/more";
@@ -27,11 +27,11 @@ export const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Meal"
-        component={MealPage}
+        name="Aid"
+        component={AidPage}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <ForkAndKnife size={size} color={color} />
+            <Grid size={size} color={color} />
           ),
         }}
       />

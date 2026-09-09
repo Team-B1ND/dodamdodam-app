@@ -7,9 +7,7 @@ import { useTheme } from "@shared/theme";
 import { TopNavBar, RefreshView, Dialog, useOverlay } from "@shared/ui";
 import { Gear, File, People } from "@shared/icons/mono";
 import { ProfileCard } from "@features/profile";
-import { InAppList } from "@features/inapp";
 import { userQueryKeys } from "@entities/user/api/queryKeys";
-import { inappQueryKeys } from "@entities/inapp/api/queryKeys";
 import type { User } from "@entities/user/types";
 import { MenuItem } from "./ui/MenuItem";
 
@@ -56,7 +54,7 @@ export const MorePage = () => {
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
-        queryKeys={[userQueryKeys.me, inappQueryKeys.activeApps]}
+        queryKeys={[userQueryKeys.me]}
       >
         <Suspense fallback={<ProfileCard.Skeleton />}>
           <ProfileCard onPress={openEditProfile} />
@@ -66,10 +64,6 @@ export const MorePage = () => {
           <MenuItem icon={<File />} title="내 학생코드 보기" onPress={showStudentCode} />
           <MenuItem icon={<People />} title="팀 확인하기" onPress={openTeamList} />
         </View>
-
-        <Suspense fallback={<InAppList.Skeleton />}>
-          <InAppList />
-        </Suspense>
       </RefreshView>
     </SafeAreaView>
   );

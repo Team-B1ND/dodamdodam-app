@@ -55,7 +55,14 @@ export const useHomePage = () => {
       setPopupUrl(linkUrl);
       webPopupRef.current?.present();
     } else if (linkUrl.startsWith("/")) {
-      const tabRoute = TAB_ROUTES[linkUrl.toLowerCase()];
+      const path = linkUrl.toLowerCase();
+      const stackRoute = STACK_ROUTES[path];
+      if (stackRoute) {
+        navigation.dispatch(CommonActions.navigate(stackRoute));
+        return;
+      }
+
+      const tabRoute = TAB_ROUTES[path];
       if (tabRoute) {
         navigation.dispatch(
           CommonActions.navigate("Main", { screen: tabRoute }),
