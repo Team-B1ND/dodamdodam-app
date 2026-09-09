@@ -13,28 +13,13 @@ const Tab = createBottomTabNavigator();
 export const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       tabBar={(props) => <BottomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
         animation: "none",
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomePage}
-        options={{
-          tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
-        }}
-      />
-      <Tab.Screen
-        name="Aid"
-        component={AidPage}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Grid size={size} color={color} />
-          ),
-        }}
-      />
       <Tab.Screen
         name="OutSleeping"
         component={OutSleepingPage}
@@ -50,6 +35,22 @@ export const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MoonPlus size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={HomePage}
+        options={{
+          tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Aid"
+        component={AidPage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Grid size={size} color={color} />
           ),
         }}
       />

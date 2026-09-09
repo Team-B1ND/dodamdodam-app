@@ -1,18 +1,13 @@
 import React, { Suspense, useCallback, useRef } from "react";
 import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
 import { TopNavBar, RefreshView } from "@shared/ui";
-import { Gear } from "@shared/icons/mono";
 import { InAppGrid } from "@features/inapp";
 import { inappQueryKeys } from "@entities/inapp/api/queryKeys";
 
 export const AidPage = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation<any>();
-  const openSettings = useCallback(() => navigation.navigate("Settings"), [navigation]);
-
   // 다음 페이지 로드 함수는 Suspense 안쪽 훅에 있어서, ref로 끌어올려 RefreshView에 연결한다.
   const loadMoreRef = useRef<(() => void) | null>(null);
   const handleEndReached = useCallback(() => loadMoreRef.current?.(), []);
@@ -22,7 +17,7 @@ export const AidPage = () => {
       style={[styles.container, { backgroundColor: colors.background.default }]}
       edges={["top"]}
     >
-      <TopNavBar right={<TopNavBar.IconButton icon={<Gear />} onPress={openSettings} />}>
+      <TopNavBar>
         <TopNavBar.Title>앱인도담</TopNavBar.Title>
       </TopNavBar>
       <RefreshView
