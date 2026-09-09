@@ -11,6 +11,7 @@ import { setSessionExpiredHandler } from "@entities/api/common";
 import { setupNotificationNavigation, setupTokenRefresh } from "@shared/lib/notification";
 import NfcManager from "react-native-nfc-manager";
 import { QrScan } from "@features/app-webview/screens/QrScan";
+import { linking } from "./navigation/linking";
 
 NfcManager.start().catch(() => {});
 import { RootStackNavigator } from "./navigation";
@@ -43,7 +44,10 @@ const AppInner = () => {
         <OverlayProvider>
           <BottomSheetModalProvider>
             <ToastProvider>
-              <NavigationContainer ref={navigationRef}>
+              <NavigationContainer
+                ref={navigationRef}
+                linking={linking}
+              >
                 <RootStackNavigator />
               </NavigationContainer>
             </ToastProvider>
