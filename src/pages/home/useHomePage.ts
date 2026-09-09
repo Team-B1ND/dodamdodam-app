@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from "react";
+import { Linking } from "react-native";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +8,7 @@ import { bannerApi } from "@entities/banner/api";
 import { bannerQueryKeys } from "@entities/banner/api/queryKeys";
 import { mealQueryKeys } from "@entities/meal/api/queryKeys";
 import { timeTableQueryKeys } from "@entities/time-table/api/queryKeys";
+import { linkOpenStorage } from "@entities/settings/storage/linkOpenStorage";
 import { TAB_ROUTES, formatToday } from "./constants";
 
 const fetchBanner = async (): Promise<BannerItem[]> => {
@@ -41,11 +43,15 @@ export const useHomePage = () => {
     [navigation],
   );
 
-  const handleBannerPress = useCallback((item: BannerItem) => {
+  const handleBannerPress = useCallback(async (item: BannerItem) => {
     const { linkUrl } = item;
     if (!linkUrl) return;
 
     if (linkUrl.startsWith("http://") || linkUrl.startsWith("https://")) {
+      if ((await linkOpenStorage.get()) === "browser") {
+        Linking.openURL(linkUrl).catch(() => {});
+        return;
+      }
       setPopupUrl(linkUrl);
       webPopupRef.current?.present();
     } else if (linkUrl.startsWith("/")) {
