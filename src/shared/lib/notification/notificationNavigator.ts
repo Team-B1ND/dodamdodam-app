@@ -4,8 +4,11 @@ import { tokenStorage } from "@entities/api/common";
 import { notificationApi } from "@entities/notification/api";
 import { LANDING_ROUTE } from "@shared/config";
 
-const TAB_ROUTES: Record<string, string> = {
+const STACK_ROUTES: Record<string, string> = {
   "/meal": "Meal",
+};
+
+const TAB_ROUTES: Record<string, string> = {
   "/outing": "OutSleeping",
   "/nightstudy": "NightStudy",
   "/home": "Home",
@@ -61,7 +64,14 @@ function navigateTo(navigation: NavigationContainerRef<any>, data: Record<string
       }),
     );
   } else if (appUrl.startsWith("/")) {
-    const tabRoute = TAB_ROUTES[appUrl.toLowerCase()];
+    const path = appUrl.toLowerCase();
+    const stackRoute = STACK_ROUTES[path];
+    if (stackRoute) {
+      navigation.dispatch(CommonActions.navigate(stackRoute));
+      return;
+    }
+
+    const tabRoute = TAB_ROUTES[path];
     if (tabRoute) {
       navigation.dispatch(
         CommonActions.navigate("Main", { screen: tabRoute }),

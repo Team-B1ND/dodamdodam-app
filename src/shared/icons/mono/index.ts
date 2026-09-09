@@ -25,6 +25,7 @@ export { EyeSlash } from "./EyeSlash";
 export { File } from "./File";
 export { ForkAndKnife } from "./ForkAndKnife";
 export { Gear } from "./Gear";
+export { Grid } from "./Grid";
 export { Home } from "./Home";
 export { Link } from "./Link";
 export { MagnifyingGlass } from "./MagnifyingGlass";
