@@ -70,13 +70,16 @@ struct MealWidgetView: View {
                 Text(type.label)
                   .font(.footnote.bold())
                   .foregroundColor(isFullColor && isSelected ? .white : WidgetColor.labelAlternative)
-                Spacer()
+                  .lineLimit(1)
+                  .fixedSize()
+                  .layoutPriority(1)
+                Spacer(minLength: 4)
                 if let meal {
-                  Text("\(Int(meal.calorie))Kcal")
+                  Text(verbatim: "\(Int(meal.calorie))Kcal")
                     .font(.system(size: 9, weight: .medium))
                     .foregroundColor(isFullColor && isSelected ? .white.opacity(0.8) : WidgetColor.labelAlternative)
                     .lineLimit(1)
-                    .layoutPriority(1)
+                    .minimumScaleFactor(0.85)
                 }
               }
               .padding(.horizontal, 10)
