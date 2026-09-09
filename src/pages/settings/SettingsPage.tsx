@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useRef, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Linking, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -8,6 +8,7 @@ import { useTheme } from "@shared/theme";
 import { Divider, TopNavBar, Skeleton, WebPopup, Switch, toast } from "@shared/ui";
 import { useLogout } from "@features/auth";
 import { useLinkOpenMode } from "@features/settings";
+import { linkOpenStorage } from "@entities/settings/storage/linkOpenStorage";
 import { SettingProfile } from "./ui/SettingProfile";
 import { SettingItem } from "./ui/SettingItem";
 
@@ -27,14 +28,22 @@ export const SettingsPage = () => {
   const logout = useLogout();
   const { mode: linkOpenMode, toggle: toggleLinkOpenMode } = useLinkOpenMode();
 
-  const openWebPopup = useCallback((path: string) => {
-    setPopupUrl(`${DOCS_BASE_URL}${path}`);
+  const openUrl = useCallback(async (url: string) => {
+    if ((await linkOpenStorage.get()) === "browser") {
+      Linking.openURL(url).catch(() => {});
+      return;
+    }
+    setPopupUrl(url);
     webPopupRef.current?.present();
   }, []);
-  const openPrivacyPolicyPopup = useCallback(() => {
-    setPopupUrl("https://humble-tadpole-f3c.notion.site/3b63cf93eace8049ad01e5f6a9654fdb?source=copy_link");
-    webPopupRef.current?.present();
-  }, []);
+  const openWebPopup = useCallback(
+    (path: string) => openUrl(`${DOCS_BASE_URL}${path}`),
+    [openUrl],
+  );
+  const openPrivacyPolicyPopup = useCallback(
+    () => openUrl("https://humble-tadpole-f3c.notion.site/3b63cf93eace8049ad01e5f6a9654fdb?source=copy_link"),
+    [openUrl],
+  );
 
   return (
     <SafeAreaView
