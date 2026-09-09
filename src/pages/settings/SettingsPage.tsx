@@ -55,7 +55,7 @@ export const SettingsPage = () => {
         <Divider />
         <View style={styles.section}>
           <SettingItem
-            title="링크 열기"
+            title="웹 브라우저 열기"
             rightText={linkOpenMode === "browser" ? "브라우저" : "앱 내에서"}
             onPress={toggleLinkOpenMode}
           />
