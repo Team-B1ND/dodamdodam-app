@@ -6,6 +6,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "도담도담",
   slug: "dodamdodam-app",
+  scheme: "dodamdodam",
   version,
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
