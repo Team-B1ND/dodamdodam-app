@@ -9,7 +9,7 @@ import { bannerQueryKeys } from "@entities/banner/api/queryKeys";
 import { mealQueryKeys } from "@entities/meal/api/queryKeys";
 import { timeTableQueryKeys } from "@entities/time-table/api/queryKeys";
 import { linkOpenStorage } from "@entities/settings/storage/linkOpenStorage";
-import { TAB_ROUTES, formatToday } from "./constants";
+import { STACK_ROUTES, TAB_ROUTES, formatToday } from "./constants";
 
 const fetchBanner = async (): Promise<BannerItem[]> => {
   try {
