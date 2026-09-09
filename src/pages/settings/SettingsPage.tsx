@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import * as Application from "expo-application";
 import { useTheme } from "@shared/theme";
-import { Divider, TopNavBar, Skeleton, WebPopup, toast } from "@shared/ui";
+import { Divider, TopNavBar, Skeleton, WebPopup, Switch, toast } from "@shared/ui";
 import { useLogout } from "@features/auth";
 import { useLinkOpenMode } from "@features/settings";
 import { SettingProfile } from "./ui/SettingProfile";
@@ -55,8 +55,18 @@ export const SettingsPage = () => {
         <Divider />
         <View style={styles.section}>
           <SettingItem
-            title="웹 브라우저 열기"
-            rightText={linkOpenMode === "browser" ? "브라우저" : "앱 내에서"}
+            title="브라우저에서 열기"
+            description={
+              linkOpenMode === "browser"
+                ? "외부 링크를 기본 브라우저로 열어요."
+                : "외부 링크를 앱 안에서 열어요."
+            }
+            right={
+              <Switch
+                checked={linkOpenMode === "browser"}
+                onChange={toggleLinkOpenMode}
+              />
+            }
             onPress={toggleLinkOpenMode}
           />
         </View>
