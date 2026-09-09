@@ -7,8 +7,9 @@ import { MealPage } from "@pages/meal";
 import { OutSleepingPage } from "@pages/out-sleeping";
 import { NightStudyPage } from "@pages/night-study";
 import { MorePage } from "@pages/more";
+import { MainTabParamList } from "./navigationTypes";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export const BottomTabNavigator = () => {
   return (

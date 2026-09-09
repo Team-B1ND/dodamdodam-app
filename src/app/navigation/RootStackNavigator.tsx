@@ -19,8 +19,10 @@ import { TeamListPage, TeamDetailPage, TeamEditPage } from "@pages/team";
 import { ChangePasswordPage } from "@pages/change-password";
 import { ResetPasswordPage } from "@pages/reset-password";
 import { TeamCreatePage } from "@pages/team/TeamCreatePage";
+import type { RootStackParamList } from "./navigationTypes";
 
-const Stack = createStackNavigator();
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export const RootStackNavigator = () => (
   <Stack.Navigator
