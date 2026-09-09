@@ -60,7 +60,7 @@ const InAppGridComponent = ({ onEndReachedRef }: InAppGridProps) => {
             />
             <Text
               numberOfLines={2}
-              style={[typo("Caption1", "Medium"), styles.name, { color: colors.text.primary }]}
+              style={[typo("Caption2", "Medium"), styles.name, { color: colors.text.primary }]}
             >
               {app.name}
             </Text>
