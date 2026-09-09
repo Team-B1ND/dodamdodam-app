@@ -12,8 +12,8 @@ android {
     minSdk 30
     targetSdk 36
     // 폰 앱과 패키지명이 같아 versionCode 번호 공간을 공유하므로, 충돌하지 않도록 10001+ 대역을 사용한다
-    versionCode 10012
-    versionName "1.0"
+    versionCode 10013
+    versionName "1.1"
   }
 
   // Wearable Data Layer는 폰 앱과 서명까지 같아야 하므로 앱 모듈과 동일한 키스토어를 사용한다
