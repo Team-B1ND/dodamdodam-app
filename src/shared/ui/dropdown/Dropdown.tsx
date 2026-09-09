@@ -9,6 +9,7 @@ import { ChevronDown } from "@shared/icons/mono";
 interface DropdownProps {
   items: string[];
   value: string;
+  placeholder?: string;
   onSelectedItemChange: (item: string) => void;
   customStyle?: ViewStyle;
 }
@@ -16,6 +17,7 @@ interface DropdownProps {
 export const Dropdown = memo(({
   items,
   value,
+  placeholder,
   onSelectedItemChange,
   customStyle,
 }: DropdownProps) => {
@@ -51,8 +53,13 @@ export const Dropdown = memo(({
           },
         ]}
       >
-        <Text style={[styles.valueText, { color: colors.text.primary }]}>
-          {value}
+        <Text
+          style={[
+            styles.valueText,
+            { color: value ? colors.text.primary : colors.text.placeholder },
+          ]}
+        >
+          {value || placeholder}
         </Text>
         <Animated.View style={iconAnimatedStyle}>
           <ChevronDown size={16} color={colors.text.primary} />
