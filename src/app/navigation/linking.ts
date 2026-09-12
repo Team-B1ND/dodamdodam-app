@@ -1,6 +1,6 @@
 import type { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
-import { tokenStorage } from "@entities/api/common";
+import { validateSession } from "@features/auth/session";
 import {
   deepLinkPrefixes,
   resolveDeepLink,
@@ -61,10 +61,10 @@ export const createLinking = ({
     const subscription = Linking.addEventListener("url", async ({ url }) => {
       if (!resolveDeepLink(url)) return;
 
-      const token = await tokenStorage.getAccessToken();
+      const authenticated = await validateSession();
       if (!active) return;
 
-      if (token) {
+      if (authenticated) {
         listener(url);
         return;
       }

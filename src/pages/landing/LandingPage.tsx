@@ -5,7 +5,7 @@ import { CommonActions, useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { AppLogo } from "@shared/ui/topNavBar/AppLogo";
 import { B1NDLogo } from "@shared/icons/logo";
-import { tokenStorage } from "@entities/api/common";
+import { validateSession } from "@features/auth/session";
 import { registerPushToken } from "@shared/lib/notification";
 import { pendingDeepLink } from "@app/navigation/pendingDeepLink";
 import { resolveDeepLink } from "@app/navigation/deepLinkResolver";
@@ -23,10 +23,10 @@ export const LandingPage = () => {
     let active = true;
 
     const timer = setTimeout(async () => {
-      const token = await tokenStorage.getAccessToken();
+      const authenticated = await validateSession();
       if (!active) return;
 
-      if (!token) {
+      if (!authenticated) {
         navigation.dispatch(
           CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
         );
