@@ -106,9 +106,11 @@ basicApiHandler.interceptors.response.use(
         return Promise.reject(error);
       }
 
-      const { data } = await axios.post(`${BASE_URL}/auth/refresh`, {
-        refreshToken,
-      });
+      const { data } = await axios.post(
+        `${BASE_URL}/auth/refresh`,
+        { refreshToken },
+        { timeout: 10000 },
+      );
 
       await tokenStorage.setTokens(
         data.data.access,
@@ -119,7 +121,16 @@ basicApiHandler.interceptors.response.use(
       return basicApiHandler(originalRequest);
     } catch (refreshError) {
       processQueue(refreshError);
-      await handleSessionExpired();
+
+      // 네트워크·서버 장애에는 기존 토큰을 유지한다. refresh 토큰이 명시적으로
+      // 거절된 경우에만 세션을 종료해야 일시적 장애로 강제 로그아웃되지 않는다.
+      const refreshStatus = axios.isAxiosError(refreshError)
+        ? refreshError.response?.status
+        : undefined;
+      if (refreshStatus === 400 || refreshStatus === 401 || refreshStatus === 403) {
+        await handleSessionExpired();
+      }
+
       return Promise.reject(refreshError);
     } finally {
       isRefreshing = false;
