@@ -38,7 +38,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     ...config.android,
     package: "com.b1nd.dodam.student",
-    googleServicesFile: "./google-services.json",
+    googleServicesFile: "./src/app/google-services.json",
     permissions: [
       "android.permission.POST_NOTIFICATIONS",
       "android.permission.NFC",
