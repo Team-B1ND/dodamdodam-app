@@ -7,6 +7,8 @@ import { AppLogo } from "@shared/ui/topNavBar/AppLogo";
 import { B1NDLogo } from "@shared/icons/logo";
 import { tokenStorage } from "@entities/api/common";
 import { registerPushToken } from "@shared/lib/notification";
+import { pendingDeepLink } from "@app/navigation/pendingDeepLink";
+import { resolveDeepLink } from "@app/navigation/deepLinkResolver";
 
 const SPLASH_DURATION = 2000;
 const APP_LOGO_WIDTH = 176;
@@ -18,21 +20,40 @@ export const LandingPage = () => {
   const { bottom } = useSafeAreaInsets();
 
   useEffect(() => {
+    let active = true;
+
     const timer = setTimeout(async () => {
       const token = await tokenStorage.getAccessToken();
+      if (!active) return;
 
-      // 로그인 시점에만 등록하면 이미 로그인된 채로 앱을 켠 사용자는 토큰이 서버에 남지 않는다.
-      if (token) registerPushToken();
+      if (!token) {
+        navigation.dispatch(
+          CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
+        );
+        return;
+      }
 
+      registerPushToken();
+
+      const pendingUrl = pendingDeepLink.peek();
+      const deepLinkState = pendingUrl ? resolveDeepLink(pendingUrl) : null;
+
+      if (deepLinkState) {
+        navigation.dispatch(CommonActions.reset(deepLinkState));
+        pendingDeepLink.clear();
+        return;
+      }
+
+      pendingDeepLink.clear();
       navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{ name: token ? "Main" : "Login" }],
-        }),
+        CommonActions.reset({ index: 0, routes: [{ name: "Main" }] }),
       );
     }, SPLASH_DURATION);
 
-    return () => clearTimeout(timer);
+    return () => {
+      active = false;
+      clearTimeout(timer);
+    };
   }, [navigation]);
 
   return (

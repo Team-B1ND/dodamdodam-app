@@ -7,6 +7,8 @@ import { typo } from "@shared/tokens";
 import { TopNavBar, TextField, FilledButton, Dialog, useOverlay, TextAreaProvider } from "@shared/ui";
 import { TextButton } from "@shared/ui/buttons";
 import { useLogin } from "@features/auth/login";
+import { pendingDeepLink } from "@app/navigation/pendingDeepLink";
+import { resolveDeepLink } from "@app/navigation/deepLinkResolver";
 
 export const LoginFormPage = () => {
   const { colors } = useTheme();
@@ -25,9 +27,15 @@ export const LoginFormPage = () => {
   const onLoginPress = useCallback(async () => {
     const errorMessage = await handleLogin();
     if (!errorMessage) {
+      const pendingUrl = pendingDeepLink.peek();
+      const deepLinkState = pendingUrl ? resolveDeepLink(pendingUrl) : null;
+
       navigation.dispatch(
-        CommonActions.reset({ index: 0, routes: [{ name: "Main" }] }),
+        CommonActions.reset(
+          deepLinkState ?? { index: 0, routes: [{ name: "Main" }] },
+        ),
       );
+      pendingDeepLink.clear();
     } else {
       overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
         <Dialog
