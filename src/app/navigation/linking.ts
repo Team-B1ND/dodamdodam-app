@@ -1,12 +1,21 @@
 import type { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
+import { tokenStorage } from "@entities/api/common";
+import {
+  deepLinkPrefixes,
+  resolveDeepLink,
+} from "./deepLinkResolver";
 import type { RootStackParamList } from "./navigationTypes";
+import { pendingDeepLink } from "./pendingDeepLink";
 
-export const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: [
-    Linking.createURL("/"),
-    "dodamdodam://",
-  ],
+interface CreateLinkingOptions {
+  onAuthenticationRequired: () => void;
+}
+
+export const createLinking = ({
+  onAuthenticationRequired,
+}: CreateLinkingOptions): LinkingOptions<RootStackParamList> => ({
+  prefixes: deepLinkPrefixes,
   config: {
     screens: {
       Main: {
@@ -21,15 +30,6 @@ export const linking: LinkingOptions<RootStackParamList> = {
       },
 
       Notification: "notifications",
-      TeamList: "teams",
-
-      TeamDetail: {
-        path: "teams/:teamId",
-        parse: {
-          teamId: value => value,
-        },
-      },
-
       OutSleepingApply: "out-sleeping/apply",
 
       NightStudyApply: {
@@ -43,4 +43,39 @@ export const linking: LinkingOptions<RootStackParamList> = {
       },
     },
   },
-};
+
+  // 콜드 스타트 딥링크가 Landing의 인증 확인을 건너뛰지 않도록 보류한다.
+  getInitialURL: async () => {
+    const url = await Linking.getInitialURL();
+
+    if (url && resolveDeepLink(url)) {
+      pendingDeepLink.save(url);
+    }
+
+    return null;
+  },
+
+  subscribe: listener => {
+    let active = true;
+
+    const subscription = Linking.addEventListener("url", async ({ url }) => {
+      if (!resolveDeepLink(url)) return;
+
+      const token = await tokenStorage.getAccessToken();
+      if (!active) return;
+
+      if (token) {
+        listener(url);
+        return;
+      }
+
+      pendingDeepLink.save(url);
+      onAuthenticationRequired();
+    });
+
+    return () => {
+      active = false;
+      subscription.remove();
+    };
+  },
+});

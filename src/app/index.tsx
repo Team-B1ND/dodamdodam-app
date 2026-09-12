@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { CommonActions, NavigationContainer, type NavigationContainerRef } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,7 +11,7 @@ import { setSessionExpiredHandler } from "@entities/api/common";
 import { setupNotificationNavigation, setupTokenRefresh } from "@shared/lib/notification";
 import NfcManager from "react-native-nfc-manager";
 import { QrScan } from "@features/app-webview/screens/QrScan";
-import { linking } from "./navigation/linking";
+import { createLinking } from "./navigation/linking";
 
 NfcManager.start().catch(() => {});
 import { RootStackNavigator } from "./navigation";
@@ -25,6 +25,17 @@ const BRIDGE_SCREENS = {
 const AppInner = () => {
   const { top } = useSafeAreaInsets();
   const navigationRef = useRef<NavigationContainerRef<any>>(null);
+  const linking = useMemo(
+    () =>
+      createLinking({
+        onAuthenticationRequired: () => {
+          navigationRef.current?.dispatch(
+            CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
+          );
+        },
+      }),
+    [],
+  );
 
   useEffect(() => {
     setSessionExpiredHandler(() => {
