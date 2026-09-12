@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { useTheme } from "@shared/theme";
 import { styles } from "./style";
-import { COLUMNS } from "./utils/constants";
+import { COLUMNS, EMPTY_STATE_HEIGHT } from "./utils/constants";
 import type { MealData } from "./HomeMealWidget";
 
 interface MealSlideProps {
@@ -28,7 +28,7 @@ export const MealSlide = React.memo(({ item, width, height }: MealSlideProps) =>
 
   if (item.menus.length === 0) {
     return (
-      <View style={[styles.mealPage, styles.emptyMealPage, { width, height }]}>
+      <View style={[styles.mealPage, styles.emptyMealPage, { width, height: EMPTY_STATE_HEIGHT }]}>
         <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
           등록된 급식이 없습니다
         </Text>
