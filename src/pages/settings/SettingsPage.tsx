@@ -40,10 +40,6 @@ export const SettingsPage = () => {
     (path: string) => openUrl(`${DOCS_BASE_URL}${path}`),
     [openUrl],
   );
-  const openPrivacyPolicyPopup = useCallback(
-    () => openUrl("https://humble-tadpole-f3c.notion.site/3b63cf93eace8049ad01e5f6a9654fdb?source=copy_link"),
-    [openUrl],
-  );
 
   return (
     <SafeAreaView
@@ -82,7 +78,7 @@ export const SettingsPage = () => {
         <Divider />
         <View style={styles.section}>
           <SettingItem title="서비스 운영 정책" onPress={() => openWebPopup("/terms")} />
-          <SettingItem title="개인정보 처리 방침" onPress={() => openPrivacyPolicyPopup()} />
+          <SettingItem title="개인정보 처리 방침" onPress={() => openWebPopup("/privacy-policy")} />
           <SettingItem title="버전 정보" rightText={APP_VERSION} />
         </View>
         <Divider />
