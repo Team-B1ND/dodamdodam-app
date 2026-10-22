@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
+import { useTabScrollPadding } from "@shared/hooks";
 import { TopNavBar, RefreshView, WebPopup } from "@shared/ui";
 import { Bell } from "@shared/icons/mono";
 import { HomeBanner } from "@features/home/home-banner";
@@ -11,6 +12,7 @@ import { useHomePage } from "./useHomePage";
 
 export const HomePage = () => {
   const { colors } = useTheme();
+  const scrollPadding = useTabScrollPadding();
   const {
     banners,
     bannerLoading,
@@ -34,7 +36,7 @@ export const HomePage = () => {
       </TopNavBar>
       <RefreshView
         style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollPadding }]}
         showsVerticalScrollIndicator={false}
         queryKeys={queryKeys}
       >
@@ -60,6 +62,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 140,
   },
 });

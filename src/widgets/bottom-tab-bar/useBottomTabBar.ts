@@ -9,22 +9,24 @@ import {
 import { Gesture } from "react-native-gesture-handler";
 import { useHaptic } from "@shared/hooks";
 import { INDICATOR_SIZE, PAN_ACTIVE_OFFSET, TIMING_CONFIG } from "./constants";
-import { calcTargetX } from "./calcTargetX";
+import { calcTargetOffset } from "./calcTargetOffset";
 
 interface UseBottomTabBarParams {
   tabCount: number;
   activeIndex: number;
+  vertical: boolean;
   onTabChange: (index: number) => void;
 }
 
 export const useBottomTabBar = ({
   tabCount,
   activeIndex,
+  vertical,
   onTabChange,
 }: UseBottomTabBarParams) => {
-  const translateX = useSharedValue(0);
-  const barWidth = useSharedValue(0);
-  const dragStartX = useSharedValue(0);
+  const translate = useSharedValue(0);
+  const barLength = useSharedValue(0);
+  const dragStart = useSharedValue(0);
   const isFirstRender = useRef(true);
   const haptic = useHaptic("light");
 
@@ -34,9 +36,9 @@ export const useBottomTabBar = ({
       return;
     }
     haptic();
-    if (barWidth.value > 0) {
-      translateX.value = withTiming(
-        calcTargetX(activeIndex, barWidth.value, tabCount),
+    if (barLength.value > 0) {
+      translate.value = withTiming(
+        calcTargetOffset(activeIndex, barLength.value, tabCount),
         TIMING_CONFIG,
       );
     }
@@ -44,48 +46,52 @@ export const useBottomTabBar = ({
 
   const onBarLayout = useCallback(
     (e: LayoutChangeEvent) => {
-      const width = e.nativeEvent.layout.width;
-      barWidth.value = width;
-      translateX.value = calcTargetX(activeIndex, width, tabCount);
+      const { width, height } = e.nativeEvent.layout;
+      const length = vertical ? height : width;
+      barLength.value = length;
+      translate.value = calcTargetOffset(activeIndex, length, tabCount);
     },
-    [activeIndex, tabCount],
+    [activeIndex, tabCount, vertical],
   );
 
-  const panGesture = Gesture.Pan()
-    .activeOffsetX([-PAN_ACTIVE_OFFSET, PAN_ACTIVE_OFFSET])
+  const pan = Gesture.Pan();
+  if (vertical) pan.activeOffsetY([-PAN_ACTIVE_OFFSET, PAN_ACTIVE_OFFSET]);
+  else pan.activeOffsetX([-PAN_ACTIVE_OFFSET, PAN_ACTIVE_OFFSET]);
+
+  const panGesture = pan
     .onStart(() => {
-      dragStartX.value = translateX.value;
+      dragStart.value = translate.value;
     })
     .onUpdate((e) => {
-      const tabW = barWidth.value / tabCount;
-      const minX = (tabW - INDICATOR_SIZE) / 2;
-      const maxX = (tabCount - 1) * tabW + minX;
-      translateX.value = Math.max(
-        minX,
-        Math.min(maxX, dragStartX.value + e.translationX),
-      );
+      const tabSize = barLength.value / tabCount;
+      const min = (tabSize - INDICATOR_SIZE) / 2;
+      const max = (tabCount - 1) * tabSize + min;
+      const moved = vertical ? e.translationY : e.translationX;
+      translate.value = Math.max(min, Math.min(max, dragStart.value + moved));
     })
     .onEnd(() => {
-      const tabW = barWidth.value / tabCount;
-      const centerX = translateX.value + INDICATOR_SIZE / 2;
+      const tabSize = barLength.value / tabCount;
+      const center = translate.value + INDICATOR_SIZE / 2;
       const nearestIndex = Math.max(
         0,
-        Math.min(tabCount - 1, Math.round(centerX / tabW - 0.5)),
+        Math.min(tabCount - 1, Math.round(center / tabSize - 0.5)),
       );
-      translateX.value = withTiming(
-        calcTargetX(nearestIndex, barWidth.value, tabCount),
+      translate.value = withTiming(
+        calcTargetOffset(nearestIndex, barLength.value, tabCount),
         TIMING_CONFIG,
       );
       runOnJS(onTabChange)(nearestIndex);
     });
 
   const indicatorStyle = useAnimatedStyle(() => {
-    if (barWidth.value === 0) return { opacity: 0 };
+    if (barLength.value === 0) return { opacity: 0 };
     return {
       opacity: 1,
-      transform: [{ translateX: translateX.value }],
+      transform: vertical
+        ? [{ translateY: translate.value }]
+        : [{ translateX: translate.value }],
     };
   });
 
-  return { onBarLayout, indicatorStyle, panGesture, translateX, barWidth };
+  return { onBarLayout, indicatorStyle, panGesture, translate, barLength };
 };

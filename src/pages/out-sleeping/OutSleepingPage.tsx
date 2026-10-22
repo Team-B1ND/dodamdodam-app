@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
+import { useTabScrollPadding } from "@shared/hooks";
 import { TopNavBar, RefreshView } from "@shared/ui";
 import { Plus } from "@shared/icons/mono";
 import { OutSleepingList } from "@features/out-sleeping";
@@ -10,6 +11,7 @@ import { outSleepingQueryKeys } from "@entities/out-sleeping/api/queryKeys";
 
 export const OutSleepingPage = () => {
   const { colors } = useTheme();
+  const scrollPadding = useTabScrollPadding();
   const navigation = useNavigation<any>();
 
   const handleApply = useCallback(() => {
@@ -28,7 +30,7 @@ export const OutSleepingPage = () => {
       </TopNavBar>
       <RefreshView
         style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollPadding }]}
         showsVerticalScrollIndicator={false}
         queryKeys={[outSleepingQueryKeys.me]}
       >
@@ -46,6 +48,5 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    paddingBottom: 140,
   },
 });
