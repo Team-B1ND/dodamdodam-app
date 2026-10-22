@@ -19,5 +19,6 @@ export {
   useTabBarPosition,
   useTabContentWidth,
   useTabScrollPadding,
+  useUnfoldedLeftPadding,
 } from "./useTabLayout";
 export type { TabBarPosition } from "./useTabLayout";
