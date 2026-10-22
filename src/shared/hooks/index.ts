@@ -15,5 +15,9 @@ export {
 export { useHaptic } from "./useHaptic";
 export type { HapticType } from "./useHaptic";
 export { useInfiniteScroll } from "./useInfiniteScroll";
-export { useTabBarPosition, useTabScrollPadding } from "./useTabLayout";
+export {
+  useTabBarPosition,
+  useTabContentWidth,
+  useTabScrollPadding,
+} from "./useTabLayout";
 export type { TabBarPosition } from "./useTabLayout";

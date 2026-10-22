@@ -1,14 +1,17 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useTheme } from "@shared/theme";
-import { CORNER_RADIUS, BANNER_HEIGHT, HORIZONTAL_PADDING } from "./constants/constants";
+import { useTabContentWidth } from "@shared/hooks";
+import { CORNER_RADIUS, HORIZONTAL_PADDING, getBannerHeight } from "./constants/constants";
 
 export const HomeBannerSkeleton = () => {
   const { colors } = useTheme();
+  const width = useTabContentWidth();
+  const height = getBannerHeight(width - HORIZONTAL_PADDING * 2);
 
   return (
     <View style={styles.container}>
-      <View style={[styles.banner, { backgroundColor: colors.background.surface }]} />
+      <View style={[styles.banner, { height, backgroundColor: colors.background.surface }]} />
     </View>
   );
 };
@@ -19,7 +22,6 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
   banner: {
-    height: BANNER_HEIGHT,
     borderRadius: CORNER_RADIUS,
     borderCurve: "continuous",
   },

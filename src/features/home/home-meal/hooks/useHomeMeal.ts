@@ -1,11 +1,11 @@
-import { useCallback, useMemo, useRef, useState } from "react";
-import { useWindowDimensions, type ViewToken } from "react-native";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { FlatList, ViewToken } from "react-native";
 import {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { usePressAnimation } from "@shared/hooks";
+import { usePressAnimation, useTabContentWidth } from "@shared/hooks";
 import {
   CARD_PADDING,
   EMPTY_STATE_HEIGHT,
@@ -17,7 +17,7 @@ import { getInitialMealIndex } from "../utils/getInitialMealIndex";
 import type { MealData } from "../HomeMealWidget";
 
 export const useHomeMeal = (meals: MealData[]) => {
-  const { width: screenWidth } = useWindowDimensions();
+  const screenWidth = useTabContentWidth();
 
   const initialIndex = useMemo(() => {
     const idx = getInitialMealIndex();
@@ -25,6 +25,7 @@ export const useHomeMeal = (meals: MealData[]) => {
   }, [meals.length]);
 
   const [activeIndex, setActiveIndex] = useState(initialIndex);
+  const flatListRef = useRef<FlatList<MealData>>(null);
 
   const { animatedStyle: pressStyle, handlePressIn, handlePressOut } =
     usePressAnimation({ scale: 0.98 });
@@ -59,6 +60,10 @@ export const useHomeMeal = (meals: MealData[]) => {
     { viewabilityConfig, onViewableItemsChanged },
   ]);
 
+  useEffect(() => {
+    flatListRef.current?.scrollToOffset({ offset: contentWidth * activeIndex, animated: false });
+  }, [contentWidth]);
+
   const keyExtractor = useCallback((item: MealData) => item.id, []);
 
   const getItemLayout = useCallback(
@@ -74,6 +79,7 @@ export const useHomeMeal = (meals: MealData[]) => {
     activeIndex,
     initialIndex,
     contentWidth,
+    flatListRef,
     maxHeight,
     pressStyle,
     handlePressIn,
