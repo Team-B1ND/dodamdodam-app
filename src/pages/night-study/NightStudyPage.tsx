@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
-import { useTabScrollPadding } from "@shared/hooks";
+import { useTabPageEdges, useTabScrollPadding } from "@shared/hooks";
 import { TopNavBar, RefreshView, SegmentedButton } from "@shared/ui";
 import type { SegmentedButtonData } from "@shared/ui/buttons/SegmentedButton";
 import { Plus } from "@shared/icons/mono";
@@ -18,6 +18,7 @@ const INITIAL_SEGMENTS: SegmentedButtonData[] = [
 export const NightStudyPage = () => {
   const { colors } = useTheme();
   const scrollPadding = useTabScrollPadding();
+  const edges = useTabPageEdges();
   const navigation = useNavigation<any>();
   const [segments, setSegments] = useState(INITIAL_SEGMENTS);
   const activeTab = segments.find((s) => s.isActive)?.value ?? "personal";
@@ -29,7 +30,7 @@ export const NightStudyPage = () => {
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
-      edges={["top"]}
+      edges={edges}
     >
       <TopNavBar
         right={<TopNavBar.IconButton icon={<Plus />} onPress={handleApply} />}

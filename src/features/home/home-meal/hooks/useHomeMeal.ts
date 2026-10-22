@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import type { FlatList, ViewToken } from "react-native";
 import {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { usePressAnimation, useTabContentWidth } from "@shared/hooks";
+import { usePressAnimation, useRealignOnWidthChange, useTabContentWidth } from "@shared/hooks";
 import {
   CARD_PADDING,
   EMPTY_STATE_HEIGHT,
@@ -60,9 +60,7 @@ export const useHomeMeal = (meals: MealData[]) => {
     { viewabilityConfig, onViewableItemsChanged },
   ]);
 
-  useEffect(() => {
-    flatListRef.current?.scrollToOffset({ offset: contentWidth * activeIndex, animated: false });
-  }, [contentWidth]);
+  useRealignOnWidthChange(flatListRef, contentWidth, activeIndex);
 
   const keyExtractor = useCallback((item: MealData) => item.id, []);
 

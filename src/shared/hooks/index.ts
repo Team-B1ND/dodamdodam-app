@@ -18,7 +18,9 @@ export { useInfiniteScroll } from "./useInfiniteScroll";
 export {
   useTabBarPosition,
   useTabContentWidth,
+  useTabPageEdges,
   useTabScrollPadding,
   useUnfoldedLeftPadding,
 } from "./useTabLayout";
+export { useRealignOnWidthChange } from "./useRealignOnWidthChange";
 export type { TabBarPosition } from "./useTabLayout";
