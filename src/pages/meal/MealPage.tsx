@@ -45,7 +45,7 @@ export const MealPage = () => {
   return (
     <SafeAreaView
       style={[styles.safeArea, { backgroundColor: colors.background.default }]}
-      edges={["top"]}
+      edges={["top", "left", "right"]}
     >
       <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />}>
         <TopNavBar.Title hasBackButton>{`${calendar.month + 1}월 급식`}</TopNavBar.Title>

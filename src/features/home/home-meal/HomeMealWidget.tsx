@@ -32,6 +32,7 @@ export const HomeMealWidget = React.memo(({ meals, onPress }: HomeMealWidgetProp
     activeIndex,
     initialIndex,
     contentWidth,
+    flatListRef,
     maxHeight,
     pressStyle,
     handlePressIn,
@@ -75,6 +76,7 @@ export const HomeMealWidget = React.memo(({ meals, onPress }: HomeMealWidgetProp
 
         <Animated.View style={[styles.listWrapper, listWrapperStyle]}>
           <FlatList
+            ref={flatListRef}
             data={meals}
             renderItem={renderMealPage}
             keyExtractor={keyExtractor}

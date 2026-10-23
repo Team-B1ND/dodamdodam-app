@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { Dimensions, type View } from "react-native";
+import { useWindowDimensions, type View } from "react-native";
 import {
   useSharedValue,
   useAnimatedStyle,
@@ -13,6 +13,7 @@ export const useDropdownAnimation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openDirection, setOpenDirection] = useState<"down" | "up">("down");
   const triggerRef = useRef<View>(null);
+  const { height: screenH } = useWindowDimensions();
 
   const iconRotation = useSharedValue(0);
   const optionScale = useSharedValue(0.96);
@@ -39,7 +40,6 @@ export const useDropdownAnimation = () => {
     const nextOpen = !isOpen;
     if (nextOpen && triggerRef.current) {
       triggerRef.current.measureInWindow((_x, y, _w, h) => {
-        const screenH = Dimensions.get("window").height;
         const spaceBelow = screenH - (y + h);
         setOpenDirection(spaceBelow < 220 ? "up" : "down");
       });
@@ -51,7 +51,7 @@ export const useDropdownAnimation = () => {
     } else {
       closeDropdown();
     }
-  }, [isOpen, iconRotation, openDropdown, closeDropdown]);
+  }, [isOpen, screenH, iconRotation, openDropdown, closeDropdown]);
 
   const iconAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${iconRotation.value}deg` }],

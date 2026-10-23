@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home, Grid, DoorOpen, MoonPlus, Menu } from "@shared/icons/mono";
 import { BottomTabBar } from "@widgets/bottom-tab-bar";
+import { useTabBarPosition } from "@shared/hooks";
 import { HomePage } from "@pages/home";
 import { AidPage } from "@pages/aid";
 import { OutSleepingPage } from "@pages/out-sleeping";
@@ -11,13 +12,16 @@ import { MorePage } from "@pages/more";
 const Tab = createBottomTabNavigator();
 
 export const BottomTabNavigator = () => {
+  const position = useTabBarPosition();
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      tabBar={(props) => <BottomTabBar {...props} />}
+      tabBar={(props) => <BottomTabBar {...props} position={position} />}
       screenOptions={{
         headerShown: false,
         animation: "none",
+        tabBarPosition: position,
       }}
     >
       <Tab.Screen

@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FlatList, useWindowDimensions, type NativeSyntheticEvent, type NativeScrollEvent } from "react-native";
-import { AUTO_SCROLL_INTERVAL, HORIZONTAL_PADDING } from "../constants/constants";
+import { FlatList, type NativeSyntheticEvent, type NativeScrollEvent } from "react-native";
+import { useRealignOnWidthChange, useTabBarPosition, useTabContentWidth } from "@shared/hooks";
+import { AUTO_SCROLL_INTERVAL, HORIZONTAL_PADDING, getBannerHeight } from "../constants/constants";
 import type { BannerItem } from "../HomeBanner";
 
 export const useHomeBanner = (items: BannerItem[]) => {
-  const { width: screenWidth } = useWindowDimensions();
+  const screenWidth = useTabContentWidth();
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList<BannerItem>>(null);
   const isUserScrolling = useRef(false);
 
   const contentWidth = screenWidth - HORIZONTAL_PADDING * 2;
+  const bannerHeight = getBannerHeight(contentWidth, useTabBarPosition() === "right");
 
   useEffect(() => {
     if (items.length <= 1) return;
@@ -33,6 +35,8 @@ export const useHomeBanner = (items: BannerItem[]) => {
     [contentWidth],
   );
 
+  useRealignOnWidthChange(flatListRef, contentWidth, activeIndex);
+
   const keyExtractor = useCallback((item: BannerItem) => item.id, []);
 
   const handleScrollBeginDrag = useCallback(() => {
@@ -55,6 +59,7 @@ export const useHomeBanner = (items: BannerItem[]) => {
   return {
     activeIndex,
     contentWidth,
+    bannerHeight,
     flatListRef,
     keyExtractor,
     handleScrollBeginDrag,

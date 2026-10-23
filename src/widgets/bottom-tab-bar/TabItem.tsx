@@ -17,8 +17,9 @@ interface TabItemProps {
   descriptors: TabDescriptors;
   navigation: TabNavigation;
   isFocused: boolean;
-  translateX: SharedValue<number>;
-  barWidth: SharedValue<number>;
+  vertical: boolean;
+  translate: SharedValue<number>;
+  barLength: SharedValue<number>;
 }
 
 export const TabItem = React.memo(({
@@ -28,8 +29,9 @@ export const TabItem = React.memo(({
   descriptors,
   navigation,
   isFocused,
-  translateX,
-  barWidth,
+  vertical,
+  translate,
+  barLength,
 }: TabItemProps) => {
   const { colors } = useTheme();
   const { options } = descriptors[route.key];
@@ -54,16 +56,16 @@ export const TabItem = React.memo(({
   }, [navigation, route.key]);
 
   const selectedOverlayStyle = useAnimatedStyle(() => {
-    if (barWidth.value === 0) return { opacity: isFocused ? 1 : 0 };
+    if (barLength.value === 0) return { opacity: isFocused ? 1 : 0 };
 
-    const tabW = barWidth.value / tabCount;
-    const tabLeft = index * tabW;
-    const tabRight = tabLeft + tabW;
-    const indicatorLeft = translateX.value;
-    const indicatorRight = indicatorLeft + INDICATOR_SIZE;
+    const tabSize = barLength.value / tabCount;
+    const tabStart = index * tabSize;
+    const tabEnd = tabStart + tabSize;
+    const indicatorStart = translate.value;
+    const indicatorEnd = indicatorStart + INDICATOR_SIZE;
 
-    const overlapStart = Math.max(indicatorLeft, tabLeft);
-    const overlapEnd = Math.min(indicatorRight, tabRight);
+    const overlapStart = Math.max(indicatorStart, tabStart);
+    const overlapEnd = Math.min(indicatorEnd, tabEnd);
     const overlap = Math.max(0, overlapEnd - overlapStart);
 
     return {
@@ -78,7 +80,7 @@ export const TabItem = React.memo(({
       accessibilityLabel={options.tabBarAccessibilityLabel}
       onPress={onPress}
       onLongPress={onLongPress}
-      style={tabStyles.container}
+      style={vertical ? tabStyles.verticalContainer : tabStyles.container}
     >
       <View>
         {options.tabBarIcon?.({
@@ -104,6 +106,12 @@ const tabStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
+  },
+  verticalContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
   },
   selectedOverlay: {
     position: "absolute",

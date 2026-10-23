@@ -13,6 +13,8 @@ import { SelectRolePage } from "@pages/select-role";
 import { EnterNamePage } from "@pages/enter-name";
 import { CreateAccountPage } from "@pages/create-account";
 import { LANDING_ROUTE } from "@shared/config";
+import { useTheme } from "@shared/theme";
+import { useUnfoldedLeftPadding } from "@shared/hooks";
 import { AppWebViewPage } from "@pages/app-webview";
 import { MealPage } from "@pages/meal";
 import { OutSleepingApplyPage } from "@pages/out-sleeping";
@@ -24,46 +26,54 @@ import { TeamCreatePage } from "@pages/team/TeamCreatePage";
 
 const Stack = createStackNavigator();
 
-export const RootStackNavigator = () => (
-  <Stack.Navigator
-    initialRouteName={LANDING_ROUTE}
-    screenOptions={{
-      ...iosSlideTransition,
-      headerShown: false,
-    }}
-  >
-    <Stack.Screen
-      name={LANDING_ROUTE}
-      component={LandingPage}
-      options={{ gestureEnabled: false, cardStyleInterpolator: () => ({}) }}
-    />
-    <Stack.Screen
-      name="Login"
-      component={LoginPage}
-      options={{ gestureEnabled: false, cardStyleInterpolator: () => ({}) }}
-    />
-    <Stack.Screen name="LoginForm" component={LoginFormPage} />
-    <Stack.Screen name="Main" component={BottomTabNavigator} />
-    <Stack.Screen name="Meal" component={MealPage} />
-    <Stack.Screen name="AppIn" component={AppInInfoPage} />
-    <Stack.Screen name="Settings" component={SettingsPage} />
-    <Stack.Screen name="EditProfile" component={EditProfilePage} />
-    <Stack.Screen name="Notification" component={NotificationPage} />
-    <Stack.Screen name="SelectRole" component={SelectRolePage} />
-    <Stack.Screen name="EnterName" component={EnterNamePage} />
-    <Stack.Screen name="CreateAccount" component={CreateAccountPage} />
-    <Stack.Screen name="ChangePassword" component={ChangePasswordPage} />
-    <Stack.Screen name="ResetPassword" component={ResetPasswordPage} />
-    <Stack.Screen name="OutSleepingApply" component={OutSleepingApplyPage} />
-    <Stack.Screen name="NightStudyApply" component={NightStudyApplyPage} />
-    <Stack.Screen name="TeamList" component={TeamListPage} />
-    <Stack.Screen name="TeamDetail" component={TeamDetailPage} />
-    <Stack.Screen name="TeamCreate" component={TeamCreatePage} />
-    <Stack.Screen name="TeamEdit" component={TeamEditPage} />
-    <Stack.Screen
-      name="AppWebView"
-      component={AppWebViewPage}
-      options={{ gestureEnabled: false }}
-    />
-  </Stack.Navigator>
-);
+export const RootStackNavigator = () => {
+  const { colors } = useTheme();
+  const leftPadding = useUnfoldedLeftPadding();
+
+  return (
+    <Stack.Navigator
+      initialRouteName={LANDING_ROUTE}
+      screenOptions={{
+        ...iosSlideTransition,
+        headerShown: false,
+        cardStyle: leftPadding
+          ? { paddingLeft: leftPadding, backgroundColor: colors.background.default }
+          : undefined,
+      }}
+    >
+      <Stack.Screen
+        name={LANDING_ROUTE}
+        component={LandingPage}
+        options={{ gestureEnabled: false, cardStyleInterpolator: () => ({}), cardStyle: undefined }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginPage}
+        options={{ gestureEnabled: false, cardStyleInterpolator: () => ({}), cardStyle: undefined }}
+      />
+      <Stack.Screen name="LoginForm" component={LoginFormPage} />
+      <Stack.Screen name="Main" component={BottomTabNavigator} />
+      <Stack.Screen name="Meal" component={MealPage} />
+      <Stack.Screen name="AppIn" component={AppInInfoPage} />
+      <Stack.Screen name="Settings" component={SettingsPage} />
+      <Stack.Screen name="EditProfile" component={EditProfilePage} />
+      <Stack.Screen name="Notification" component={NotificationPage} />
+      <Stack.Screen name="SelectRole" component={SelectRolePage} />
+      <Stack.Screen name="EnterName" component={EnterNamePage} />
+      <Stack.Screen name="CreateAccount" component={CreateAccountPage} />
+      <Stack.Screen name="ChangePassword" component={ChangePasswordPage} />
+      <Stack.Screen name="ResetPassword" component={ResetPasswordPage} />
+      <Stack.Screen name="OutSleepingApply" component={OutSleepingApplyPage} />
+      <Stack.Screen name="NightStudyApply" component={NightStudyApplyPage} />
+      <Stack.Screen name="TeamList" component={TeamListPage} />
+      <Stack.Screen name="TeamDetail" component={TeamDetailPage} />
+      <Stack.Screen name="TeamCreate" component={TeamCreatePage} />
+      <Stack.Screen name="TeamEdit" component={TeamEditPage} />
+      <Stack.Screen
+        name="AppWebView"
+        component={AppWebViewPage}
+        options={{ gestureEnabled: false }}
+      />
+    </Stack.Navigator>
+  );
+};
