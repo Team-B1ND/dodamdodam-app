@@ -27,10 +27,10 @@ export const useUnfoldedLeftPadding = () => {
 
 export const useTabContentWidth = () => {
   const { width, height } = useWindowDimensions();
-  const { right } = useSafeAreaInsets();
-  const sideColumn =
-    getTabBarPosition(width, height) === "right" ? Math.max(right, VERTICAL_COLUMN_WIDTH) : 0;
-  return width - sideColumn - getUnfoldedLeftPadding(width, height);
+  const { left, right } = useSafeAreaInsets();
+  const sideInsets =
+    getTabBarPosition(width, height) === "right" ? left + Math.max(right, VERTICAL_COLUMN_WIDTH) : 0;
+  return width - sideInsets - getUnfoldedLeftPadding(width, height);
 };
 
 const BOTTOM_TAB_SCROLL_PADDING = 140;
