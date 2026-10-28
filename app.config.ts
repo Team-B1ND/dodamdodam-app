@@ -31,6 +31,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     ...config.ios,
     bundleIdentifier: "com.b1nd.dodam.student",
+    // 선언하지 않으면 prebuild가 매번 "1"로 되돌린다.
+    buildNumber: "1",
     googleServicesFile: "./src/app/GoogleService-Info.plist",
     entitlements: {
       "com.apple.developer.nfc.readersession.formats": ["TAG"],
@@ -45,6 +47,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     ...config.android,
     package: "com.b1nd.dodam.student",
+    // 선언하지 않으면 prebuild가 매번 1로 되돌린다.
+    versionCode: 42,
     googleServicesFile: "./google-services.json",
     permissions: [
       "android.permission.POST_NOTIFICATIONS",

@@ -1,10 +1,13 @@
 const {
   AndroidConfig,
   withAndroidManifest,
+  withDangerousMod,
   withInfoPlist,
   withStringsXml,
   withXcodeProject,
 } = require("expo/config-plugins");
+const fs = require("fs");
+const path = require("path");
 
 // expo 내장 mod는 사용자 플러그인보다 먼저 실행되므로(먼저 추가된 mod가 나중에
 // 실행된다), 이 파일에서 쓴 값이 최종값이 된다. 단 app.config.ts의 plugins 배열
@@ -100,12 +103,54 @@ function withWatchDeviceFamily(config) {
   });
 }
 
+/**
+ * 위젯·Watch·NotificationService 타겟은 프로젝트 레벨 baseConfigurationReference로
+ * 이 xcconfig 하나를 공유한다. expo는 메인 앱 Info.plist만 갱신하므로 나머지
+ * 타겟의 버전이 밀리지 않게 package.json에서 생성한다.
+ */
+function withVersionXcconfig(config) {
+  return withDangerousMod(config, [
+    "ios",
+    (config) => {
+      const dir = path.join(config.modRequest.platformProjectRoot, "Config");
+      fs.mkdirSync(dir, { recursive: true });
+
+      const contents = [
+        "// plugins/withProjectFixups.js가 생성하는 파일이다. 직접 수정하지 말 것.",
+        "// 버전의 단일 출처는 package.json이다.",
+        `MARKETING_VERSION = ${config.version}`,
+        `CURRENT_PROJECT_VERSION = ${config.ios?.buildNumber ?? "1"}`,
+        "",
+      ].join("\n");
+
+      fs.writeFileSync(path.join(dir, "Version.xcconfig"), contents);
+
+      return config;
+    },
+  ]);
+}
+
+/**
+ * expo의 Version mod는 메인 앱 Info.plist에 버전을 문자열로 직접 써 넣는다.
+ * 그러면 버전이 Info.plist와 Version.xcconfig 두 곳에 기록되므로, 메인 앱도
+ * 다른 타겟처럼 xcconfig의 빌드 설정을 참조하도록 되돌린다.
+ */
+function withVersionReferences(config) {
+  return withInfoPlist(config, (config) => {
+    config.modResults.CFBundleShortVersionString = "$(MARKETING_VERSION)";
+    config.modResults.CFBundleVersion = "$(CURRENT_PROJECT_VERSION)";
+    return config;
+  });
+}
+
 module.exports = function withProjectFixups(config, props = {}) {
   const displayName = props.displayName ?? config.name;
 
   config = withDisplayNames(config, displayName);
   config = withFirebaseNotificationMeta(config);
   config = withWatchDeviceFamily(config);
+  config = withVersionXcconfig(config);
+  config = withVersionReferences(config);
 
   return config;
 };
