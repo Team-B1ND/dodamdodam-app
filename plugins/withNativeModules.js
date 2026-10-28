@@ -16,6 +16,22 @@ function copyDirSync(src, dest) {
   }
 }
 
+function normalizeXcodeValue(value) {
+  return typeof value === "string" ? value.replace(/^"|"$/g, "") : value;
+}
+
+function hasNativeModulesGroup(project) {
+  const groups = project.hash.project.objects.PBXGroup;
+
+  return Object.entries(groups).some(([key, group]) => {
+    if (key.endsWith("_comment") || typeof group !== "object") return false;
+
+    const name = normalizeXcodeValue(group.name);
+    const groupPath = normalizeXcodeValue(group.path);
+    return name === "NativeModules" || groupPath?.endsWith("/NativeModules");
+  });
+}
+
 module.exports = function withNativeModules(config) {
   return withXcodeProject(config, (config) => {
     const project = config.modResults;
@@ -30,6 +46,9 @@ module.exports = function withNativeModules(config) {
 
     // Copy native modules into ios/ folder
     copyDirSync(nativeModulesSource, nativeModulesDest);
+
+    // 기존 프로젝트에 이미 등록된 그룹과 build phase를 재생성하지 않는다.
+    if (hasNativeModulesGroup(project)) return config;
 
     const targetKey = project.getFirstTarget().uuid;
 

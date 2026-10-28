@@ -38,6 +38,22 @@ function collectSwiftFiles(dir) {
   return results;
 }
 
+function normalizeXcodeValue(value) {
+  return typeof value === "string" ? value.replace(/^"|"$/g, "") : value;
+}
+
+function hasNativeTarget(project, targetName) {
+  const targets = project.pbxNativeTargetSection();
+
+  return Object.entries(targets).some(([key, target]) => {
+    if (key.endsWith("_comment") || typeof target !== "object") return false;
+
+    return [target.name, target.productName]
+      .map(normalizeXcodeValue)
+      .includes(targetName);
+  });
+}
+
 // Copy widget + notification source files to ios/
 function withCopyFiles(config) {
   return withDangerousMod(config, [
@@ -135,8 +151,9 @@ function addExtensionTarget(project, iosRoot, opts) {
     marketingVersion,
   } = opts;
 
-  // Skip if target already exists
-  if (project.pbxTargetByName(targetName)) return;
+  // 기존 수동 target은 표시 이름과 productName이 다를 수 있다. 둘 중 하나가
+  // 일치하면 이미 구성된 것으로 보고 prebuild 재실행 시 중복 생성을 막는다.
+  if (hasNativeTarget(project, targetName)) return;
 
   const targetDir = path.join(iosRoot, targetName);
   if (!fs.existsSync(targetDir)) return;
