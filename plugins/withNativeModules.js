@@ -52,15 +52,19 @@ module.exports = function withNativeModules(config) {
 
     const targetKey = project.getFirstTarget().uuid;
 
-    // Collect all source files
+    // Collect all source files. WatchConnectivityBridge.swift처럼 모듈 디렉터리에
+    // 속하지 않는 최상위 파일도 등록 대상에 포함한다.
+    const isSource = (name) => name.endsWith(".swift") || name.endsWith(".m");
     const allFiles = [];
-    for (const moduleName of fs.readdirSync(nativeModulesSource)) {
-      const moduleDir = path.join(nativeModulesDest, moduleName);
-      if (!fs.statSync(moduleDir).isDirectory()) continue;
-      for (const file of fs.readdirSync(moduleDir)) {
-        if (file.endsWith(".swift") || file.endsWith(".m")) {
-          allFiles.push(path.join(appName, "NativeModules", moduleName, file));
+    for (const entry of fs.readdirSync(nativeModulesSource, { withFileTypes: true })) {
+      if (entry.isDirectory()) {
+        for (const file of fs.readdirSync(path.join(nativeModulesDest, entry.name))) {
+          if (isSource(file)) {
+            allFiles.push(path.join(appName, "NativeModules", entry.name, file));
+          }
         }
+      } else if (isSource(entry.name)) {
+        allFiles.push(path.join(appName, "NativeModules", entry.name));
       }
     }
 
