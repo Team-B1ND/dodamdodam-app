@@ -57,7 +57,8 @@ class MainApplication : Application(), ReactApplication {
   }
 
   companion object {
-    // AndroidManifest의 default_notification_channel_id 값과 반드시 같아야 한다.
+    // plugins/withProjectFixups.js의 NOTIFICATION_CHANNEL_ID와 반드시 같아야 한다.
+    // (AndroidManifest는 prebuild가 생성하므로 그쪽이 원본이다.)
     private const val DEFAULT_NOTIFICATION_CHANNEL_ID = "dodam_default"
   }
 
