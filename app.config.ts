@@ -35,7 +35,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     buildNumber: "1",
     googleServicesFile: "./src/app/GoogleService-Info.plist",
     entitlements: {
-      "com.apple.developer.nfc.readersession.formats": ["TAG"],
+      // NfcRead 화면이 NfcTech.Ndef로 읽으므로 NDEF가 필요하다.
+      // react-native-nfc-manager 플러그인도 NDEF를 넣기 때문에 선언을 맞춰둔다.
+      "com.apple.developer.nfc.readersession.formats": ["TAG", "NDEF"],
     },
     infoPlist: {
       NSAppTransportSecurity: {
