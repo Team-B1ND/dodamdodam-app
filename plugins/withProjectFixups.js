@@ -3,6 +3,7 @@ const {
   withAndroidManifest,
   withInfoPlist,
   withStringsXml,
+  withXcodeProject,
 } = require("expo/config-plugins");
 
 // expo 내장 mod는 사용자 플러그인보다 먼저 실행되므로(먼저 추가된 mod가 나중에
@@ -79,11 +80,32 @@ function withFirebaseNotificationMeta(config) {
   });
 }
 
+/**
+ * expo의 DeviceFamily mod는 PRODUCT_NAME이 있는 build configuration을 전부
+ * 순회하며 TARGETED_DEVICE_FAMILY를 덮는다. 추가 타겟을 모르기 때문에 watchOS
+ * 타겟도 iPhone(1)으로 바뀌므로 다시 4로 되돌린다.
+ */
+function withWatchDeviceFamily(config) {
+  return withXcodeProject(config, (config) => {
+    const buildConfigs = config.modResults.pbxXCBuildConfigurationSection();
+
+    for (const [key, item] of Object.entries(buildConfigs)) {
+      if (key.endsWith("_comment") || typeof item !== "object") continue;
+      if (item.buildSettings?.WATCHOS_DEPLOYMENT_TARGET === undefined) continue;
+
+      item.buildSettings.TARGETED_DEVICE_FAMILY = "4";
+    }
+
+    return config;
+  });
+}
+
 module.exports = function withProjectFixups(config, props = {}) {
   const displayName = props.displayName ?? config.name;
 
   config = withDisplayNames(config, displayName);
   config = withFirebaseNotificationMeta(config);
+  config = withWatchDeviceFamily(config);
 
   return config;
 };
