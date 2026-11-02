@@ -1,10 +1,8 @@
 import type { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import { validateSession } from "@features/auth/session";
-import {
-  deepLinkPrefixes,
-  resolveDeepLink,
-} from "./deepLinkResolver";
+import { deepLinkConfig, deepLinkPrefixes } from "./deepLinkConfig";
+import { getDeepLinkStateFromPath, resolveDeepLink } from "./deepLinkResolver";
 import type { RootStackParamList } from "./navigationTypes";
 import { pendingDeepLink } from "./pendingDeepLink";
 
@@ -16,33 +14,8 @@ export const createLinking = ({
   onAuthenticationRequired,
 }: CreateLinkingOptions): LinkingOptions<RootStackParamList> => ({
   prefixes: deepLinkPrefixes,
-  config: {
-    screens: {
-      Main: {
-        path: "",
-        screens: {
-          Home: "home",
-          Meal: "meal",
-          OutSleeping: "out-sleeping",
-          NightStudy: "night-study",
-          More: "more",
-        },
-      },
-
-      Notification: "notifications",
-      OutSleepingApply: "out-sleeping/apply",
-
-      NightStudyApply: {
-        path: "night-study/apply",
-        parse: {
-          tab: value =>
-            value === "project" || value === "personal"
-              ? value
-              : undefined,
-        },
-      },
-    },
-  },
+  config: deepLinkConfig,
+  getStateFromPath: path => getDeepLinkStateFromPath(path),
 
   // 콜드 스타트 딥링크가 Landing의 인증 확인을 건너뛰지 않도록 보류한다.
   getInitialURL: async () => {
