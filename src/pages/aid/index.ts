@@ -1,0 +1,1 @@
+export { AidPage } from "./AidPage";

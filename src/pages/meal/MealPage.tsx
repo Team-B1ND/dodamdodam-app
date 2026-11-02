@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useCallback } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import Animated, {
   useSharedValue,
@@ -7,6 +7,7 @@ import Animated, {
   clamp,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { TopNavBar } from "@shared/ui";
 import {
@@ -19,6 +20,8 @@ import { MealCardList } from "@features/meal";
 
 export const MealPage = () => {
   const { colors } = useTheme();
+  const navigation = useNavigation<any>();
+  const goBack = useCallback(() => navigation.goBack(), [navigation]);
   const calendar = useCalendar();
   const rowCount = Math.ceil(calendar.monthDates.length / 7);
   const collapsibleHeight = (rowCount - 1) * ROW_HEIGHT;
@@ -44,8 +47,8 @@ export const MealPage = () => {
       style={[styles.safeArea, { backgroundColor: colors.background.default }]}
       edges={["top"]}
     >
-      <TopNavBar>
-        <TopNavBar.Title>{`${calendar.month + 1}월 급식`}</TopNavBar.Title>
+      <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />}>
+        <TopNavBar.Title hasBackButton>{`${calendar.month + 1}월 급식`}</TopNavBar.Title>
       </TopNavBar>
 
       <View style={styles.content}>

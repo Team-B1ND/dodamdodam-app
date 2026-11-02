@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type ReactNode } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
@@ -8,13 +8,15 @@ import { ChevronRight } from "@shared/icons/mono";
 
 interface SettingItemProps {
   title: string;
+  description?: string;
   rightText?: string;
+  right?: ReactNode;
   color?: string;
   onPress?: () => void;
 }
 
 export const SettingItem = React.memo(
-  ({ title, rightText, color, onPress }: SettingItemProps) => {
+  ({ title, description, rightText, right, color, onPress }: SettingItemProps) => {
     const { colors } = useTheme();
     const { animatedStyle, handlePressIn, handlePressOut } =
       usePressAnimation({ scale: 0.98 });
@@ -26,14 +28,21 @@ export const SettingItem = React.memo(
         onPressOut={handlePressOut}
       >
         <Animated.View style={[styles.container, animatedStyle]}>
-          <Text style={[styles.title, { color: color ?? colors.text.primary }]}>{title}</Text>
-          {rightText ? (
+          <View style={styles.labels}>
+            <Text style={[styles.title, { color: color ?? colors.text.primary }]}>{title}</Text>
+            {description ? (
+              <Text style={[styles.description, { color: colors.text.tertiary }]}>
+                {description}
+              </Text>
+            ) : null}
+          </View>
+          {right ?? (rightText ? (
             <Text style={[styles.rightText, { color: colors.text.tertiary }]}>
               {rightText}
             </Text>
           ) : (
             <ChevronRight size={16} color={colors.text.tertiary} />
-          )}
+          ))}
         </Animated.View>
       </Pressable>
     );
@@ -46,10 +55,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 16,
-    height: 52,
+    minHeight: 52,
+    paddingVertical: 8,
+    gap: 12,
+  },
+  labels: {
+    flex: 1,
+    gap: 2,
   },
   title: {
     ...typo("Body1", "Medium"),
+  },
+  description: {
+    ...typo("Caption1", "Regular"),
   },
   rightText: {
     ...typo("Body1", "Regular"),

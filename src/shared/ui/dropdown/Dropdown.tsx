@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from "react";
+import React, { useCallback, useMemo, memo } from "react";
 import { View, Text, Pressable, ScrollView, StyleSheet, type ViewStyle } from "react-native";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@shared/theme";
@@ -9,6 +9,7 @@ import { ChevronDown } from "@shared/icons/mono";
 interface DropdownProps {
   items: string[];
   value: string;
+  placeholder?: string;
   onSelectedItemChange: (item: string) => void;
   customStyle?: ViewStyle;
 }
@@ -16,6 +17,7 @@ interface DropdownProps {
 export const Dropdown = memo(({
   items,
   value,
+  placeholder,
   onSelectedItemChange,
   customStyle,
 }: DropdownProps) => {
@@ -29,6 +31,11 @@ export const Dropdown = memo(({
     iconAnimatedStyle,
     optionAnimatedStyle,
   } = useDropdownAnimation();
+
+  const widestLabel = useMemo(
+    () => [placeholder ?? "", ...items].reduce((a, b) => (b.length > a.length ? b : a)),
+    [items, placeholder]
+  );
 
   const handleItemPress = useCallback(
     (item: string) => {
@@ -51,9 +58,19 @@ export const Dropdown = memo(({
           },
         ]}
       >
-        <Text style={[styles.valueText, { color: colors.text.primary }]}>
-          {value}
-        </Text>
+        <View>
+          <Text style={[styles.valueText, styles.sizer]}>{widestLabel}</Text>
+          <Text
+            style={[
+              styles.valueText,
+              styles.value,
+              { color: value ? colors.text.primary : colors.text.placeholder },
+            ]}
+            numberOfLines={1}
+          >
+            {value || placeholder}
+          </Text>
+        </View>
         <Animated.View style={iconAnimatedStyle}>
           <ChevronDown size={16} color={colors.text.primary} />
         </Animated.View>
@@ -134,6 +151,15 @@ const styles = StyleSheet.create({
   },
   valueText: {
     ...typo("Headline", "Medium"),
+  },
+  sizer: {
+    opacity: 0,
+  },
+  value: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
   },
   optionWrap: {
     position: "absolute",
