@@ -44,6 +44,9 @@
 		F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634D2FE2CF00004AD0B3 /* RNMealWidgetModule.swift */; };
 		F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */; };
 		F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634C2FE2CF00004AD0B3 /* RNMealWidgetModule.m */; };
+		BD033FFC681A24F2DAB93A6A /* InAppTestWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A81A52B7DA92D82D96FE81 /* InAppTestWidget.swift */; };
+		9A9C2E4F1B09E7BC09ADC760 /* RNInAppWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 31758F0F7D6B30DF14F0E30D /* RNInAppWidgetModule.m */; };
+		6C912D71DE08C35E6806B187 /* RNInAppWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3A69AD356B302EE8D2234A /* RNInAppWidgetModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +129,9 @@
 		F5A7634F2FE2CF00004AD0B3 /* RNTimetableWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTimetableWidgetModule.m; sourceTree = "<group>"; };
 		F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTimetableWidgetModule.swift; sourceTree = "<group>"; };
 		FDD3B7C6E1B6198C0ACC15EA /* DeepLinkTestWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = DeepLinkTestWidget.swift; path = Feature/DeepLinkTest/DeepLinkTestWidget.swift; sourceTree = "<group>"; };
+		32A81A52B7DA92D82D96FE81 /* InAppTestWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = InAppTestWidget.swift; path = Feature/InAppTest/InAppTestWidget.swift; sourceTree = "<group>"; };
+		31758F0F7D6B30DF14F0E30D /* RNInAppWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNInAppWidgetModule.m; sourceTree = "<group>"; };
+		5C3A69AD356B302EE8D2234A /* RNInAppWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNInAppWidgetModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -172,6 +178,7 @@
 				1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */,
 				3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */,
 				FDD3B7C6E1B6198C0ACC15EA /* DeepLinkTestWidget.swift */,
+				32A81A52B7DA92D82D96FE81 /* InAppTestWidget.swift */,
 				888D23419118411AA4F38A1E /* MealMenuText.swift */,
 				B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */,
 				658D8CB42C11402FB995C840 /* MealType.swift */,
@@ -204,6 +211,7 @@
 		401AE01862FC4C198E7E0B2D /* NativeModules */ = {
 			isa = PBXGroup;
 			children = (
+				A77161EA7DEFFFC1D2A2910B /* InApp */,
 				F5A7634E2FE2CF00004AD0B3 /* Meal */,
 				F5A763512FE2CF00004AD0B3 /* Timetable */,
 				9A2017103002A25E008AC312 /* WatchConnectivityBridge.swift */,
@@ -316,6 +324,15 @@
 				F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */,
 			);
 			path = Timetable;
+			sourceTree = "<group>";
+		};
+		A77161EA7DEFFFC1D2A2910B /* InApp */ = {
+			isa = PBXGroup;
+			children = (
+				31758F0F7D6B30DF14F0E30D /* RNInAppWidgetModule.m */,
+				5C3A69AD356B302EE8D2234A /* RNInAppWidgetModule.swift */,
+			);
+			path = InApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -643,6 +660,8 @@
 				F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */,
 				F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */,
 				F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */,
+				9A9C2E4F1B09E7BC09ADC760 /* RNInAppWidgetModule.m in Sources */,
+				6C912D71DE08C35E6806B187 /* RNInAppWidgetModule.swift in Sources */,
 				5E21E6B362CA12EA87C0A043 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -660,6 +679,7 @@
 			files = (
 				40E6414E860847419134EA6C /* AppMainWidget.swift in Sources */,
 				72A7AAB783B9942B3BF4D296 /* DeepLinkTestWidget.swift in Sources */,
+				BD033FFC681A24F2DAB93A6A /* InAppTestWidget.swift in Sources */,
 				8DEE63BA3F434062BDBB217A /* MealMenuText.swift in Sources */,
 				1D77E8991BDE49DCB4D7001F /* SelectMealIntent.swift in Sources */,
 				88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */,

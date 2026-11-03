@@ -15,6 +15,7 @@ struct AppMainWidget: WidgetBundle {
     TimetableWidget()
 #if DEBUG
     DeepLinkTestWidget()
+    InAppTestWidget()
 #endif
   }
 }

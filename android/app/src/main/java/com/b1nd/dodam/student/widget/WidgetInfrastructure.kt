@@ -12,6 +12,7 @@ internal object WidgetPreferences {
   const val MEALS_KEY = "widgetMeals"
   const val SELECTED_MEAL_KEY = "selectedMealType"
   const val TIMETABLE_KEY = "widgetTimetable"
+  const val INAPPS_KEY = "widgetInApps"
 }
 
 internal object WidgetColors {
