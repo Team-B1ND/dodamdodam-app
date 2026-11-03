@@ -12,6 +12,7 @@ const PARENT_TABS: Partial<
   Notification: "Home",
   OutSleepingApply: "OutSleeping",
   NightStudyApply: "NightStudy",
+  InAppLaunch: "Aid",
 };
 
 const normalizePath = (path: string) => {

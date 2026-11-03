@@ -5,7 +5,7 @@ import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { EmptyState } from "@shared/ui";
 import { Globe } from "@shared/icons/illustration";
-import { skipStorage } from "@entities/inapp/storage/skipStorage";
+import { getInAppRoute } from "../inAppLauncher";
 import { useInAppsSuspense } from "../useInApps";
 import { InAppGridSkeleton } from "./InAppGridSkeleton";
 import { styles } from "./styles";
@@ -27,20 +27,8 @@ const InAppGridComponent = ({ onEndReachedRef }: InAppGridProps) => {
   }
 
   const handlePress = useCallback(async (app: InApp) => {
-    const skipped = await skipStorage.isSkipped(app.appId);
-    if (skipped) {
-      navigation.navigate("AppWebView", { appUrl: app.appUrl, name: app.name });
-    } else {
-      navigation.navigate("AppIn", {
-        appId: app.appId,
-        name: app.name,
-        subTitle: app.subtitle,
-        description: app.description,
-        iconUrl: app.iconUrl,
-        darkIconUrl: app.darkIconUrl,
-        appUrl: app.appUrl,
-      });
-    }
+    const route = await getInAppRoute(app);
+    navigation.navigate(route.name, route.params);
   }, [navigation]);
 
   if (apps.length === 0) {

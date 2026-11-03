@@ -21,6 +21,7 @@ export const deepLinkConfig: NonNullable<
     Meal: "meal",
     Notification: "notifications",
     OutSleepingApply: "out-sleeping/apply",
+    InAppLaunch: "apps/:appId",
 
     NightStudyApply: {
       path: "night-study/apply",

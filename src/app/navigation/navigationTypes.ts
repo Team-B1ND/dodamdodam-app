@@ -41,4 +41,7 @@ export type RootStackParamList = {
     appUrl: string;
     name: string;
   };
+  InAppLaunch: {
+    appId: string;
+  };
 };

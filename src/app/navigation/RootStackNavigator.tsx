@@ -14,6 +14,7 @@ import { EnterNamePage } from "@pages/enter-name";
 import { CreateAccountPage } from "@pages/create-account";
 import { LANDING_ROUTE } from "@shared/config";
 import { AppWebViewPage } from "@pages/app-webview";
+import { InAppLaunchPage } from "@pages/inapp-launch";
 import { MealPage } from "@pages/meal";
 import { OutSleepingApplyPage } from "@pages/out-sleeping";
 import { NightStudyApplyPage } from "@pages/night-study";
@@ -67,5 +68,6 @@ export const RootStackNavigator = () => (
       component={AppWebViewPage}
       options={{ gestureEnabled: false }}
     />
+    <Stack.Screen name="InAppLaunch" component={InAppLaunchPage} />
   </Stack.Navigator>
 );
