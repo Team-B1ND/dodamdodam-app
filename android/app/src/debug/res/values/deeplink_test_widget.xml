@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="deeplink_test_widget_name">딥링크 테스트 (Debug)</string>
+  <string name="deeplink_test_widget_description">dodamdodam:// 딥링크 경로를 눌러 바로 열어요</string>
+</resources>

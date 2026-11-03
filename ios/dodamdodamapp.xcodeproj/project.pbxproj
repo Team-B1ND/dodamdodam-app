@@ -22,6 +22,7 @@
 		5ABE104AAB2D4474A81FC1DC /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9601C9410E7F4025B1E07AC8 /* MealModel.swift */; };
 		5E21E6B362CA12EA87C0A043 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973EDEF75B081C984B4BFCF /* ExpoModulesProvider.swift */; };
 		68B1A088A127846392FF9635 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */; };
+		72A7AAB783B9942B3BF4D296 /* DeepLinkTestWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3B7C6E1B6198C0ACC15EA /* DeepLinkTestWidget.swift */; };
 		88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8CB42C11402FB995C840 /* MealType.swift */; };
 		8BC93403078E4BA592BCDCBF /* NotificationService.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 3CFD1620E27149769777318D /* NotificationService.appex */; };
 		8DEE63BA3F434062BDBB217A /* MealMenuText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888D23419118411AA4F38A1E /* MealMenuText.swift */; };
@@ -124,6 +125,7 @@
 		F5A7634D2FE2CF00004AD0B3 /* RNMealWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNMealWidgetModule.swift; sourceTree = "<group>"; };
 		F5A7634F2FE2CF00004AD0B3 /* RNTimetableWidgetModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTimetableWidgetModule.m; sourceTree = "<group>"; };
 		F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTimetableWidgetModule.swift; sourceTree = "<group>"; };
+		FDD3B7C6E1B6198C0ACC15EA /* DeepLinkTestWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = DeepLinkTestWidget.swift; path = Feature/DeepLinkTest/DeepLinkTestWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -169,6 +171,7 @@
 			children = (
 				1F2E3D4C5B6A478899AABBCC /* Assets.xcassets */,
 				3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */,
+				FDD3B7C6E1B6198C0ACC15EA /* DeepLinkTestWidget.swift */,
 				888D23419118411AA4F38A1E /* MealMenuText.swift */,
 				B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */,
 				658D8CB42C11402FB995C840 /* MealType.swift */,
@@ -656,6 +659,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40E6414E860847419134EA6C /* AppMainWidget.swift in Sources */,
+				72A7AAB783B9942B3BF4D296 /* DeepLinkTestWidget.swift in Sources */,
 				8DEE63BA3F434062BDBB217A /* MealMenuText.swift in Sources */,
 				1D77E8991BDE49DCB4D7001F /* SelectMealIntent.swift in Sources */,
 				88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */,
