@@ -2,7 +2,7 @@
 //  InAppTestWidget.swift
 //  dodamwidgetExtension
 //
-//  미니앱 목록 표시 검증용 위젯. Debug 빌드에만 포함된다.
+//  미니앱 목록 표시와 미니앱 딥링크 검증용 위젯. Debug 빌드에만 포함된다.
 //
 
 #if DEBUG
@@ -18,7 +18,7 @@ struct InAppTestWidget: Widget {
       InAppTestWidgetView(entry: entry)
     }
     .configurationDisplayName("미니앱 테스트 (Debug)")
-    .description("앱이 저장한 미니앱 목록을 보여줘요")
+    .description("미니앱을 눌러 바로 열어요")
     .contentMarginsDisabled()
     .supportedFamilies([.systemLarge])
   }
@@ -39,6 +39,12 @@ struct InAppTestRow: Identifiable {
   let subtitle: String
   let icon: UIImage?
   let darkIcon: UIImage?
+
+  // src/app/navigation/deepLinkConfig의 InAppLaunch 경로와 맞춘다.
+  var url: URL? {
+    id.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+      .flatMap { URL(string: "dodamdodam://apps/\($0)") }
+  }
 }
 
 struct InAppTestEntry: TimelineEntry {
@@ -105,7 +111,11 @@ struct InAppTestWidgetView: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
       } else {
         ForEach(entry.rows) { row in
-          InAppTestCell(row: row)
+          if let url = row.url {
+            Link(destination: url) { InAppTestCell(row: row) }
+          } else {
+            InAppTestCell(row: row)
+          }
         }
       }
     }

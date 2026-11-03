@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,12 +42,12 @@ import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import java.net.URL
 
-// 미니앱 목록 표시 검증용 위젯. debug 소스셋에만 있어 릴리스 빌드에는 포함되지 않는다.
+// 미니앱 목록 표시와 미니앱 딥링크 검증용 위젯. debug 소스셋에만 있어 릴리스 빌드에는 포함되지 않는다.
 class InAppTestWidgetProvider : GlanceAppWidgetReceiver() {
   override val glanceAppWidget: GlanceAppWidget = InAppTestWidget()
 }
 
-private data class InAppRow(val name: String, val subtitle: String, val icon: Bitmap?)
+private data class InAppRow(val appId: String, val name: String, val subtitle: String, val icon: Bitmap?)
 
 internal class InAppTestWidget : GlanceAppWidget() {
   override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -65,7 +66,7 @@ private suspend fun loadRows(context: Context): List<InAppRow> = coroutineScope 
     val app = apps.getJSONObject(index)
     val darkIconUrl = app.optString("darkIconUrl").takeIf { isDark && it.isNotEmpty() && it != "null" }
     async {
-      InAppRow(app.optString("name"), app.optString("subtitle"), loadIcon(darkIconUrl ?: app.optString("iconUrl")))
+      InAppRow(app.optString("appId"), app.optString("name"), app.optString("subtitle"), loadIcon(darkIconUrl ?: app.optString("iconUrl")))
     }
   }.awaitAll()
 }
@@ -92,15 +93,17 @@ private fun InAppTestContent(context: Context, rows: List<InAppRow>) {
     } else {
       // Glance의 Column은 자식이 10개를 넘으면 잘리므로 간격은 Spacer 대신 padding으로 준다.
       rows.forEach { row ->
-        InAppCell(row, GlanceModifier.fillMaxWidth().defaultWeight().padding(top = 6.dp))
+        InAppCell(context, row, GlanceModifier.fillMaxWidth().defaultWeight().padding(top = 6.dp))
       }
     }
   }
 }
 
 @Composable
-private fun InAppCell(row: InAppRow, modifier: GlanceModifier) {
-  Box(modifier = modifier) {
+private fun InAppCell(context: Context, row: InAppRow, modifier: GlanceModifier) {
+  // src/app/navigation/deepLinkConfig의 InAppLaunch 경로와 맞춘다.
+  val intent = Intent(Intent.ACTION_VIEW, Uri.parse("dodamdodam://apps/${Uri.encode(row.appId)}"), context, MainActivity::class.java)
+  Box(modifier = modifier.clickable(actionStartActivity(intent))) {
     Row(
       modifier = GlanceModifier.fillMaxSize().background(WidgetColors.card).cornerRadius(14.dp).padding(horizontal = 10.dp),
       verticalAlignment = Alignment.CenterVertically,
