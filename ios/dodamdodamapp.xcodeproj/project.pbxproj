@@ -20,6 +20,7 @@
 		40E6414E860847419134EA6C /* AppMainWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E330A5EB3E042CE8C27CFE4 /* AppMainWidget.swift */; };
 		45A0B16941194B5A9A362915 /* MealWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC278270A04A3BA1938C81 /* MealWidget.swift */; };
 		5ABE104AAB2D4474A81FC1DC /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9601C9410E7F4025B1E07AC8 /* MealModel.swift */; };
+		5E21E6B362CA12EA87C0A043 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973EDEF75B081C984B4BFCF /* ExpoModulesProvider.swift */; };
 		68B1A088A127846392FF9635 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D72396F0AA5FC7586C3C7DA8 /* PrivacyInfo.xcprivacy */; };
 		88181ABD1F7341EA870A5EDF /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8CB42C11402FB995C840 /* MealType.swift */; };
 		8BC93403078E4BA592BCDCBF /* NotificationService.appex in Copy Files */ = {isa = PBXBuildFile; fileRef = 3CFD1620E27149769777318D /* NotificationService.appex */; };
@@ -42,7 +43,6 @@
 		F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634D2FE2CF00004AD0B3 /* RNMealWidgetModule.swift */; };
 		F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A763502FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift */; };
 		F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A7634C2FE2CF00004AD0B3 /* RNMealWidgetModule.m */; };
-		FB5C4AAA770D143C683FEE44 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +100,7 @@
 		6117C2826C2E42B69B3D1C9A /* SharedDefaults.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SharedDefaults.swift; path = Shared/SharedDefaults.swift; sourceTree = "<group>"; };
 		61509D8BD2C84F2D825D57C9 /* TimetablePeriodRow.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = TimetablePeriodRow.swift; path = Feature/Timetable/Component/TimetablePeriodRow.swift; sourceTree = "<group>"; };
 		658D8CB42C11402FB995C840 /* MealType.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealType.swift; path = Feature/Meal/Enum/MealType.swift; sourceTree = "<group>"; };
+		6973EDEF75B081C984B4BFCF /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DodamdodamApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		6DA3A54553D14A178F7AE179 /* MealWidgetView.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealWidgetView.swift; path = Feature/Meal/View/MealWidgetView.swift; sourceTree = "<group>"; };
 		888D23419118411AA4F38A1E /* MealMenuText.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealMenuText.swift; path = Feature/Meal/Component/MealMenuText.swift; sourceTree = "<group>"; };
 		9601C9410E7F4025B1E07AC8 /* MealModel.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealModel.swift; path = Feature/Meal/Model/MealModel.swift; sourceTree = "<group>"; };
@@ -110,7 +111,6 @@
 		A1B2C3D4E5F60718293A4B5C /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = dodamdodamapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B12C233D8B6D45EFA0EDDB85 /* SelectMealIntent.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = SelectMealIntent.swift; path = Feature/Meal/Component/SelectMealIntent.swift; sourceTree = "<group>"; };
-		B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DodamdodamApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		B5FC278270A04A3BA1938C81 /* MealWidget.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = MealWidget.swift; path = Feature/Meal/MealWidget.swift; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		C5ECE8FEA92F497EBE77D0E4 /* NotificationService.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -198,14 +198,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3285087E29E6B7C0C9286EEE /* dodamdodamapp */ = {
-			isa = PBXGroup;
-			children = (
-				B56B0ACBCB5636413C078483 /* ExpoModulesProvider.swift */,
-			);
-			name = dodamdodamapp;
-			sourceTree = "<group>";
-		};
 		401AE01862FC4C198E7E0B2D /* NativeModules */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,9 +212,17 @@
 		5148E926F2213A4D41B968C5 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				3285087E29E6B7C0C9286EEE /* dodamdodamapp */,
+				6FBBFE3771DE5E0E8219A0A2 /* DodamdodamApp */,
 			);
 			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		6FBBFE3771DE5E0E8219A0A2 /* DodamdodamApp */ = {
+			isa = PBXGroup;
+			children = (
+				6973EDEF75B081C984B4BFCF /* ExpoModulesProvider.swift */,
+			);
+			name = DodamdodamApp;
 			sourceTree = "<group>";
 		};
 		7C50C55E39F057F7C7F90939 /* Pods */ = {
@@ -640,7 +640,7 @@
 				F5A763532FE2CF00004AD0B3 /* RNMealWidgetModule.swift in Sources */,
 				F5A763542FE2CF00004AD0B3 /* RNTimetableWidgetModule.swift in Sources */,
 				F5A763552FE2CF00004AD0B3 /* RNMealWidgetModule.m in Sources */,
-				FB5C4AAA770D143C683FEE44 /* ExpoModulesProvider.swift in Sources */,
+				5E21E6B362CA12EA87C0A043 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
