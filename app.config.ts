@@ -8,6 +8,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   slug: "dodamdodam-app",
   version,
   icon: "./assets/icon.png",
+  orientation: "portrait",
   userInterfaceStyle: "automatic",
   plugins: [
     "@react-native-firebase/app",
