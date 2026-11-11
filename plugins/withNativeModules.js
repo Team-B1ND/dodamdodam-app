@@ -16,6 +16,22 @@ function copyDirSync(src, dest) {
   }
 }
 
+function normalizeXcodeValue(value) {
+  return typeof value === "string" ? value.replace(/^"|"$/g, "") : value;
+}
+
+function hasNativeModulesGroup(project) {
+  const groups = project.hash.project.objects.PBXGroup;
+
+  return Object.entries(groups).some(([key, group]) => {
+    if (key.endsWith("_comment") || typeof group !== "object") return false;
+
+    const name = normalizeXcodeValue(group.name);
+    const groupPath = normalizeXcodeValue(group.path);
+    return name === "NativeModules" || groupPath?.endsWith("/NativeModules");
+  });
+}
+
 module.exports = function withNativeModules(config) {
   return withXcodeProject(config, (config) => {
     const project = config.modResults;
@@ -31,17 +47,24 @@ module.exports = function withNativeModules(config) {
     // Copy native modules into ios/ folder
     copyDirSync(nativeModulesSource, nativeModulesDest);
 
+    // 기존 프로젝트에 이미 등록된 그룹과 build phase를 재생성하지 않는다.
+    if (hasNativeModulesGroup(project)) return config;
+
     const targetKey = project.getFirstTarget().uuid;
 
-    // Collect all source files
+    // Collect all source files. WatchConnectivityBridge.swift처럼 모듈 디렉터리에
+    // 속하지 않는 최상위 파일도 등록 대상에 포함한다.
+    const isSource = (name) => name.endsWith(".swift") || name.endsWith(".m");
     const allFiles = [];
-    for (const moduleName of fs.readdirSync(nativeModulesSource)) {
-      const moduleDir = path.join(nativeModulesDest, moduleName);
-      if (!fs.statSync(moduleDir).isDirectory()) continue;
-      for (const file of fs.readdirSync(moduleDir)) {
-        if (file.endsWith(".swift") || file.endsWith(".m")) {
-          allFiles.push(path.join(appName, "NativeModules", moduleName, file));
+    for (const entry of fs.readdirSync(nativeModulesSource, { withFileTypes: true })) {
+      if (entry.isDirectory()) {
+        for (const file of fs.readdirSync(path.join(nativeModulesDest, entry.name))) {
+          if (isSource(file)) {
+            allFiles.push(path.join(appName, "NativeModules", entry.name, file));
+          }
         }
+      } else if (isSource(entry.name)) {
+        allFiles.push(path.join(appName, "NativeModules", entry.name));
       }
     }
 

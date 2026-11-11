@@ -8,5 +8,6 @@ class RNMealWidgetModule: NSObject {
   func saveMeals(json: String) {
     UserDefaults(suiteName: "group.com.b1nd.dodam.student.shared")?.set(json, forKey: "widgetMeals")
     WidgetCenter.shared.reloadAllTimelines()
+    WatchConnectivityBridge.shared.send(key: "meals", json: json)
   }
 }
