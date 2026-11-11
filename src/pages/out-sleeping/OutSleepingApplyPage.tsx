@@ -13,7 +13,7 @@ export const OutSleepingApplyPage = () => {
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
-      edges={["top", "bottom"]}
+      edges={["top", "bottom", "left", "right"]}
     >
       <TopNavBar
         left={<TopNavBar.BackButton onPress={() => navigation.goBack()} />}

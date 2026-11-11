@@ -98,7 +98,7 @@ export const CreateAccountPage = () => {
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
-      edges={["top", "bottom"]}
+      edges={["top", "bottom", "left", "right"]}
     >
       <KeyboardAvoidingView
         style={styles.flex}
