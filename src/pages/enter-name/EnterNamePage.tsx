@@ -9,16 +9,25 @@ import {
   TopNavBar,
   TextField,
   FilledButton,
+  Dropdown,
   TextAreaProvider,
   VerifyCodeDialog,
   useOverlay,
   toast,
 } from "@shared/ui";
 import { authApi } from "@entities/auth/api";
+import type { Gender } from "@entities/auth/types";
 import { Role } from "@features/register/types";
 import { validateStudentNumber } from "@features/register/validateStudentNumber";
 import { formatPhoneNumber, parsePhoneDigits } from "@features/register/formatPhoneNumber";
 import { useSlideAnimation } from "@shared/hooks/animations/useSlideAnimation";
+
+const GENDER_BY_LABEL: Record<string, Gender> = {
+  "남성": "MALE",
+  "여성": "FEMALE",
+};
+
+const GENDER_LABELS = Object.keys(GENDER_BY_LABEL);
 
 interface EnterNameRouteParams {
   role: Role;
@@ -35,6 +44,7 @@ export const EnterNamePage = () => {
 
   const [name, setName] = useState("");
   const [extraField, setExtraField] = useState("");
+  const [genderLabel, setGenderLabel] = useState("");
   const [phone, setPhone] = useState("");
 
   const handleNameChange = useCallback((text: string) => {
@@ -50,13 +60,20 @@ export const EnterNamePage = () => {
   }, []);
 
   const showExtraField = name.trim().length >= 2;
-  const showPhoneField = showExtraField && (isStudent
+  const showGenderField = showExtraField && (isStudent
     ? extraField.length === 4
     : extraField.trim().length >= 1);
+  const showPhoneField = showGenderField && genderLabel.length > 0;
   const showVerifyButton = showPhoneField && phone.length === 11;
 
   const { animatedStyle: extraFieldStyle } = useSlideAnimation({
     visible: showExtraField,
+    direction: "up",
+    distance: 12,
+  });
+
+  const { animatedStyle: genderFieldStyle } = useSlideAnimation({
+    visible: showGenderField,
     direction: "up",
     distance: 12,
   });
@@ -101,6 +118,7 @@ export const EnterNamePage = () => {
               name,
               extraField,
               phone,
+              gender: GENDER_BY_LABEL[genderLabel],
             });
           }}
         />
@@ -110,7 +128,7 @@ export const EnterNamePage = () => {
     } finally {
       setSendingCode(false);
     }
-  }, [sendingCode, phone, overlay, navigation, role, name, extraField]);
+  }, [sendingCode, phone, overlay, navigation, role, name, extraField, genderLabel]);
 
   return (
     <SafeAreaView
@@ -137,6 +155,17 @@ export const EnterNamePage = () => {
                   value={formatPhoneNumber(phone)}
                   onChangeText={handlePhoneChange}
                   keyboardType="number-pad"
+                />
+              </Animated.View>
+            )}
+
+            {showGenderField && (
+              <Animated.View style={[genderFieldStyle, styles.genderField]}>
+                <Dropdown
+                  items={GENDER_LABELS}
+                  value={genderLabel}
+                  placeholder="성별"
+                  onSelectedItemChange={setGenderLabel}
                 />
               </Animated.View>
             )}
@@ -192,6 +221,9 @@ const styles = StyleSheet.create({
   },
   fields: {
     gap: 20,
+  },
+  genderField: {
+    zIndex: 1000,
   },
   verifyButton: {
     marginTop: 24,

@@ -8,6 +8,8 @@ export interface TokenData {
   refresh: string;
 }
 
+export type Gender = "MALE" | "FEMALE";
+
 export interface RegisterStudentRequest {
   username: string;
   name: string;
@@ -16,6 +18,7 @@ export interface RegisterStudentRequest {
   grade: number;
   room: number;
   number: number;
+  gender: Gender;
 }
 
 export interface RegisterTeacherRequest {
@@ -24,4 +27,5 @@ export interface RegisterTeacherRequest {
   password: string;
   phone: string;
   position: string;
+  gender: Gender;
 }
