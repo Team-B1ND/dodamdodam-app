@@ -4,8 +4,10 @@ import { Actions, Errors, core, useBridgeCore, useBridgeUi } from "@b1nd/aid-kit
 import * as Location from "expo-location";
 import * as ImagePicker from "expo-image-picker";
 import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
+import type { HapticRequest } from "@b1nd/aid-kit/bridge-kit/app";
+import { triggerHaptic } from "@shared/hooks";
 import { useNfcRead } from "./screens/NfcRead";
 
 export const useAppBridge = () => {
@@ -135,8 +137,14 @@ export const useAppBridge = () => {
 		};
 	});
 
-	core.mount(Actions.FILE_SAVE, async (data: any) => {
-		const { url, fileName } = data ?? {};
+	core.mount(Actions.HAPTIC, async (payload) => {
+		const { style } = (payload ?? {}) as Partial<HapticRequest>;
+		await triggerHaptic(style);
+		return null;
+	});
+
+	core.mount(Actions.FILE_SAVE, async (payload) => {
+		const { url, fileName } = (payload ?? {}) as { url?: string; fileName?: string };
 		if (!url) return Errors.UNKNOWN as any;
 
 		const fileUri = `${FileSystem.cacheDirectory}${fileName ?? "download"}`;
