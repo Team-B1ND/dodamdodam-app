@@ -29,7 +29,12 @@ const InAppGridComponent = ({ onEndReachedRef }: InAppGridProps) => {
   const handlePress = useCallback(async (app: InApp) => {
     const skipped = await skipStorage.isSkipped(app.appId);
     if (skipped) {
-      navigation.navigate("AppWebView", { appUrl: app.appUrl, name: app.name });
+      navigation.navigate("AppWebView", {
+        appUrl: app.appUrl,
+        name: app.name,
+        iconUrl: app.iconUrl,
+        darkIconUrl: app.darkIconUrl,
+      });
     } else {
       navigation.navigate("AppIn", {
         appId: app.appId,

@@ -3,12 +3,15 @@ import { useRoute, type RouteProp } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { tokenStorage } from "@entities/api/common/tokenStorage";
 
-interface AppWebViewParams {
+export interface AppWebViewParams {
   appUrl: string;
   name: string;
+  // 푸시 알림으로 들어오면 아이콘 정보가 없다.
+  iconUrl?: string;
+  darkIconUrl?: string | null;
 }
 
-type AppWebViewRouteProp = RouteProp<{ AppWebView: AppWebViewParams }, "AppWebView">;
+export type AppWebViewRouteProp = RouteProp<{ AppWebView: AppWebViewParams }, "AppWebView">;
 
 export const useAppWebViewUri = () => {
   const { params } = useRoute<AppWebViewRouteProp>();
