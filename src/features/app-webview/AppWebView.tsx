@@ -117,7 +117,10 @@ export const AppWebView = () => {
 	const popupRef = useRef<BottomSheetModal>(null);
 	const [popupUrl, setPopupUrl] = useState("");
 	// 메인 문서가 4xx/5xx로 오면 서버 에러 페이지를 노출하지 않고 앱 화면으로 대체한다.
-	const [httpFailed, setHttpFailed] = useState(false);
+	// 실패 여부 대신 실패한 URL을 기억한다. 알림으로 다른 미니앱을 열면 같은 화면이 params만 바뀐 채
+	// 재사용되는데, 그때 URL이 달라지면 자동으로 실패 상태가 풀려 새 WebView가 마운트된다.
+	const [failedUri, setFailedUri] = useState<string | null>(null);
+	const httpFailed = failedUri === uri;
 
 	const handleLinkRequest = useCallback(
 		(req: { url: string; isTopFrame?: boolean }) => {
@@ -154,7 +157,7 @@ export const AppWebView = () => {
 					// 메인 프레임 응답에서만 호출된다(iOS·Android 모두). 이미지·API 같은 하위 요청 실패는 해당 없다.
 					onHttpError={({ nativeEvent }) => {
 						console.error("[AppWebView] HTTP 오류", nativeEvent.statusCode, withoutQuery(nativeEvent.url));
-						setHttpFailed(true);
+						setFailedUri(uri);
 					}}
 					renderError={() => <LoadFailed message={NETWORK_ERROR_MESSAGE} />}
 					overScrollMode="never"
