@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { BackHandler, Image, Linking, View, useColorScheme } from "react-native";
+import { BackHandler, Image, Linking, Pressable, StyleSheet, Text, View, useColorScheme } from "react-native";
 import { WebView } from "react-native-webview";
 import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { EmptyState, WebPopup } from "@shared/ui";
-import { TextButton } from "@shared/ui/buttons";
-import { Globe } from "@shared/icons/illustration";
+import { WebPopup } from "@shared/ui";
+import { ExclamationmarkCircle } from "@shared/icons/mono";
+import { useTheme } from "@shared/theme";
+import { shapes, typo } from "@shared/tokens";
 import { useAppBridge } from "./useAppBridge";
 import { useAppWebViewUri, type AppWebViewRouteProp } from "./useAppWebViewUri";
 import { useLinkOpenMode } from "@features/settings";
@@ -18,11 +19,14 @@ const NETWORK_ERROR_MESSAGE = "페이지를 불러오지 못했어요.\n네트�
 // 배포가 덜 됐거나 경로가 없을 때 S3/CloudFront가 403·404 XML(Access Denied)을 그대로 돌려준다.
 const SERVER_ERROR_MESSAGE = "지금은 이 서비스를 이용할 수 없어요.\n잠시 후 다시 시도해 주세요.";
 
-const ICON_SIZE = 56;
+const ICON_SIZE = 80;
+const BADGE_RING_SIZE = 36;
+const BADGE_ICON_SIZE = 28;
 
 const LoadFailed = ({ message }: { message: string }) => {
 	const navigation = useNavigation();
 	const { params } = useRoute<AppWebViewRouteProp>();
+	const { colors } = useTheme();
 	const isDark = useColorScheme() === "dark";
 	const iconUri = isDark && params.darkIconUrl ? params.darkIconUrl : params.iconUrl;
 	const goBack = useCallback(() => navigation.goBack(), [navigation]);
@@ -38,25 +42,73 @@ const LoadFailed = ({ message }: { message: string }) => {
 	}, [goBack]);
 
 	return (
-		<View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 24 }}>
-			<EmptyState
-				icon={
-					iconUri ? (
-						<Image source={{ uri: iconUri }} style={{ width: ICON_SIZE, height: ICON_SIZE, borderRadius: 14 }} />
-					) : (
-						<Globe size={36} />
-					)
-				}
-				message={message}
-				cta={
-					<TextButton size="large" onPress={goBack}>
-						뒤로 가기
-					</TextButton>
-				}
-			/>
+		<View style={styles.container}>
+			<View style={styles.message}>
+				{/* 아이콘이 없거나(푸시 알림 진입) 불러오는 중·실패일 때는 회색 자리 표시자가 보인다. */}
+				<View style={[styles.icon, { backgroundColor: colors.border.subtle }]}>
+					{iconUri ? <Image source={{ uri: iconUri }} style={styles.icon} /> : null}
+					<View style={[styles.badgeRing, { backgroundColor: colors.background.default }]}>
+						<View style={[styles.badgeFill, { backgroundColor: colors.static.white }]} />
+						<ExclamationmarkCircle size={BADGE_ICON_SIZE} color={colors.status.warning} />
+					</View>
+				</View>
+				<Text style={[typo("Body1", "Medium"), styles.description, { color: colors.text.tertiary }]}>
+					{message}
+				</Text>
+			</View>
+			<Pressable
+				onPress={goBack}
+				style={({ pressed }) => [styles.backButton, pressed && { backgroundColor: colors.fill.secondary }]}
+			>
+				<Text style={[typo("Body1", "Bold"), { color: colors.text.primary }]}>뒤로 가기</Text>
+			</Pressable>
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
+		gap: 32,
+		paddingHorizontal: 24,
+	},
+	message: {
+		alignItems: "center",
+		gap: 24,
+	},
+	icon: {
+		width: ICON_SIZE,
+		height: ICON_SIZE,
+		borderRadius: 20,
+	},
+	// 페이지 배경색 원으로 아이콘 오른쪽 아래를 파내고 그 위에 경고 아이콘을 올린다.
+	badgeRing: {
+		position: "absolute",
+		left: 50,
+		top: 50,
+		width: BADGE_RING_SIZE,
+		height: BADGE_RING_SIZE,
+		borderRadius: BADGE_RING_SIZE / 2,
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	// ExclamationmarkCircle의 느낌표는 뚫려 있어서 뒤에 흰 바탕을 깔아야 디자인처럼 보인다.
+	badgeFill: {
+		position: "absolute",
+		width: BADGE_ICON_SIZE / 2,
+		height: BADGE_ICON_SIZE / 2,
+	},
+	description: {
+		textAlign: "center",
+	},
+	backButton: {
+		paddingHorizontal: 12,
+		paddingVertical: 8,
+		borderRadius: shapes.medium,
+	},
+});
 
 export const AppWebView = () => {
 	const { webViewProps, NfcSheet } = useAppBridge();
