@@ -27,6 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>dodamdodam</string>
 				<string>com.b1nd.dodam.student</string>
 			</array>
 		</dict>

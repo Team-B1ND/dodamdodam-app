@@ -43,16 +43,16 @@ export const LoginPage = () => {
 					</Text>
 				</View>
 				<View style={styles.bottom}>
-					<FilledButton size="large" display="fill" onPress={handleSignUp}>
-						시작하기
+					<FilledButton size="large" display="fill" onPress={() => navigation.navigate("LoginForm")}>
+						로그인
 					</FilledButton>
 					<View style={styles.loginRow}>
 						<Text style={[styles.loginText, { color: colors.static.white }]}>
-							이미 계정이 있나요?
+							계정이 없으시다면?
 						</Text>
-						<Pressable onPress={() => navigation.navigate("LoginForm")}>
+						<Pressable onPress={handleSignUp}>
 							<Text style={[styles.loginLink, { color: colors.static.white }]}>
-								로그인
+								회원가입
 							</Text>
 						</Pressable>
 					</View>

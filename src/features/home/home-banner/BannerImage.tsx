@@ -1,26 +1,20 @@
 import React from "react";
-import { Image, Pressable, StyleSheet } from "react-native";
-import { BANNER_HEIGHT } from "./constants/constants";
+import { Image, Pressable } from "react-native";
 import type { BannerItem } from "./HomeBanner";
 
 interface BannerImageProps {
   item: BannerItem;
   width: number;
+  height: number;
   onPress?: () => void;
 }
 
-export const BannerImage = React.memo(({ item, width, onPress }: BannerImageProps) => (
+export const BannerImage = React.memo(({ item, width, height, onPress }: BannerImageProps) => (
   <Pressable onPress={onPress}>
     <Image
       source={{ uri: item.imageUrl }}
-      style={[styles.image, { width }]}
+      style={{ width, height }}
       resizeMode="cover"
     />
   </Pressable>
 ));
-
-const styles = StyleSheet.create({
-  image: {
-    height: BANNER_HEIGHT,
-  },
-});

@@ -6,6 +6,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "도담도담",
   slug: "dodamdodam-app",
+  scheme: "dodamdodam",
   version,
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
@@ -23,7 +24,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     ...config.ios,
     bundleIdentifier: "com.b1nd.dodam.student",
-    googleServicesFile: "./src/app/GoogleService-Info.plist",
+    googleServicesFile: "./src/shared/config/GoogleService-Info.plist",
     entitlements: {
       "com.apple.developer.nfc.readersession.formats": ["TAG"],
     },
@@ -37,7 +38,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     ...config.android,
     package: "com.b1nd.dodam.student",
-    googleServicesFile: "./google-services.json",
+    googleServicesFile: "./src/shared/config/google-services.json",
     permissions: [
       "android.permission.POST_NOTIFICATIONS",
       "android.permission.NFC",

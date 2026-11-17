@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { useTheme } from "@shared/theme";
 import { Indicator } from "@shared/ui";
-import { CORNER_RADIUS, BANNER_HEIGHT, HORIZONTAL_PADDING } from "./constants/constants";
+import { CORNER_RADIUS, HORIZONTAL_PADDING } from "./constants/constants";
 import { useHomeBanner } from "./hooks/useHomeBanner";
 import { BannerImage } from "./BannerImage";
 
@@ -27,6 +27,7 @@ export const HomeBanner = React.memo(({ items, onPressItem }: HomeBannerProps) =
   const {
     activeIndex,
     contentWidth,
+    bannerHeight,
     flatListRef,
     keyExtractor,
     handleScrollBeginDrag,
@@ -37,16 +38,16 @@ export const HomeBanner = React.memo(({ items, onPressItem }: HomeBannerProps) =
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<BannerItem>) => (
-      <BannerImage item={item} width={contentWidth} onPress={() => onPressItem?.(item)} />
+      <BannerImage item={item} width={contentWidth} height={bannerHeight} onPress={() => onPressItem?.(item)} />
     ),
-    [contentWidth, onPressItem],
+    [contentWidth, bannerHeight, onPressItem],
   );
 
   if (items.length === 0) return null;
 
   return (
     <View style={styles.container}>
-      <View style={[styles.banner, { backgroundColor: colors.background.surface }]}>
+      <View style={[styles.banner, { height: bannerHeight, backgroundColor: colors.background.surface }]}>
         <FlatList
           ref={flatListRef}
           data={items}
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
   banner: {
-    height: BANNER_HEIGHT,
     borderRadius: CORNER_RADIUS,
     borderCurve: "continuous",
     overflow: "hidden",

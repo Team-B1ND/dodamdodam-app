@@ -1,18 +1,41 @@
-import React, { useCallback, useState } from "react";
-import { View } from "react-native";
+import React, { useCallback, useRef, useState } from "react";
+import { Linking, View } from "react-native";
 import { WebView } from "react-native-webview";
-import { EmptyState } from "@shared/ui";
+import type { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { EmptyState, WebPopup } from "@shared/ui";
 import { TextButton } from "@shared/ui/buttons";
 import { Globe } from "@shared/icons/illustration";
 import { useAppBridge } from "./useAppBridge";
 import { useAppWebViewUri } from "./useAppWebViewUri";
+import { useLinkOpenMode } from "@features/settings";
+
+const originOf = (url: string) => url.match(/^https?:\/\/[^/]+/)?.[0] ?? "";
 
 export const AppWebView = () => {
 	const { webViewProps, NfcSheet } = useAppBridge();
 	const { uri } = useAppWebViewUri();
+	const { modeRef } = useLinkOpenMode();
+	const popupRef = useRef<BottomSheetModal>(null);
+	const [popupUrl, setPopupUrl] = useState("");
 	// ref는 브릿지가 쓰고 있어 reload()를 직접 못 부른다. key를 바꿔 다시 마운트하는 방식으로 재시도한다.
 	const [reloadKey, setReloadKey] = useState(0);
 	const retry = useCallback(() => setReloadKey((key) => key + 1), []);
+
+	const handleLinkRequest = useCallback(
+		(req: { url: string; isTopFrame?: boolean }) => {
+			if (req.isTopFrame === false) return true;
+			if (originOf(req.url) === originOf(uri)) return true;
+			if (!/^https?:/.test(req.url) || modeRef.current === "browser") {
+				Linking.openURL(req.url).catch(() => {});
+				return false;
+			}
+
+			setPopupUrl(req.url);
+			popupRef.current?.present();
+			return false;
+		},
+		[uri, modeRef],
+	);
 
 	if (!uri) return <View style={{ flex: 1 }} />;
 
@@ -22,6 +45,7 @@ export const AppWebView = () => {
 				{...webViewProps}
 				key={reloadKey}
 				source={{ uri }}
+				onShouldStartLoadWithRequest={handleLinkRequest}
 				// iOS 16.4+는 이 값이 켜져야 Safari 웹 검사기에 WebView가 잡힌다.
 				webviewDebuggingEnabled={__DEV__}
 				onError={({ nativeEvent }) =>
@@ -52,6 +76,7 @@ export const AppWebView = () => {
 				style={{ backgroundColor: "transparent" }}
 			/>
 			<NfcSheet />
+			<WebPopup sheetRef={popupRef} url={popupUrl} onDismiss={() => setPopupUrl("")} />
 		</View>
 	);
 };

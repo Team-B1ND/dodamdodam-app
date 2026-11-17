@@ -8,6 +8,7 @@ import { Trash } from "@shared/icons/mono";
 import { calcProgress, calcRemainingTime } from "@shared/utils";
 import type { TagColor } from "@shared/ui/tag/Tag";
 import type { OutSleeping, OutSleepingStatus } from "@entities/out-sleeping/types";
+import { OUT_SLEEPING_REASON_LABEL } from "@entities/out-sleeping/types";
 import { formatDate } from "./utils/formatDate";
 
 interface OutSleepingCardProps {
@@ -45,7 +46,9 @@ export const OutSleepingCard = ({ item, onDelete }: OutSleepingCardProps) => {
       </View>
 
       <Text style={[styles.description, { color: colors.text.primary }]}>
-        {item.reason}
+        {item.reasonType === "ETC" && item.reason
+          ? item.reason
+          : OUT_SLEEPING_REASON_LABEL[item.reasonType]}
       </Text>
 
       <Divider marginHorizontal={0} marginVertical={0} />
