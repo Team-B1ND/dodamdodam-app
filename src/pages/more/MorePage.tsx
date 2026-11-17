@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "@shared/theme";
+import { useTabPageEdges, useTabScrollPadding } from "@shared/hooks";
 import { TopNavBar, RefreshView, Dialog, useOverlay } from "@shared/ui";
 import { Gear, File, People } from "@shared/icons/mono";
 import { ProfileCard } from "@features/profile";
@@ -13,6 +14,8 @@ import { MenuItem } from "./ui/MenuItem";
 
 export const MorePage = () => {
   const { colors } = useTheme();
+  const scrollPadding = useTabScrollPadding();
+  const edges = useTabPageEdges();
   const navigation = useNavigation<any>();
 
   const queryClient = useQueryClient();
@@ -43,7 +46,7 @@ export const MorePage = () => {
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
-      edges={["top"]}
+      edges={edges}
     >
       <TopNavBar
         right={<TopNavBar.IconButton icon={<Gear />} onPress={openSettings} />}
@@ -52,7 +55,7 @@ export const MorePage = () => {
       </TopNavBar>
       <RefreshView
         style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: scrollPadding }]}
         showsVerticalScrollIndicator={false}
         queryKeys={[userQueryKeys.me]}
       >
@@ -79,7 +82,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     // 탭바가 콘텐츠 위에 떠 있어 그만큼 비워둔다. 다른 탭 화면과 같은 값.
-    paddingBottom: 140,
   },
   section: {
     paddingVertical: 4,

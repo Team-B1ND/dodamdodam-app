@@ -44,7 +44,7 @@ export const SettingsPage = () => {
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
-      edges={["top"]}
+      edges={["top", "left", "right"]}
     >
       <TopNavBar left={<TopNavBar.BackButton onPress={goBack} />}>
         <TopNavBar.Title hasBackButton>설정</TopNavBar.Title>

@@ -35,7 +35,7 @@ export const TeamListPage = () => {
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background.default }]}
-      edges={["top"]}
+      edges={["top", "left", "right"]}
     >
       <TeamLoadMoreProvider>
         <TeamListContent />
