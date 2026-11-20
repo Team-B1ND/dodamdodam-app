@@ -12,6 +12,7 @@ import { setupNotificationNavigation, setupTokenRefresh } from "@shared/lib/noti
 import NfcManager from "react-native-nfc-manager";
 import { QrScan } from "@features/app-webview/screens/QrScan";
 import { createLinking } from "./navigation/linking";
+import { pendingDeepLink } from "./navigation/pendingDeepLink";
 
 NfcManager.start().catch(() => {});
 import { RootStackNavigator } from "./navigation";
@@ -39,6 +40,8 @@ const AppInner = () => {
 
   useEffect(() => {
     setSessionExpiredHandler(() => {
+      // 서비스 조회 중 세션이 만료돼도 로그인 후 같은 AID로 이어진다.
+      pendingDeepLink.saveAidEntry(navigationRef.current?.getCurrentRoute());
       navigationRef.current?.dispatch(
         CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
       );

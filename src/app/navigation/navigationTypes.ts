@@ -14,6 +14,9 @@ export type RootStackParamList = {
   LoginForm: undefined;
   Main: NavigatorScreenParams<MainTabParamList>;
   AppIn: undefined;
+  AidEntry: {
+    appId: string;
+  };
   Settings: undefined;
   EditProfile: undefined;
   Notification: undefined;

@@ -42,7 +42,9 @@ export const useAppBridge = () => {
 
 		const location = await Location.getCurrentPositionAsync({
 			accuracy: Location.Accuracy.High,
-		});
+			mayShowUserSettingsDialog: false,
+		}).catch(() => null);
+		if (!location) return Errors.UNKNOWN as any;
 
 		return {
 			coords: {
@@ -60,14 +62,16 @@ export const useAppBridge = () => {
 
 	core.mountPush(Actions.GPS_GET, (send) => {
 		let subscription: Location.LocationSubscription | null = null;
+		let active = true;
 
 		(async () => {
-			const { status } = await Location.requestForegroundPermissionsAsync();
-			if (status !== "granted") return;
+			const { status } = await Location.getForegroundPermissionsAsync();
+			if (!active || status !== "granted") return;
 
 			subscription = await Location.watchPositionAsync(
-				{ accuracy: Location.Accuracy.High, distanceInterval: 5 },
+				{ accuracy: Location.Accuracy.High, distanceInterval: 5, mayShowUserSettingsDialog: false },
 				(location) => {
+					if (!active) return;
 					send({
 						coords: {
 							latitude: location.coords.latitude,
@@ -82,9 +86,13 @@ export const useAppBridge = () => {
 					});
 				},
 			);
-		})();
+			if (!active) subscription.remove();
+		})().catch(() => {
+			// 위치 설정 거절·서비스 불가 시 push를 중단한다.
+		});
 
 		return () => {
+			active = false;
 			subscription?.remove();
 		};
 	});

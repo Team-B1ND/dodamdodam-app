@@ -1,8 +1,8 @@
-import { CommonActions } from "@react-navigation/native";
+import type { NavigationState, PartialState } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import type { MainTabParamList, RootStackParamList } from "./navigationTypes";
 
-type ResetState = Parameters<typeof CommonActions.reset>[0];
+type ResetState = PartialState<NavigationState>;
 type MainTabName = keyof MainTabParamList;
 
 export const deepLinkPrefixes = [Linking.createURL("/"), "dodamdodam://"];
@@ -44,8 +44,26 @@ export function resolveDeepLink(url: string): ResetState | null {
   if (relativeUrl === null) return null;
 
   const [rawPath, rawQuery = ""] = relativeUrl.split("?", 2);
-  const path = rawPath.replace(/\/+$/, "").toLowerCase();
-  const tab = MAIN_TAB_PATHS[path];
+  const normalizedPath = rawPath.replace(/\/+$/, "");
+  const path = normalizedPath.toLowerCase();
+
+  // iOS와 같은 apps 경로를 사용하고, 기존 Android 위젯의 aid 링크도 받는다.
+  if (path.startsWith("apps/") || path.startsWith("aid/")) {
+    const encodedAppId = normalizedPath.slice(normalizedPath.indexOf("/") + 1);
+    try {
+      const appId = decodeURIComponent(encodedAppId);
+      if (!appId || appId.length > 200 || /[\s/\\?#\u0000-\u001f\u007f]/.test(appId)) {
+        return null;
+      }
+
+      return createRootStack("More", "AidEntry", { appId });
+    } catch {
+      return null;
+    }
+  }
+  const tab = Object.prototype.hasOwnProperty.call(MAIN_TAB_PATHS, path)
+    ? MAIN_TAB_PATHS[path]
+    : undefined;
 
   if (tab) {
     return {
@@ -63,7 +81,12 @@ export function resolveDeepLink(url: string): ResetState | null {
   }
 
   if (path === "night-study/apply") {
-    const requestedTab = new URLSearchParams(rawQuery).get("tab");
+    let requestedTab: string | null;
+    try {
+      requestedTab = new URLSearchParams(rawQuery).get("tab");
+    } catch {
+      return null;
+    }
     const selectedTab = requestedTab === "project" ? "project" : "personal";
 
     return createRootStack("NightStudy", "NightStudyApply", {

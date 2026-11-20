@@ -8,10 +8,12 @@ import { OutSleepingPage } from "@pages/out-sleeping";
 import { NightStudyPage } from "@pages/night-study";
 import { MorePage } from "@pages/more";
 import { MainTabParamList } from "./navigationTypes";
+import { useAidWidgetSync } from "@features/inapp/useAidWidgetSync";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export const BottomTabNavigator = () => {
+  useAidWidgetSync();
   return (
     <Tab.Navigator
       tabBar={(props) => <BottomTabBar {...props} />}

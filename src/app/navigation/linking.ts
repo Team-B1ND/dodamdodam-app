@@ -1,4 +1,4 @@
-import type { LinkingOptions } from "@react-navigation/native";
+import { CommonActions, type LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import { validateSession } from "@features/auth/session";
 import {
@@ -16,6 +16,9 @@ export const createLinking = ({
   onAuthenticationRequired,
 }: CreateLinkingOptions): LinkingOptions<RootStackParamList> => ({
   prefixes: deepLinkPrefixes,
+  // 실행 중인 앱도 콜드 스타트와 같은 뒤로가기 스택으로 진입한다.
+  getStateFromPath: path => resolveDeepLink(`dodamdodam://${path}`) ?? undefined,
+  getActionFromState: state => CommonActions.reset(state),
   config: {
     screens: {
       Main: {
@@ -30,6 +33,7 @@ export const createLinking = ({
       },
 
       Notification: "notifications",
+      AidEntry: "apps/:appId",
       OutSleepingApply: "out-sleeping/apply",
 
       NightStudyApply: {
@@ -57,14 +61,17 @@ export const createLinking = ({
 
   subscribe: listener => {
     let active = true;
+    let latestRequest = 0;
 
     const subscription = Linking.addEventListener("url", async ({ url }) => {
       if (!resolveDeepLink(url)) return;
 
+      const request = ++latestRequest;
       const authenticated = await validateSession();
-      if (!active) return;
+      if (!active || request !== latestRequest) return;
 
       if (authenticated) {
+        pendingDeepLink.clear();
         listener(url);
         return;
       }

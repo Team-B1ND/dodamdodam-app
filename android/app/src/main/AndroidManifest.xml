@@ -36,6 +36,17 @@
         <data android:scheme="dodamdodam"/>
       </intent-filter>
     </activity>
+    <activity android:name=".widget.AidWidgetConfigureActivity" android:exported="true" android:label="@string/aid_widget_name" android:theme="@style/AppTheme" android:taskAffinity="" android:excludeFromRecents="true">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+      </intent-filter>
+    </activity>
+    <receiver android:name=".widget.AidWidgetProvider" android:exported="false" android:label="@string/aid_widget_name">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/aid_widget_info"/>
+    </receiver>
     <receiver android:name=".widget.MealWidgetProvider" android:exported="false" android:label="@string/meal_widget_small_name">
       <intent-filter>
         <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>

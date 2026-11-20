@@ -9,7 +9,8 @@
     "prebuild": "LANG=en_US.UTF-8 expo prebuild",
     "pod-install": "LANG=en_US.UTF-8 pod install --project-directory=ios",
     "web": "expo start --web",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:aid": "node --test tests/aid-*.test.cjs"
   },
   "dependencies": {
     "@b1nd/aid-kit": "^1.0.9",
