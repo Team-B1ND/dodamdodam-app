@@ -11,5 +11,7 @@ export const supportsAidWidget = Platform.OS === "android" && Boolean(aidWidgetM
 
 export const saveAidAppsToWidget = async (apps: InApp[]): Promise<void> => {
   if (!supportsAidWidget) return;
-  await aidWidgetModule!.updateApps(JSON.stringify(apps.map(({ appId, name }) => ({ appId, name }))));
+  await aidWidgetModule!.updateApps(JSON.stringify(
+    apps.map(({ appId, name, subtitle, iconUrl, darkIconUrl }) => ({ appId, name, subtitle, iconUrl, darkIconUrl })),
+  ));
 };

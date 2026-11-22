@@ -189,6 +189,7 @@ class AidWidgetConfigureActivity : Activity() {
           AidWidgetStore.select(applicationContext, widgetId, currentApp)
           try {
             val glanceId = GlanceAppWidgetManager(applicationContext).getGlanceIdBy(widgetId)
+            AidWidget.resetPage(applicationContext, glanceId)
             AidWidget().update(applicationContext, glanceId)
           } catch (error: Exception) {
             AidWidgetStore.select(applicationContext, widgetId, previous)

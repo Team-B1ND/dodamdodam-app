@@ -11,9 +11,17 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import org.json.JSONArray
 import org.json.JSONObject
 
-internal data class AidWidgetApp(val appId: String, val name: String)
+internal data class AidWidgetApp(
+  val appId: String,
+  val name: String,
+  val subtitle: String = "",
+  val iconUrl: String? = null,
+  val darkIconUrl: String? = null,
+)
 
-/** Only public service identifiers and labels belong here. Authentication stays in the app. */
+internal data class AidWidgetData(val apps: List<AidWidgetApp>, val selected: AidWidgetApp?)
+
+/** Stores widget display metadata. Authentication stays in the app. */
 internal object AidWidgetStore {
   private const val PREFERENCES = "dodam_aid_widgets"
   private const val APPS_KEY = "apps"
@@ -29,7 +37,12 @@ internal object AidWidgetStore {
     val apps = parseApps(json)
     val serialized = JSONArray().apply {
       apps.forEach { app ->
-        put(JSONObject().put("appId", app.appId).put("name", app.name))
+        put(JSONObject()
+          .put("appId", app.appId)
+          .put("name", app.name)
+          .put("subtitle", app.subtitle)
+          .put("iconUrl", app.iconUrl)
+          .put("darkIconUrl", app.darkIconUrl))
       }
     }.toString()
     val preferences = preferences(context)
@@ -44,23 +57,26 @@ internal object AidWidgetStore {
     check(editor.commit()) { "AID service catalogue could not be saved" }
   }
 
-  fun selection(context: Context, widgetId: Int): AidWidgetApp? {
+  fun selection(context: Context, widgetId: Int): AidWidgetApp? = data(context, widgetId).selected
+
+  fun data(context: Context, widgetId: Int): AidWidgetData {
     val preferences = preferences(context)
-    val appId = preferences.getString(idKey(widgetId), null) ?: return null
-    val name = apps(context).firstOrNull { it.appId == appId }?.name
-      ?: preferences.getString(nameKey(widgetId), null)
-      ?: return null
-    return AidWidgetApp(appId, name)
+    val apps = apps(context)
+    val appId = preferences.getString(idKey(widgetId), null)
+    val storedName = preferences.getString(nameKey(widgetId), null)
+    val selected = apps.firstOrNull { it.appId == appId }
+      ?: if (appId != null && storedName != null) AidWidgetApp(appId, storedName) else null
+    return AidWidgetData(apps, selected)
   }
 
   // Glance keeps a composition alive after rendering; updateAll alone does not reload its data.
-  fun observeSelection(context: Context, widgetId: Int): Flow<AidWidgetApp?> = callbackFlow {
+  fun observe(context: Context, widgetId: Int): Flow<AidWidgetData> = callbackFlow {
     val preferences = preferences(context)
     val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
-      trySend(selection(context, widgetId))
+      trySend(data(context, widgetId))
     }
     preferences.registerOnSharedPreferenceChangeListener(listener)
-    trySend(selection(context, widgetId))
+    trySend(data(context, widgetId))
     awaitClose { preferences.unregisterOnSharedPreferenceChangeListener(listener) }
   }.distinctUntilChanged()
 
@@ -88,10 +104,12 @@ internal object AidWidgetStore {
       val appId = item.getString("appId")
       val name = item.getString("name").trim()
       require(appId.isNotBlank() && name.isNotBlank()) { "AID service identifier and name are required" }
-      apps[appId] = AidWidgetApp(appId, name)
+      apps[appId] = AidWidgetApp(appId, name, item.optString("subtitle"), item.iconUrl("iconUrl"), item.iconUrl("darkIconUrl"))
     }
     return apps.values.toList()
   }
+
+  private fun JSONObject.iconUrl(key: String) = (opt(key) as? String)?.takeIf { it.isNotBlank() }
 
   private fun idKey(widgetId: Int) = "widget_${widgetId}_id"
   private fun nameKey(widgetId: Int) = "widget_${widgetId}_name"

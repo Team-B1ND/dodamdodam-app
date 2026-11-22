@@ -366,7 +366,7 @@ test("malformed query encoding cannot crash the native deep-link parser", () => 
   assert.doesNotThrow(() => nativeResolver.resolveDeepLink("dodamdodam://apps/ValidId?unused=%"));
 });
 
-test("widget synchronization stores service identity without service URLs or authentication context", async () => {
+test("widget synchronization sends display metadata without launch URLs or authentication context", async () => {
   const saved = [];
   const { saveAidAppsToWidget } = loadTypeScript("src/shared/lib/widget/aidWidget.ts", {
     "react-native": {
@@ -374,8 +374,19 @@ test("widget synchronization stores service identity without service URLs or aut
       Platform: { OS: "android" },
     },
   });
-  await saveAidAppsToWidget([app("Selected")]);
-  assert.deepEqual(saved, [[{ appId: "Selected", name: "Service Selected" }]]);
+  await saveAidAppsToWidget([{
+    ...app("Selected"),
+    subtitle: "Service description",
+    iconUrl: "https://assets.example/icon.png",
+    darkIconUrl: "https://assets.example/icon-dark.png",
+  }]);
+  assert.deepEqual(saved, [[{
+    appId: "Selected",
+    name: "Service Selected",
+    subtitle: "Service description",
+    iconUrl: "https://assets.example/icon.png",
+    darkIconUrl: "https://assets.example/icon-dark.png",
+  }]]);
 });
 
 // A single-state/effect harness runs the actual hook across render/effect boundaries.
