@@ -2,7 +2,9 @@ import type { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import type { RootStackParamList } from "./navigationTypes";
 
-export const deepLinkPrefixes = [Linking.createURL("/"), "dodamdodam://"];
+export const DEEP_LINK_PREFIX = "dodamdodam://";
+
+export const deepLinkPrefixes = [Linking.createURL("/"), DEEP_LINK_PREFIX];
 
 export const deepLinkConfig: NonNullable<
   LinkingOptions<RootStackParamList>["config"]

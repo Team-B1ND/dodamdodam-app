@@ -4,4 +4,3 @@ export {
   setupTokenRefresh,
   setupBackgroundMessageHandler,
 } from "./pushNotification";
-export { setupNotificationNavigation } from "./notificationNavigator";

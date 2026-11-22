@@ -8,10 +8,11 @@ import { BridgeUiProvider } from "@b1nd/aid-kit/bridge-kit/app";
 import { ThemeProvider } from "@shared/theme";
 import { ToastProvider, OverlayProvider } from "@shared/ui";
 import { setSessionExpiredHandler } from "@entities/api/common";
-import { setupNotificationNavigation, setupTokenRefresh } from "@shared/lib/notification";
+import { setupTokenRefresh } from "@shared/lib/notification";
 import NfcManager from "react-native-nfc-manager";
 import { QrScan } from "@features/app-webview/screens/QrScan";
 import { createLinking } from "./navigation/linking";
+import { setupNotificationNavigation } from "./navigation/notificationNavigator";
 
 NfcManager.start().catch(() => {});
 import { RootStackNavigator } from "./navigation";
