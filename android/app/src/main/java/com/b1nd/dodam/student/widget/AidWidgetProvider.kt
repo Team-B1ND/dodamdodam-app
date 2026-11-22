@@ -170,7 +170,7 @@ private fun Header(context: Context, showMore: Boolean) {
     if (showMore) {
       Spacer(GlanceModifier.defaultWeight())
       Row(
-        modifier = GlanceModifier.height(24.dp).clickable(actionStartActivity(openDodam(context, "more"))),
+        modifier = GlanceModifier.height(24.dp).clickable(actionStartActivity(openDodam(context, "aid"))),
         verticalAlignment = Alignment.CenterVertically,
       ) {
         Text(context.getString(R.string.aid_widget_all), style = TextStyle(color = assistiveLabel, fontSize = 12.sp))
@@ -265,7 +265,7 @@ private fun AppList(context: Context, apps: List<AidWidgetApp>) {
 private fun EmptyContent(context: Context, wide: Boolean) {
   val size = if (wide) 44.dp else 32.dp
   Column(
-    modifier = GlanceModifier.fillMaxSize().clickable(actionStartActivity(openDodam(context, "more"))),
+    modifier = GlanceModifier.fillMaxSize().clickable(actionStartActivity(openDodam(context, "aid"))),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalAlignment = Alignment.CenterVertically,
   ) {

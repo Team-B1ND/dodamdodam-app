@@ -1,11 +1,30 @@
 const assert = require("node:assert/strict");
+const { createRequire } = require("node:module");
 const { test } = require("node:test");
 const loadTypeScript = require("./helpers/load-typescript.cjs");
 
-const resolver = loadTypeScript("src/app/navigation/deepLinkResolver.ts", {
-  "expo-linking": { createURL: () => "exp://local.example/--/" },
-});
+const requireFromNavigation = createRequire(require.resolve("@react-navigation/native/package.json"));
+const { getStateFromPath } = requireFromNavigation("@react-navigation/core");
+
+function loadNavigation(platform, globals) {
+  const config = loadTypeScript("src/app/navigation/deepLinkConfig.ts", {
+    "expo-linking": { createURL: () => "exp://local.example/--/" },
+    "react-native": { Platform: { OS: platform } },
+  });
+  const resolver = loadTypeScript("src/app/navigation/deepLinkResolver.ts", {
+    "@react-navigation/native": { getStateFromPath },
+    "./deepLinkConfig": config,
+  }, globals);
+  return { config, resolver };
+}
+
+const { config, resolver } = loadNavigation("android");
 const { resolveDeepLink } = resolver;
+
+function stackDestination(state) {
+  const { path, ...route } = state.routes[1];
+  return route;
+}
 
 function createLinkingFixture({ initialUrl = null, validate = async () => true } = {}) {
   let eventListener;
@@ -31,6 +50,7 @@ function createLinkingFixture({ initialUrl = null, validate = async () => true }
         return validate();
       },
     },
+    "./deepLinkConfig": config,
     "./deepLinkResolver": resolver,
     "./pendingDeepLink": { pendingDeepLink },
   });
@@ -52,42 +72,44 @@ function deferred() {
 
 test("existing tabs and application routes keep their destinations", () => {
   for (const [path, screen] of Object.entries({
-    home: "Home", meal: "Meal", "out-sleeping": "OutSleeping",
-    "night-study": "NightStudy", more: "More",
+    home: "Home", "out-sleeping": "OutSleeping",
+    "night-study": "NightStudy", more: "More", aid: "Aid",
   })) {
-    assert.deepEqual(resolveDeepLink(`dodamdodam://${path}`), {
-      index: 0, routes: [{ name: "Main", params: { screen } }],
-    });
+    const [route] = resolveDeepLink(`dodamdodam://${path}`).routes;
+    assert.equal(route.name, "Main");
+    assert.equal(route.state.routes[0].name, screen);
   }
-  assert.deepEqual(resolveDeepLink("dodamdodam://notifications"), {
-    index: 1, routes: [
-      { name: "Main", params: { screen: "Home" } }, { name: "Notification" },
-    ],
-  });
-  assert.deepEqual(resolveDeepLink("dodamdodam://out-sleeping/apply").routes[1], {
+  for (const [path, screen] of [["MEAL/", "Meal"], ["notifications", "Notification"]]) {
+    const state = resolveDeepLink(`dodamdodam://${path}`);
+    assert.equal(state.index, 1);
+    assert.equal(state.routes[0].state.routes[0].name, "Home");
+    assert.deepEqual(stackDestination(state), { name: screen });
+  }
+  assert.deepEqual(stackDestination(resolveDeepLink("dodamdodam://out-sleeping/apply")), {
     name: "OutSleepingApply",
   });
-  for (const [query, tab] of [["project", "project"], ["personal", "personal"], ["invalid", "personal"]]) {
-    assert.deepEqual(resolveDeepLink(`dodamdodam://night-study/apply?tab=${query}`).routes[1], {
+  for (const [query, tab] of [["project", "project"], ["personal", "personal"], ["invalid", "personal"], ["", "personal"]]) {
+    assert.deepEqual(stackDestination(resolveDeepLink(`dodamdodam://night-study/apply?tab=${query}`)), {
       name: "NightStudyApply", params: { tab },
     });
   }
 });
 
-test("AID links preserve service ID case, decode once, and keep More as the back destination", () => {
+test("AID links preserve service ID case, decode once, and keep the AID tab as the back destination", () => {
   const expected = {
     index: 1, routes: [
-      { name: "Main", params: { screen: "More" } },
-      { name: "AidEntry", params: { appId: "Service-ABC_123" } },
+      { name: "Main", state: { routes: [{ name: "Aid" }] } },
+      { name: "AidEntry", params: { appId: "Service-ABC_123" }, path: "apps/Service-ABC_123" },
     ],
   };
   assert.deepEqual(resolveDeepLink("dodamdodam://apps/Service%2DABC_123"), expected);
   assert.deepEqual(resolveDeepLink("exp://local.example/--/apps/Service-ABC_123"), expected);
+  assert.equal(stackDestination(resolveDeepLink("dodamdodam://apps/Service%252FId")).params.appId, "Service%2FId");
 });
 
 test("AID links cannot supply a WebView URL or override the path ID via query parameters", () => {
   const state = resolveDeepLink("dodamdodam://apps/TrustedId?appId=OtherId&appUrl=https%3A%2F%2Funtrusted.example&name=Fake");
-  assert.deepEqual(state.routes[1], { name: "AidEntry", params: { appId: "TrustedId" } });
+  assert.deepEqual(stackDestination(state), { name: "AidEntry", params: { appId: "TrustedId" } });
 });
 
 test("foreign schemes and malformed AID destinations are ignored", () => {
@@ -109,7 +131,7 @@ test("cold start holds a recognized link until the authentication flow resumes i
   assert.equal(await fixture.linking.getInitialURL(), null);
   assert.equal(fixture.pendingDeepLink.peek(), url);
   assert.equal(fixture.validationRequests, 0);
-  assert.deepEqual(resolveDeepLink(fixture.pendingDeepLink.consume()).routes[1], {
+  assert.deepEqual(stackDestination(resolveDeepLink(fixture.pendingDeepLink.consume())), {
     name: "AidEntry", params: { appId: "ColdStart" },
   });
   assert.equal(fixture.pendingDeepLink.hasPending(), false);
@@ -171,13 +193,15 @@ test("session expiry during AID resolution retains the current service for login
   const { pendingDeepLink } = loadTypeScript("src/app/navigation/pendingDeepLink.ts");
   pendingDeepLink.saveAidEntry({ name: "AidEntry", params: { appId: "Mixed+Case" } });
   assert.equal(pendingDeepLink.peek(), "dodamdodam://apps/Mixed%2BCase");
-  assert.deepEqual(resolveDeepLink(pendingDeepLink.peek()).routes[1], {
+  assert.deepEqual(stackDestination(resolveDeepLink(pendingDeepLink.peek())), {
     name: "AidEntry", params: { appId: "Mixed+Case" },
   });
   pendingDeepLink.saveAidEntry({ name: "Login", params: { appId: "Unrelated" } });
   pendingDeepLink.saveAidEntry(undefined);
   pendingDeepLink.saveAidEntry({ name: "AidEntry", params: { appId: null } });
   assert.equal(pendingDeepLink.peek(), "dodamdodam://apps/Mixed%2BCase");
+  pendingDeepLink.saveAidEntry({ name: "InAppLaunch", params: { appId: "IOS-App" } });
+  assert.equal(pendingDeepLink.peek(), "dodamdodam://apps/IOS-App");
 });
 
 test("unrecognized warm links do not trigger authentication or navigation", async () => {
@@ -359,9 +383,7 @@ test("service URI query/hash behavior also holds with the installed React Native
 });
 
 test("malformed query encoding cannot crash the native deep-link parser", () => {
-  const nativeResolver = loadTypeScript("src/app/navigation/deepLinkResolver.ts", {
-    "expo-linking": { createURL: () => "exp://local.example/--/" },
-  }, require("./helpers/load-react-native-url.cjs"));
+  const { resolver: nativeResolver } = loadNavigation("android", require("./helpers/load-react-native-url.cjs"));
   assert.doesNotThrow(() => nativeResolver.resolveDeepLink("dodamdodam://night-study/apply?tab=%"));
   assert.doesNotThrow(() => nativeResolver.resolveDeepLink("dodamdodam://apps/ValidId?unused=%"));
 });
@@ -472,15 +494,24 @@ test("a late token lookup for the previous service cannot replace the current se
 });
 
 
-test("iOS apps links and installed Android aid links resolve to the same service", () => {
+test("Android supports both service link formats and gives the short aid path to the AID tab", () => {
   const fixture = createLinkingFixture();
   assert.equal(fixture.linking.config.screens.AidEntry, "apps/:appId");
   for (const id of ["Service-ID", "Mixed%2BCase", "service-123"]) {
     assert.deepEqual(resolveDeepLink(`dodamdodam://aid/${id}`), resolveDeepLink(`dodamdodam://apps/${id}`));
     assert.deepEqual(fixture.linking.getStateFromPath(`aid/${id}`), fixture.linking.getStateFromPath(`apps/${id}`));
   }
-  for (const path of ["", "%", "App%2FOther", "App/Other"]) {
+  for (const path of ["%", "App%2FOther", "App/Other"]) {
     assert.equal(resolveDeepLink(`dodamdodam://aid/${path}`), null);
     assert.equal(resolveDeepLink(`dodamdodam://apps/${path}`), null);
   }
+});
+
+test("iOS keeps the existing mini-app launch screen behind the same public link", () => {
+  const { resolver } = loadNavigation("ios");
+  const state = resolver.resolveDeepLink("dodamdodam://apps/Mixed%2BCase?appId=Other");
+  assert.equal(state.routes[0].state.routes[0].name, "Aid");
+  assert.deepEqual(stackDestination(state), {
+    name: "InAppLaunch", params: { appId: "Mixed+Case" },
+  });
 });

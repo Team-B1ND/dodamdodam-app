@@ -6,7 +6,7 @@ export const pendingDeepLink = {
   },
 
   saveAidEntry(route: { name: string; params?: object } | undefined) {
-    if (route?.name !== "AidEntry") return;
+    if (route?.name !== "AidEntry" && route?.name !== "InAppLaunch") return;
     const appId = (route.params as { appId?: unknown } | undefined)?.appId;
     if (typeof appId === "string" && appId) {
       pendingUrl = `dodamdodam://apps/${encodeURIComponent(appId)}`;

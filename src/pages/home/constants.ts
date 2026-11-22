@@ -1,5 +1,8 @@
-export const TAB_ROUTES: Record<string, string> = {
+export const STACK_ROUTES: Record<string, string> = {
   "/meal": "Meal",
+};
+
+export const TAB_ROUTES: Record<string, string> = {
   "/outing": "OutSleeping",
   "/nightstudy": "NightStudy",
   "/home": "Home",

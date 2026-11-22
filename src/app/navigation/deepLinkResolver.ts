@@ -1,98 +1,63 @@
-import type { NavigationState, PartialState } from "@react-navigation/native";
-import * as Linking from "expo-linking";
+import { getStateFromPath } from "@react-navigation/native";
+import { aidServicePath, aidTabPath, deepLinkConfig, deepLinkPrefixes } from "./deepLinkConfig";
 import type { MainTabParamList, RootStackParamList } from "./navigationTypes";
 
-type ResetState = PartialState<NavigationState>;
-type MainTabName = keyof MainTabParamList;
+type DeepLinkState = NonNullable<ReturnType<typeof getStateFromPath>>;
 
-export const deepLinkPrefixes = [Linking.createURL("/"), "dodamdodam://"];
-
-const MAIN_TAB_PATHS: Record<string, MainTabName> = {
-  home: "Home",
-  meal: "Meal",
-  "out-sleeping": "OutSleeping",
-  "night-study": "NightStudy",
-  more: "More",
+// 스택 화면에서 뒤로 가면 연결된 탭을 연다.
+const PARENT_TABS: Partial<Record<keyof RootStackParamList, keyof MainTabParamList>> = {
+  Meal: "Home",
+  Notification: "Home",
+  OutSleepingApply: "OutSleeping",
+  NightStudyApply: "NightStudy",
+  AidEntry: "Aid",
+  InAppLaunch: "Aid",
 };
 
-const createMainRoute = (screen: MainTabName) => ({
-  name: "Main" as const,
-  params: { screen },
-});
+const withParentTab = (state: DeepLinkState): DeepLinkState => {
+  if (state.routes.length !== 1) return state;
 
-const createRootStack = (
-  parentTab: MainTabName,
-  destination: keyof RootStackParamList,
-  params?: object,
-): ResetState => ({
-  index: 1,
-  routes: [
-    createMainRoute(parentTab),
-    params ? { name: destination, params } : { name: destination },
-  ],
-});
+  const [route] = state.routes;
+  const parentTab = PARENT_TABS[route.name as keyof RootStackParamList];
+  if (!parentTab) return state;
 
-const extractRelativeUrl = (url: string) => {
-  const prefix = deepLinkPrefixes.find((candidate) => url.startsWith(candidate));
-  if (!prefix) return null;
-
-  return url.slice(prefix.length).replace(/^\/+/, "");
+  return {
+    index: 1,
+    routes: [{ name: "Main", state: { routes: [{ name: parentTab }] } }, route],
+  };
 };
 
-export function resolveDeepLink(url: string): ResetState | null {
-  const relativeUrl = extractRelativeUrl(url);
-  if (relativeUrl === null) return null;
+export function getDeepLinkStateFromPath(path: string) {
+  const [rawPath, query] = path.split("?", 2);
+  const trimmedPath = rawPath.replace(/^\/+|\/+$/g, "");
+  const [firstSegment] = trimmedPath.split("/", 1);
+  const root = firstSegment.toLowerCase();
+  let routePath = trimmedPath.toLowerCase();
+  if (!routePath) return undefined;
 
-  const [rawPath, rawQuery = ""] = relativeUrl.split("?", 2);
-  const normalizedPath = rawPath.replace(/\/+$/, "");
-  const path = normalizedPath.toLowerCase();
-
-  // iOS와 같은 apps 경로를 사용하고, 기존 Android 위젯의 aid 링크도 받는다.
-  if (path.startsWith("apps/") || path.startsWith("aid/")) {
-    const encodedAppId = normalizedPath.slice(normalizedPath.indexOf("/") + 1);
-    try {
-      const appId = decodeURIComponent(encodedAppId);
+  try {
+    if (root === aidServicePath || routePath.startsWith(`${aidTabPath}/`)) {
+      if (trimmedPath === firstSegment) return undefined;
+      const appId = decodeURIComponent(trimmedPath.slice(firstSegment.length + 1));
       if (!appId || appId.length > 200 || /[\s/\\?#\u0000-\u001f\u007f]/.test(appId)) {
-        return null;
+        return undefined;
       }
 
-      return createRootStack("More", "AidEntry", { appId });
-    } catch {
-      return null;
+      // AID 서비스는 경로 ID만으로 조회하고 쿼리 파라미터는 무시한다.
+      routePath = `${aidServicePath}/${encodeURIComponent(appId)}`;
+    } else if (routePath === deepLinkConfig.screens.NightStudyApply.path) {
+      const tab = new URLSearchParams(query).get("tab") ?? "";
+      routePath += `?tab=${encodeURIComponent(tab)}`;
     }
+
+    const state = getStateFromPath(routePath, deepLinkConfig);
+    return state ? withParentTab(state) : undefined;
+  } catch {
+    return undefined;
   }
-  const tab = Object.prototype.hasOwnProperty.call(MAIN_TAB_PATHS, path)
-    ? MAIN_TAB_PATHS[path]
-    : undefined;
+}
 
-  if (tab) {
-    return {
-      index: 0,
-      routes: [createMainRoute(tab)],
-    };
-  }
-
-  if (path === "notifications") {
-    return createRootStack("Home", "Notification");
-  }
-
-  if (path === "out-sleeping/apply") {
-    return createRootStack("OutSleeping", "OutSleepingApply");
-  }
-
-  if (path === "night-study/apply") {
-    let requestedTab: string | null;
-    try {
-      requestedTab = new URLSearchParams(rawQuery).get("tab");
-    } catch {
-      return null;
-    }
-    const selectedTab = requestedTab === "project" ? "project" : "personal";
-
-    return createRootStack("NightStudy", "NightStudyApply", {
-      tab: selectedTab,
-    });
-  }
-
-  return null;
+export function resolveDeepLink(url: string) {
+  const prefix = deepLinkPrefixes.find(candidate => url.startsWith(candidate));
+  return prefix ? getDeepLinkStateFromPath(url.slice(prefix.length)) ?? null : null;
 }

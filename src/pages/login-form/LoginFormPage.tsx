@@ -61,7 +61,7 @@ export const LoginFormPage = () => {
   return (
     <SafeAreaView
       style={[styles.safeArea, { backgroundColor: colors.background.default }]}
-      edges={["top"]}
+      edges={["top", "left", "right"]}
     >
       <KeyboardAvoidingView
         style={styles.flex}
