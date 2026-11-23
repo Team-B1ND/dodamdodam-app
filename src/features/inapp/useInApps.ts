@@ -24,9 +24,9 @@ export const useInAppsSuspense = () => {
 
   const apps: InApp[] = data.pages.flatMap((page) => page.content);
 
-  // 미니앱 테스트 위젯은 Debug 빌드에만 있으므로 개발 중에만 넘긴다.
+  // 미니앱 탭에서 목록을 새로 받으면 앱인도담 위젯도 같은 목록으로 갱신한다.
   useEffect(() => {
-    if (__DEV__) saveInAppsToWidget(data.pages.flatMap((page) => page.content));
+    saveInAppsToWidget(data.pages.flatMap((page) => page.content));
   }, [data]);
 
   return {
