@@ -6,9 +6,9 @@ import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { TopNavBar, TextField, FilledButton, Dialog, useOverlay, TextAreaProvider } from "@shared/ui";
 import { TextButton } from "@shared/ui/buttons";
+import { notificationApi } from "@entities/notification/api";
 import { useLogin } from "@features/auth/login";
-import { pendingDeepLink } from "@app/navigation/pendingDeepLink";
-import { resolveDeepLink } from "@app/navigation/deepLinkResolver";
+import { pendingDeepLink, resolvePendingNavigation } from "@app/navigation/pendingDeepLink";
 
 export const LoginFormPage = () => {
   const { colors } = useTheme();
@@ -27,15 +27,19 @@ export const LoginFormPage = () => {
   const onLoginPress = useCallback(async () => {
     const errorMessage = await handleLogin();
     if (!errorMessage) {
-      const pendingUrl = pendingDeepLink.peek();
-      const deepLinkState = pendingUrl ? resolveDeepLink(pendingUrl) : null;
+      const pendingTarget = pendingDeepLink.peek();
+      const resolved = resolvePendingNavigation(pendingTarget);
 
       navigation.dispatch(
         CommonActions.reset(
-          deepLinkState ?? { index: 0, routes: [{ name: "Main" }] },
+          resolved?.state ?? { index: 0, routes: [{ name: "Main" }] },
         ),
       );
       pendingDeepLink.clear();
+
+      if (resolved?.notificationId) {
+        notificationApi.markAsRead(resolved.notificationId).catch(() => {});
+      }
     } else {
       overlay.open(({ isOpen, close, exit, setDimClickHandler }) => (
         <Dialog

@@ -84,8 +84,12 @@ async function handleNotificationNavigation(
   if (!navigation) return;
 
   if (!authenticated) {
-    // 딥링크와 같이 로그인 후 이어서 열도록 보류한다.
-    if (deepLinkUrl) pendingDeepLink.save(deepLinkUrl);
+    // 딥링크와 웹 알림 모두 로그인 후 이어서 열도록 보류한다.
+    if (deepLinkUrl) {
+      pendingDeepLink.save(deepLinkUrl, data.id);
+    } else {
+      pendingDeepLink.saveWebView(toWebViewUrl(data), data.appName ?? "", data.id);
+    }
     navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }));
     return;
   }
