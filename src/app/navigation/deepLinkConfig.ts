@@ -16,6 +16,7 @@ export const deepLinkConfig: NonNullable<
         Home: "home",
         OutSleeping: "out-sleeping",
         NightStudy: "night-study",
+        Aid: "aid",
         More: "more",
       },
     },
