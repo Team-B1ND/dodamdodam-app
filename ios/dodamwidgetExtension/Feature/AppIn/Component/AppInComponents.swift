@@ -67,15 +67,27 @@ struct AppInNavButton: View {
 }
 
 struct AppInPageIndicator: View {
+  /// 점 5개(45pt)를 넘으면 Small 위젯에서 좌우 이동 버튼이 잘릴 수 있어 숫자 표기로 바꾼다.
+  private static let maxDotCount = 5
+
   let page: AppInPage
 
   var body: some View {
-    HStack(spacing: 5) {
-      ForEach(0..<page.count, id: \.self) { index in
-        Circle()
-          .fill(index == page.index ? WidgetColor.primaryNormal : WidgetColor.fillAlternative)
-          .frame(width: 5, height: 5)
+    if page.count <= Self.maxDotCount {
+      HStack(spacing: 5) {
+        ForEach(0..<page.count, id: \.self) { index in
+          Circle()
+            .fill(index == page.index ? WidgetColor.primaryNormal : WidgetColor.fillAlternative)
+            .frame(width: 5, height: 5)
+        }
       }
+    } else {
+      Text("\(page.index + 1) / \(page.count)")
+        .font(.system(size: 11, weight: .medium))
+        .monospacedDigit()
+        .foregroundStyle(WidgetColor.labelAssistive)
+        .lineLimit(1)
+        .fixedSize()
     }
   }
 }
