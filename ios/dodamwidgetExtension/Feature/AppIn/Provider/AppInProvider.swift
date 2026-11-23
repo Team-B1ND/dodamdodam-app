@@ -14,9 +14,13 @@ struct AppInProvider: TimelineProvider {
   func getSnapshot(in context: Context, completion: @escaping (AppInEntry) -> Void) {
     Task {
       let entry = await makeEntry(layout: AppInLayout(family: context.family))
-      // 위젯 갤러리에서는 아직 목록이 없어도 실제 모습을 미리 보여준다.
-      if context.isPreview, case .unavailable = entry.content {
-        completion(placeholder(in: context))
+      // 위젯 갤러리에서는 표시할 앱이 없어도 실제 모습을 미리 보여준다.
+      if context.isPreview {
+        if case .apps = entry.content {
+          completion(entry)
+        } else {
+          completion(placeholder(in: context))
+        }
       } else {
         completion(entry)
       }
@@ -32,8 +36,12 @@ struct AppInProvider: TimelineProvider {
   }
 
   private func makeEntry(layout: AppInLayout) async -> AppInEntry {
-    let items = AppInStore.loadApps()
-    guard !items.isEmpty else { return AppInEntry(date: .now, content: .unavailable) }
+    guard let items = AppInStore.loadApps() else {
+      return AppInEntry(date: .now, content: .unavailable)
+    }
+    guard !items.isEmpty else {
+      return AppInEntry(date: .now, content: .empty)
+    }
 
     let index = AppInStore.page(for: layout, itemCount: items.count)
     let start = index * layout.pageSize

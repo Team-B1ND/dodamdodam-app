@@ -31,6 +31,10 @@ struct AppInWidgetView: View {
         iconSize: layout == .small ? 32 : 44,
         message: layout == .small ? "미니앱을\n불러올 수 없어요" : "미니앱을 불러올 수 없어요"
       )
+    case .empty:
+      AppInEmptyView(
+        message: layout == .small ? "사용할 수 있는\n미니앱이 없어요" : "사용할 수 있는 미니앱이 없어요"
+      )
     case .apps(let page):
       switch layout {
       case .small: AppInSmallCarousel(page: page)

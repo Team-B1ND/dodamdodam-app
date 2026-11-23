@@ -170,6 +170,19 @@ struct AppInListRow: View {
   }
 }
 
+/// 목록은 정상적으로 받았지만 활성화된 미니앱이 없을 때. 오류 화면과 구분해 경고 배지 없이 안내한다.
+struct AppInEmptyView: View {
+  let message: String
+
+  var body: some View {
+    Text(message)
+      .font(.system(size: 12, weight: .medium))
+      .foregroundStyle(WidgetColor.labelAssistive)
+      .multilineTextAlignment(.center)
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+  }
+}
+
 /// 미니앱 목록을 불러오지 못했을 때. 위젯을 누르면 앱의 미니앱 탭이 열려 목록을 다시 받는다.
 struct AppInUnavailableView: View {
   let iconSize: CGFloat

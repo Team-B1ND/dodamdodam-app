@@ -12,12 +12,13 @@ enum AppInStore {
   // RNInAppWidgetModule이 저장하는 키와 맞춘다.
   private static let appsKey = "widgetInApps"
 
-  static func loadApps() -> [AppInItem] {
+  /// 저장된 값이 없거나 디코딩에 실패하면 nil, 정상적으로 빈 목록이 저장됐으면 []를 반환한다.
+  static func loadApps() -> [AppInItem]? {
     guard let json = defaults?.string(forKey: appsKey),
           let data = json.data(using: .utf8)
-    else { return [] }
+    else { return nil }
 
-    return (try? JSONDecoder().decode([AppInItem].self, from: data)) ?? []
+    return try? JSONDecoder().decode([AppInItem].self, from: data)
   }
 
   static func pageCount(itemCount: Int, layout: AppInLayout) -> Int {
@@ -32,7 +33,7 @@ enum AppInStore {
 
   /// 끝에서 넘기면 반대쪽 끝으로 돌아간다.
   static func movePage(for layout: AppInLayout, by offset: Int) {
-    let itemCount = loadApps().count
+    let itemCount = loadApps()?.count ?? 0
     let count = pageCount(itemCount: itemCount, layout: layout)
     let current = page(for: layout, itemCount: itemCount)
     let next = ((current + offset) % count + count) % count

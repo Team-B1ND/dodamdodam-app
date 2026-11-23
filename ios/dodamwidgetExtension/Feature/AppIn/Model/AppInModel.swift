@@ -68,6 +68,7 @@ struct AppInPage {
 struct AppInEntry: TimelineEntry {
   enum Content {
     case apps(AppInPage)
+    case empty
     case unavailable
   }
 
