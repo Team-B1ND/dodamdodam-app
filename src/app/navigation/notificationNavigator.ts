@@ -37,11 +37,20 @@ async function waitUntilSplashCleared(navigationRef: NavigationRef) {
 
 const isWebUrl = (url: string) => url.startsWith("https://") || url.startsWith("http://");
 
-// "/outing", "/meal?x=1" 같은 알림 경로를 dodamdodam:// 딥링크로 바꾼다.
+// "/outing", "/meal?x=1", "/apps/AbC" 같은 알림 경로를 dodamdodam:// 딥링크로 바꾼다.
+// 경로 ID의 대소문자가 깨지지 않도록 첫 세그먼트만 소문자로 정규화해 매핑한다.
 const toDeepLinkUrl = (appUrl: string) => {
-  const [rawPath, query] = appUrl.split("?", 2);
-  const path = rawPath.replace(/^\/+|\/+$/g, "").toLowerCase();
-  const mappedPath = LEGACY_PATHS[path] ?? path;
+  const queryIndex = appUrl.indexOf("?");
+  const rawPath = queryIndex === -1 ? appUrl : appUrl.slice(0, queryIndex);
+  const query = queryIndex === -1 ? undefined : appUrl.slice(queryIndex + 1);
+
+  const trimmedPath = rawPath.replace(/^\/+|\/+$/g, "");
+  const slashIndex = trimmedPath.indexOf("/");
+  const firstSegment = (slashIndex === -1 ? trimmedPath : trimmedPath.slice(0, slashIndex)).toLowerCase();
+  const restPath = slashIndex === -1 ? "" : trimmedPath.slice(slashIndex);
+
+  const mappedFirst = LEGACY_PATHS[firstSegment] ?? firstSegment;
+  const mappedPath = `${mappedFirst}${restPath}`;
 
   return `${DEEP_LINK_PREFIX}${query === undefined ? mappedPath : `${mappedPath}?${query}`}`;
 };
