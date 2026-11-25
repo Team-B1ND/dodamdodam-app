@@ -70,6 +70,34 @@ export const isWithinDeadline = (
   return true;
 };
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+const WEEK_MS = 7 * DAY_MS;
+
+/** 다음 신청 기간 시작·마감 경계까지 남은 ms를 반환한다. */
+export const getMsUntilNextDeadlineTransition = (
+  deadline: WeekendStudyDeadline,
+  now = new Date(),
+): number => {
+  const currentMs =
+    (getIsoDayOfWeek(now) - 1) * DAY_MS +
+    (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()) * 1000 +
+    now.getMilliseconds();
+
+  const startMs =
+    (DAY_OF_WEEK_VALUE[deadline.startDayOfWeek] - 1) * DAY_MS +
+    parseTimeToSeconds(deadline.startTime) * 1000;
+  const endMs =
+    (DAY_OF_WEEK_VALUE[deadline.endDayOfWeek] - 1) * DAY_MS +
+    parseTimeToSeconds(deadline.endTime) * 1000;
+
+  const msUntil = (targetMs: number) => {
+    const diff = targetMs - currentMs;
+    return diff > 0 ? diff : diff + WEEK_MS;
+  };
+
+  return Math.min(msUntil(startMs), msUntil(endMs)) + 50;
+};
+
 /** "17:00:00" → "17:00" */
 export const formatDeadlineTime = (time: string): string => {
   const [hours = "00", minutes = "00"] = time.split(":");
