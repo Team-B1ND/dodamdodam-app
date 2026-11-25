@@ -35,8 +35,35 @@ export const syncInAppWidget = async (apps: InApp[], selectedIds?: string[]) => 
 };
 
 /**
+ * 위젯 동기화에 필요한 활성 미니앱 목록을 조회한다.
+ * 기본은 첫 페이지(최대 30개)만 받고, 선택된 ID 중 누락된 항목이 있으면 다음 페이지까지 이어 조회한다.
+ */
+const fetchWidgetApps = async (selectedIds: string[]): Promise<InApp[]> => {
+  const apps: InApp[] = [];
+  const seenIds = new Set<string>();
+
+  for (let page = 0; ; page++) {
+    const { data } = await inappApi.getActiveApps(page, WIDGET_APP_COUNT);
+    const { content, hasNext } = data.data;
+
+    for (const app of content) {
+      if (!seenIds.has(app.appId)) {
+        seenIds.add(app.appId);
+        apps.push(app);
+      }
+    }
+
+    const hasUnmatchedSelection =
+      selectedIds.length > 0 && selectedIds.some((id) => !seenIds.has(id));
+    if (!hasNext || !hasUnmatchedSelection) {
+      return apps;
+    }
+  }
+};
+
+/**
  * 앱인도담 위젯이 쓸 미니앱 목록을 받아 App Group에 저장한다.
- * 위젯 저장 경로를 하나로 통일해 홈·미니앱 탭 어디로 진입해도 같은 최대 30개 목록을 쓴다.
+ * 위젯 저장 경로를 하나로 통일해 홈·미니앱 탭 어디로 진입해도 같은 목록을 쓴다.
  */
 export const useInAppWidgetSync = () => {
   const queryClient = useQueryClient();
@@ -44,11 +71,8 @@ export const useInAppWidgetSync = () => {
   useQuery({
     queryKey: inappQueryKeys.widgetApps,
     queryFn: async () => {
-      const [{ data }, selectedIds] = await Promise.all([
-        inappApi.getActiveApps(0, WIDGET_APP_COUNT),
-        widgetSelectionStorage.getSelectedIds(),
-      ]);
-      const apps = data.data.content;
+      const selectedIds = await widgetSelectionStorage.getSelectedIds();
+      const apps = await fetchWidgetApps(selectedIds);
       saveInAppsToWidget(resolveWidgetInApps(apps, selectedIds));
       return apps;
     },
