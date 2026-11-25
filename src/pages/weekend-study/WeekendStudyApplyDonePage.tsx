@@ -8,11 +8,7 @@ import { Checkmark } from "@shared/icons/mono";
 import { useTheme } from "@shared/theme";
 import { shapes, typo } from "@shared/tokens";
 import { FilledButton, TopNavBar } from "@shared/ui";
-
-export interface WeekendStudyApplyDoneParams {
-  date: string;
-  periods: number[];
-}
+import type { WeekendStudyApplyDoneParams } from "./types";
 
 type WeekendStudyApplyDoneStackParamList = {
   WeekendStudy: undefined;
