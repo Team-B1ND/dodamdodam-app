@@ -8,17 +8,18 @@ import {
   getMsUntilNextDeadlineTransition,
   isWithinDeadline,
 } from "../lib/deadline";
+import { shouldRetryWeekendStudyQuery } from "../lib/error";
 
 const fetchDeadline = async (): Promise<WeekendStudyDeadline | null> => {
   const { data } = await weekendStudyApi.getDeadline();
-  return data.data ?? null;
+  return data?.data ?? null;
 };
 
 export const useWeekendStudyDeadline = () => {
   const query = useQuery({
     queryKey: weekendStudyQueryKeys.deadline,
     queryFn: fetchDeadline,
-    retry: 1,
+    retry: shouldRetryWeekendStudyQuery,
   });
   const [now, setNow] = useState(() => new Date());
 
@@ -29,6 +30,8 @@ export const useWeekendStudyDeadline = () => {
     if (!deadline) return;
 
     const delay = getMsUntilNextDeadlineTransition(deadline, new Date());
+    if (!Number.isFinite(delay) || delay <= 0) return;
+
     const timer = setTimeout(() => {
       setNow(new Date());
     }, delay);

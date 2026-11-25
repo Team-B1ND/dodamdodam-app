@@ -1,7 +1,14 @@
-import type { DayOfWeek, WeekendStudyDeadline } from "@entities/weekend-study/types";
+import type {
+  DayOfWeek,
+  WeekendStudyDeadline,
+  WeekendStudyTime,
+} from "@entities/weekend-study/types";
 
 export const DEADLINE_CLOSED_MESSAGE =
   "신청이 마감되었습니다. 변경은 관리자에게 문의하세요.";
+
+const DEFAULT_DEADLINE_DAY_LABEL = "당일";
+const DEFAULT_DEADLINE_TIME = "17:00";
 
 const DAY_OF_WEEK_VALUE: Record<DayOfWeek, number> = {
   MONDAY: 1,
@@ -23,9 +30,47 @@ const DAY_OF_WEEK_LABEL: Record<DayOfWeek, string> = {
   SUNDAY: "당일",
 };
 
-const parseTimeToSeconds = (time: string): number => {
-  const [hours = 0, minutes = 0, seconds = 0] = time.split(":").map(Number);
-  return hours * 3600 + minutes * 60 + seconds;
+export interface NormalizedDeadlineTime {
+  hour: number;
+  minute: number;
+  second: number;
+}
+
+const clampTimePart = (value: number, max: number): number => {
+  if (!Number.isFinite(value)) return 0;
+  return Math.min(Math.max(Math.trunc(value), 0), max);
+};
+
+/** "HH:mm:ss" 문자열 또는 { hour, minute, second? } 객체를 시·분·초로 정규화한다. */
+export const normalizeDeadlineTime = (
+  time: WeekendStudyTime | null | undefined,
+): NormalizedDeadlineTime => {
+  if (typeof time === "string") {
+    const [hours = 0, minutes = 0, seconds = 0] = time
+      .trim()
+      .split(":")
+      .map(Number);
+    return {
+      hour: clampTimePart(hours, 23),
+      minute: clampTimePart(minutes, 59),
+      second: clampTimePart(seconds, 59),
+    };
+  }
+
+  if (time && typeof time === "object") {
+    return {
+      hour: clampTimePart(Number(time.hour), 23),
+      minute: clampTimePart(Number(time.minute), 59),
+      second: clampTimePart(Number(time.second ?? 0), 59),
+    };
+  }
+
+  return { hour: 0, minute: 0, second: 0 };
+};
+
+const parseTimeToSeconds = (time: WeekendStudyTime): number => {
+  const { hour, minute, second } = normalizeDeadlineTime(time);
+  return hour * 3600 + minute * 60 + second;
 };
 
 const getIsoDayOfWeek = (date: Date): number => {
@@ -46,6 +91,7 @@ export const isWithinDeadline = (
   const currentDayValue = getIsoDayOfWeek(now);
   const startDayValue = DAY_OF_WEEK_VALUE[deadline.startDayOfWeek];
   const endDayValue = DAY_OF_WEEK_VALUE[deadline.endDayOfWeek];
+  if (!startDayValue || !endDayValue) return true;
 
   const currentSeconds =
     now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
@@ -78,17 +124,19 @@ export const getMsUntilNextDeadlineTransition = (
   deadline: WeekendStudyDeadline,
   now = new Date(),
 ): number => {
+  const startDayValue = DAY_OF_WEEK_VALUE[deadline.startDayOfWeek];
+  const endDayValue = DAY_OF_WEEK_VALUE[deadline.endDayOfWeek];
+  if (!startDayValue || !endDayValue) return WEEK_MS;
+
   const currentMs =
     (getIsoDayOfWeek(now) - 1) * DAY_MS +
     (now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()) * 1000 +
     now.getMilliseconds();
 
   const startMs =
-    (DAY_OF_WEEK_VALUE[deadline.startDayOfWeek] - 1) * DAY_MS +
-    parseTimeToSeconds(deadline.startTime) * 1000;
+    (startDayValue - 1) * DAY_MS + parseTimeToSeconds(deadline.startTime) * 1000;
   const endMs =
-    (DAY_OF_WEEK_VALUE[deadline.endDayOfWeek] - 1) * DAY_MS +
-    parseTimeToSeconds(deadline.endTime) * 1000;
+    (endDayValue - 1) * DAY_MS + parseTimeToSeconds(deadline.endTime) * 1000;
 
   const msUntil = (targetMs: number) => {
     const diff = targetMs - currentMs;
@@ -98,14 +146,20 @@ export const getMsUntilNextDeadlineTransition = (
   return Math.min(msUntil(startMs), msUntil(endMs)) + 50;
 };
 
-/** "17:00:00" → "17:00" */
-export const formatDeadlineTime = (time: string): string => {
-  const [hours = "00", minutes = "00"] = time.split(":");
-  return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
+/** "17:00:00" 또는 { hour: 17, minute: 0 } → "17:00" */
+export const formatDeadlineTime = (time: WeekendStudyTime): string => {
+  const { hour, minute } = normalizeDeadlineTime(time);
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
 };
 
-export const formatDeadlineNotice = (deadline: WeekendStudyDeadline): string => {
-  const dayLabel = DAY_OF_WEEK_LABEL[deadline.endDayOfWeek];
-  const time = formatDeadlineTime(deadline.endTime);
+export const formatDeadlineNotice = (
+  deadline?: WeekendStudyDeadline | null,
+): string => {
+  const dayLabel = deadline
+    ? (DAY_OF_WEEK_LABEL[deadline.endDayOfWeek] ?? DEFAULT_DEADLINE_DAY_LABEL)
+    : DEFAULT_DEADLINE_DAY_LABEL;
+  const time = deadline
+    ? formatDeadlineTime(deadline.endTime)
+    : DEFAULT_DEADLINE_TIME;
   return `주의: 신청은 ${dayLabel} ${time}에 마감됩니다.\n${time} 이후 변경은 관리자에게 문의하세요.`;
 };
