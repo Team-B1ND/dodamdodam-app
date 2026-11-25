@@ -37,9 +37,18 @@ export interface WeekendStudyPersonalRequest {
   periods: number[];
 }
 
+export type WeekendStudyTime =
+  | string
+  | {
+      hour: number;
+      minute: number;
+      second?: number;
+    };
+
 export interface WeekendStudyDeadline {
   startDayOfWeek: DayOfWeek;
-  startTime: string;
+  /** Jackson 직렬화 설정에 따라 "HH:mm:ss" 문자열 또는 객체로 내려올 수 있다. */
+  startTime: WeekendStudyTime;
   endDayOfWeek: DayOfWeek;
-  endTime: string;
+  endTime: WeekendStudyTime;
 }

@@ -9,4 +9,5 @@ export {
   type WeekendStudyPersonalRequest,
   type WeekendStudyProject,
   type WeekendStudyRoom,
+  type WeekendStudyTime,
 } from "./types";
