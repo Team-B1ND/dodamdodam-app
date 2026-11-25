@@ -1,5 +1,6 @@
 import React, { forwardRef, useCallback } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import Animated from "react-native-reanimated";
 import {
   BottomSheetModal,
   BottomSheetView,
@@ -8,7 +9,8 @@ import {
 } from "@gorhom/bottom-sheet";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
-import { Radio } from "@shared/ui";
+import { usePressAnimation } from "@shared/hooks";
+import { Checkmark } from "@shared/icons/mono";
 import type { Gender } from "@entities/auth/types";
 import { GENDER_OPTIONS } from "./gender";
 
@@ -17,6 +19,44 @@ interface GenderSheetProps {
   onSelect: (gender: Gender) => void;
   onOpenChange?: (open: boolean) => void;
 }
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
+const GenderOption = ({
+  label,
+  selected,
+  onPress,
+}: {
+  label: string;
+  selected: boolean;
+  onPress: () => void;
+}) => {
+  const { colors } = useTheme();
+  const { animatedStyle, brightnessOverlayStyle, handlePressIn, handlePressOut } =
+    usePressAnimation();
+
+  return (
+    <AnimatedPressable
+      accessibilityRole="radio"
+      accessibilityState={{ checked: selected }}
+      style={[styles.option, animatedStyle]}
+      onPress={onPress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+    >
+      <Animated.View style={[styles.optionOverlay, brightnessOverlayStyle]} pointerEvents="none" />
+      <Text
+        style={[
+          styles.optionText,
+          { color: selected ? colors.text.primary : colors.text.placeholder },
+        ]}
+      >
+        {label}
+      </Text>
+      {selected && <Checkmark size={16} color={colors.brand.primary} />}
+    </AnimatedPressable>
+  );
+};
 
 export const GenderSheet = forwardRef<BottomSheetModal, GenderSheetProps>(
   ({ value, onSelect, onOpenChange }, ref) => {
@@ -47,23 +87,21 @@ export const GenderSheet = forwardRef<BottomSheetModal, GenderSheetProps>(
         enablePanDownToClose
         backdropComponent={renderBackdrop}
         onChange={(index) => onOpenChange?.(index >= 0)}
-        backgroundStyle={[styles.background, { backgroundColor: colors.background.surface }]}
-        handleIndicatorStyle={[styles.indicator, { backgroundColor: colors.fill.secondary }]}
+        backgroundStyle={{ backgroundColor: colors.background.surface }}
+        handleIndicatorStyle={{ backgroundColor: colors.fill.secondary }}
       >
-        <BottomSheetView style={styles.content}>
-          <Text style={[styles.title, { color: colors.text.primary }]}>성별</Text>
-          {GENDER_OPTIONS.map((option) => (
-            <Pressable
-              key={option.value}
-              accessibilityRole="radio"
-              accessibilityState={{ checked: value === option.value }}
-              style={styles.option}
-              onPress={() => select(option.value)}
-            >
-              <Radio selected={value === option.value} onPress={() => select(option.value)} />
-              <Text style={[styles.optionText, { color: colors.text.primary }]}>{option.label}</Text>
-            </Pressable>
-          ))}
+        <BottomSheetView style={styles.sheetContent}>
+          <Text style={[styles.sheetTitle, { color: colors.text.primary }]}>성별</Text>
+          <View style={styles.options}>
+            {GENDER_OPTIONS.map((option) => (
+              <GenderOption
+                key={option.value}
+                label={option.label}
+                selected={value === option.value}
+                onPress={() => select(option.value)}
+              />
+            ))}
+          </View>
         </BottomSheetView>
       </BottomSheetModal>
     );
@@ -71,31 +109,32 @@ export const GenderSheet = forwardRef<BottomSheetModal, GenderSheetProps>(
 );
 
 const styles = StyleSheet.create({
-  background: {
-    borderTopLeftRadius: 28,
-    borderTopRightRadius: 28,
-  },
-  indicator: {
-    width: 64,
-    height: 5,
-    borderRadius: 2.5,
-  },
-  content: {
+  sheetContent: {
     paddingHorizontal: 16,
-    paddingTop: 8,
     paddingBottom: 48,
+    gap: 8,
   },
-  title: {
-    ...typo("Headline", "Bold"),
-    marginBottom: 8,
+  sheetTitle: {
+    ...typo("Heading2", "Bold"),
+    padding: 8,
+  },
+  options: {
+    gap: 16,
   },
   option: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
-    paddingVertical: 12,
+    justifyContent: "space-between",
+    padding: 8,
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+  optionOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "#000",
+    borderRadius: 8,
   },
   optionText: {
-    ...typo("Body1", "Medium"),
+    ...typo("Headline", "Medium"),
   },
 });

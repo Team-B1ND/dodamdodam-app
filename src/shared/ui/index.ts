@@ -16,7 +16,6 @@ export { Indicator, Switcher } from "./indicators";
 export { OverlayProvider, useOverlay } from "./overlay";
 export { DatePicker, TimePicker, PickerTrigger } from "./pickers";
 export { Progress, CircularProgress } from "./progress";
-export { Radio } from "./radio";
 export { Switch } from "./switch";
 export { Tab } from "./tab";
 export { Tag } from "./tag";
