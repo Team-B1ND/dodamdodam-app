@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from "react";
-import { View, Text, Pressable, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
+import React, { useState, useCallback, useRef } from "react";
+import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, Keyboard } from "react-native";
 import Animated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
+import type { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
@@ -9,7 +10,7 @@ import {
   TopNavBar,
   TextField,
   FilledButton,
-  Dropdown,
+  SelectField,
   TextAreaProvider,
   VerifyCodeDialog,
   useOverlay,
@@ -20,14 +21,9 @@ import type { Gender } from "@entities/auth/types";
 import { Role } from "@features/register/types";
 import { validateStudentNumber } from "@features/register/validateStudentNumber";
 import { formatPhoneNumber, parsePhoneDigits } from "@features/register/formatPhoneNumber";
+import { GenderSheet } from "@features/register/GenderSheet";
+import { getGenderLabel } from "@features/register/gender";
 import { useSlideAnimation } from "@shared/hooks/animations/useSlideAnimation";
-
-const GENDER_BY_LABEL: Record<string, Gender> = {
-  "남성": "MALE",
-  "여성": "FEMALE",
-};
-
-const GENDER_LABELS = Object.keys(GENDER_BY_LABEL);
 
 interface EnterNameRouteParams {
   role: Role;
@@ -44,7 +40,14 @@ export const EnterNamePage = () => {
 
   const [name, setName] = useState("");
   const [extraField, setExtraField] = useState("");
-  const [genderLabel, setGenderLabel] = useState("");
+  const [gender, setGender] = useState<Gender | null>(null);
+  const [isGenderSheetOpen, setIsGenderSheetOpen] = useState(false);
+  const genderSheetRef = useRef<BottomSheetModal>(null);
+
+  const openGenderSheet = useCallback(() => {
+    Keyboard.dismiss();
+    genderSheetRef.current?.present();
+  }, []);
   const [phone, setPhone] = useState("");
 
   const handleNameChange = useCallback((text: string) => {
@@ -63,7 +66,7 @@ export const EnterNamePage = () => {
   const showGenderField = showExtraField && (isStudent
     ? extraField.length === 4
     : extraField.trim().length >= 1);
-  const showPhoneField = showGenderField && genderLabel.length > 0;
+  const showPhoneField = showGenderField && gender !== null;
   const showVerifyButton = showPhoneField && phone.length === 11;
 
   const { animatedStyle: extraFieldStyle } = useSlideAnimation({
@@ -118,7 +121,7 @@ export const EnterNamePage = () => {
               name,
               extraField,
               phone,
-              gender: GENDER_BY_LABEL[genderLabel],
+              gender,
             });
           }}
         />
@@ -128,7 +131,7 @@ export const EnterNamePage = () => {
     } finally {
       setSendingCode(false);
     }
-  }, [sendingCode, phone, overlay, navigation, role, name, extraField, genderLabel]);
+  }, [sendingCode, phone, overlay, navigation, role, name, extraField, gender]);
 
   return (
     <SafeAreaView
@@ -160,12 +163,13 @@ export const EnterNamePage = () => {
             )}
 
             {showGenderField && (
-              <Animated.View style={[genderFieldStyle, styles.genderField]}>
-                <Dropdown
-                  items={GENDER_LABELS}
-                  value={genderLabel}
-                  placeholder="성별"
-                  onSelectedItemChange={setGenderLabel}
+              <Animated.View style={genderFieldStyle}>
+                <SelectField
+                  label="성별"
+                  value={getGenderLabel(gender)}
+                  placeholder="선택해주세요"
+                  active={isGenderSheetOpen}
+                  onPress={openGenderSheet}
                 />
               </Animated.View>
             )}
@@ -199,6 +203,13 @@ export const EnterNamePage = () => {
           )}
         </TextAreaProvider>
       </KeyboardAvoidingView>
+
+      <GenderSheet
+        ref={genderSheetRef}
+        value={gender}
+        onSelect={setGender}
+        onOpenChange={setIsGenderSheetOpen}
+      />
     </SafeAreaView>
   );
 };
@@ -221,9 +232,6 @@ const styles = StyleSheet.create({
   },
   fields: {
     gap: 20,
-  },
-  genderField: {
-    zIndex: 1000,
   },
   verifyButton: {
     marginTop: 24,
