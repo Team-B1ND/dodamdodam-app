@@ -127,7 +127,6 @@ export const AppWebView = () => {
 		routeKey: route.key,
 		params,
 		appUrl: params.appUrl,
-		requestId: params.requestId,
 		baseUrl,
 		failed: false,
 	}));
@@ -135,8 +134,7 @@ export const AppWebView = () => {
 	const isNewOpenRequest =
 		loadSession.routeKey !== route.key ||
 		loadSession.params !== params ||
-		loadSession.appUrl !== params.appUrl ||
-		loadSession.requestId !== params.requestId;
+		loadSession.appUrl !== params.appUrl;
 	const isDifferentBaseUrl =
 		baseUrl !== "" && loadSession.baseUrl !== "" && loadSession.baseUrl !== baseUrl;
 
@@ -146,7 +144,6 @@ export const AppWebView = () => {
 			routeKey: route.key,
 			params,
 			appUrl: params.appUrl,
-			requestId: params.requestId,
 			baseUrl,
 			failed: false,
 		});

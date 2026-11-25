@@ -17,7 +17,6 @@ const TAB_ROUTES: Record<string, string> = {
 
 const SPLASH_POLL_MS = 100;
 const SPLASH_TIMEOUT_MS = 6000;
-let appWebViewRequestSeq = 0;
 
 async function waitUntilSplashCleared(
   navigationRef: React.RefObject<NavigationContainerRef<any> | null>,
@@ -62,8 +61,6 @@ function navigateTo(navigation: NavigationContainerRef<any>, data: Record<string
       CommonActions.navigate("AppWebView", {
         appUrl: fullUrl,
         name: data.appName ?? "",
-        // 같은 미니앱을 푸시로 다시 열 때도 새 로드 요청으로 구분한다.
-        requestId: ++appWebViewRequestSeq,
       }),
     );
   } else if (appUrl.startsWith("/")) {

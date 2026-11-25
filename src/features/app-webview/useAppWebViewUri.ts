@@ -9,8 +9,6 @@ export interface AppWebViewParams {
   // 푸시 알림으로 들어오면 아이콘 정보가 없다.
   iconUrl?: string;
   darkIconUrl?: string | null;
-  // 같은 화면 인스턴스가 재사용될 때 미니앱 열기 요청을 구분하는 토큰.
-  requestId?: number;
 }
 
 export type AppWebViewRouteProp = RouteProp<{ AppWebView: AppWebViewParams }, "AppWebView">;
