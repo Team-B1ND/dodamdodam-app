@@ -4,6 +4,7 @@ export {
   DEADLINE_CLOSED_MESSAGE,
   formatDeadlineNotice,
   formatDeadlineTime,
+  getMsUntilNextDeadlineTransition,
   isWithinDeadline,
 } from "./lib/deadline";
 export { useWeekendStudyDeadline } from "./hooks/useWeekendStudyDeadline";
