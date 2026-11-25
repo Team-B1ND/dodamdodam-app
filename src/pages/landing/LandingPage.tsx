@@ -5,10 +5,10 @@ import { CommonActions, useNavigation } from "@react-navigation/native";
 import { useTheme } from "@shared/theme";
 import { AppLogo } from "@shared/ui/topNavBar/AppLogo";
 import { B1NDLogo } from "@shared/icons/logo";
+import { notificationApi } from "@entities/notification/api";
 import { validateSession } from "@features/auth/session";
 import { registerPushToken } from "@shared/lib/notification";
-import { pendingDeepLink } from "@app/navigation/pendingDeepLink";
-import { resolveDeepLink } from "@app/navigation/deepLinkResolver";
+import { pendingDeepLink, resolvePendingNavigation } from "@app/navigation/pendingDeepLink";
 
 const SPLASH_DURATION = 2000;
 const APP_LOGO_WIDTH = 176;
@@ -35,19 +35,19 @@ export const LandingPage = () => {
 
       registerPushToken();
 
-      const pendingUrl = pendingDeepLink.peek();
-      const deepLinkState = pendingUrl ? resolveDeepLink(pendingUrl) : null;
+      const pendingTarget = pendingDeepLink.peek();
+      const resolved = resolvePendingNavigation(pendingTarget);
 
-      if (deepLinkState) {
-        navigation.dispatch(CommonActions.reset(deepLinkState));
-        pendingDeepLink.clear();
-        return;
-      }
-
-      pendingDeepLink.clear();
       navigation.dispatch(
-        CommonActions.reset({ index: 0, routes: [{ name: "Main" }] }),
+        CommonActions.reset(
+          resolved?.state ?? { index: 0, routes: [{ name: "Main" }] },
+        ),
       );
+      pendingDeepLink.clear();
+
+      if (resolved?.notificationId) {
+        notificationApi.markAsRead(resolved.notificationId).catch(() => {});
+      }
     }, SPLASH_DURATION);
 
     return () => {

@@ -3,8 +3,14 @@ import SwiftUI
 enum WidgetColor {
   static let primaryNormal = Color(hex: 0x0083F0)
   
+  static let statusWarning = Color(hex: 0xFBD300)
+
+  static var labelAssistive: Color { adaptive(light: 0x747678, dark: 0x9B9D9F) }
   static var labelAlternative: Color { adaptive(light: 0x5D5F60, dark: 0xC4C5C6) }
+  static var labelNeutral: Color { adaptive(light: 0x383A3B, dark: 0xDCDDDE) }
   static var labelNormal: Color { adaptive(light: 0x0F0F10, dark: 0xF5F5F5) }
+  static var fillNeutral: Color { adaptive(light: 0xF5F5F5, dark: 0x383A3B) }
+  static var fillAlternative: Color { adaptive(light: 0xDCDDDE, dark: 0x48494A) }
   static var backgroundNormal: Color { adaptive(light: 0xFFFFFF, dark: 0x232424) }
   static var backgroundNeutral: Color { adaptive(light: 0xF5F5F5, dark: 0x191A1A) }
   

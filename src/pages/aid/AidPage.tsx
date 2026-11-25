@@ -4,8 +4,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@shared/theme";
 import { useTabPageEdges } from "@shared/hooks";
 import { TopNavBar, RefreshView } from "@shared/ui";
-import { InAppGrid } from "@features/inapp";
+import { InAppGrid, useInAppWidgetSync } from "@features/inapp";
 import { inappQueryKeys } from "@entities/inapp/api/queryKeys";
+
+const AID_REFRESH_QUERY_KEYS = [
+  inappQueryKeys.activeApps,
+  inappQueryKeys.widgetApps,
+] as const;
 
 export const AidPage = () => {
   const { colors } = useTheme();
@@ -13,6 +18,7 @@ export const AidPage = () => {
   // 다음 페이지 로드 함수는 Suspense 안쪽 훅에 있어서, ref로 끌어올려 RefreshView에 연결한다.
   const loadMoreRef = useRef<(() => void) | null>(null);
   const handleEndReached = useCallback(() => loadMoreRef.current?.(), []);
+  useInAppWidgetSync();
 
   return (
     <SafeAreaView
@@ -26,7 +32,7 @@ export const AidPage = () => {
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
-        queryKeys={[inappQueryKeys.activeApps]}
+        queryKeys={AID_REFRESH_QUERY_KEYS}
         onEndReached={handleEndReached}
       >
         <Suspense fallback={<InAppGrid.Skeleton />}>

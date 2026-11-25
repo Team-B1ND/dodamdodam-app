@@ -13,9 +13,9 @@ struct AppMainWidget: WidgetBundle {
   var body: some Widget {
     MealWidget()
     TimetableWidget()
+    AppInWidget()
 #if DEBUG
     DeepLinkTestWidget()
-    InAppTestWidget()
 #endif
   }
 }

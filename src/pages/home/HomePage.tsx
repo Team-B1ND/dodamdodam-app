@@ -8,6 +8,7 @@ import { Bell } from "@shared/icons/mono";
 import { HomeBanner } from "@features/home/home-banner";
 import { HomeMealCard } from "@features/meal";
 import { HomeTimeTableCard } from "@features/time-table";
+import { useInAppWidgetSync } from "@features/inapp";
 import { useHomePage } from "./useHomePage";
 
 export const HomePage = () => {
@@ -24,6 +25,7 @@ export const HomePage = () => {
     navigateToMeal,
     handleBannerPress,
   } = useHomePage();
+  useInAppWidgetSync();
 
   return (
     <SafeAreaView

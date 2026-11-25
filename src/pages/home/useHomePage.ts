@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { BannerItem } from "@features/home/home-banner";
 import { bannerApi } from "@entities/banner/api";
 import { bannerQueryKeys } from "@entities/banner/api/queryKeys";
+import { inappQueryKeys } from "@entities/inapp/api/queryKeys";
 import { mealQueryKeys } from "@entities/meal/api/queryKeys";
 import { timeTableQueryKeys } from "@entities/time-table/api/queryKeys";
 import { linkOpenStorage } from "@entities/settings/storage/linkOpenStorage";
@@ -73,7 +74,12 @@ export const useHomePage = () => {
 
   const today = useMemo(formatToday, []);
   const queryKeys = useMemo(
-    () => [mealQueryKeys.byDate(today), timeTableQueryKeys.me, bannerQueryKeys.banner],
+    () => [
+      mealQueryKeys.byDate(today),
+      timeTableQueryKeys.me,
+      bannerQueryKeys.banner,
+      inappQueryKeys.widgetApps,
+    ],
     [today],
   );
 
