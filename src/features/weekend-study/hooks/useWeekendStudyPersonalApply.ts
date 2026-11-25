@@ -7,16 +7,15 @@ import {
   type WeekendStudyPersonalRequest,
 } from "@entities/weekend-study";
 import { toast } from "@shared/ui";
+import { getWeekendStudyErrorMessage } from "../lib/error";
 
 const notifyApplyError = (error: unknown) => {
-  if (!axios.isAxiosError(error)) return;
+  const message = getWeekendStudyErrorMessage(
+    error,
+    "주말 자습 신청에 실패했어요.",
+  );
+  if (!message) return;
 
-  // 네트워크 오류·5xx는 인터셉터가, 401은 세션 만료 처리가 담당한다.
-  const status = error.response?.status;
-  if (!status || status === 401 || status >= 500) return;
-
-  const message =
-    error.response?.data?.message || "주말 자습 신청에 실패했어요.";
   toast.warning(message, { position: "top" });
 };
 

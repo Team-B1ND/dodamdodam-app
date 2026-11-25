@@ -97,7 +97,7 @@ export const PersonalApplyForm = ({ onSuccess }: PersonalApplyFormProps) => {
 
   const noticeText = isClosed
     ? DEADLINE_CLOSED_MESSAGE
-    : isOpen && deadline
+    : isOpen
       ? formatDeadlineNotice(deadline)
       : null;
 
