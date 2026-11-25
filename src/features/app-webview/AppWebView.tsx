@@ -111,16 +111,54 @@ const styles = StyleSheet.create({
 });
 
 export const AppWebView = () => {
+	const route = useRoute<AppWebViewRouteProp>();
+	const { params } = route;
 	const { webViewProps, NfcSheet } = useAppBridge();
 	const { uri } = useAppWebViewUri();
 	const { modeRef } = useLinkOpenMode();
 	const popupRef = useRef<BottomSheetModal>(null);
 	const [popupUrl, setPopupUrl] = useState("");
+	const baseUrl = uri ? withoutQuery(uri) : "";
 	// 메인 문서가 4xx/5xx로 오면 서버 에러 페이지를 노출하지 않고 앱 화면으로 대체한다.
-	// 실패 여부 대신 실패한 URL을 기억한다. 알림으로 다른 미니앱을 열면 같은 화면이 params만 바뀐 채
-	// 재사용되는데, 그때 URL이 달라지면 자동으로 실패 상태가 풀려 새 WebView가 마운트된다.
-	const [failedUri, setFailedUri] = useState<string | null>(null);
-	const httpFailed = failedUri === uri;
+	// 같은 화면 인스턴스가 재사용된 채 다른 미니앱이나 같은 미니앱을 푸시 등으로 다시 열면
+	// 이전 실패 상태를 지우고 WebView를 새 key로 다시 마운트해 항상 새 요청을 보낸다.
+	const [loadSession, setLoadSession] = useState(() => ({
+		id: 0,
+		routeKey: route.key,
+		params,
+		appUrl: params.appUrl,
+		requestId: params.requestId,
+		baseUrl,
+		failed: false,
+	}));
+
+	const isNewOpenRequest =
+		loadSession.routeKey !== route.key ||
+		loadSession.params !== params ||
+		loadSession.appUrl !== params.appUrl ||
+		loadSession.requestId !== params.requestId;
+	const isDifferentBaseUrl =
+		baseUrl !== "" && loadSession.baseUrl !== "" && loadSession.baseUrl !== baseUrl;
+
+	if (isNewOpenRequest || isDifferentBaseUrl) {
+		setLoadSession({
+			id: loadSession.id + 1,
+			routeKey: route.key,
+			params,
+			appUrl: params.appUrl,
+			requestId: params.requestId,
+			baseUrl,
+			failed: false,
+		});
+	} else if (baseUrl !== "" && loadSession.baseUrl === "") {
+		setLoadSession({
+			...loadSession,
+			baseUrl,
+		});
+	}
+
+	const httpFailed = loadSession.failed;
+	const currentLoadId = loadSession.id;
 
 	const handleLinkRequest = useCallback(
 		(req: { url: string; isTopFrame?: boolean }) => {
@@ -146,6 +184,7 @@ export const AppWebView = () => {
 				<LoadFailed message={SERVER_ERROR_MESSAGE} />
 			) : (
 				<WebView
+					key={currentLoadId}
 					{...webViewProps}
 					source={{ uri }}
 					onShouldStartLoadWithRequest={handleLinkRequest}
@@ -157,7 +196,7 @@ export const AppWebView = () => {
 					// 메인 프레임 응답에서만 호출된다(iOS·Android 모두). 이미지·API 같은 하위 요청 실패는 해당 없다.
 					onHttpError={({ nativeEvent }) => {
 						console.error("[AppWebView] HTTP 오류", nativeEvent.statusCode, withoutQuery(nativeEvent.url));
-						setFailedUri(uri);
+						setLoadSession((prev) => (prev.id === currentLoadId ? { ...prev, failed: true } : prev));
 					}}
 					renderError={() => <LoadFailed message={NETWORK_ERROR_MESSAGE} />}
 					overScrollMode="never"
