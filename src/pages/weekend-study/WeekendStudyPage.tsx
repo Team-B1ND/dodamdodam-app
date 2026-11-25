@@ -25,7 +25,7 @@ export const WeekendStudyPage = () => {
   const { colors } = useTheme();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const queryClient = useQueryClient();
-  const { isOpen } = useWeekendStudyDeadline();
+  const { isOpen, isClosed } = useWeekendStudyDeadline();
   const [retryKey, setRetryKey] = useState(0);
 
   const handleGoBack = useCallback(() => {
@@ -60,7 +60,7 @@ export const WeekendStudyPage = () => {
         showsVerticalScrollIndicator={false}
         queryKeys={REFRESH_QUERY_KEYS}
       >
-        {!isOpen ? (
+        {isClosed ? (
           <Text style={[styles.closedNotice, { color: colors.status.error }]}>
             {DEADLINE_CLOSED_MESSAGE}
           </Text>
