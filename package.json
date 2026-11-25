@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@b1nd/aid-kit": "^1.0.9",
+    "@b1nd/aid-kit": "^1.0.11",
     "@gorhom/bottom-sheet": "^5.2.8",
     "@react-native-community/datetimepicker": "^8.6.0",
     "@react-native-firebase/app": "^23.8.8",
