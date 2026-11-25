@@ -96,6 +96,8 @@ const AidWidgetSettingContent = ({ onSaved }: AidWidgetSettingContentProps) => {
     if (isSaving) return;
     setIsSaving(true);
     try {
+      // 진행 중인 위젯 동기화 쿼리가 이전 선택으로 덮어쓰지 않도록 먼저 취소한다.
+      await queryClient.cancelQueries({ queryKey: inappQueryKeys.widgetApps });
       const cachedWidgetApps =
         queryClient.getQueryData<InApp[]>(inappQueryKeys.widgetApps) ?? [];
       const allKnownApps = mergeApps(apps, cachedWidgetApps);

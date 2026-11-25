@@ -11,6 +11,9 @@ import { saveInAppsToWidget } from "@shared/lib/widget/inAppWidget";
 const WIDGET_APP_COUNT = 30;
 const WIDGET_SYNC_STALE_TIME = 5 * 60 * 1000;
 
+// 진행 중이던 이전 동기화가 최신 저장 결과를 덮어쓰지 않도록 순번을 관리한다.
+let latestSyncVersion = 0;
+
 /**
  * 저장된 선택 ID 순서대로 미니앱 목록을 거르고 정렬한다.
  * 선택이 비어 있거나 선택된 ID가 현재 목록에 하나도 없으면 전체 목록을 그대로 반환한다.
@@ -30,7 +33,9 @@ export const resolveWidgetInApps = (apps: InApp[], selectedIds: string[]): InApp
  * 미니앱 목록에 현재 선택 설정을 반영해 위젯에 저장하고 타임라인을 리로드한다.
  */
 export const syncInAppWidget = async (apps: InApp[], selectedIds?: string[]) => {
+  const version = ++latestSyncVersion;
   const ids = selectedIds ?? (await widgetSelectionStorage.getSelectedIds());
+  if (version !== latestSyncVersion) return;
   saveInAppsToWidget(resolveWidgetInApps(apps, ids));
 };
 
@@ -71,9 +76,12 @@ export const useInAppWidgetSync = () => {
   useQuery({
     queryKey: inappQueryKeys.widgetApps,
     queryFn: async () => {
+      const version = ++latestSyncVersion;
       const selectedIds = await widgetSelectionStorage.getSelectedIds();
       const apps = await fetchWidgetApps(selectedIds);
-      saveInAppsToWidget(resolveWidgetInApps(apps, selectedIds));
+      if (version === latestSyncVersion) {
+        saveInAppsToWidget(resolveWidgetInApps(apps, selectedIds));
+      }
       return apps;
     },
     staleTime: WIDGET_SYNC_STALE_TIME,
