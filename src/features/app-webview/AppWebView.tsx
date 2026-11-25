@@ -15,6 +15,28 @@ const originOf = (url: string) => url.match(/^https?:\/\/[^/]+/)?.[0] ?? "";
 // 쿼리에 액세스 토큰이 붙어 있어 로그에는 경로까지만 남긴다.
 const withoutQuery = (url: string) => url.split("?")[0];
 
+// 미니앱을 네이티브 화면처럼 보이게 하려고 텍스트 선택·드래그·길게 눌러 뜨는 메뉴를 막는다.
+// 입력창(input, textarea, contenteditable)은 그대로 선택·복사할 수 있게 둔다.
+// Android는 로드 전 주입이 빠질 수 있어 로드 뒤에도 한 번 더 넣고, 이미 들어갔으면 건너뛴다.
+const DISABLE_SELECTION_SCRIPT = `
+(function () {
+	if (window.__dodamSelectionDisabled) return;
+	window.__dodamSelectionDisabled = true;
+	var css = "*:not(input):not(textarea):not([contenteditable]):not([contenteditable] *){-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;}" +
+		"img,a{-webkit-user-drag:none!important;}";
+	var style = document.createElement("style");
+	style.textContent = css;
+	(document.head || document.documentElement).appendChild(style);
+	var editable = function (el) {
+		if (el && el.nodeType === 3) el = el.parentElement;
+		return el && el.closest && el.closest("input, textarea, [contenteditable]");
+	};
+	document.addEventListener("selectstart", function (e) { if (!editable(e.target)) e.preventDefault(); }, true);
+	document.addEventListener("dragstart", function (e) { if (!editable(e.target)) e.preventDefault(); }, true);
+})();
+true;
+`;
+
 const NETWORK_ERROR_MESSAGE = "페이지를 불러오지 못했어요.\n네트워크 상태를 확인해 주세요.";
 // 배포가 덜 됐거나 경로가 없을 때 S3/CloudFront가 403·404 XML(Access Denied)을 그대로 돌려준다.
 const SERVER_ERROR_MESSAGE = "지금은 이 서비스를 이용할 수 없어요.\n잠시 후 다시 시도해 주세요.";
@@ -185,6 +207,8 @@ export const AppWebView = () => {
 					{...webViewProps}
 					source={{ uri }}
 					onShouldStartLoadWithRequest={handleLinkRequest}
+					injectedJavaScriptBeforeContentLoaded={DISABLE_SELECTION_SCRIPT}
+					injectedJavaScript={DISABLE_SELECTION_SCRIPT}
 					// iOS 16.4+는 이 값이 켜져야 Safari 웹 검사기에 WebView가 잡힌다.
 					webviewDebuggingEnabled={__DEV__}
 					onError={({ nativeEvent }) =>
