@@ -9,6 +9,7 @@ import { typo } from "@shared/tokens";
 import { TopNavBar, TextField, FilledButton, TextAreaProvider, toast } from "@shared/ui";
 import { useSlideAnimation } from "@shared/hooks/animations/useSlideAnimation";
 import { authApi } from "@entities/auth/api";
+import type { Gender } from "@entities/auth/types";
 import { Role } from "@features/register/types";
 
 interface CreateAccountRouteParams {
@@ -16,6 +17,7 @@ interface CreateAccountRouteParams {
   name: string;
   extraField: string;
   phone: string;
+  gender: Gender;
 }
 
 export const CreateAccountPage = () => {
@@ -69,6 +71,7 @@ export const CreateAccountPage = () => {
           grade,
           room,
           number,
+          gender: params.gender,
         });
       } else {
         await authApi.registerTeacher({
@@ -77,9 +80,10 @@ export const CreateAccountPage = () => {
           password,
           phone,
           position: params.extraField,
+          gender: params.gender,
         });
       }
-      toast.info("회원가입에 성공했어요. 관리자의 승인을 기다려주세요.", { position: "top" });
+      toast.success("회원가입에 성공했어요. 관리자의 승인을 기다려주세요.", { position: "top" });
       navigation.dispatch(
         CommonActions.reset({ index: 0, routes: [{ name: "Login" }] }),
       );

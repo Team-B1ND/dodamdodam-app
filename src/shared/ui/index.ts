@@ -19,7 +19,7 @@ export { Progress, CircularProgress } from "./progress";
 export { Switch } from "./switch";
 export { Tab } from "./tab";
 export { Tag } from "./tag";
-export { TextField, FilledTextField } from "./textfield";
+export { TextField, FilledTextField, SelectField } from "./textfield";
 export { ToastProvider, ToastItem, useToast, toast } from "./toast";
 export { Skeleton } from "./skeleton";
 export { EmptyState } from "./emptyState";
