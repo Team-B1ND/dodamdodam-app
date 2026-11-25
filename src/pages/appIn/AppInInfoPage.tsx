@@ -68,6 +68,8 @@ export const AppInInfoPage = () => {
             (navigation as any).replace("AppWebView", {
               appUrl: params.appUrl,
               name: params.name,
+              iconUrl: params.iconUrl,
+              darkIconUrl: params.darkIconUrl,
             });
           }}>서비스 시작하기</FilledButton>
         </View>
