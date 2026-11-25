@@ -6,7 +6,15 @@ export {
   formatDeadlineTime,
   getMsUntilNextDeadlineTransition,
   isWithinDeadline,
+  normalizeDeadlineTime,
+  type NormalizedDeadlineTime,
 } from "./lib/deadline";
+export {
+  WEEKEND_STUDY_SERVER_ERROR_MESSAGE,
+  getWeekendStudyErrorMessage,
+  isHandledByCommonInterceptor,
+  shouldRetryWeekendStudyQuery,
+} from "./lib/error";
 export { useWeekendStudyDeadline } from "./hooks/useWeekendStudyDeadline";
 export {
   useWeekendStudyList,

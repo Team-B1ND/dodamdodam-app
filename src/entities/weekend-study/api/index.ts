@@ -19,7 +19,7 @@ export const weekendStudyApi = {
     ),
 
   getDeadline: () =>
-    basicApiHandler.get<ApiResponse<WeekendStudyDeadline | null>>(
+    basicApiHandler.get<ApiResponse<WeekendStudyDeadline | null | undefined>>(
       "/weekendstudy/deadline",
     ),
 
