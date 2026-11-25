@@ -28,4 +28,5 @@ export {
   type WeekendStudyCardRow,
 } from "./card/WeekendStudyCard";
 export { WeekendStudyCardSkeleton } from "./card/WeekendStudyCardSkeleton";
+export { WeekendStudyErrorBoundary } from "./list/WeekendStudyErrorBoundary";
 export { WeekendStudyList } from "./list/WeekendStudyList";

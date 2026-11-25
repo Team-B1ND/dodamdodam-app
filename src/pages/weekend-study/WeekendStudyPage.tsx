@@ -1,15 +1,16 @@
-import React, { Suspense, useCallback, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { StyleSheet, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { QueryErrorResetBoundary, useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
-import { NetworkErrorBoundary, RefreshView, TopNavBar } from "@shared/ui";
+import { RefreshView, TopNavBar } from "@shared/ui";
 import { Plus } from "@shared/icons/mono";
 import { weekendStudyQueryKeys } from "@entities/weekend-study";
 import {
   DEADLINE_CLOSED_MESSAGE,
+  WeekendStudyErrorBoundary,
   WeekendStudyList,
   useWeekendStudyDeadline,
 } from "@features/weekend-study";
@@ -25,6 +26,9 @@ export const WeekendStudyPage = () => {
   const queryClient = useQueryClient();
   const { isOpen, isClosed } = useWeekendStudyDeadline();
   const [retryKey, setRetryKey] = useState(0);
+  const [hasListError, setHasListError] = useState(false);
+  const hasListErrorRef = useRef(false);
+  const resetRef = useRef<(() => void) | null>(null);
 
   const handleGoBack = useCallback(() => {
     navigation.goBack();
@@ -33,6 +37,47 @@ export const WeekendStudyPage = () => {
   const handleApply = useCallback(() => {
     navigation.navigate("WeekendStudyApply");
   }, [navigation]);
+
+  const handleListError = useCallback(() => {
+    hasListErrorRef.current = true;
+    setHasListError(true);
+  }, []);
+
+  // 오류 화면에서 당겨서 새로고침하면 캐시가 초기화되므로 에러 경계도 함께 복구한다.
+  useEffect(() => {
+    if (!hasListError) return;
+
+    return queryClient.getQueryCache().subscribe((event) => {
+      if (!hasListErrorRef.current || event.type !== "updated") return;
+      const key = event.query.queryKey;
+      if (
+        key.length !== weekendStudyQueryKeys.myPersonal.length ||
+        weekendStudyQueryKeys.myPersonal.some((part, index) => key[index] !== part)
+      ) {
+        return;
+      }
+      if (event.query.state.status === "pending") {
+        hasListErrorRef.current = false;
+        resetRef.current?.();
+        setHasListError(false);
+        setRetryKey((prev) => prev + 1);
+      }
+    });
+  }, [hasListError, queryClient]);
+
+  // 목록 조회 실패 상태로 화면을 벗어나면 캐시된 오류를 비워 재진입 시 바로 재조회한다.
+  useEffect(() => {
+    return () => {
+      if (
+        queryClient.getQueryState(weekendStudyQueryKeys.myPersonal)?.status ===
+        "error"
+      ) {
+        queryClient.removeQueries({
+          queryKey: weekendStudyQueryKeys.myPersonal,
+        });
+      }
+    };
+  }, [queryClient]);
 
   return (
     <SafeAreaView
@@ -65,26 +110,35 @@ export const WeekendStudyPage = () => {
         ) : null}
 
         <QueryErrorResetBoundary>
-          {({ reset }) => (
-            <NetworkErrorBoundary
-              key={retryKey}
-              fallback={
-                <WeekendStudyList.Error
-                  onRetry={() => {
-                    reset();
-                    void queryClient.resetQueries({
-                      queryKey: weekendStudyQueryKeys.myPersonal,
-                    });
-                    setRetryKey((prev) => prev + 1);
-                  }}
-                />
-              }
-            >
-              <Suspense fallback={<WeekendStudyList.Skeleton />}>
-                <WeekendStudyList isOpen={isOpen} onApply={handleApply} />
-              </Suspense>
-            </NetworkErrorBoundary>
-          )}
+          {({ reset }) => {
+            resetRef.current = reset;
+            return (
+              <WeekendStudyErrorBoundary
+                key={retryKey}
+                onError={handleListError}
+                fallback={
+                  <WeekendStudyList.Error
+                    onRetry={() => {
+                      hasListErrorRef.current = false;
+                      setHasListError(false);
+                      reset();
+                      void queryClient.resetQueries({
+                        queryKey: weekendStudyQueryKeys.myPersonal,
+                      });
+                      void queryClient.resetQueries({
+                        queryKey: weekendStudyQueryKeys.deadline,
+                      });
+                      setRetryKey((prev) => prev + 1);
+                    }}
+                  />
+                }
+              >
+                <Suspense fallback={<WeekendStudyList.Skeleton />}>
+                  <WeekendStudyList isOpen={isOpen} onApply={handleApply} />
+                </Suspense>
+              </WeekendStudyErrorBoundary>
+            );
+          }}
         </QueryErrorResetBoundary>
       </RefreshView>
     </SafeAreaView>

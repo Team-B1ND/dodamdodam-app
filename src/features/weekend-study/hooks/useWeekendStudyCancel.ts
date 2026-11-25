@@ -2,19 +2,15 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { weekendStudyApi, weekendStudyQueryKeys } from "@entities/weekend-study";
 import { toast } from "@shared/ui";
+import { getWeekendStudyErrorMessage } from "../lib/error";
 
 const notifyCancelError = (error: unknown) => {
-  if (!axios.isAxiosError(error)) {
-    toast.error("주말 자습 신청 취소에 실패했어요.", { position: "top" });
-    return;
-  }
+  const message = getWeekendStudyErrorMessage(
+    error,
+    "주말 자습 신청 취소에 실패했어요.",
+  );
+  if (!message) return;
 
-  // 네트워크 오류, 5xx, 401은 공통 인터셉터에서 처리하므로 중복 토스트를 띄우지 않는다.
-  const status = error.response?.status;
-  if (!status || status === 401 || status >= 500) return;
-
-  const message =
-    error.response?.data?.message || "주말 자습 신청 취소에 실패했어요.";
   toast.error(message, { position: "top" });
 };
 
