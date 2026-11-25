@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "@shared/theme";
 import { useTabPageEdges, useTabScrollPadding } from "@shared/hooks";
 import { TopNavBar, RefreshView, Dialog, useOverlay } from "@shared/ui";
-import { Gear, File, People } from "@shared/icons/mono";
+import { Gear, File, People, Calendar } from "@shared/icons/mono";
 import { ProfileCard } from "@features/profile";
 import { userQueryKeys } from "@entities/user/api/queryKeys";
 import type { User } from "@entities/user/types";
@@ -24,6 +24,7 @@ export const MorePage = () => {
   const openSettings = useCallback(() => navigation.navigate("Settings"), [navigation]);
   const openEditProfile = useCallback(() => navigation.navigate("EditProfile"), [navigation]);
   const openTeamList = useCallback(() => navigation.navigate("TeamList"), [navigation]);
+  const openWeekendStudy = useCallback(() => navigation.navigate("WeekendStudy"), [navigation]);
 
   const showStudentCode = useCallback(() => {
     const user = queryClient.getQueryData<User>(userQueryKeys.me);
@@ -66,6 +67,7 @@ export const MorePage = () => {
         <View style={styles.section}>
           <MenuItem icon={<File />} title="내 학생코드 보기" onPress={showStudentCode} />
           <MenuItem icon={<People />} title="팀 확인하기" onPress={openTeamList} />
+          <MenuItem icon={<Calendar />} title="주말 자습" onPress={openWeekendStudy} />
         </View>
       </RefreshView>
     </SafeAreaView>

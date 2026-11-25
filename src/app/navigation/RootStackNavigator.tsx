@@ -19,6 +19,11 @@ import { AppWebViewPage } from "@pages/app-webview";
 import { MealPage } from "@pages/meal";
 import { OutSleepingApplyPage } from "@pages/out-sleeping";
 import { NightStudyApplyPage } from "@pages/night-study";
+import {
+  WeekendStudyPage,
+  WeekendStudyApplyPage,
+  WeekendStudyApplyDonePage,
+} from "@pages/weekend-study";
 import { TeamListPage, TeamDetailPage, TeamEditPage } from "@pages/team";
 import { ChangePasswordPage } from "@pages/change-password";
 import { ResetPasswordPage } from "@pages/reset-password";
@@ -65,6 +70,13 @@ export const RootStackNavigator = () => {
       <Stack.Screen name="ResetPassword" component={ResetPasswordPage} />
       <Stack.Screen name="OutSleepingApply" component={OutSleepingApplyPage} />
       <Stack.Screen name="NightStudyApply" component={NightStudyApplyPage} />
+      <Stack.Screen name="WeekendStudy" component={WeekendStudyPage} />
+      <Stack.Screen name="WeekendStudyApply" component={WeekendStudyApplyPage} />
+      <Stack.Screen
+        name="WeekendStudyApplyDone"
+        component={WeekendStudyApplyDonePage}
+        options={{ gestureEnabled: false }}
+      />
       <Stack.Screen name="TeamList" component={TeamListPage} />
       <Stack.Screen name="TeamDetail" component={TeamDetailPage} />
       <Stack.Screen name="TeamCreate" component={TeamCreatePage} />
