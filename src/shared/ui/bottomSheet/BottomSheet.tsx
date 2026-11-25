@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useRef, useImperativeHandle, forwardRef } from "react";
-import { View, StyleSheet, Pressable } from "react-native";
-import GorhomBottomSheet, {
+import { StyleSheet } from "react-native";
+import {
+  BottomSheetModal,
   BottomSheetView,
   BottomSheetBackdrop,
   type BottomSheetBackdropProps,
@@ -23,13 +24,13 @@ interface BottomSheetProps {
 export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
   ({ children, snapPoints = ["40%"], onClose, enableDynamicSizing = false }, ref) => {
     const { colors } = useTheme();
-    const bottomSheetRef = useRef<GorhomBottomSheet>(null);
+    const bottomSheetRef = useRef<BottomSheetModal>(null);
 
     const memoizedSnapPoints = useMemo(() => snapPoints, [snapPoints]);
 
     useImperativeHandle(ref, () => ({
-      open: (index = 0) => bottomSheetRef.current?.snapToIndex(index),
-      close: () => bottomSheetRef.current?.close(),
+      open: () => bottomSheetRef.current?.present(),
+      close: () => bottomSheetRef.current?.dismiss(),
       snapTo: (index: number) => bottomSheetRef.current?.snapToIndex(index),
     }));
 
@@ -47,9 +48,8 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
     );
 
     return (
-      <GorhomBottomSheet
+      <BottomSheetModal
         ref={bottomSheetRef}
-        index={-1}
         snapPoints={enableDynamicSizing ? undefined : memoizedSnapPoints}
         enableDynamicSizing={enableDynamicSizing}
         enablePanDownToClose
@@ -62,14 +62,12 @@ export const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
           styles.indicator,
           { backgroundColor: colors.fill.secondary },
         ]}
-        onChange={(index) => {
-          if (index === -1) onClose?.();
-        }}
+        onDismiss={onClose}
       >
         <BottomSheetView style={styles.content}>
           {children}
         </BottomSheetView>
-      </GorhomBottomSheet>
+      </BottomSheetModal>
     );
   },
 );
