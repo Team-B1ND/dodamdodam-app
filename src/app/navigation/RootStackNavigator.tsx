@@ -6,6 +6,7 @@ import { LandingPage } from "@pages/landing";
 import { LoginPage } from "@pages/login";
 import { LoginFormPage } from "@pages/login-form";
 import { AppInInfoPage } from "@pages/appIn";
+import { AidWidgetSettingPage } from "@pages/aid-widget-setting";
 import { SettingsPage } from "@pages/settings";
 import { EditProfilePage } from "@pages/edit-profile";
 import { NotificationPage } from "@pages/notification";
@@ -58,6 +59,7 @@ export const RootStackNavigator = () => {
       <Stack.Screen name="Main" component={BottomTabNavigator} />
       <Stack.Screen name="Meal" component={MealPage} />
       <Stack.Screen name="AppIn" component={AppInInfoPage} />
+      <Stack.Screen name="AidWidgetSetting" component={AidWidgetSettingPage} />
       <Stack.Screen name="Settings" component={SettingsPage} />
       <Stack.Screen name="EditProfile" component={EditProfilePage} />
       <Stack.Screen name="Notification" component={NotificationPage} />
