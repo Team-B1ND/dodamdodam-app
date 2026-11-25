@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { BackHandler } from "react-native";
 import { Actions, Errors, core, useBridgeCore, useBridgeUi } from "@b1nd/aid-kit/bridge-kit/app";
@@ -18,6 +19,13 @@ export const useAppBridge = () => {
 	// NOT_SUPPORT(data: undefined)로 응답하고, 웹이 그걸 Object.values로 까다가 터져 화면이 비었다.
 	core.mount(Actions.SYNC, async () => null);
 	core.mount(Actions.ACK, async () => null);
+
+	useEffect(
+		() => () => {
+			(core as unknown as { tasks: Map<string, unknown> }).tasks.clear();
+		},
+		[],
+	);
 
 	core.mount(Actions.NAVIGATION_POP, async () => {
 		navigation.goBack();
