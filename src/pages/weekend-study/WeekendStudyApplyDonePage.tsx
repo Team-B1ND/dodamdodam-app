@@ -3,19 +3,28 @@ import { BackHandler, StyleSheet, Text, View } from "react-native";
 import { useNavigation, useRoute, type RouteProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import type { RootStackParamList } from "@app/navigation";
 import { formatDate, formatPeriods } from "@features/weekend-study";
 import { Checkmark } from "@shared/icons/mono";
 import { useTheme } from "@shared/theme";
 import { shapes, typo } from "@shared/tokens";
 import { FilledButton, TopNavBar } from "@shared/ui";
 
+export interface WeekendStudyApplyDoneParams {
+  date: string;
+  periods: number[];
+}
+
+type WeekendStudyApplyDoneStackParamList = {
+  WeekendStudy: undefined;
+  WeekendStudyApplyDone: WeekendStudyApplyDoneParams;
+};
+
 type WeekendStudyApplyDoneNavigation = StackNavigationProp<
-  RootStackParamList,
+  WeekendStudyApplyDoneStackParamList,
   "WeekendStudyApplyDone"
 >;
 type WeekendStudyApplyDoneRoute = RouteProp<
-  RootStackParamList,
+  WeekendStudyApplyDoneStackParamList,
   "WeekendStudyApplyDone"
 >;
 

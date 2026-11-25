@@ -3,13 +3,18 @@ import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import type { RootStackParamList } from "@app/navigation";
 import { PersonalApplyForm } from "@features/weekend-study";
 import { useTheme } from "@shared/theme";
 import { TopNavBar } from "@shared/ui";
+import type { WeekendStudyApplyDoneParams } from "./WeekendStudyApplyDonePage";
+
+type WeekendStudyApplyStackParamList = {
+  WeekendStudyApply: undefined;
+  WeekendStudyApplyDone: WeekendStudyApplyDoneParams;
+};
 
 type WeekendStudyApplyNavigation = StackNavigationProp<
-  RootStackParamList,
+  WeekendStudyApplyStackParamList,
   "WeekendStudyApply"
 >;
 
@@ -18,7 +23,7 @@ export const WeekendStudyApplyPage = () => {
   const navigation = useNavigation<WeekendStudyApplyNavigation>();
 
   const handleApplySuccess = useCallback(
-    (result: { date: string; periods: number[] }) => {
+    (result: WeekendStudyApplyDoneParams) => {
       navigation.replace("WeekendStudyApplyDone", result);
     },
     [navigation],

@@ -26,7 +26,7 @@ export const PersonalApplyForm = ({ onSuccess }: PersonalApplyFormProps) => {
   const { colors } = useTheme();
   const targetDate = useMemo(() => getUpcomingSunday(), []);
 
-  const { deadline, isOpen } = useWeekendStudyDeadline();
+  const { deadline, isOpen, isClosed } = useWeekendStudyDeadline();
   const { data: myPersonal = [] } = useWeekendStudyMyPersonal();
   const { data: myProject = [] } = useWeekendStudyMyProject();
   const { apply, isLoading } = useWeekendStudyPersonalApply();
@@ -95,9 +95,9 @@ export const PersonalApplyForm = ({ onSuccess }: PersonalApplyFormProps) => {
     }
   }, [isOpen, isLoading, selectedPeriods, appliedPeriods, apply, targetDate, onSuccess]);
 
-  const noticeText = !isOpen
+  const noticeText = isClosed
     ? DEADLINE_CLOSED_MESSAGE
-    : deadline
+    : isOpen && deadline
       ? formatDeadlineNotice(deadline)
       : null;
 
@@ -112,7 +112,7 @@ export const PersonalApplyForm = ({ onSuccess }: PersonalApplyFormProps) => {
           <Text
             style={[
               styles.notice,
-              { color: isOpen ? colors.text.placeholder : colors.status.error },
+              { color: isClosed ? colors.status.error : colors.text.placeholder },
             ]}
           >
             {noticeText}
