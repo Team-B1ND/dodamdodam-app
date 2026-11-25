@@ -1,10 +1,8 @@
 import React, { Suspense, useCallback, useState } from "react";
 import { StyleSheet, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import type { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { QueryErrorResetBoundary, useQueryClient } from "@tanstack/react-query";
-import type { RootStackParamList } from "@app/navigation";
 import { useTheme } from "@shared/theme";
 import { typo } from "@shared/tokens";
 import { NetworkErrorBoundary, RefreshView, TopNavBar } from "@shared/ui";
@@ -23,7 +21,7 @@ const REFRESH_QUERY_KEYS = [
 
 export const WeekendStudyPage = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<any>();
   const queryClient = useQueryClient();
   const { isOpen, isClosed } = useWeekendStudyDeadline();
   const [retryKey, setRetryKey] = useState(0);
