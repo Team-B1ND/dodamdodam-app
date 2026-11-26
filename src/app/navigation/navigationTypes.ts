@@ -15,6 +15,7 @@ export type RootStackParamList = {
   Main: NavigatorScreenParams<MainTabParamList>;
   Meal: undefined;
   AppIn: undefined;
+  AidWidgetSetting: undefined;
   Settings: undefined;
   EditProfile: undefined;
   Notification: undefined;
