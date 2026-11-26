@@ -5,6 +5,7 @@ export { useInAppTeamName } from "./useInAppTeamName";
 export {
   resolveWidgetInApps,
   syncInAppWidget,
+  syncInAppWidgetFromQuery,
   useInAppWidgetSync,
 } from "./useInAppWidgetSync";
 export { useWidgetSelectedIdsSuspense } from "./useWidgetSelectedIds";

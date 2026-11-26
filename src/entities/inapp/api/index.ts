@@ -3,9 +3,10 @@ import type { ApiResponse } from "@shared/types";
 import type { InAppPageResponse, InAppDetail, InAppTeam } from "@entities/inapp/types";
 
 export const inappApi = {
-  getActiveApps: (page: number, size: number = 10) =>
+  getActiveApps: (page: number, size: number = 10, signal?: AbortSignal) =>
     basicApiHandler.get<ApiResponse<InAppPageResponse>>("/inapp/app/active", {
       params: { page, size },
+      signal,
     }),
 
   getApp: (appId: string) =>
