@@ -1,7 +1,8 @@
 import React, { Suspense, useCallback, useRef } from "react";
 import { StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import type { RootStackParamList } from "@app/navigation/navigationTypes";
 import { useTheme } from "@shared/theme";
 import { useTabPageEdges } from "@shared/hooks";
 import { TopNavBar, RefreshView } from "@shared/ui";
@@ -17,7 +18,7 @@ const AID_REFRESH_QUERY_KEYS = [
 export const AidPage = () => {
   const { colors } = useTheme();
   const edges = useTabPageEdges();
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   // 다음 페이지 로드 함수는 Suspense 안쪽 훅에 있어서, ref로 끌어올려 RefreshView에 연결한다.
   const loadMoreRef = useRef<(() => void) | null>(null);
   const handleEndReached = useCallback(() => loadMoreRef.current?.(), []);
